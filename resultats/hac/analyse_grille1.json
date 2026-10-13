@@ -1,0 +1,456 @@
+{
+ "n_runs": 63,
+ "rc_non_nuls": [],
+ "comparaisons": {
+  "lr_extracteur": {
+   "dernier": {
+    "ecarts": [
+     16.3,
+     12.32,
+     17.03,
+     12.5,
+     6.82,
+     0.0,
+     0.92,
+     7.8,
+     -4.59
+    ],
+    "moyenne": 7.68,
+    "ic95": [
+     1.83,
+     13.52
+    ],
+    "positifs": 7,
+    "par_cible": {
+     "human": 15.22,
+     "animal": 6.44,
+     "cartoon": 1.38
+    }
+   },
+   "meilleur": {
+    "ecarts": [
+     16.67,
+     13.77,
+     18.12,
+     17.05,
+     1.7,
+     6.25,
+     4.59,
+     6.42,
+     -3.21
+    ],
+    "moyenne": 9.04,
+    "ic95": [
+     3.18,
+     14.9
+    ],
+    "positifs": 8,
+    "par_cible": {
+     "human": 16.18,
+     "animal": 8.33,
+     "cartoon": 2.6
+    }
+   },
+   "critere": {
+    "ecarts": [
+     1.81,
+     10.14,
+     3.26,
+     7.39,
+     7.95,
+     6.25,
+     1.38,
+     7.34,
+     -4.13
+    ],
+    "moyenne": 4.6,
+    "ic95": [
+     1.2,
+     8.0
+    ],
+    "positifs": 8,
+    "par_cible": {
+     "human": 5.07,
+     "animal": 7.2,
+     "cartoon": 1.53
+    }
+   },
+   "verdict": "SOUTENU"
+  },
+  "z256": {
+   "dernier": {
+    "ecarts": [
+     6.16,
+     -3.26,
+     7.25,
+     3.41,
+     7.39,
+     -2.27,
+     0.92,
+     2.29,
+     0.46
+    ],
+    "moyenne": 2.48,
+    "ic95": [
+     -0.54,
+     5.5
+    ],
+    "positifs": 7,
+    "par_cible": {
+     "human": 3.38,
+     "animal": 2.84,
+     "cartoon": 1.22
+    }
+   },
+   "meilleur": {
+    "ecarts": [
+     6.16,
+     -3.26,
+     7.61,
+     9.66,
+     2.27,
+     -1.14,
+     1.83,
+     0.0,
+     -1.83
+    ],
+    "moyenne": 2.37,
+    "ic95": [
+     -1.1,
+     5.83
+    ],
+    "positifs": 5,
+    "par_cible": {
+     "human": 3.5,
+     "animal": 3.6,
+     "cartoon": 0.0
+    }
+   },
+   "critere": {
+    "ecarts": [
+     7.97,
+     -3.26,
+     7.25,
+     3.41,
+     9.66,
+     2.84,
+     0.92,
+     1.38,
+     7.34
+    ],
+    "moyenne": 4.17,
+    "ic95": [
+     0.95,
+     7.38
+    ],
+    "positifs": 8,
+    "par_cible": {
+     "human": 3.99,
+     "animal": 5.3,
+     "cartoon": 3.21
+    }
+   },
+   "verdict": "INCONCLUSIF"
+  },
+  "partition_equilibree": {
+   "dernier": {
+    "ecarts": [
+     6.16,
+     4.71,
+     11.59,
+     9.66,
+     7.39,
+     0.0,
+     7.34,
+     5.5,
+     3.21
+    ],
+    "moyenne": 6.17,
+    "ic95": [
+     3.54,
+     8.81
+    ],
+    "positifs": 8,
+    "par_cible": {
+     "human": 7.49,
+     "animal": 5.68,
+     "cartoon": 5.35
+    }
+   },
+   "meilleur": {
+    "ecarts": [
+     6.16,
+     5.43,
+     11.59,
+     9.09,
+     3.41,
+     2.27,
+     5.96,
+     3.67,
+     0.92
+    ],
+    "moyenne": 5.39,
+    "ic95": [
+     2.82,
+     7.96
+    ],
+    "positifs": 9,
+    "par_cible": {
+     "human": 7.73,
+     "animal": 4.92,
+     "cartoon": 3.52
+    }
+   },
+   "critere": {
+    "ecarts": [
+     9.78,
+     4.71,
+     11.59,
+     9.66,
+     9.66,
+     4.55,
+     7.34,
+     7.34,
+     9.63
+    ],
+    "moyenne": 8.25,
+    "ic95": [
+     6.38,
+     10.12
+    ],
+    "positifs": 9,
+    "par_cible": {
+     "human": 8.7,
+     "animal": 7.95,
+     "cartoon": 8.1
+    }
+   },
+   "verdict": "SOUTENU"
+  },
+  "info_max": {
+   "dernier": {
+    "ecarts": [
+     -0.36,
+     0.72,
+     -0.36,
+     -0.57,
+     4.55,
+     0.0,
+     1.38,
+     2.29,
+     -0.46
+    ],
+    "moyenne": 0.8,
+    "ic95": [
+     -0.52,
+     2.11
+    ],
+    "positifs": 4,
+    "par_cible": {
+     "human": 0.0,
+     "animal": 1.33,
+     "cartoon": 1.07
+    }
+   },
+   "meilleur": {
+    "ecarts": [
+     -0.36,
+     -0.36,
+     -0.36,
+     1.7,
+     -0.57,
+     0.0,
+     0.0,
+     1.38,
+     -0.92
+    ],
+    "moyenne": 0.06,
+    "ic95": [
+     -0.63,
+     0.74
+    ],
+    "positifs": 2,
+    "par_cible": {
+     "human": -0.36,
+     "animal": 0.38,
+     "cartoon": 0.15
+    }
+   },
+   "critere": {
+    "ecarts": [
+     0.72,
+     -0.36,
+     -0.36,
+     2.84,
+     6.82,
+     -0.57,
+     -2.29,
+     4.59,
+     5.96
+    ],
+    "moyenne": 1.93,
+    "ic95": [
+     -0.56,
+     4.42
+    ],
+    "positifs": 5,
+    "par_cible": {
+     "human": 0.0,
+     "animal": 3.03,
+     "cartoon": 2.75
+    }
+   },
+   "verdict": "INCONCLUSIF"
+  },
+  "sources_160": {
+   "dernier": {
+    "ecarts": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "moyenne": 0.0,
+    "ic95": [
+     0.0,
+     0.0
+    ],
+    "positifs": 0,
+    "par_cible": {
+     "human": 0.0,
+     "animal": 0.0,
+     "cartoon": 0.0
+    }
+   },
+   "meilleur": {
+    "ecarts": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "moyenne": 0.0,
+    "ic95": [
+     0.0,
+     0.0
+    ],
+    "positifs": 0,
+    "par_cible": {
+     "human": 0.0,
+     "animal": 0.0,
+     "cartoon": 0.0
+    }
+   },
+   "critere": {
+    "ecarts": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "moyenne": 0.0,
+    "ic95": [
+     0.0,
+     0.0
+    ],
+    "positifs": 0,
+    "par_cible": {
+     "human": 0.0,
+     "animal": 0.0,
+     "cartoon": 0.0
+    }
+   },
+   "verdict": "NON SOUTENU"
+  },
+  "tout": {
+   "dernier": {
+    "ecarts": [
+     15.22,
+     13.77,
+     20.29,
+     17.61,
+     14.2,
+     6.82,
+     9.63,
+     12.84,
+     3.67
+    ],
+    "moyenne": 12.67,
+    "ic95": [
+     8.67,
+     16.68
+    ],
+    "positifs": 9,
+    "par_cible": {
+     "human": 16.43,
+     "animal": 12.88,
+     "cartoon": 8.72
+    }
+   },
+   "meilleur": {
+    "ecarts": [
+     16.67,
+     13.04,
+     20.65,
+     18.75,
+     9.09,
+     9.09,
+     9.63,
+     11.93,
+     1.83
+    ],
+    "moyenne": 12.3,
+    "ic95": [
+     7.85,
+     16.75
+    ],
+    "positifs": 9,
+    "par_cible": {
+     "human": 16.79,
+     "animal": 12.31,
+     "cartoon": 7.8
+    }
+   },
+   "critere": {
+    "ecarts": [
+     17.75,
+     10.87,
+     19.2,
+     18.75,
+     13.07,
+     14.2,
+     8.72,
+     14.22,
+     9.63
+    ],
+    "moyenne": 14.05,
+    "ic95": [
+     11.05,
+     17.04
+    ],
+    "positifs": 9,
+    "par_cible": {
+     "human": 15.94,
+     "animal": 15.34,
+     "cartoon": 10.86
+    }
+   },
+   "verdict": "SOUTENU"
+  }
+ }
+}

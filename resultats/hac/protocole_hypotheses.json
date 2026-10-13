@@ -1,0 +1,101 @@
+{
+ "titre": "Hypotheses H1 et H2 du memoire sur HAC : barycentre de Wasserstein contre concatenation des sources (H1), transport hierarchique contre transport plat (H2)",
+ "ecrit_le": "2026-10-13T06:13",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_paquet": "8dcb5103098c24ea18b5bbc666db1e70479ad99652abdd9b25f2f22ee11f73f1",
+ "donnees": "HAC, audio AST 768-d + video SlowFast 2304-d, caracteristiques gelees de hac-extract-features, AVEC les 4 vues fortes (augmentations de M2CAN)",
+ "preparation": [
+  "--vues_fortes"
+ ],
+ "cibles": [
+  "human",
+  "animal",
+  "cartoon"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "base": "la methode (ALGORITHME.md) = configuration lr_z256_pseudo de la grille 3 ; une seule option change par configuration ; les options agissent a la fois sur l'evaluation et sur les pseudo-etiquettes",
+ "configurations": {
+  "methode": {
+   "phase1": {
+    "optimiseur": {
+     "lr_extracteur": 5e-05
+    }
+   },
+   "fusion": {
+    "dim": 256
+   },
+   "pseudo": {
+    "actif": true
+   }
+  },
+  "h1_concatenation": {
+   "phase1": {
+    "optimiseur": {
+     "lr_extracteur": 5e-05
+    }
+   },
+   "fusion": {
+    "dim": 256
+   },
+   "pseudo": {
+    "actif": true
+   },
+   "phase2": {
+    "representant": "concatenation"
+   }
+  },
+  "h2_plat": {
+   "phase1": {
+    "optimiseur": {
+     "lr_extracteur": 5e-05
+    }
+   },
+   "fusion": {
+    "dim": 256
+   },
+   "pseudo": {
+    "actif": true
+   },
+   "phase2": {
+    "transport": "plat"
+   }
+  },
+  "plat_concatenation": {
+   "phase1": {
+    "optimiseur": {
+     "lr_extracteur": 5e-05
+    }
+   },
+   "fusion": {
+    "dim": 256
+   },
+   "pseudo": {
+    "actif": true
+   },
+   "phase2": {
+    "representant": "concatenation",
+    "transport": "plat"
+   }
+  }
+ },
+ "hypotheses": {
+  "H1": "resumer chaque classe source par le barycentre de Wasserstein des sources donne un representant plus proche de la classe cible (cout de transport plus faible) et un meilleur etiquetage de la cible que la concatenation des sources",
+  "H2": "apparier des structures (classes sources, groupes cibles) par un transport hierarchique etiquette mieux la cible qu'un transport plat point a point"
+ },
+ "metrique_principale": "exactitude au dernier point",
+ "comparaisons": {
+  "H1": "methode - h1_concatenation (9 paires) ; diagnostic : cout_representant_classe_cible de methode < celui de h1_concatenation",
+  "H2": "methode - h2_plat (9 paires)",
+  "complementaire": "plat_concatenation (transport plat classique vers les points sources) contre methode"
+ },
+ "critere": {
+  "SOUTENUE": "ecart moyen > 0, IC95 (t, 8 ddl) excluant 0, et au moins 7/9 ecarts positifs",
+  "REFUTEE": "ecart moyen < 0 et IC95 excluant 0 (l'alternative fait mieux)",
+  "NON_CONCLUANTE": "sinon"
+ },
+ "execution": "3 kernels CPU Kaggle fgm-hac-options-hyp-<cible> (12 runs chacun)"
+}

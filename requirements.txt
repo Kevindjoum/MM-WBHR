@@ -1,0 +1,18 @@
+# Méthode et M2CAN (cadre A, caractéristiques gelées)
+torch>=2.0
+torchvision
+transformers>=4.28
+numpy
+scipy
+scikit-learn
+PyYAML
+tqdm
+# Prétraitement des textes de M2CAN (sentiment)
+ekphrasis
+emoji
+# Extraction HAC (preparation/hac_extraire.py) uniquement
+huggingface_hub
+av
+soundfile
+fvcore
+iopath

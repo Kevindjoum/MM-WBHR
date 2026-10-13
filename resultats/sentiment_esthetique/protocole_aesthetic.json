@@ -1,0 +1,77 @@
+{
+ "titre": "Cadre A, esthetique : la methode (ALGORITHME.md) contre M2CAN sur les memes caracteristiques gelees",
+ "ecrit_le": "2026-10-13T05:17",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_code": "f0eeb0c54f41724ea85178f1a32562629c046bdb5bd5017adaa0bdb07f7e9134",
+ "groupe": "aesthetic",
+ "cibles": [
+  "AVA",
+  "PCCD",
+  "RPCD"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "donnees": "sortie de djoumessi237/extract-a-aesthetic : BERT pooler 768-d + ResNet-50 2048-d de M2CAN, 1 vue faible + 4 fortes ; val de M2CAN = test",
+ "configurations": {
+  "fgm": {
+   "methode": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    }
+   },
+   "methode_sans_pseudo": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": false
+    }
+   }
+  },
+  "m2can": {
+   "publie": {}
+  }
+ },
+ "notes": "methode : config_exemple.yaml de fusion_geometrique_m (3 epoques x 3750 pas, lot 4), comme les resultats HAC ; M2CAN : configuration publiee config_<cible>.yaml, lot 8, n_sample 3388, 10 epoques (m2can_carac/run.py)",
+ "metrique_principale": "exactitude au dernier point",
+ "comparaisons": {
+  "principale": "methode contre M2CAN (9 paires cible x graine)",
+  "secondaires": [
+   "methode_sans_pseudo contre M2CAN",
+   "methode contre methode_sans_pseudo"
+  ]
+ },
+ "critere": {
+  "MIEUX": "IC95 (t, 8 ddl) de l'ecart moyen > 0 et au moins 7/9 positifs",
+  "MOINS_BIEN": "IC95 < 0",
+  "INDISTINGUABLE": "sinon"
+ },
+ "reperes": {
+  "classe_majoritaire_test": {
+   "AVA": 54.07,
+   "PCCD": 50.3,
+   "RPCD": 58.56
+  },
+  "M2CAN_publie_bout_en_bout": {
+   "AVA": 77.9,
+   "PCCD": 69.1,
+   "RPCD": 73.8
+  }
+ }
+}

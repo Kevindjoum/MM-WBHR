@@ -1,0 +1,41 @@
+cibles completes : ['human', 'animal', 'cartoon'] ; 36 runs ; rc != 0 : 0
+
+Dernier point (%), puis oracle du dernier point entre parentheses
+  human
+    methode               88.41 ( 88.41)   85.51 ( 85.51)   85.51 ( 85.51)   moy  86.47
+    h1_concatenation      88.41 ( 88.41)   85.51 ( 85.51)   85.51 ( 85.51)   moy  86.47
+    h2_plat               85.51 ( 85.51)   84.78 ( 84.78)   85.51 ( 85.51)   moy  85.27
+    plat_concatenation    85.51 ( 85.51)   85.14 ( 85.14)   87.68 ( 87.68)   moy  86.11
+  animal
+    methode               86.93 ( 86.93)   85.80 ( 85.80)   86.93 ( 86.93)   moy  86.55
+    h1_concatenation      86.93 ( 86.93)   85.80 ( 85.80)   86.93 ( 86.93)   moy  86.55
+    h2_plat               83.52 ( 83.52)   82.39 ( 82.39)   84.66 ( 84.66)   moy  83.52
+    plat_concatenation    81.25 ( 81.25)   78.98 ( 78.98)   83.52 ( 83.52)   moy  81.25
+  cartoon
+    methode               60.55 ( 60.55)   65.60 ( 65.60)   57.80 ( 57.80)   moy  61.31
+    h1_concatenation      60.55 ( 60.55)   65.60 ( 65.60)   57.80 ( 57.80)   moy  61.31
+    h2_plat               63.76 ( 63.76)   61.93 ( 61.93)   64.22 ( 64.22)   moy  63.30
+    plat_concatenation    61.93 ( 61.93)   61.01 ( 61.01)   63.30 ( 63.30)   moy  62.08
+
+Comparaisons (ecart en points, paires cible x graine)
+  H1 : methode - h1_concatenation                   +0.00  IC95 [ +0.00,  +0.00]  0/9 positifs  -> NON_CONCLUANTE
+  H2 : methode - h2_plat                            +0.75  IC95 [ -1.93,  +3.43]  6/9 positifs  -> NON_CONCLUANTE
+  methode - plat_concatenation                      +1.63  IC95 [ -1.50,  +4.77]  6/9 positifs  -> NON_CONCLUANTE
+
+Diagnostic H1 : cout de transport representant -> sa classe cible (test, vraies etiquettes), dernier point
+  human    123456  barycentre 0.0460  concatenation 0.0690  ecart +0.0230
+  human    234567  barycentre 0.0411  concatenation 0.0621  ecart +0.0210
+  human    345678  barycentre 0.0398  concatenation 0.0604  ecart +0.0206
+  animal   123456  barycentre 0.0383  concatenation 0.0586  ecart +0.0203
+  animal   234567  barycentre 0.0372  concatenation 0.0567  ecart +0.0194
+  animal   345678  barycentre 0.0375  concatenation 0.0570  ecart +0.0195
+  cartoon  123456  barycentre 0.0676  concatenation 0.0829  ecart +0.0152
+  cartoon  234567  barycentre 0.0676  concatenation 0.0833  ecart +0.0157
+  cartoon  345678  barycentre 0.0639  concatenation 0.0790  ecart +0.0151
+  barycentre plus proche dans 9/9 paires ; ecart moyen +0.0189
+
+Appariement : dernier point == oracle ?
+  methode              9/9
+  h1_concatenation     9/9
+  h2_plat              9/9
+  plat_concatenation   9/9

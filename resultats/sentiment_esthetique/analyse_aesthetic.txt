@@ -1,0 +1,40 @@
+aesthetic : 27 runs, rc != 0 : 0
+
+Dernier point par graine, moyenne (meilleur point moyen, plafond optimiste) (%)
+  AVA   (classe majoritaire du test : 54.07)
+    methode               72.73   74.73   71.90   moy  73.12  (meilleur  74.73)
+    methode_sans_pseudo   72.96   74.62   74.50   moy  74.03  (meilleur  74.38)
+    M2CAN                 52.66   52.18   52.42   moy  52.42  (meilleur  52.46)
+  PCCD   (classe majoritaire du test : 50.3)
+    methode               60.68   60.09   60.45   moy  60.41  (meilleur  61.20)
+    methode_sans_pseudo   60.45   61.51   59.98   moy  60.65  (meilleur  61.90)
+    M2CAN                 48.76   47.70   48.41   moy  48.29  (meilleur  50.14)
+  RPCD   (classe majoritaire du test : 58.56)
+    methode               53.96   54.78   53.60   moy  54.11  (meilleur  59.70)
+    methode_sans_pseudo   55.73   55.96   55.02   moy  55.57  (meilleur  59.46)
+    M2CAN                 54.31   53.96   55.49   moy  54.58  (meilleur  55.53)
+  moyenne sur les cibles
+    methode               62.55
+    methode_sans_pseudo   63.41
+    M2CAN                 51.76
+
+Comparaisons appariees (9 paires cible x graine, dernier point)
+  methode - M2CAN                          +10.78  IC95 [ +3.65, +17.92]  7/9 positifs  -> MIEUX
+  methode_sans_pseudo - M2CAN              +11.65  IC95 [ +4.72, +18.57]  8/9 positifs  -> MIEUX
+  methode - methode_sans_pseudo             -0.87  IC95 [ -1.68,  -0.06]  3/9 positifs  -> MOINS_BIEN
+
+Par cible, ecart moyen methode - M2CAN
+  AVA      +20.70
+  PCCD     +12.12
+  RPCD      -0.47
+
+Tailles des groupes au dernier point (methode) et justesse des pseudo-etiquettes retenues (dernier tour)
+  AVA      123456  groupes [343, 504]  pseudo : 1542 retenus, justesse 0.6575875486381323
+  AVA      234567  groupes [463, 384]  pseudo : 1506 retenus, justesse 0.648074369189907
+  AVA      345678  groupes [509, 338]  pseudo : 1515 retenus, justesse 0.6495049504950495
+  PCCD     123456  groupes [467, 380]  pseudo : 2629 retenus, justesse 0.6333206542411564
+  PCCD     234567  groupes [351, 496]  pseudo : 2276 retenus, justesse 0.6621265377855887
+  PCCD     345678  groupes [312, 535]  pseudo : 2194 retenus, justesse 0.6572470373746582
+  RPCD     123456  groupes [258, 589]  pseudo : 1755 retenus, justesse 0.596011396011396
+  RPCD     234567  groupes [586, 261]  pseudo : 2006 retenus, justesse 0.6031904287138584
+  RPCD     345678  groupes [564, 283]  pseudo : 1975 retenus, justesse 0.5964556962025317

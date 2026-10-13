@@ -1,0 +1,40 @@
+sentiment : 27 runs, rc != 0 : 0
+
+Dernier point par graine, moyenne (meilleur point moyen, plafond optimiste) (%)
+  TumEmo   (classe majoritaire du test : 33.33)
+    methode               41.33   46.07   43.40   moy  43.60  (meilleur  44.82)
+    methode_sans_pseudo   43.47   46.20   38.60   moy  42.76  (meilleur  44.33)
+    M2CAN                 35.07   39.53   39.53   moy  38.04  (meilleur  38.42)
+  Twitter   (classe majoritaire du test : 33.33)
+    methode               55.07   53.60   53.73   moy  54.13  (meilleur  54.18)
+    methode_sans_pseudo   54.53   53.40   54.07   moy  54.00  (meilleur  54.16)
+    M2CAN                 36.20   37.07   36.60   moy  36.62  (meilleur  37.91)
+  Yelp   (classe majoritaire du test : 33.33)
+    methode               44.33   43.07   43.20   moy  43.53  (meilleur  44.24)
+    methode_sans_pseudo   46.67   43.53   44.13   moy  44.78  (meilleur  45.13)
+    M2CAN                 37.20   36.33   37.27   moy  36.93  (meilleur  37.00)
+  moyenne sur les cibles
+    methode               47.09
+    methode_sans_pseudo   47.18
+    M2CAN                 37.20
+
+Comparaisons appariees (9 paires cible x graine, dernier point)
+  methode - M2CAN                           +9.89  IC95 [ +5.41, +14.36]  9/9 positifs  -> MIEUX
+  methode_sans_pseudo - M2CAN               +9.98  IC95 [ +5.14, +14.81]  8/9 positifs  -> MIEUX
+  methode - methode_sans_pseudo             -0.09  IC95 [ -1.69,  +1.51]  3/9 positifs  -> INDISTINGUABLE
+
+Par cible, ecart moyen methode - M2CAN
+  TumEmo    +5.56
+  Twitter  +17.51
+  Yelp      +6.60
+
+Tailles des groupes au dernier point (methode) et justesse des pseudo-etiquettes retenues (dernier tour)
+  TumEmo   123456  groupes [129, 552, 819]  pseudo : 2272 retenus, justesse 0.4841549295774648
+  TumEmo   234567  groupes [769, 178, 553]  pseudo : 2184 retenus, justesse 0.5086996336996337
+  TumEmo   345678  groupes [758, 134, 608]  pseudo : 2012 retenus, justesse 0.4945328031809145
+  Twitter  123456  groupes [554, 295, 651]  pseudo : 2184 retenus, justesse 0.6094322344322345
+  Twitter  234567  groupes [628, 138, 734]  pseudo : 1944 retenus, justesse 0.6054526748971193
+  Twitter  345678  groupes [755, 591, 154]  pseudo : 2137 retenus, justesse 0.6078614880673842
+  Yelp     123456  groupes [1097, 112, 291]  pseudo : 1178 retenus, justesse 0.4533106960950764
+  Yelp     234567  groupes [482, 973, 45]  pseudo : 1452 retenus, justesse 0.5110192837465565
+  Yelp     345678  groupes [1044, 37, 419]  pseudo : 1150 retenus, justesse 0.64

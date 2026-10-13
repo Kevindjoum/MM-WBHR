@@ -1,0 +1,10 @@
+# La méthode (methode/ALGORITHME.md) : surcharges appliquées à methode/config_exemple.yaml.
+# Barycentres de Wasserstein, partition spectrale, appariement hongrois, pseudo-étiquettes.
+fusion:
+  dim: 256                     # espace fusionné z en 256 dimensions
+phase1:
+  epoques: 10                  # à changer ici si besoin
+  optimiseur:
+    lr_extracteur: 5.0e-5
+pseudo:
+  actif: true

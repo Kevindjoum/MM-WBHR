@@ -1,0 +1,28 @@
+63 runs, rc != 0 : 0
+
+Moyennes par cible (3 graines), dernier point / meilleur / critere intra-inter, en %
+config                                   human                  animal                 cartoon
+c0_base                  68.60 / 68.96 / 67.39   66.48 / 68.75 / 64.02   52.91 / 55.20 / 50.15
+lr_extracteur            83.82 / 85.14 / 72.46   72.92 / 77.08 / 71.21   54.28 / 57.80 / 51.68
+z256                     71.98 / 72.46 / 71.38   69.32 / 72.35 / 69.32   54.13 / 55.20 / 53.36
+partition_equilibree     76.09 / 76.69 / 76.09   72.16 / 73.67 / 71.97   58.26 / 58.72 / 58.26
+info_max                 68.60 / 68.60 / 67.39   67.80 / 69.13 / 67.05   53.98 / 55.35 / 52.91
+sources_160              68.60 / 68.96 / 67.39   66.48 / 68.75 / 64.02   52.91 / 55.20 / 50.15
+tout                     85.02 / 85.75 / 83.33   79.36 / 81.06 / 79.36   61.62 / 63.00 / 61.01
+
+Ecarts apparies a c0_base (9 paires), metrique principale = dernier point
+  lr_extracteur          dernier  +7.68 [ +1.83, +13.52] 7/9 par cible {'human': 15.22, 'animal': 6.44, 'cartoon': 1.38}  | meilleur  +9.04  critere  +4.60  -> SOUTENU
+  z256                   dernier  +2.48 [ -0.54,  +5.50] 7/9 par cible {'human': 3.38, 'animal': 2.84, 'cartoon': 1.22}  | meilleur  +2.37  critere  +4.17  -> INCONCLUSIF
+  partition_equilibree   dernier  +6.17 [ +3.54,  +8.81] 8/9 par cible {'human': 7.49, 'animal': 5.68, 'cartoon': 5.35}  | meilleur  +5.39  critere  +8.25  -> SOUTENU
+  info_max               dernier  +0.80 [ -0.52,  +2.11] 4/9 par cible {'human': 0.0, 'animal': 1.33, 'cartoon': 1.07}  | meilleur  +0.06  critere  +1.93  -> INCONCLUSIF
+  sources_160            dernier  +0.00 [ +0.00,  +0.00] 0/9 par cible {'human': 0.0, 'animal': 0.0, 'cartoon': 0.0}  | meilleur  +0.00  critere  +0.00  -> NON SOUTENU
+  tout                   dernier +12.67 [ +8.67, +16.68] 9/9 par cible {'human': 16.43, 'animal': 12.88, 'cartoon': 8.72}  | meilleur +12.30  critere +14.05  -> SOUTENU
+
+Oracle de la partition au dernier point (moyenne, %) et minutes par run
+  c0_base                oracle  62.72  perte d'appariement  0.06    8.4 min
+  lr_extracteur          oracle  70.80  perte d'appariement  0.46    8.6 min
+  z256                   oracle  65.14  perte d'appariement  0.00    8.7 min
+  partition_equilibree   oracle  68.83  perte d'appariement  0.00    7.8 min
+  info_max               oracle  63.59  perte d'appariement  0.13    8.4 min
+  sources_160            oracle  62.72  perte d'appariement  0.06    8.0 min
+  tout                   oracle  75.33  perte d'appariement  0.00    7.2 min

@@ -1,0 +1,9 @@
+# La méthode sans pseudo-étiquettes (ablation) : surcharges appliquées à methode/config_exemple.yaml.
+fusion:
+  dim: 256
+phase1:
+  epoques: 10
+  optimiseur:
+    lr_extracteur: 5.0e-5
+pseudo:
+  actif: false

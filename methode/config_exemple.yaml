@@ -1,0 +1,61 @@
+# Configuration de la fusion géométrique pour M modalités.
+# L'ordre des modalités compte : avec 2 modalités, la 1re joue le rôle du texte et la 2e celui de l'image
+# dans M2CAN (fusion MLB et KL de cohérence identiques).
+
+graine: 123456
+appareil: auto            # auto = GPU s'il existe, sinon processeur ; ou cuda, cpu
+sortie: sorties/hac_human_s123456
+
+donnees:
+  racine: donnees/hac     # format décrit dans donnees.py (voir preparer_hac.py)
+  sources: [animal, cartoon]
+  cible: human
+
+modalites:                # 2, 3 modalités ou plus
+  - nom: audio
+    encodeur: {type: caracteristiques, dim: 768}     # AST
+  - nom: video
+    encodeur: {type: caracteristiques, dim: 2304}    # SlowFast (2048 pour ResNet50)
+  # - nom: flot
+  #   encodeur: {type: caracteristiques, dim: 2048}
+  # Exemples d'encodeurs entraînés de bout en bout (entrées brutes à fournir par le jeu de données) :
+  #   encodeur: {type: bert, nom: bert-base-uncased}
+  #   encodeur: {type: torchvision, nom: resnet50}
+
+fusion:
+  dim: 64                  # dimension de z (64 dans M2CAN)
+
+phase1:
+  epoques: 10               # 10 par défaut ; les résultats HAC du dépôt ont été obtenus avec 3
+  pas_par_epoque: 3750     # 15 000 exemples cibles par époque avec des lots de 4
+  lot: 4                   # exemples par domaine et par pas
+  evaluer_tous_les: 750
+  tau: 0.07
+  poids_tetes: 1.0
+  alpha_cmcfa: 1.0
+  beta_cdcfa: 1.0
+  gamma_supcon_fusion: 1.0
+  poids_im: 0.0            # > 0 : maximisation de l'information sur les têtes du lot cible
+  optimiseur:              # Adam ; taux publiés de M2CAN, décroissance polynomiale
+    lr_dorsale: 2.0e-6
+    lr_extracteur: 2.0e-6  # très faible : avec des caractéristiques gelées, l'extracteur bouge à peine
+    lr_fusion: 5.0e-5
+    lr_tetes: 5.0e-5
+    puissance: 0.9
+    lr_min: 1.0e-8
+
+phase2:
+  partition: spectrale     # spectrale (HOT-DA) | equilibree (transport équilibré vers les centres sources)
+  support: 16
+  eps: 0.02
+  sinkhorn: 60
+  point_fixe: 8
+  par_classe: 400
+  sources_max: null        # nombre max d'exemples par source pour les barycentres (160 dans le code d'origine)
+
+pseudo:
+  actif: false             # true = fusion géométrique + pseudo-étiquettes WBHR
+  tous_les: 750
+  cible_max: 3000
+  taux: [0.3, 0.6, 0.9, 1.0]
+  filtre: accord           # accord | aucun

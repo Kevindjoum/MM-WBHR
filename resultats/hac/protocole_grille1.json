@@ -1,0 +1,94 @@
+{
+ "titre": "Fusion geometrique (fusion_geometrique_m) sur HAC : options proposees par la critique du 12/10",
+ "ecrit_le": "2026-10-12T15:35",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_paquet": "71e8e96f759668e268c1f69e653632cb635bd9d2bd675c6a9842566c0381fc37",
+ "donnees": "HAC, audio AST 768-d + video SlowFast 2304-d, caracteristiques gelees (sortie de hac-extract-features), vue augmentee = vue faible",
+ "cibles": [
+  "human",
+  "animal",
+  "cartoon"
+ ],
+ "sources": "les deux autres domaines",
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "base": "config_exemple.yaml du paquet, inchangee (3 epoques x 3750 pas, lot 4, evaluation tous les 750 pas, lr extracteur 2e-6, z 64-d, partition spectrale, sources_max null, poids_im 0)",
+ "configurations": {
+  "c0_base": {},
+  "lr_extracteur": {
+   "phase1": {
+    "optimiseur": {
+     "lr_extracteur": 5e-05
+    }
+   }
+  },
+  "z256": {
+   "fusion": {
+    "dim": 256
+   }
+  },
+  "partition_equilibree": {
+   "phase2": {
+    "partition": "equilibree"
+   }
+  },
+  "info_max": {
+   "phase1": {
+    "poids_im": 1.0
+   }
+  },
+  "sources_160": {
+   "phase2": {
+    "sources_max": 160
+   }
+  },
+  "tout": {
+   "phase1": {
+    "optimiseur": {
+     "lr_extracteur": 5e-05
+    },
+    "poids_im": 1.0
+   },
+   "fusion": {
+    "dim": 256
+   },
+   "phase2": {
+    "partition": "equilibree"
+   }
+  }
+ },
+ "metrique_principale": "exactitude de la phase 2 au DERNIER point d'evaluation (HAC n'a pas de validation : le meilleur point est choisi sur le test cible, donc optimiste)",
+ "metriques_secondaires": [
+  "meilleur point (optimiste)",
+  "point choisi par le minimum du ratio intra/inter (sans etiquette)"
+ ],
+ "comparaison": "chaque configuration contre c0_base, apparie par (cible, graine) : 9 ecarts",
+ "critere": {
+  "SOUTENU": "moyenne des 9 ecarts > 0, IC95 (t de Student, 8 ddl) excluant 0, et au moins 7 ecarts sur 9 positifs",
+  "NON SOUTENU": "moyenne des 9 ecarts <= 0",
+  "INCONCLUSIF": "sinon"
+ },
+ "sources_160_lecture": "sources_160 imite l'echantillonnage du code d'origine (40 lots x 4) ; c0_base prend toutes les sources. Si c0_base bat sources_160 selon le critere, le point 4 de la critique est soutenu",
+ "references": {
+  "plancher_source_only_slowfast": {
+   "human": 76.59,
+   "animal": 80.68,
+   "cartoon": 50.92
+  },
+  "M2CAN_slowfast_best": {
+   "human": 85.99,
+   "animal": 84.85,
+   "cartoon": 72.94
+  },
+  "bras_C_code_origine_slowfast_best": {
+   "human": 69.32,
+   "animal": 67.23,
+   "cartoon": 52.75
+  },
+  "note": "references d'ABLATIONS (section HAC), obtenues avec augmentations fortes et le code d'origine : indicatives, non appariees"
+ },
+ "execution": "3 kernels CPU Kaggle (un par cible) sur le compte kevindjoumessiwoumpe, 4 runs en parallele, 1 thread chacun"
+}

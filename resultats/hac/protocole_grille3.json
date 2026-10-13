@@ -1,0 +1,83 @@
+{
+ "titre": "Grille 3 : la methode (ALGORITHME.md) sur HAC avec les vues augmentees fortes, appariee a M2CAN",
+ "ecrit_le": "2026-10-13T04:20",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_paquet": "acbb3ce33a43b2d806c62b92364e3018cc542f9d20eaa60519196e57fbd9d702",
+ "donnees": "HAC, audio AST 768-d + video SlowFast 2304-d, caracteristiques gelees de hac-extract-features, AVEC les 4 vues fortes (augmentations de M2CAN)",
+ "preparation": [
+  "--vues_fortes"
+ ],
+ "cibles": [
+  "human",
+  "animal",
+  "cartoon"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "base": "config_exemple.yaml du paquet, inchangee (3 epoques x 3750 pas, lot 4, evaluation tous les 750 pas, lr extracteur 2e-6, z 64-d, partition spectrale, sources_max null, poids_im 0)",
+ "configurations": {
+  "lr_z256": {
+   "phase1": {
+    "optimiseur": {
+     "lr_extracteur": 5e-05
+    }
+   },
+   "fusion": {
+    "dim": 256
+   }
+  },
+  "lr_z256_pseudo": {
+   "phase1": {
+    "optimiseur": {
+     "lr_extracteur": 5e-05
+    }
+   },
+   "fusion": {
+    "dim": 256
+   },
+   "pseudo": {
+    "actif": true
+   }
+  }
+ },
+ "metrique_principale": "exactitude au dernier point",
+ "reference_appariee": {
+  "methode": "M2CAN, memes caracteristiques et vues fortes, memes graines, dernier point (results/hac_m2can_brasc/courbes_validation.csv, pas 37500)",
+  "valeurs": {
+   "human": {
+    "123456": 82.25,
+    "234567": 86.23,
+    "345678": 88.77
+   },
+   "animal": {
+    "123456": 84.66,
+    "234567": 85.8,
+    "345678": 82.95
+   },
+   "cartoon": {
+    "123456": 72.02,
+    "234567": 72.94,
+    "345678": 68.81
+   }
+  },
+  "differences_connues": "M2CAN : video SlowFast ramenee a 2048-d par une ACP ajustee sur les sources, 10 epoques (37 500 pas) ; methode : 2304-d bruts, 3 epoques (11 250 pas)"
+ },
+ "comparaisons": {
+  "principale": "lr_z256_pseudo contre M2CAN (9 paires cible x graine)",
+  "secondaires": [
+   "lr_z256 contre M2CAN",
+   "lr_z256_pseudo contre lr_z256",
+   "effet des vues fortes : chaque configuration contre la meme en grille 2 (CPU, sans vues fortes)"
+  ]
+ },
+ "critere": {
+  "AU_NIVEAU_OU_MIEUX": "moyenne des 9 ecarts a M2CAN >= 0",
+  "MIEUX": "IC95 (t, 8 ddl) de l'ecart moyen > 0 et au moins 7/9 positifs",
+  "MOINS_BIEN": "IC95 de l'ecart moyen < 0",
+  "INDISTINGUABLE": "sinon"
+ },
+ "execution": "1 kernel GPU Kaggle fgm-hac-options-g3, 3 cibles x 2 configurations x 3 graines = 18 runs"
+}

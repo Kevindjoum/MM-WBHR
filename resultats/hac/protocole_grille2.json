@@ -1,0 +1,61 @@
+{
+ "titre": "Grille 2 : la methode complete (partition spectrale + barycentres de Wasserstein) avec lr extracteur 5e-5 et z 256-d, sans et avec pseudo-etiquettes",
+ "ecrit_le": "2026-10-12T17:57",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_paquet": "71e8e96f759668e268c1f69e653632cb635bd9d2bd675c6a9842566c0381fc37",
+ "donnees": "HAC, audio AST 768-d + video SlowFast 2304-d, caracteristiques gelees (sortie de hac-extract-features), vue augmentee = vue faible",
+ "cibles": [
+  "human",
+  "animal",
+  "cartoon"
+ ],
+ "sources": "les deux autres domaines",
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "base": "config_exemple.yaml du paquet, inchangee (3 epoques x 3750 pas, lot 4, evaluation tous les 750 pas, lr extracteur 2e-6, z 64-d, partition spectrale, sources_max null, poids_im 0)",
+ "configurations": {
+  "c0_base": {},
+  "lr_z256": {
+   "phase1": {
+    "optimiseur": {
+     "lr_extracteur": 5e-05
+    }
+   },
+   "fusion": {
+    "dim": 256
+   }
+  },
+  "lr_z256_pseudo": {
+   "phase1": {
+    "optimiseur": {
+     "lr_extracteur": 5e-05
+    }
+   },
+   "fusion": {
+    "dim": 256
+   },
+   "pseudo": {
+    "actif": true
+   }
+  }
+ },
+ "controle": "c0_base doit reproduire au bit pres le dernier point de c0_base de la grille 1 (protocole.json) ; sinon, on compare a c0_base de cette grille",
+ "metrique_principale": "exactitude de la phase 2 au DERNIER point d'evaluation (HAC n'a pas de validation : le meilleur point est choisi sur le test cible, donc optimiste)",
+ "comparaisons": {
+  "principale": "lr_z256 contre c0_base (9 paires)",
+  "secondaires": [
+   "lr_z256_pseudo contre lr_z256 (effet des pseudo-etiquettes)",
+   "lr_z256 contre 'tout' de la grille 1 (cout de garder la partition spectrale et les barycentres)"
+  ]
+ },
+ "critere": {
+  "SOUTENU": "moyenne des 9 ecarts > 0, IC95 (t de Student, 8 ddl) excluant 0, et au moins 7 ecarts sur 9 positifs",
+  "NON SOUTENU": "moyenne des 9 ecarts <= 0",
+  "INCONCLUSIF": "sinon"
+ },
+ "execution": "3 kernels GPU Kaggle fgm-hac-options-g2gpu-<cible> (principal) + 3 kernels CPU fgm-hac-options-g2-<cible> (replique)",
+ "amendement_avant_resultats": "12/10, avant tout resultat : execution deplacee sur GPU a la demande de l'utilisateur (kernels fgm-hac-options-g2gpu-<cible>). Le calcul GPU n'est pas identique au bit pres au CPU : le controle se fait donc contre c0_base de cette grille. Les kernels CPU fgm-hac-options-g2-<cible> deja lances servent de replique."
+}

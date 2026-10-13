@@ -1,0 +1,39 @@
+caracteristiques : /kaggle/input/notebooks/kevindjoumessiwoumpe/hac-extract-features/hac_feats
+human/train : 1111 clips, video 2304-d, audio 768-d, vues fortes (4, 2304) / (4, 768)
+human/test : 276 clips, video 2304-d, audio 768-d, vues fortes (4, 2304) / (4, 768)
+animal/train : 730 clips, video 2304-d, audio 768-d, vues fortes (4, 2304) / (4, 768)
+animal/test : 176 clips, video 2304-d, audio 768-d, vues fortes (4, 2304) / (4, 768)
+cartoon/train : 870 clips, video 2304-d, audio 768-d, vues fortes (4, 2304) / (4, 768)
+cartoon/test : 218 clips, video 2304-d, audio 768-d, vues fortes (4, 2304) / (4, 768)
+cibles ['human'] : 12 runs, 4 en parallele, preparation ['--vues_fortes']
+[run] {"cible": "human", "config": "h1_concatenation", "graine": 123456, "rc": 0, "minutes": 9.0, "meilleur": 0.8913043478260869, "meilleur_pas": 3000, "dernier": 0.8840579710144928, "oracle_dernier": 0.8840579710144928, "critere": 0.8876811594202898, "critere_pas": 6000, "n_evals": 15, "tailles_dernier": [40, 35, 37, 42, 41, 40, 41]}
+[run] {"cible": "human", "config": "h2_plat", "graine": 123456, "rc": 0, "minutes": 9.2, "meilleur": 0.8731884057971014, "meilleur_pas": 3000, "dernier": 0.855072463768116, "oracle_dernier": 0.855072463768116, "critere": 0.8623188405797102, "critere_pas": 5250, "n_evals": 15, "tailles_dernier": [40, 39, 38, 38, 40, 39, 42]}
+[run] {"cible": "human", "config": "methode", "graine": 123456, "rc": 0, "minutes": 9.5, "meilleur": 0.8913043478260869, "meilleur_pas": 3000, "dernier": 0.8840579710144928, "oracle_dernier": 0.8840579710144928, "critere": 0.8876811594202898, "critere_pas": 6000, "n_evals": 15, "tailles_dernier": [40, 35, 37, 42, 41, 40, 41]}
+[run] {"cible": "human", "config": "plat_concatenation", "graine": 123456, "rc": 0, "minutes": 11.4, "meilleur": 0.8731884057971014, "meilleur_pas": 5250, "dernier": 0.855072463768116, "oracle_dernier": 0.855072463768116, "critere": 0.8731884057971014, "critere_pas": 5250, "n_evals": 15, "tailles_dernier": [36, 38, 43, 37, 40, 39, 43]}
+[run] {"cible": "human", "config": "h1_concatenation", "graine": 234567, "rc": 0, "minutes": 7.7, "meilleur": 0.8659420289855072, "meilleur_pas": 7500, "dernier": 0.855072463768116, "oracle_dernier": 0.855072463768116, "critere": 0.8586956521739131, "critere_pas": 6000, "n_evals": 15, "tailles_dernier": [38, 40, 38, 42, 36, 42, 40]}
+[run] {"cible": "human", "config": "methode", "graine": 234567, "rc": 0, "minutes": 8.2, "meilleur": 0.8659420289855072, "meilleur_pas": 7500, "dernier": 0.855072463768116, "oracle_dernier": 0.855072463768116, "critere": 0.8586956521739131, "critere_pas": 6000, "n_evals": 15, "tailles_dernier": [38, 40, 38, 42, 36, 42, 40]}
+[run] {"cible": "human", "config": "h2_plat", "graine": 234567, "rc": 0, "minutes": 8.0, "meilleur": 0.8478260869565217, "meilleur_pas": 7500, "dernier": 0.8478260869565217, "oracle_dernier": 0.8478260869565217, "critere": 0.8442028985507246, "critere_pas": 5250, "n_evals": 15, "tailles_dernier": [42, 41, 37, 36, 40, 38, 42]}
+[run] {"cible": "human", "config": "plat_concatenation", "graine": 234567, "rc": 0, "minutes": 10.2, "meilleur": 0.855072463768116, "meilleur_pas": 7500, "dernier": 0.8514492753623188, "oracle_dernier": 0.8514492753623188, "critere": 0.8478260869565217, "critere_pas": 5250, "n_evals": 15, "tailles_dernier": [36, 38, 47, 32, 40, 39, 44]}
+[run] {"cible": "human", "config": "h1_concatenation", "graine": 345678, "rc": 0, "minutes": 7.9, "meilleur": 0.855072463768116, "meilleur_pas": 9000, "dernier": 0.855072463768116, "oracle_dernier": 0.855072463768116, "critere": 0.8514492753623188, "critere_pas": 6750, "n_evals": 15, "tailles_dernier": [40, 38, 47, 37, 38, 43, 33]}
+[run] {"cible": "human", "config": "methode", "graine": 345678, "rc": 0, "minutes": 8.4, "meilleur": 0.855072463768116, "meilleur_pas": 9000, "dernier": 0.855072463768116, "oracle_dernier": 0.855072463768116, "critere": 0.8514492753623188, "critere_pas": 6750, "n_evals": 15, "tailles_dernier": [40, 38, 47, 37, 38, 43, 33]}
+[run] {"cible": "human", "config": "h2_plat", "graine": 345678, "rc": 0, "minutes": 8.0, "meilleur": 0.8586956521739131, "meilleur_pas": 6000, "dernier": 0.855072463768116, "oracle_dernier": 0.855072463768116, "critere": 0.8514492753623188, "critere_pas": 4500, "n_evals": 15, "tailles_dernier": [42, 38, 41, 36, 40, 39, 40]}
+[run] {"cible": "human", "config": "plat_concatenation", "graine": 345678, "rc": 0, "minutes": 8.0, "meilleur": 0.8768115942028986, "meilleur_pas": 10500, "dernier": 0.8768115942028986, "oracle_dernier": 0.8768115942028986, "critere": 0.8623188405797102, "critere_pas": 6750, "n_evals": 15, "tailles_dernier": [36, 39, 44, 35, 40, 40, 42]}
+=== RESUME ===
+{"cible": "human", "config": "methode", "graine": 123456, "rc": 0, "meilleur": 0.8913043478260869, "dernier": 0.8840579710144928, "critere": 0.8876811594202898, "minutes": 9.5}
+{"cible": "human", "config": "h1_concatenation", "graine": 123456, "rc": 0, "meilleur": 0.8913043478260869, "dernier": 0.8840579710144928, "critere": 0.8876811594202898, "minutes": 9.0}
+{"cible": "human", "config": "h2_plat", "graine": 123456, "rc": 0, "meilleur": 0.8731884057971014, "dernier": 0.855072463768116, "critere": 0.8623188405797102, "minutes": 9.2}
+{"cible": "human", "config": "plat_concatenation", "graine": 123456, "rc": 0, "meilleur": 0.8731884057971014, "dernier": 0.855072463768116, "critere": 0.8731884057971014, "minutes": 11.4}
+{"cible": "human", "config": "methode", "graine": 234567, "rc": 0, "meilleur": 0.8659420289855072, "dernier": 0.855072463768116, "critere": 0.8586956521739131, "minutes": 8.2}
+{"cible": "human", "config": "h1_concatenation", "graine": 234567, "rc": 0, "meilleur": 0.8659420289855072, "dernier": 0.855072463768116, "critere": 0.8586956521739131, "minutes": 7.7}
+{"cible": "human", "config": "h2_plat", "graine": 234567, "rc": 0, "meilleur": 0.8478260869565217, "dernier": 0.8478260869565217, "critere": 0.8442028985507246, "minutes": 8.0}
+{"cible": "human", "config": "plat_concatenation", "graine": 234567, "rc": 0, "meilleur": 0.855072463768116, "dernier": 0.8514492753623188, "critere": 0.8478260869565217, "minutes": 10.2}
+{"cible": "human", "config": "methode", "graine": 345678, "rc": 0, "meilleur": 0.855072463768116, "dernier": 0.855072463768116, "critere": 0.8514492753623188, "minutes": 8.4}
+{"cible": "human", "config": "h1_concatenation", "graine": 345678, "rc": 0, "meilleur": 0.855072463768116, "dernier": 0.855072463768116, "critere": 0.8514492753623188, "minutes": 7.9}
+{"cible": "human", "config": "h2_plat", "graine": 345678, "rc": 0, "meilleur": 0.8586956521739131, "dernier": 0.855072463768116, "critere": 0.8514492753623188, "minutes": 8.0}
+{"cible": "human", "config": "plat_concatenation", "graine": 345678, "rc": 0, "meilleur": 0.8768115942028986, "dernier": 0.8768115942028986, "critere": 0.8623188405797102, "minutes": 8.0}
+/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+  cells[i][c] = re.sub('\\\\\|', '|', cell)
+/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+[NbConvertApp] Converting notebook __script__.ipynb to html
+[NbConvertApp] Writing 383175 bytes to __results__.html

@@ -1,0 +1,82 @@
+{
+ "titre": "Cadre A, sentiment : la methode (ALGORITHME.md) contre M2CAN sur les memes caracteristiques gelees",
+ "ecrit_le": "2026-10-13T06:36",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_code": "7c937067947c45cdcd75509a89269c3a4e7b1f692bd3bcd3508dbdba4e1cf713",
+ "groupe": "sentiment",
+ "cibles": [
+  "TumEmo",
+  "Twitter",
+  "Yelp"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "donnees": "sortie de kevindjoumessiwoumpe/extract-a-sentiment : BERT pooler 768-d + ResNet-50 2048-d de M2CAN, 1 vue faible + 4 fortes ; 15000 train (5000 par classe) et 1500 test (500 par classe) par domaine ; val de M2CAN = test",
+ "configurations": {
+  "fgm": {
+   "methode": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    }
+   },
+   "methode_sans_pseudo": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": false
+    }
+   }
+  },
+  "m2can": {
+   "publie": {}
+  }
+ },
+ "notes": "methode : config_exemple.yaml de fusion_geometrique_m (3 epoques x 3750 pas, lot 4), comme HAC et l'esthetique ; M2CAN : configuration publiee config_<cible>.yaml, lot 8, n_sample 15000, 10 epoques (m2can_carac/run.py). Le sha differe de celui du protocole esthetique : phase2.py a recu depuis les options representant et transport (H1/H2), dont les valeurs par defaut (barycentre, hierarchique) laissent la methode inchangee.",
+ "metrique_principale": "exactitude au dernier point",
+ "comparaisons": {
+  "principale": "methode contre M2CAN (9 paires cible x graine)",
+  "secondaires": [
+   "methode_sans_pseudo contre M2CAN",
+   "methode contre methode_sans_pseudo"
+  ]
+ },
+ "critere": {
+  "MIEUX": "IC95 (t, 8 ddl) de l'ecart moyen > 0 et au moins 7/9 positifs",
+  "MOINS_BIEN": "IC95 < 0",
+  "INDISTINGUABLE": "sinon"
+ },
+ "reperes": {
+  "classe_majoritaire_test": {
+   "TumEmo": 33.33,
+   "Twitter": 33.33,
+   "Yelp": 33.33
+  },
+  "M2CAN_publie_bout_en_bout": {
+   "TumEmo": 63.8,
+   "Yelp": 63.7
+  },
+  "M2CAN_checkpoint_officiel_remesure": {
+   "TumEmo": 64.87,
+   "Twitter": 86.4,
+   "Yelp": 61.2
+  },
+  "source_reperes": "ABLATIONS.md sections 9 et 10 (valeurs publiees deduites des ecarts qui y sont notes)"
+ }
+}

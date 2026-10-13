@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+donnees/
+donnees_brutes/
+sorties/
+*.pt
+*.pth
