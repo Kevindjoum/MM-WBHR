@@ -1,3 +1,8 @@
 # M2CAN : options passées à m2can/m2can_carac/run.py. Les hyperparamètres viennent de la configuration PUBLIÉE de la
 # cible (m2can/msmm/scripts/config_<cible>.yaml) ; pour HAC, celle de Twitter. Laisser vide = valeurs publiées.
 epochs: 10
+# Taux d'apprentissage (facultatif, défaut : ceux de la configuration publiée). Pour donner à M2CAN le même taux
+# d'extracteur que la méthode sur caractéristiques gelées (5e-5), décommenter :
+# extractor_lr: 5.0e-5
+# mlb_lr: 5.0e-4
+# classifier_lr: 5.0e-4

@@ -7,6 +7,8 @@ scipy
 scikit-learn
 PyYAML
 tqdm
+# Figures t-SNE (methode/visualiser_tsne.py) uniquement
+matplotlib
 # Prétraitement des textes de M2CAN (sentiment)
 ekphrasis
 emoji

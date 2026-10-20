@@ -20,6 +20,10 @@ Options de test des hypothèses (défauts = la méthode) :
                 défaut), ou transport direct des points cibles vers les points des représentants de classe (Sinkhorn,
                 marges uniformes, coût cosinus, même eps) ; chaque point prend la classe qui reçoit le plus de sa masse.
 
+Options d'évaluation (défauts = la méthode) :
+  evaluation_jointe: true           le test cible est partitionné avec les points du train cible (sans étiquette).
+  sauver_z: true                    écrit z_dernier.npz (sources, cible, barycentres) pour visualiser_tsne.py.
+
 Utilisation autonome, sur un modèle déjà entraîné :
     python phase2.py --config config.yaml --modele sorties/xxx/modele_meilleur.pt
 """
@@ -161,13 +165,40 @@ def diagnostics(res, y_vrai, K):
             "tailles_groupes": np.bincount(g, minlength=K).tolist()}
 
 
-def evaluer(modele, jeux_sources, jeu_cible, K, conf, graine=0):
+def sauver_representations(chemin, src, noms_sources, zt, yt, res, par_source=1000, graine=0):
+    """Option sauver_z : z des sources (au plus par_source points chacune), z de la cible de test avec ses vraies
+    étiquettes, groupes et étiquettes prédites, et les points des représentants de classe (barycentres)."""
+    rng = np.random.default_rng(graine)
+    zs, ys, ds = [], [], []
+    for k, s in enumerate(src):
+        idx = rng.choice(len(s[3]), min(par_source, len(s[3])), replace=False)
+        zs.append(s[0][torch.as_tensor(idx, device=s[0].device)].cpu().numpy())
+        ys.append(np.asarray(s[3])[idx])
+        ds.append(np.full(len(idx), k))
+    reps = res.get("representants") or {}
+    hs = sorted(reps)
+    np.savez_compressed(
+        chemin, z_sources=np.concatenate(zs), y_sources=np.concatenate(ys), source=np.concatenate(ds),
+        noms_sources=np.array(noms_sources), z_cible=zt.cpu().numpy(), y_cible=np.asarray(yt),
+        groupes=np.asarray(res["groupes"]), etiquettes=np.asarray(res["etiquettes"]),
+        z_barycentres=np.concatenate([reps[h].cpu().numpy() for h in hs]) if hs else np.zeros((0, zt.shape[1])),
+        classe_barycentres=np.concatenate([np.full(reps[h].shape[0], h) for h in hs]) if hs else np.zeros(0))
+
+
+def evaluer(modele, jeux_sources, jeu_cible, K, conf, graine=0, jeu_cible_train=None, n_train=3000, chemin_z=None):
+    """jeu_cible_train (option evaluation_jointe) : le test cible est étiqueté avec au plus n_train points du train
+    cible (sans étiquette), en une seule partition ; seuls les points du test sont mesurés.
+    chemin_z (option sauver_z) : fichier .npz des représentations, pour la visualisation (visualiser_tsne.py)."""
     was = modele.training
     modele.eval()
     try:
         src = [representations(modele, j, conf.get("sources_max")) for j in jeux_sources]
         zt, _, _, yt = representations(modele, jeu_cible)
-        res = etiqueter([s[0] for s in src], [s[3] for s in src], zt, K, conf, graine)
+        nt = len(yt)
+        zall = zt if jeu_cible_train is None else torch.cat([zt, representations(modele, jeu_cible_train, n_train)[0]])
+        res = etiqueter([s[0] for s in src], [s[3] for s in src], zall, K, conf, graine)
+        if jeu_cible_train is not None:
+            res = dict(res, etiquettes=res["etiquettes"][:nt], groupes=res["groupes"][:nt], C=res["C"][:nt, :nt])
         d = diagnostics(res, yt, K)
         reps = res.get("representants")
         if reps:   # diagnostic de H1 : distance de transport entre chaque représentant et SA classe cible (étiquettes vraies)
@@ -175,6 +206,9 @@ def evaluer(modele, jeux_sources, jeu_cible, K, conf, graine=0):
             couts = [cout_transport(reps[h], zt[torch.as_tensor(np.where(yt == h)[0], device=zt.device)], eps, it)
                      for h in reps if (yt == h).any()]
             d["cout_representant_classe_cible"] = float(np.mean(couts)) if couts else float("nan")
+        if chemin_z:
+            sauver_representations(chemin_z, src, [getattr(j, "domaine", f"source {k + 1}") for k, j in enumerate(jeux_sources)],
+                                   zt, yt, res, graine=graine)
         return d
     finally:
         if was:

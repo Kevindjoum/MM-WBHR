@@ -6,6 +6,7 @@ Option : pseudo-étiquettes WBHR (section `pseudo` de la configuration). Tous le
 étiquette le TRAIN cible ; on garde les points où la moyenne des têtes unimodales prédit la même classe que
 WBHR (filtre `accord`), puis, par classe, les plus centraux de leur groupe, dans la limite d'un quota qui
 croît d'un tour à l'autre. Ces points rejoignent les sources dans le SupCon sur la fusion.
+`pseudo.debut` (0 par défaut) : aucun tour avant ce pas ; le quota repart de son premier taux au premier tour.
 
     python phase1.py --config config.yaml
 """
@@ -98,7 +99,7 @@ def main():
     for ep in range(p1["epoques"]):
         for s in range(p1["pas_par_epoque"]):
             pas += 1
-            if confp.get("actif") and pas % confp.get("tous_les", 750) == 0:
+            if confp.get("actif") and pas % confp.get("tous_les", 750) == 0 and pas >= confp.get("debut", 0):
                 pseudo, j = pseudo_etiquettes(modele, src, cib_train, K, conf2, confp, tour)
                 tour += 1
                 print("[pseudo] " + json.dumps(j), flush=True)
@@ -117,7 +118,9 @@ def main():
                       f"cdcfa={ld.item():.4f} sc_fusion={ls.item():.4f} im={li.item():.4f} ({time.time() - t0:.0f} s)", flush=True)
             fin = (s + 1 == p1["pas_par_epoque"])
             if pas % p1["evaluer_tous_les"] == 0 or fin or pas == args.pas_max:
-                d = phase2.evaluer(modele, src, cib_test, K, conf2, graine)
+                d = phase2.evaluer(modele, src, cib_test, K, conf2, graine,
+                                   cib_train if conf2.get("evaluation_jointe") else None, confp.get("cible_max", 3000),
+                                   os.path.join(sorties, "z_dernier.npz") if conf2.get("sauver_z") else None)
                 d.update({"epoque": ep, "pas": pas})
                 histo.append(d)
                 print("[phase2] " + json.dumps(d), flush=True)
