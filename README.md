@@ -66,6 +66,10 @@ Par défaut : toutes les cibles, graines 123456, 234567 et 345678, et trois runs
 - `methode / methode_sans_pseudo` : la même sans pseudo-étiquettes (ablation) ;
 - `m2can / publie` : M2CAN avec la configuration publiée de la cible (`m2can/msmm/scripts/config_<cible>.yaml`).
 
+Avec `--configs methode methode_sans_pseudo methode_wbhr`, s'ajoute `methode / methode_wbhr` : la même avec la fin de
+HOT-DA fidèle à WBHR (appariement argmax, représentants transportés vers leur groupe, classifieur logistique ;
+`ALGORITHME.md`, section 6).
+
 Options utiles : `--methodes methode` ou `--methodes m2can`, `--cibles Twitter`, `--graines 123456`,
 `--appareil cpu`, `--parallele N` (plusieurs runs tiennent sur un même GPU).
 

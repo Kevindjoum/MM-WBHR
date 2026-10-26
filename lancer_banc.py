@@ -18,7 +18,8 @@ from concurrent.futures import ThreadPoolExecutor
 import yaml
 
 ICI = os.path.dirname(os.path.abspath(__file__))
-CONFIGS_METHODE = {"methode": "configs/methode.yaml", "methode_sans_pseudo": "configs/methode_sans_pseudo.yaml"}
+CONFIGS_METHODE = {"methode": "configs/methode.yaml", "methode_sans_pseudo": "configs/methode_sans_pseudo.yaml",
+                   "methode_wbhr": "configs/methode_wbhr.yaml"}
 
 
 def deep_update(d, u):

@@ -1,7 +1,8 @@
 """Test de bout en bout sur données synthétiques, sans GPU, pour M = 2, 3 et 4 modalités.
 
 Vérifie que l'entraînement tourne, que la phase 2 étiquette la cible et que les pseudo-étiquettes
-fonctionnent, puis les options (z en 256-d, maximisation de l'information, partition équilibrée). Ne mesure pas une performance réelle.
+fonctionnent, puis les options (z en 256-d, maximisation de l'information, partition équilibrée,
+appariement argmax et classifieur de HOT-DA). Ne mesure pas une performance réelle.
 
     python test_synthetique.py
 """
@@ -57,7 +58,11 @@ def lancer(M, pseudo, options=False):
                                          "lr_tetes": 1e-3}},
                "phase2": {"support": 8, "eps": 0.05, "sinkhorn": 30, "point_fixe": 4, "par_classe": 100},
                "pseudo": {"actif": pseudo, "tous_les": 15, "cible_max": 200, "taux": [0.3, 0.6], "filtre": "accord"}}
-        if options:                      # z en 256-d, maximisation de l'information, partition équilibrée
+        if options == "wbhr":            # fin de HOT-DA fidèle à WBHR : appariement argmax, classifieur
+            cfg["phase2"].update(appariement="argmax", classifieur="logistique")
+        elif options == "voisins":
+            cfg["phase2"].update(classifieur="voisins", voisins=3)
+        elif options:                    # z en 256-d, maximisation de l'information, partition équilibrée
             cfg["fusion"] = {"dim": 256}
             cfg["phase1"]["poids_im"] = 1.0
             cfg["phase2"]["partition"] = "equilibree"
@@ -80,6 +85,7 @@ def lancer(M, pseudo, options=False):
 
 if __name__ == "__main__":
     torch.set_num_threads(2)
-    res = [lancer(M, p) for M in (2, 3, 4) for p in (False, True)] + [lancer(2, False, True), lancer(3, True, True)]
+    res = [lancer(M, p) for M in (2, 3, 4) for p in (False, True)] + [lancer(2, False, True), lancer(3, True, True),
+                                                                 lancer(2, True, "wbhr"), lancer(2, False, "voisins")]
     print("TOUS LES TESTS PASSENT" if all(res) else "ECHEC")
     sys.exit(0 if all(res) else 1)

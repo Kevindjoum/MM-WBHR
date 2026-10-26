@@ -192,6 +192,26 @@ C'est une adaptation de HOT-DA (*hierarchical optimal transport for domain adapt
 transport se fait entre structures, des barycentres de classe vers des groupes cibles, et non point à point. La
 différence est l'usage, à l'étape 1, du barycentre de Wasserstein des sources plutôt que d'un seul domaine source.
 
+**Variante fidèle à WBHR (option `classifieur`).** Les algorithmes de référence de WBHR ne s'arrêtent pas à
+l'étape 5 : l'algorithme 3 (HOT-DA) transporte les points de chaque représentant $B_h$ vers son groupe apparié
+$\hat{l}(h)$ par projection barycentrique, $\tilde{B}_h = |B_h|\, \gamma^\star_{h,\hat{l}}\, Z_{\hat{l}}$, puis
+entraîne un classifieur $\eta$ sur $\bigcup_h \tilde{B}_h$ étiqueté $h$, et étiquette la cible par $\eta(z_j)$. Avec
+`phase2.classifieur: logistique` (ou `voisins`, $k$ plus proches voisins), le code fait exactement cela, sur les
+$z$ normalisés L2 ; avec `aucun` (défaut), l'étiquette est celle du groupe (étape 5). L'option
+`phase2.appariement: argmax` remplace le hongrois par l'appariement de WBHR : chaque classe $h$ va au groupe
+$\arg\max_l G_{hl}$, ce qui n'est pas forcément une bijection. La configuration `configs/methode_wbhr.yaml`
+combine les deux. Avec 16 points par représentant, le classifieur s'entraîne sur $16K$ points.
+
+Écarts entre le code (défauts) et les algorithmes 1 à 3 de WBHR :
+
+| étape | WBHR | code (défaut) |
+|---|---|---|
+| coût du barycentre | euclidien au carré | cosinus |
+| partition de la cible | partition spectrale de Wasserstein | partition spectrale sur $\exp(-C/\sigma)$, coût cosinus |
+| coût $W_{hl}$ | $W_2^2$ avec $\varepsilon'$ | coût de Sinkhorn, même $\varepsilon = 0.02$ |
+| appariement | $\arg\max_l G_{hl}$ | hongrois (option `appariement: argmax`) |
+| étiquettes finales | classifieur sur les représentants transportés | classe du groupe (option `classifieur`) |
+
 ## 7. Évaluation
 
 Après les pas 750, 1500, …, 11 250, la section 6 est appliquée au **test** cible. On journalise :
@@ -247,6 +267,7 @@ ETIQUETER(Z_s, Y_s, Z_t) :                                               # secti
 | transport entre structures : $\varepsilon$, itérations | 0.02, 300 |
 | pseudo-étiquettes : période, points cibles max, taux $\rho$, filtre | 750 pas, 3000, (0.3, 0.6, 0.9, 1.0), accord |
 | évaluation | tous les 750 pas, dernier point rapporté |
+| appariement, classifieur (variante WBHR) | hongrois, aucun (`methode_wbhr` : argmax, logistique) |
 
 ## 10. Résultats et conditions
 

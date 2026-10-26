@@ -13,6 +13,16 @@ transport équilibré des points cibles vers les centres de classe des sources (
 médiane, Sinkhorn, marges uniformes, eps 0.05), chaque point prenant la classe où va le plus de sa masse.
 Les groupes sont alors les classes prédites (ABLATIONS section 15 : 69.07 contre 66.20 sur Twitter).
 
+Options de fidélité à WBHR / HOT-DA (algorithme 3 de la référence ; défauts = la méthode) :
+  appariement: hongrois | argmax              hongrois (défaut) : bijection groupes <-> classes sur le plan G ;
+                argmax : comme WBHR, chaque classe h va au groupe argmax_l G[h, l] (pas forcément bijectif) et
+                chaque groupe prend la classe argmax_h G[h, l].
+  classifieur: aucun | logistique | voisins    aucun (défaut) : chaque point cible prend la classe appariée à son
+                groupe. Sinon, fin de HOT-DA : les points du représentant B_h sont transportés par projection
+                barycentrique vers leur groupe apparié (B~_h = |B_h| gamma_{h,l} Z_l), un classifieur est entraîné
+                sur les points transportés étiquetés h (régression logistique, ou k plus proches voisins avec
+                `voisins`, 1 par défaut), sur les z normalisés L2, puis appliqué à tous les points cibles.
+
 Options de test des hypothèses (défauts = la méthode) :
   representant: barycentre | concatenation   (H1) chaque classe source est résumée par le barycentre de Wasserstein
                 des nuages de cette classe dans chaque source (défaut), ou par ces nuages mis bout à bout.
@@ -31,7 +41,7 @@ from scipy.optimize import linear_sum_assignment
 from sklearn.cluster import SpectralClustering
 from sklearn.metrics import silhouette_score
 
-from ot_outils import cosine_cost, cout_transport, free_support_barycenter, sinkhorn_log
+from ot_outils import cosine_cost, cout_transport, free_support_barycenter, plan_transport, projection_barycentrique, sinkhorn_log
 
 
 @torch.no_grad()
@@ -94,12 +104,50 @@ def etiqueter(z_src, y_src, zt, K, conf, graine=0):
                 W[h, l] = cout_transport(barys[h], zt[torch.as_tensor(sel, device=zt.device)], eps, it)
     u = torch.full((K,), 1.0 / K)
     G = sinkhorn_log(torch.tensor(W, dtype=torch.float32), u, u, eps, 300).numpy()
-    rows, cols = linear_sum_assignment(-G)
-    g2c = {int(c): int(r) for r, c in zip(rows, cols)}
+    if conf.get("appariement", "hongrois") == "argmax":
+        c2g = {h: int(G[h].argmax()) for h in barys}                  # classe -> groupe, comme WBHR
+        g2c = {l: int(G[:, l].argmax()) for l in range(K)}            # groupe -> classe, pour les étiquettes
+    else:
+        rows, cols = linear_sum_assignment(-G)
+        g2c = {int(c): int(r) for r, c in zip(rows, cols)}
+        c2g = {h: l for l, h in g2c.items()}
     etiq = np.array([g2c.get(int(g), 0) for g in groupes])
 
-    return {"etiquettes": etiq, "groupes": groupes, "appariement": g2c, "marge": marge_geometrique(zt, groupes, K),
-            "W": W, "C": C, "representants": barys}
+    res = {"etiquettes": etiq, "groupes": groupes, "appariement": g2c, "marge": marge_geometrique(zt, groupes, K),
+           "W": W, "C": C, "representants": barys}
+    if conf.get("classifieur", "aucun") != "aucun":
+        res["etiquettes"] = classifier_transporte(barys, c2g, zt, groupes, conf, eps, it, graine)
+    return res
+
+
+@torch.no_grad()
+def classifier_transporte(barys, c2g, zt, groupes, conf, eps, it, graine=0):
+    """Fin de HOT-DA (option classifieur) : projection barycentrique des représentants vers leur groupe apparié,
+    puis classifieur entraîné sur les points transportés et appliqué à toute la cible."""
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.neighbors import KNeighborsClassifier
+
+    X, y = [], []
+    for h, l in c2g.items():
+        if h not in barys:
+            continue
+        sel = np.where(groupes == l)[0]
+        if not sel.size:
+            continue
+        Zl = zt[torch.as_tensor(sel, device=zt.device)]
+        P, _ = plan_transport(barys[h], Zl, eps, it)
+        X.append(projection_barycentrique(barys[h], Zl, P))
+        y.append(np.full(barys[h].shape[0], h))
+    X = torch.nn.functional.normalize(torch.cat(X), dim=-1).cpu().numpy()
+    y = np.concatenate(y)
+    if conf.get("classifieur") == "voisins":
+        clf = KNeighborsClassifier(n_neighbors=min(conf.get("voisins", 1), len(y)), metric="cosine")
+    else:
+        clf = LogisticRegression(max_iter=1000, random_state=graine)
+    if len(np.unique(y)) < 2:          # une seule classe transportée : rien à apprendre
+        return np.full(len(groupes), int(y[0]))
+    clf.fit(X, y)
+    return clf.predict(torch.nn.functional.normalize(zt, dim=-1).cpu().numpy()).astype(int)
 
 
 @torch.no_grad()

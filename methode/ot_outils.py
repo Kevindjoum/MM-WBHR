@@ -48,9 +48,20 @@ def free_support_barycenter(clouds, support=16, eps=0.05, sinkhorn_iters=20, out
     return B, plans, costs
 
 
-def cout_transport(B, X, eps, iters):
-    """Coût de Sinkhorn <P, C> entre deux nuages uniformes, coût cosinus."""
+def plan_transport(B, X, eps, iters):
+    """Plan de Sinkhorn P (|B|, |X|) entre deux nuages uniformes, coût cosinus. Renvoie (P, C)."""
     C = cosine_cost(B, X)
     a = torch.full((B.shape[0],), 1.0 / B.shape[0], device=B.device, dtype=B.dtype)
     b = torch.full((X.shape[0],), 1.0 / X.shape[0], device=B.device, dtype=B.dtype)
-    return float((sinkhorn_log(C, a, b, eps, iters) * C).sum())
+    return sinkhorn_log(C, a, b, eps, iters), C
+
+
+def cout_transport(B, X, eps, iters):
+    """Coût de Sinkhorn <P, C> entre deux nuages uniformes, coût cosinus."""
+    P, C = plan_transport(B, X, eps, iters)
+    return float((P * C).sum())
+
+
+def projection_barycentrique(B, X, P):
+    """Transport des points de B vers X par le plan P (marges uniformes sur B) : B~ = |B| P X."""
+    return B.shape[0] * (P @ X)

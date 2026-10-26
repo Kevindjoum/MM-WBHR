@@ -52,6 +52,10 @@ phase2:
   point_fixe: 8
   par_classe: 400
   sources_max: null        # nombre max d'exemples par source pour les barycentres (160 dans le code d'origine)
+  appariement: hongrois    # hongrois (bijection) | argmax (comme l'algorithme 3 de WBHR)
+  classifieur: aucun       # aucun (classe du groupe) | logistique | voisins : fin de HOT-DA, classifieur entraîné
+                           # sur les représentants transportés vers leur groupe apparié, appliqué à la cible
+  voisins: 1               # k pour classifieur: voisins
 
 pseudo:
   actif: false             # true = fusion géométrique + pseudo-étiquettes WBHR
