@@ -13,7 +13,10 @@ transport équilibré des points cibles vers les centres de classe des sources (
 médiane, Sinkhorn, marges uniformes, eps 0.05), chaque point prenant la classe où va le plus de sa masse.
 Les groupes sont alors les classes prédites (ABLATIONS section 15 : 69.07 contre 66.20 sur Twitter).
 
-Options de fidélité à WBHR / HOT-DA (algorithme 3 de la référence ; défauts = la méthode) :
+Options de fidélité à WBHR / HOT-DA (défauts = la méthode) :
+  support: 16 | auto                          16 (défaut, algorithme 2 de WBHR) ; auto : cardinalité du cadre
+                théorique, |Supp(rho_h^aux)| = (1/N) sum_i |C_h^i|, la taille moyenne de la classe h dans les
+                sources (après le tirage de `par_classe` points au plus par source).
   appariement: hongrois | argmax              hongrois (défaut) : bijection groupes <-> classes sur le plan G ;
                 argmax : comme WBHR, chaque classe h va au groupe argmax_l G[h, l] (pas forcément bijectif) et
                 chaque groupe prend la classe argmax_h G[h, l].
@@ -84,7 +87,10 @@ def etiqueter(z_src, y_src, zt, K, conf, graine=0):
         if conf.get("representant", "barycentre") == "concatenation":
             barys[h] = torch.cat(clouds)
         else:
-            barys[h] = free_support_barycenter(clouds, support=conf.get("support", 16), eps=conf.get("eps", 0.02),
+            S = conf.get("support", 16)
+            if S == "auto":            # cadre théorique de WBHR : |Supp(rho_h^aux)| = (1/N) sum_i |C_h^i|
+                S = max(1, int(round(sum(c.shape[0] for c in clouds) / len(clouds))))
+            barys[h] = free_support_barycenter(clouds, support=S, eps=conf.get("eps", 0.02),
                                                sinkhorn_iters=conf.get("sinkhorn", 60),
                                                outer_iters=conf.get("point_fixe", 8))[0]
     C = cosine_cost(zt, zt).cpu().numpy()

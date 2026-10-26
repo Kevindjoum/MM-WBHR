@@ -1,6 +1,7 @@
 # La méthode avec la fin de HOT-DA fidèle à WBHR (algorithme 3) : surcharges appliquées à methode/config_exemple.yaml.
 # Appariement argmax classe -> groupe, projection barycentrique des représentants vers leur groupe, classifieur
-# (régression logistique) entraîné sur les points transportés et appliqué à la cible.
+# (régression logistique) entraîné sur les points transportés et appliqué à la cible. Support du barycentre à la
+# cardinalité théorique de WBHR, la taille moyenne de la classe dans les sources (400 au plus par source).
 fusion:
   dim: 256
 phase1:
@@ -8,6 +9,7 @@ phase1:
   optimiseur:
     lr_extracteur: 5.0e-5
 phase2:
+  support: auto
   appariement: argmax
   classifieur: logistique
 pseudo:

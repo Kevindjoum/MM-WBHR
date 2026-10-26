@@ -46,7 +46,7 @@ phase1:
 
 phase2:
   partition: spectrale     # spectrale (HOT-DA) | equilibree (transport équilibré vers les centres sources)
-  support: 16
+  support: 16              # 16 (algorithme 2 de WBHR) | auto (taille moyenne de la classe dans les sources)
   eps: 0.02
   sinkhorn: 60
   point_fixe: 8

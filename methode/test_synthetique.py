@@ -59,7 +59,7 @@ def lancer(M, pseudo, options=False):
                "phase2": {"support": 8, "eps": 0.05, "sinkhorn": 30, "point_fixe": 4, "par_classe": 100},
                "pseudo": {"actif": pseudo, "tous_les": 15, "cible_max": 200, "taux": [0.3, 0.6], "filtre": "accord"}}
         if options == "wbhr":            # fin de HOT-DA fidèle à WBHR : appariement argmax, classifieur
-            cfg["phase2"].update(appariement="argmax", classifieur="logistique")
+            cfg["phase2"].update(support="auto", appariement="argmax", classifieur="logistique")
         elif options == "voisins":
             cfg["phase2"].update(classifieur="voisins", voisins=3)
         elif options:                    # z en 256-d, maximisation de l'information, partition équilibrée

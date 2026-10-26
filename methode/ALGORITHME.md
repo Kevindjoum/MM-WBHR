@@ -202,11 +202,18 @@ $z$ normalisés L2 ; avec `aucun` (défaut), l'étiquette est celle du groupe (�
 $\arg\max_l G_{hl}$, ce qui n'est pas forcément une bijection. La configuration `configs/methode_wbhr.yaml`
 combine les deux. Avec 16 points par représentant, le classifieur s'entraîne sur $16K$ points.
 
+**Taille du support (option `support`).** Le cadre théorique de WBHR fixe la cardinalité du support de
+$\rho_h^{\text{aux}}$ à la taille moyenne de la classe dans les sources, $|\mathrm{Supp}(\rho_h^{\text{aux}})| = \frac{1}{N} \sum_i |C_h^i|$,
+alors que son algorithme 2 prend $S = 16$. `phase2.support: 16` (défaut) suit l'algorithme, `support: auto` suit
+la formule (avec les $|C_h^i|$ plafonnés par `par_classe`, soit environ 400 points sur HAC). `configs/methode_wbhr.yaml`
+prend `auto`. Le classifieur de la variante s'entraîne alors sur $\approx 400 K$ points au lieu de $16 K$.
+
 Écarts entre le code (défauts) et les algorithmes 1 à 3 de WBHR :
 
 | étape | WBHR | code (défaut) |
 |---|---|---|
 | coût du barycentre | euclidien au carré | cosinus |
+| support du barycentre | $\frac{1}{N}\sum_i |C_h^i|$ (théorie), 16 (algorithme 2) | 16 (option `support: auto`) |
 | partition de la cible | partition spectrale de Wasserstein | partition spectrale sur $\exp(-C/\sigma)$, coût cosinus |
 | coût $W_{hl}$ | $W_2^2$ avec $\varepsilon'$ | coût de Sinkhorn, même $\varepsilon = 0.02$ |
 | appariement | $\arg\max_l G_{hl}$ | hongrois (option `appariement: argmax`) |
