@@ -73,6 +73,11 @@ HOT-DA fidèle à WBHR (appariement argmax, représentants transportés vers leu
 Options utiles : `--methodes methode` ou `--methodes m2can`, `--cibles Twitter`, `--graines 123456`,
 `--appareil cpu`, `--parallele N` (plusieurs runs tiennent sur un même GPU).
 
+**Taux d'apprentissage de M2CAN.** Par défaut, ceux de sa configuration publiée, prévus pour des encodeurs ajustés de
+bout en bout. Sur caractéristiques gelées, ils figent presque ses couches entraînables, comme ils figeaient celles de la
+méthode avant le passage de son extracteur à 5e-5. Pour un traitement symétrique, `configs/m2can.yaml` accepte
+`extractor_lr`, `mlb_lr` et `classifier_lr` (exemple commenté dans le fichier).
+
 **Nombre d'époques : 10 par défaut pour les deux méthodes.** Pour le changer :
 `configs/methode.yaml` et `configs/methode_sans_pseudo.yaml` (`phase1: epoques:`) pour la méthode,
 `configs/m2can.yaml` (`epochs:`) pour M2CAN.
@@ -93,6 +98,25 @@ python analyser.py sorties/sentiment/resultats.json --mesure meilleur
 Le tableau donne l'exactitude par méthode et par cible (moyenne ± écart-type sur les graines), puis l'écart de la
 méthode à M2CAN, apparié par (cible, graine), avec son intervalle de confiance à 95 %. La mesure par défaut est le
 **dernier point** d'évaluation : le meilleur point est choisi avec les étiquettes du test cible, il est donc optimiste.
+
+## 4. Visualiser l'espace fusionné (t-SNE)
+
+Ajouter dans `configs/methode.yaml` :
+
+```yaml
+phase2:
+  sauver_z: true
+```
+
+Chaque run écrit alors `z_dernier.npz` (z des sources, de la cible de test et des barycentres, au dernier point) dans
+son dossier de sortie. Puis :
+
+```bash
+python methode/visualiser_tsne.py --npz sorties/hac/methode_methode/human_s123456/z_dernier.npz --sortie tsne_human.pdf --cible human
+```
+
+Une seule projection t-SNE (distance cosinus, celle de l'étiquetage) : chaque source en points de couleur différente,
+la cible en astérisques, les barycentres de Wasserstein en tirets violets.
 
 ## Organisation
 

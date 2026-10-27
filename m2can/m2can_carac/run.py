@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CODE_ROOT = os.path.dirname(HERE)
 
 
-def make_config(meta, listes, target, seed, out_dir, n_sample, epochs, batch_size):
+def make_config(meta, listes, target, seed, out_dir, n_sample, epochs, batch_size, taux=None):
     """Configuration M2CAN de la cible : la configuration PUBLIEE msmm/scripts/config_<cible>.yaml quand elle existe
     (sentiment, esthetique : ordre des sources, taux d'apprentissage, poids des pertes, nombre de classes), dont seules
     les listes de donnees sont remplacees ; sinon (HAC) celle de Twitter, comme pour les runs HAC de reference.
@@ -55,6 +55,9 @@ def make_config(meta, listes, target, seed, out_dir, n_sample, epochs, batch_siz
     cfg["seed"], cfg["snapshot_dir"] = seed, out_dir
     if epochs is not None:
         cfg.setdefault("trainer", {})["epochs"] = epochs
+    if taux:                                   # taux d'apprentissage surcharges (option, defaut : publies)
+        cfg.setdefault("trainer", {}).setdefault("optimizer", {}).update(taux)
+        print(f"[m2can] taux d'apprentissage surcharges : {taux}", flush=True)
     path = os.path.join(out_dir, f"config_{target}.yaml")
     with open(path, "w") as f:
         yaml.dump(cfg, f)
@@ -82,6 +85,8 @@ def main():
     ap.add_argument("--n_sample", type=int, default=None, help="taille d'une epoque ; defaut : celle de M2CAN pour la cible")
     ap.add_argument("--batch_size", type=int, default=None, help="defaut : 8 (config publiee) ou 4 (HAC)")
     ap.add_argument("--epochs", type=int, default=None, help="defaut : 10 (M2CAN)")
+    for k in ("extractor_lr", "mlb_lr", "classifier_lr"):
+        ap.add_argument(f"--{k}", type=float, default=None, help="defaut : valeur de la configuration publiee")
     args = ap.parse_args()
 
     out, feats = os.path.abspath(args.out), os.path.abspath(args.feats)
@@ -92,8 +97,9 @@ def main():
 
     entry = adapter.install(feats, "m2can", os.path.join(out, "results.json"), args.target)
     listes = adapter.STORE.ecrire_listes(os.path.join(out, "listes"))
+    taux = {k: getattr(args, k) for k in ("extractor_lr", "mlb_lr", "classifier_lr") if getattr(args, k) is not None}
     cfg_path = make_config(adapter.STORE.meta, listes, args.target, args.seed, out, args.n_sample, args.epochs,
-                           args.batch_size)
+                           args.batch_size, taux)
     print("[m2can] train.py --config " + cfg_path, flush=True)
     sys.argv = ["train.py", "--config", cfg_path]
     entry()
