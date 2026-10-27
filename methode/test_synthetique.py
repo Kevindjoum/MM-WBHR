@@ -62,6 +62,9 @@ def lancer(M, pseudo, options=False):
             cfg["phase2"].update(support="auto", appariement="argmax", classifieur="logistique")
         elif options == "voisins":
             cfg["phase2"].update(classifieur="voisins", voisins=3)
+        elif options == "knn_zn":          # graphe kNN, SupCon sur z normalisé
+            cfg["phase2"].update(affinite="knn", voisins_graphe=10)
+            cfg["phase1"]["normaliser_z"] = True
         elif options:                    # z en 256-d, maximisation de l'information, partition équilibrée
             cfg["fusion"] = {"dim": 256}
             cfg["phase1"]["poids_im"] = 1.0
@@ -86,6 +89,7 @@ def lancer(M, pseudo, options=False):
 if __name__ == "__main__":
     torch.set_num_threads(2)
     res = [lancer(M, p) for M in (2, 3, 4) for p in (False, True)] + [lancer(2, False, True), lancer(3, True, True),
-                                                                 lancer(2, True, "wbhr"), lancer(2, False, "voisins")]
+                                                                 lancer(2, True, "wbhr"), lancer(2, False, "voisins"),
+                                                                 lancer(2, True, "knn_zn")]
     print("TOUS LES TESTS PASSENT" if all(res) else "ECHEC")
     sys.exit(0 if all(res) else 1)

@@ -36,6 +36,7 @@ phase1:
   beta_cdcfa: 1.0
   gamma_supcon_fusion: 1.0
   poids_im: 0.0            # > 0 : maximisation de l'information sur les têtes du lot cible
+  normaliser_z: false      # true : SupCon de la fusion sur z normalisé L2 (la géométrie lue par la phase 2)
   optimiseur:              # Adam ; taux publiés de M2CAN, décroissance polynomiale
     lr_dorsale: 2.0e-6
     lr_extracteur: 2.0e-6  # très faible : avec des caractéristiques gelées, l'extracteur bouge à peine
@@ -46,6 +47,9 @@ phase1:
 
 phase2:
   partition: spectrale     # spectrale (HOT-DA) | equilibree (transport équilibré vers les centres sources)
+  affinite: dense          # dense (graphe complet) | knn (graphe des voisins_graphe plus proches voisins)
+  voisins_graphe: 15
+  plancher: true           # journalise la régression logistique sources -> cible sur z (diagnostic)
   support: 16              # 16 (algorithme 2 de WBHR) | auto (taille moyenne de la classe dans les sources)
   eps: 0.02
   sinkhorn: 60

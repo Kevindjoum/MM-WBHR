@@ -1,0 +1,10 @@
+# B5 : SupCon de la fusion sur z normalisé L2 (la géométrie lue par la phase 2). Surcharges de methode/config_exemple.yaml.
+fusion:
+  dim: 256
+phase1:
+  normaliser_z: true
+  epoques: 10
+  optimiseur:
+    lr_extracteur: 5.0e-5
+pseudo:
+  actif: true

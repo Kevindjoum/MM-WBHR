@@ -33,7 +33,13 @@ Options de test des hypothèses (défauts = la méthode) :
                 défaut), ou transport direct des points cibles vers les points des représentants de classe (Sinkhorn,
                 marges uniformes, coût cosinus, même eps) ; chaque point prend la classe qui reçoit le plus de sa masse.
 
+Options de partition (défauts = la méthode) :
+  affinite: dense | knn             graphe complet exp(-C/sigma) (défaut) ou graphe des `voisins_graphe` (15) plus
+                proches voisins, symétrisé ; voir `affinite`.
+
 Options d'évaluation (défauts = la méthode) :
+  plancher: true                    (défaut) ajoute `plancher_logistique` au journal : régression logistique sur les z
+                des sources appliquée au test cible, ce que vaut z sans WBHR.
   evaluation_jointe: true           le test cible est partitionné avec les points du train cible (sans étiquette).
   sauver_z: true                    écrit z_dernier.npz (sources, cible, barycentres) pour visualiser_tsne.py.
 
@@ -100,9 +106,7 @@ def etiqueter(z_src, y_src, zt, K, conf, graine=0):
     C = cosine_cost(zt, zt).cpu().numpy()
     if conf.get("transport", "hierarchique") == "plat":
         return etiqueter_plat(barys, zt, K, conf, C)
-    sigma = float(np.median(C[C > 0])) if np.any(C > 0) else 1.0
-    A = np.exp(-C / max(sigma, 1e-8))
-    np.fill_diagonal(A, 1.0)
+    A = affinite(C, conf)
     groupes = SpectralClustering(n_clusters=K, affinity="precomputed", assign_labels="kmeans",
                                  random_state=graine).fit_predict(A)
     eps, it = conf.get("eps", 0.02), conf.get("sinkhorn", 60)
@@ -128,6 +132,36 @@ def etiqueter(z_src, y_src, zt, K, conf, graine=0):
     if conf.get("classifieur", "aucun") != "aucun":
         res["etiquettes"] = classifier_transporte(barys, c2g, zt, groupes, conf, eps, it, graine)
     return res
+
+
+def affinite(C, conf):
+    """Matrice de ressemblance de la partition spectrale à partir du coût cosinus C.
+
+    dense (défaut) : A = exp(-C / sigma), sigma = médiane des coûts non nuls, graphe complet.
+    knn : même poids, mais seuls les `voisins_graphe` (15) plus proches voisins de chaque point sont reliés
+          (graphe symétrisé par le maximum) ; n'impose aucune taille de groupe, évite le groupe géant d'une cible diffuse.
+    """
+    sigma = float(np.median(C[C > 0])) if np.any(C > 0) else 1.0
+    A = np.exp(-C / max(sigma, 1e-8))
+    np.fill_diagonal(A, 1.0)
+    if conf.get("affinite", "dense") == "knn":
+        k = min(int(conf.get("voisins_graphe", 15)), C.shape[0] - 1)
+        voisins = np.argpartition(C, k, axis=1)[:, :k + 1]            # k plus proches, soi-même compris
+        M = np.zeros_like(A, dtype=bool)
+        np.put_along_axis(M, voisins, True, axis=1)
+        M |= M.T
+        A = np.where(M, A, 0.0)
+    return A
+
+
+def plancher_logistique(z_src, y_src, zt, yt, graine=0):
+    """Exactitude sur la cible d'une régression logistique entraînée sur les z des sources (normalisés L2) :
+    ce que vaut l'espace fusionné sans l'étiquetage géométrique. Diagnostic seulement."""
+    from sklearn.linear_model import LogisticRegression
+    n = lambda z: torch.nn.functional.normalize(z, dim=-1).cpu().numpy()
+    X, y = np.concatenate([n(z) for z in z_src]), np.concatenate([np.asarray(v) for v in y_src])
+    clf = LogisticRegression(max_iter=1000, random_state=graine).fit(X, y)
+    return float((clf.predict(n(zt)) == np.asarray(yt)).mean())
 
 
 @torch.no_grad()
@@ -254,6 +288,11 @@ def evaluer(modele, jeux_sources, jeu_cible, K, conf, graine=0, jeu_cible_train=
         if jeu_cible_train is not None:
             res = dict(res, etiquettes=res["etiquettes"][:nt], groupes=res["groupes"][:nt], C=res["C"][:nt, :nt])
         d = diagnostics(res, yt, K)
+        if conf.get("plancher", True):
+            try:
+                d["plancher_logistique"] = plancher_logistique([s[0] for s in src], [s[3] for s in src], zt, yt, graine)
+            except Exception as e:   # diagnostic : ne doit jamais interrompre l'entraînement
+                d["plancher_logistique"] = float("nan"); print(f"[phase2] plancher logistique : {e!r}", flush=True)
         reps = res.get("representants")
         if reps:   # diagnostic de H1 : distance de transport entre chaque représentant et SA classe cible (étiquettes vraies)
             eps, it = conf.get("eps", 0.02), conf.get("sinkhorn", 60)

@@ -1,0 +1,10 @@
+# B3 : maximisation de l'information (SHOT) sur les têtes du lot cible, poids 1.0. Surcharges de methode/config_exemple.yaml.
+fusion:
+  dim: 256
+phase1:
+  poids_im: 1.0
+  epoques: 10
+  optimiseur:
+    lr_extracteur: 5.0e-5
+pseudo:
+  actif: true

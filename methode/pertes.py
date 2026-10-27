@@ -74,13 +74,15 @@ def cmcfa(feats, feats_aug, logits):
     return (l * torch.exp(-V)).mean() + V.mean()
 
 
-def pertes_phase1(modele, lots, tau, pseudo=None):
+def pertes_phase1(modele, lots, tau, pseudo=None, normaliser_z=False):
     """Calcule les quatre termes sur un pas.
 
     lots : liste de dictionnaires par domaine, sources d'abord, cible en dernier, chacun avec
            "x" ({modalité: tenseur}), "x_aug" ({modalité: tenseur}), "y" (sources), "ids" (cible).
     pseudo : dictionnaire {id cible: classe} ou None ; les points cibles du lot qui y figurent rejoignent
              les sources dans le SupCon sur la fusion.
+    normaliser_z : SupCon de la fusion sur z normalisé L2 (option phase1.normaliser_z), la géométrie que lit la
+             phase 2 ; par défaut z entre tel quel.
     Renvoie (tetes, cmcfa, cdcfa, sc_fusion, im) ; im porte sur les têtes du lot cible, sans étiquette.
     """
     n_src = len(lots) - 1
@@ -106,6 +108,7 @@ def pertes_phase1(modele, lots, tau, pseudo=None):
         if sel:
             z.append(modele.fusionner(feats[-1])[sel])
             y_fus.append(torch.tensor([pseudo[ids[k]] for k in sel], device=y_src.device, dtype=y_src.dtype))
-    l_sc = supcon(torch.cat(z), torch.cat(y_fus), tau)
+    z = torch.cat(z)
+    l_sc = supcon(F.normalize(z, dim=-1) if normaliser_z else z, torch.cat(y_fus), tau)
     l_im = sum(info_max(l) for l in logits[-1]) / modele.M
     return l_tetes, l_cmcfa, l_cdcfa, l_sc, l_im

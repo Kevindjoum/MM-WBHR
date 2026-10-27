@@ -105,7 +105,7 @@ def main():
                 print("[pseudo] " + json.dumps(j), flush=True)
                 histo.append({"pas": pas, "pseudo": j})
             lots = ech.suivant()
-            lt, lc, ld, ls, li = pertes_phase1(modele, lots, p1["tau"], pseudo)
+            lt, lc, ld, ls, li = pertes_phase1(modele, lots, p1["tau"], pseudo, p1.get("normaliser_z", False))
             perte = p1["poids_tetes"] * lt + p1["alpha_cmcfa"] * lc + p1["beta_cdcfa"] * ld + p1["gamma_supcon_fusion"] * ls
             if p1.get("poids_im", 0):
                 perte = perte + p1["poids_im"] * li

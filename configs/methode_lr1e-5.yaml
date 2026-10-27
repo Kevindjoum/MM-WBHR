@@ -1,0 +1,9 @@
+# B6 : taux d'apprentissage de l'extracteur 1e-5 (grille du sentiment). Surcharges de methode/config_exemple.yaml.
+fusion:
+  dim: 256
+phase1:
+  epoques: 10
+  optimiseur:
+    lr_extracteur: 1.0e-5
+pseudo:
+  actif: true

@@ -93,13 +93,30 @@ Chaque run écrit son journal dans `sorties/<groupe>/<méthode>_<config>/<cible>
 ```bash
 python analyser.py sorties/sentiment/resultats.json
 python analyser.py sorties/sentiment/resultats.json --mesure meilleur
+python analyser.py sorties/sentiment/resultats.json --mesure oracle --reference methode/methode
 ```
 
 Le tableau donne l'exactitude par méthode et par cible (moyenne ± écart-type sur les graines), puis l'écart de la
 méthode à M2CAN, apparié par (cible, graine), avec son intervalle de confiance à 95 %. La mesure par défaut est le
 **dernier point** d'évaluation : le meilleur point est choisi avec les étiquettes du test cible, il est donc optimiste.
 
-## 4. Visualiser l'espace fusionné (t-SNE)
+## 4. Expériences sur Colab
+
+`experiences_colab.ipynb` (généré par `experiences_colab.py`) clone la branche, copie les caractéristiques depuis Google
+Drive, lance sur GPU les configurations `configs/methode_*.yaml` choisies (`--reprendre` : une coupure ne perd rien) et
+produit les tableaux : exactitude, oracle de la partition, plancher logistique (régression logistique sources → cible
+sur z, sans WBHR), et écart apparié à `methode/methode`. Configurations disponibles :
+
+| configuration | ce qu'elle change |
+|---|---|
+| `methode_wbhr` | fin fidèle à WBHR : support auto, appariement argmax, classifieur logistique |
+| `methode_im03`, `methode_im1` | maximisation de l'information (SHOT) sur les têtes du lot cible |
+| `methode_zn` | SupCon de la fusion sur z normalisé L2 |
+| `methode_wbhr_zn` | classifieur + z normalisé |
+| `methode_knn` | partition spectrale sur graphe des 15 plus proches voisins |
+| `methode_lr1e-5`, `methode_lr2e-4` | taux de l'extracteur |
+
+## 5. Visualiser l'espace fusionné (t-SNE)
 
 Ajouter dans `configs/methode.yaml` :
 

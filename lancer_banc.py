@@ -5,6 +5,8 @@
 
 Chaque run est un sous-processus indépendant (sa sortie dans <sortie>/<méthode>_<config>/<cible>_s<graine>/journal.txt).
 Le résumé de tous les runs est écrit dans <sortie>/resultats.json ; analyser.py en tire les tableaux.
+--reprendre : les runs déjà réussis (présents dans resultats.json avec rc 0) ne sont pas relancés ; utile après une
+coupure (Colab). --configs accepte toute configuration configs/methode*.yaml par son nom.
 GPU utilisé s'il existe (--appareil auto), sinon processeur.
 """
 import argparse
@@ -18,8 +20,9 @@ from concurrent.futures import ThreadPoolExecutor
 import yaml
 
 ICI = os.path.dirname(os.path.abspath(__file__))
-CONFIGS_METHODE = {"methode": "configs/methode.yaml", "methode_sans_pseudo": "configs/methode_sans_pseudo.yaml",
-                   "methode_wbhr": "configs/methode_wbhr.yaml"}
+# Toute configuration configs/methode*.yaml est acceptée par --configs, sous son nom de fichier sans extension.
+CONFIGS_METHODE = {os.path.splitext(f)[0]: os.path.join("configs", f)
+                   for f in sorted(os.listdir(os.path.join(ICI, "configs"))) if f.startswith("methode") and f.endswith(".yaml")}
 
 
 def deep_update(d, u):
@@ -55,11 +58,14 @@ def resume_methode(path):
     k = min(range(len(ev)), key=lambda i: ev[i].get("ratio_intra_inter") or 9e9)
     ps = [e["pseudo"] for e in h["historique"] if "pseudo" in e]
     return {"dernier": ev[-1]["exactitude"], "meilleur": max(e["exactitude"] for e in ev), "critere": ev[k]["exactitude"],
-            "oracle_dernier": ev[-1]["oracle"], "n_evals": len(ev),
+            "oracle_dernier": ev[-1]["oracle"], "plancher_dernier": ev[-1].get("plancher_logistique"), "n_evals": len(ev),
             "pseudo_dernier_tour": ps[-1] if ps else None}
 
 
-def run(meth, conf, cible, graine, args, meta, dev):
+def run(meth, conf, cible, graine, args, meta, dev, anciens=None):
+    if anciens and args.reprendre and (meth, conf, cible, graine) in anciens:   # run déjà terminé sans erreur
+        print("[run] (repris) " + json.dumps(anciens[(meth, conf, cible, graine)]), flush=True)
+        return anciens[(meth, conf, cible, graine)]
     sortie = os.path.abspath(os.path.join(args.sortie, f"{meth}_{conf}", f"{cible}_s{graine}"))
     os.makedirs(sortie, exist_ok=True)
     t0 = time.time()
@@ -112,6 +118,7 @@ def main():
     ap.add_argument("--graines", nargs="+", type=int, default=[123456, 234567, 345678])
     ap.add_argument("--parallele", type=int, default=1, help="runs simultanés (plusieurs tiennent sur un GPU)")
     ap.add_argument("--appareil", default="auto", choices=["auto", "cuda", "cpu"])
+    ap.add_argument("--reprendre", action="store_true", help="ne relance pas les runs déjà réussis dans resultats.json")
     args = ap.parse_args()
     meta = json.load(open(os.path.join(args.feats, "meta.json"), encoding="utf-8"))
     cibles = args.cibles or list(meta["domaines"])
@@ -124,12 +131,15 @@ def main():
             if "m2can" in args.methodes:
                 taches.append(("m2can", "publie", c, g))
     os.makedirs(args.sortie, exist_ok=True)
-    print(f"{len(taches)} runs sur {dev}, {args.parallele} à la fois ; caractéristiques {args.feats}", flush=True)
-    with ThreadPoolExecutor(args.parallele) as ex:
-        res = list(ex.map(lambda t: run(*t, args, meta, dev), taches))
     chemin = os.path.join(args.sortie, "resultats.json")
     anciens = json.load(open(chemin, encoding="utf-8")) if os.path.exists(chemin) else []
     cle = lambda r: (r["methode"], r["config"], r["cible"], r["graine"])
+    reussis = {cle(r): r for r in anciens if r.get("rc") == 0 and "erreur" not in r}
+    print(f"{len(taches)} runs sur {dev}, {args.parallele} à la fois ; caractéristiques {args.feats}"
+          + (f" ; {sum(t in reussis for t in taches)} déjà faits" if args.reprendre else ""), flush=True)
+    with ThreadPoolExecutor(args.parallele) as ex:
+        res = list(ex.map(lambda t: run(*t, args, meta, dev, reussis), taches))
+    anciens = json.load(open(chemin, encoding="utf-8")) if os.path.exists(chemin) else []
     fusion = {cle(r): r for r in anciens}
     fusion.update({cle(r): r for r in res})
     json.dump(list(fusion.values()), open(chemin, "w", encoding="utf-8"), indent=1)

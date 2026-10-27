@@ -4,7 +4,9 @@ puis écart de la méthode à M2CAN, apparié par (cible, graine).
     python analyser.py sorties/sentiment/resultats.json [--mesure dernier|meilleur]
 
 « dernier » (défaut) = exactitude au dernier point d'évaluation ; « meilleur » = meilleur point, choisi avec les
-étiquettes du test cible, donc optimiste.
+étiquettes du test cible, donc optimiste ; « oracle » = plafond de la partition (meilleur appariement possible) ;
+« plancher » = régression logistique sources -> cible sur z, sans WBHR. `--reference methode/methode` compare à une
+autre configuration que M2CAN.
 """
 import argparse
 import json
@@ -23,15 +25,18 @@ def ic95(d):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("resultats")
-    ap.add_argument("--mesure", default="dernier", choices=["dernier", "meilleur"])
+    ap.add_argument("--mesure", default="dernier", choices=["dernier", "meilleur", "oracle", "plancher"])
+    ap.add_argument("--reference", default="m2can/publie", help="méthode/config de référence pour l'écart apparié")
     args = ap.parse_args()
-    runs = [r for r in json.load(open(args.resultats, encoding="utf-8")) if r.get("rc") == 0 and args.mesure in r]
+    mesure = {"oracle": "oracle_dernier", "plancher": "plancher_dernier"}.get(args.mesure, args.mesure)
+    ref = tuple(args.reference.split("/"))
+    runs = [r for r in json.load(open(args.resultats, encoding="utf-8")) if r.get("rc") == 0 and r.get(mesure) is not None]
     echecs = [r for r in json.load(open(args.resultats, encoding="utf-8")) if r.get("rc") != 0]
     groupes = sorted({(r["methode"], r["config"]) for r in runs})
     cibles = sorted({r["cible"] for r in runs})
-    val = {(r["methode"], r["config"], r["cible"], r["graine"]): r[args.mesure] * 100 for r in runs}
+    val = {(r["methode"], r["config"], r["cible"], r["graine"]): r[mesure] * 100 for r in runs}
 
-    print(f"Exactitude ({args.mesure} point), moyenne ± écart-type sur les graines, en %\n")
+    print(f"Exactitude ({args.mesure}), moyenne ± écart-type sur les graines, en %\n")
     print(f"{'méthode / configuration':34s}" + "".join(f"{c:>18s}" for c in cibles) + f"{'moyenne':>12s}")
     for m, c in groupes:
         cells, moy = [], []
@@ -44,12 +49,12 @@ def main():
                 cells.append("-")
         print(f"{m + ' / ' + c:34s}" + "".join(f"{x:>18s}" for x in cells) + f"{st.mean(moy) if moy else float('nan'):12.2f}")
 
-    print("\nÉcart à M2CAN, apparié par (cible, graine)")
+    print(f"\nÉcart à {args.reference}, apparié par (cible, graine)")
     for m, c in groupes:
-        if m == "m2can":
+        if (m, c) == ref:
             continue
-        d = [x - val[("m2can", "publie", cb, g)] for (m2, c2, cb, g), x in val.items()
-             if (m2, c2) == (m, c) and ("m2can", "publie", cb, g) in val]
+        d = [x - val[ref + (cb, g)] for (m2, c2, cb, g), x in val.items()
+             if (m2, c2) == (m, c) and ref + (cb, g) in val]
         if not d:
             continue
         lo, hi = ic95(d)
