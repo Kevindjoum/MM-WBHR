@@ -1,0 +1,72 @@
+
+===== hac : 54 runs, rc != 0 : []
+dernier point, moyenne 3 graines (plancher logistique)
+  methode             human  93.36 ( 91.55)  animal  96.40 ( 92.23)  cartoon  76.15 ( 76.15)   moy  88.64
+  methode_im03        human  94.08 ( 92.75)  animal  95.64 ( 94.70)  cartoon  77.52 ( 78.29)   moy  89.08
+  methode_im1         human  93.36 ( 93.12)  animal  96.02 ( 95.83)  cartoon  76.61 ( 76.61)   moy  88.66
+  methode_zn          human  92.15 ( 89.37)  animal  96.97 ( 93.56)  cartoon  75.99 ( 76.76)   moy  88.37
+  methode_knn         human  92.27 ( 85.14)  animal  96.78 ( 91.29)  cartoon  73.39 ( 72.63)   moy  87.48
+  methode_wbhr_zn     human  92.87 ( 89.86)  animal  96.97 ( 93.75)  cartoon  76.30 ( 76.91)   moy  88.71
+  methode_im03       - methode :  +0.45  IC95 [ -0.38,  +1.28]  6/9 positifs  -> INDISTINGUABLE
+  methode_im1        - methode :  +0.03  IC95 [ -0.66,  +0.71]  3/9 positifs  -> INDISTINGUABLE
+  methode_zn         - methode :  -0.26  IC95 [ -2.44,  +1.91]  3/9 positifs  -> INDISTINGUABLE
+  methode_knn        - methode :  -1.15  IC95 [ -2.54,  +0.23]  1/9 positifs  -> INDISTINGUABLE
+  methode_wbhr_zn    - methode :  +0.08  IC95 [ -2.37,  +2.53]  4/9 positifs  -> INDISTINGUABLE
+  tailles des groupes au dernier point (graine 123456) :
+    methode            {'human': [49, 40, 40, 28, 40, 38, 41], 'animal': [24, 36, 26, 26, 16, 23, 25], 'cartoon': [21, 51, 19, 26, 41, 35, 25]}
+    methode_im03       {'human': [41, 48, 40, 38, 40, 29, 40], 'animal': [26, 36, 25, 27, 24, 15, 23], 'cartoon': [43, 43, 27, 41, 19, 21, 24]}
+    methode_im1        {'human': [40, 39, 49, 41, 39, 39, 29], 'animal': [26, 36, 25, 24, 22, 15, 28], 'cartoon': [46, 42, 27, 41, 24, 21, 17]}
+    methode_zn         {'human': [40, 49, 41, 40, 40, 27, 39], 'animal': [24, 21, 37, 26, 16, 25, 27], 'cartoon': [21, 51, 43, 26, 33, 24, 20]}
+    methode_knn        {'human': [40, 40, 37, 41, 46, 36, 36], 'animal': [26, 36, 26, 26, 16, 25, 21], 'cartoon': [27, 13, 58, 47, 26, 25, 22]}
+    methode_wbhr_zn    {'human': [41, 41, 40, 39, 40, 26, 49], 'animal': [26, 37, 25, 26, 25, 16, 21], 'cartoon': [51, 21, 24, 21, 32, 43, 26]}
+  M2CAN extracteur 5e-5 : human  87.68  animal  95.45  cartoon  81.96   moy  88.36
+  methode            - M2CAN 5e-5 :  +0.27  IC95 [ -3.68,  +4.22]  5/9 positifs  -> INDISTINGUABLE
+  methode_im03       - M2CAN 5e-5 :  +0.72  IC95 [ -3.01,  +4.45]  4/9 positifs  -> INDISTINGUABLE   (meilleure configuration)
+
+===== aesthetic : 54 runs, rc != 0 : []
+dernier point, moyenne 3 graines (plancher logistique)
+  methode             AVA  72.06 ( 62.77)  PCCD  62.06 ( 61.87)  RPCD  61.08 ( 55.53)   moy  65.07
+  methode_im03        AVA  72.26 ( 63.01)  PCCD  62.22 ( 62.22)  RPCD  60.96 ( 56.91)   moy  65.14
+  methode_im1         AVA  72.96 ( 64.42)  PCCD  62.18 ( 61.79)  RPCD  60.33 ( 58.40)   moy  65.16
+  methode_zn          AVA  71.00 ( 64.46)  PCCD  61.79 ( 61.24)  RPCD  60.13 ( 56.75)   moy  64.31
+  methode_knn         AVA  72.33 ( 62.53)  PCCD  62.42 ( 62.61)  RPCD  62.34 ( 55.25)   moy  65.70
+  methode_wbhr_zn     AVA  71.07 ( 64.46)  PCCD  61.75 ( 61.16)  RPCD  60.25 ( 56.75)   moy  64.36
+  methode_im03       - methode :  +0.08  IC95 [ -0.17,  +0.33]  4/9 positifs  -> INDISTINGUABLE
+  methode_im1        - methode :  +0.09  IC95 [ -0.58,  +0.76]  4/9 positifs  -> INDISTINGUABLE
+  methode_zn         - methode :  -0.76  IC95 [ -1.70,  +0.18]  1/9 positifs  -> INDISTINGUABLE
+  methode_knn        - methode :  +0.63  IC95 [ -0.25,  +1.50]  6/9 positifs  -> INDISTINGUABLE
+  methode_wbhr_zn    - methode :  -0.71  IC95 [ -1.44,  +0.02]  1/9 positifs  -> INDISTINGUABLE
+  tailles des groupes au dernier point (graine 123456) :
+    methode            {'AVA': [437, 410], 'PCCD': [434, 413], 'RPCD': [451, 396]}
+    methode_im03       {'AVA': [437, 410], 'PCCD': [433, 414], 'RPCD': [442, 405]}
+    methode_im1        {'AVA': [420, 427], 'PCCD': [453, 394], 'RPCD': [451, 396]}
+    methode_zn         {'AVA': [507, 340], 'PCCD': [423, 424], 'RPCD': [359, 488]}
+    methode_knn        {'AVA': [395, 452], 'PCCD': [376, 471], 'RPCD': [458, 389]}
+    methode_wbhr_zn    {'AVA': [507, 340], 'PCCD': [432, 415], 'RPCD': [362, 485]}
+  M2CAN extracteur 5e-5 : AVA  69.62  PCCD  62.42  RPCD  59.94   moy  63.99
+  methode            - M2CAN 5e-5 :  +1.08  IC95 [ -0.13,  +2.28]  7/9 positifs  -> INDISTINGUABLE
+  methode_knn        - M2CAN 5e-5 :  +1.71  IC95 [ +0.14,  +3.27]  7/9 positifs  -> MIEUX   (meilleure configuration)
+
+===== sentiment : 54 runs, rc != 0 : []
+dernier point, moyenne 3 graines (plancher logistique)
+  methode             TumEmo  46.02 ( 52.82)  Twitter  56.36 ( 54.31)  Yelp  39.67 ( 38.47)   moy  47.35
+  methode_im03        TumEmo  46.87 ( 53.16)  Twitter  56.78 ( 54.93)  Yelp  40.87 ( 41.22)   moy  48.17
+  methode_im1         TumEmo  45.89 ( 53.93)  Twitter  58.84 ( 56.00)  Yelp  46.51 ( 47.78)   moy  50.41
+  methode_zn          TumEmo  47.78 ( 51.67)  Twitter  56.87 ( 54.62)  Yelp  35.02 ( 38.31)   moy  46.56
+  methode_knn         TumEmo  47.51 ( 52.20)  Twitter  55.29 ( 54.31)  Yelp  42.38 ( 39.87)   moy  48.39
+  methode_wbhr_zn     TumEmo  50.18 ( 51.80)  Twitter  57.49 ( 54.76)  Yelp  35.87 ( 38.98)   moy  47.84
+  methode_im03       - methode :  +0.82  IC95 [ +0.32,  +1.33]  9/9 positifs  -> MIEUX
+  methode_im1        - methode :  +3.07  IC95 [ +0.01,  +6.12]  7/9 positifs  -> MIEUX
+  methode_zn         - methode :  -0.79  IC95 [ -3.86,  +2.27]  6/9 positifs  -> INDISTINGUABLE
+  methode_knn        - methode :  +1.04  IC95 [ -1.41,  +3.50]  5/9 positifs  -> INDISTINGUABLE
+  methode_wbhr_zn    - methode :  +0.50  IC95 [ -2.67,  +3.66]  7/9 positifs  -> INDISTINGUABLE
+  tailles des groupes au dernier point (graine 123456) :
+    methode            {'TumEmo': [859, 197, 444], 'Twitter': [588, 309, 603], 'Yelp': [794, 545, 161]}
+    methode_im03       {'TumEmo': [851, 210, 439], 'Twitter': [585, 334, 581], 'Yelp': [772, 542, 186]}
+    methode_im1        {'TumEmo': [817, 223, 460], 'Twitter': [535, 580, 385], 'Yelp': [294, 661, 545]}
+    methode_zn         {'TumEmo': [244, 825, 431], 'Twitter': [589, 563, 348], 'Yelp': [756, 678, 66]}
+    methode_knn        {'TumEmo': [704, 528, 268], 'Twitter': [617, 258, 625], 'Yelp': [728, 99, 673]}
+    methode_wbhr_zn    {'TumEmo': [819, 253, 428], 'Twitter': [562, 349, 589], 'Yelp': [745, 688, 67]}
+  M2CAN extracteur 5e-5 : TumEmo  58.02  Twitter  59.07  Yelp  50.31   moy  55.80
+  methode            - M2CAN 5e-5 :  -8.45  IC95 [-12.32,  -4.58]  0/9 positifs  -> MOINS_BIEN
+  methode_im1        - M2CAN 5e-5 :  -5.39  IC95 [ -9.51,  -1.26]  2/9 positifs  -> MOINS_BIEN   (meilleure configuration)

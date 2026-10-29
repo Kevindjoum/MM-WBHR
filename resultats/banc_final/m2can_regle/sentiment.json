@@ -1,0 +1,200 @@
+[
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "TumEmo",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 59.2,
+  "meilleur": 0.5806666666666667,
+  "dernier": 0.58,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "TumEmo",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 60.6,
+  "meilleur": 0.5373333333333333,
+  "dernier": 0.532,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "TumEmo",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 60.7,
+  "meilleur": 0.5826666666666667,
+  "dernier": 0.5826666666666667,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "TumEmo",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 59.1,
+  "meilleur": 0.552,
+  "dernier": 0.5446666666666666,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "TumEmo",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 58.4,
+  "meilleur": 0.5813333333333334,
+  "dernier": 0.578,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "TumEmo",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 59.3,
+  "meilleur": 0.5533333333333333,
+  "dernier": 0.5506666666666666,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "Twitter",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 57.8,
+  "meilleur": 0.5866666666666667,
+  "dernier": 0.5846666666666667,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "Twitter",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 57.2,
+  "meilleur": 0.5906666666666667,
+  "dernier": 0.588,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "Twitter",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 58.4,
+  "meilleur": 0.592,
+  "dernier": 0.592,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "Twitter",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 57.8,
+  "meilleur": 0.59,
+  "dernier": 0.5893333333333334,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "Twitter",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 58.4,
+  "meilleur": 0.5953333333333334,
+  "dernier": 0.5953333333333334,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "Twitter",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 57.3,
+  "meilleur": 0.5906666666666667,
+  "dernier": 0.5886666666666667,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "Yelp",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 56.7,
+  "meilleur": 0.5106666666666667,
+  "dernier": 0.5013333333333333,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "Yelp",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 58.9,
+  "meilleur": 0.5226666666666666,
+  "dernier": 0.5066666666666667,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "Yelp",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 56.6,
+  "meilleur": 0.5053333333333333,
+  "dernier": 0.5013333333333333,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "Yelp",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 58.4,
+  "meilleur": 0.5086666666666667,
+  "dernier": 0.5033333333333333,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "Yelp",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 32.4,
+  "meilleur": 0.508,
+  "dernier": 0.5066666666666667,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "Yelp",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 32.1,
+  "meilleur": 0.5126666666666667,
+  "dernier": 0.5006666666666667,
+  "n_evals": 10
+ }
+]

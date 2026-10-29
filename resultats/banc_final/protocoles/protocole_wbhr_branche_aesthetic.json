@@ -1,0 +1,108 @@
+{
+ "titre": "Variante fidele a WBHR (branche claude/repo-access-lzj47d, commit 84fd73b), CLIP, aesthetic",
+ "ecrit_le": "2026-10-27T03:37",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_code": null,
+ "code": "methode/ du commit 84fd73b de MM-WBHR (+ visualiser_tsne.py, inutilise ici)",
+ "groupe": "aesthetic",
+ "cibles": [
+  "AVA",
+  "PCCD",
+  "RPCD"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "configurations": {
+  "fgm": {
+   "methode": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    }
+   },
+   "support_auto": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    },
+    "phase2": {
+     "support": "auto"
+    }
+   },
+   "fin_wbhr": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    },
+    "phase2": {
+     "appariement": "argmax",
+     "classifieur": "logistique"
+    }
+   },
+   "methode_wbhr": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    },
+    "phase2": {
+     "support": "auto",
+     "appariement": "argmax",
+     "classifieur": "logistique"
+    }
+   }
+  },
+  "m2can": {}
+ },
+ "notes": "3 epoques x 3750 pas comme les bancs CLIP precedents (le config_exemple de la branche est a 10) ; methode relancee avec le code de la branche pour un appariement par graine ; support_auto = taille moyenne de la classe dans les sources (400 au plus) ; fin_wbhr = appariement argmax + classifieur logistique sur les representants transportes",
+ "metrique_principale": "exactitude au dernier point",
+ "comparaisons": {
+  "principales": [
+   "support_auto - methode",
+   "fin_wbhr - methode",
+   "methode_wbhr - methode"
+  ],
+  "secondaires": [
+   "methode_wbhr contre M2CAN extracteur 5e-5 (section 27), par (cible, graine)"
+  ]
+ },
+ "critere": {
+  "MIEUX": "IC95 (t, 8 ddl) > 0 et au moins 7/9 positifs",
+  "MOINS_BIEN": "IC95 < 0",
+  "INDISTINGUABLE": "sinon"
+ }
+}

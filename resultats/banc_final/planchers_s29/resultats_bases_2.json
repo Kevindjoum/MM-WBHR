@@ -1,0 +1,383 @@
+{
+ "bases": [
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 768, 'image': 2048}",
+   "cible": "AVA",
+   "graine": 123456,
+   "sources_seules": 0.6221959858323495,
+   "auto_apprentissage": 0.6434474616292798,
+   "oracle_cible": 0.7024793388429752,
+   "classe_majoritaire": 0.5407319952774499,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.737417943107221,
+     "exactitude_test": 0.628099173553719
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.6920131291028446,
+     "exactitude_test": 0.628099173553719
+    },
+    {
+     "tour": 2,
+     "retenus": 2552,
+     "justesse": 0.6387147335423198,
+     "exactitude_test": 0.641086186540732
+    },
+    {
+     "tour": 3,
+     "retenus": 2811,
+     "justesse": 0.6246887228744219,
+     "exactitude_test": 0.6446280991735537
+    },
+    {
+     "tour": 4,
+     "retenus": 2852,
+     "justesse": 0.6241234221598878,
+     "exactitude_test": 0.6434474616292798
+    }
+   ],
+   "minutes": 2.2
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 768, 'image': 2048}",
+   "cible": "AVA",
+   "graine": 234567,
+   "sources_seules": 0.6115702479338843,
+   "auto_apprentissage": 0.6363636363636364,
+   "oracle_cible": 0.7036599763872491,
+   "classe_majoritaire": 0.5407319952774499,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.725382932166302,
+     "exactitude_test": 0.6139315230224321
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.6832603938730853,
+     "exactitude_test": 0.6304604486422668
+    },
+    {
+     "tour": 2,
+     "retenus": 2567,
+     "justesse": 0.6357615894039735,
+     "exactitude_test": 0.6422668240850059
+    },
+    {
+     "tour": 3,
+     "retenus": 2818,
+     "justesse": 0.630943931866572,
+     "exactitude_test": 0.6351829988193625
+    },
+    {
+     "tour": 4,
+     "retenus": 2851,
+     "justesse": 0.6296036478428622,
+     "exactitude_test": 0.6363636363636364
+    }
+   ],
+   "minutes": 2.2
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 768, 'image': 2048}",
+   "cible": "AVA",
+   "graine": 345678,
+   "sources_seules": 0.6139315230224321,
+   "auto_apprentissage": 0.6363636363636364,
+   "oracle_cible": 0.7024793388429752,
+   "classe_majoritaire": 0.5407319952774499,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.7330415754923414,
+     "exactitude_test": 0.615112160566706
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.6788840262582057,
+     "exactitude_test": 0.6304604486422668
+    },
+    {
+     "tour": 2,
+     "retenus": 2579,
+     "justesse": 0.638231872818922,
+     "exactitude_test": 0.6363636363636364
+    },
+    {
+     "tour": 3,
+     "retenus": 2849,
+     "justesse": 0.6272376272376272,
+     "exactitude_test": 0.628099173553719
+    },
+    {
+     "tour": 4,
+     "retenus": 2886,
+     "justesse": 0.6278586278586279,
+     "exactitude_test": 0.6363636363636364
+    }
+   ],
+   "minutes": 2.1
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 768, 'image': 2048}",
+   "cible": "PCCD",
+   "graine": 123456,
+   "sources_seules": 0.5796930342384888,
+   "auto_apprentissage": 0.5820543093270366,
+   "oracle_cible": 0.6328217237308147,
+   "classe_majoritaire": 0.5029515938606848,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.6564551422319475,
+     "exactitude_test": 0.5761511216056671
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.6236323851203501,
+     "exactitude_test": 0.5855962219598583
+    },
+    {
+     "tour": 2,
+     "retenus": 2724,
+     "justesse": 0.6009544787077826,
+     "exactitude_test": 0.5844155844155844
+    },
+    {
+     "tour": 3,
+     "retenus": 2976,
+     "justesse": 0.5897177419354839,
+     "exactitude_test": 0.5879574970484062
+    },
+    {
+     "tour": 4,
+     "retenus": 2993,
+     "justesse": 0.5900434346809221,
+     "exactitude_test": 0.5820543093270366
+    }
+   ],
+   "minutes": 2.0
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 768, 'image': 2048}",
+   "cible": "PCCD",
+   "graine": 234567,
+   "sources_seules": 0.5726092089728453,
+   "auto_apprentissage": 0.5820543093270366,
+   "oracle_cible": 0.6328217237308147,
+   "classe_majoritaire": 0.5029515938606848,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.6728665207877462,
+     "exactitude_test": 0.5714285714285714
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.6296498905908097,
+     "exactitude_test": 0.5761511216056671
+    },
+    {
+     "tour": 2,
+     "retenus": 2700,
+     "justesse": 0.5929629629629629,
+     "exactitude_test": 0.5785123966942148
+    },
+    {
+     "tour": 3,
+     "retenus": 2965,
+     "justesse": 0.5851602023608768,
+     "exactitude_test": 0.5785123966942148
+    },
+    {
+     "tour": 4,
+     "retenus": 2993,
+     "justesse": 0.5843635148680254,
+     "exactitude_test": 0.5820543093270366
+    }
+   ],
+   "minutes": 2.1
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 768, 'image': 2048}",
+   "cible": "PCCD",
+   "graine": 345678,
+   "sources_seules": 0.5832349468713105,
+   "auto_apprentissage": 0.5737898465171193,
+   "oracle_cible": 0.6316410861865407,
+   "classe_majoritaire": 0.5029515938606848,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.6652078774617067,
+     "exactitude_test": 0.5808736717827627
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.637855579868709,
+     "exactitude_test": 0.5737898465171193
+    },
+    {
+     "tour": 2,
+     "retenus": 2678,
+     "justesse": 0.614637789395071,
+     "exactitude_test": 0.5714285714285714
+    },
+    {
+     "tour": 3,
+     "retenus": 2925,
+     "justesse": 0.6041025641025641,
+     "exactitude_test": 0.5714285714285714
+    },
+    {
+     "tour": 4,
+     "retenus": 2956,
+     "justesse": 0.6028416779431665,
+     "exactitude_test": 0.5737898465171193
+    }
+   ],
+   "minutes": 2.1
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 768, 'image': 2048}",
+   "cible": "RPCD",
+   "graine": 123456,
+   "sources_seules": 0.5466351829988194,
+   "auto_apprentissage": 0.551357733175915,
+   "oracle_cible": 0.6528925619834711,
+   "classe_majoritaire": 0.5855962219598583,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.6805251641137856,
+     "exactitude_test": 0.5501770956316411
+    },
+    {
+     "tour": 1,
+     "retenus": 1793,
+     "justesse": 0.6397099832682654,
+     "exactitude_test": 0.5525383707201889
+    },
+    {
+     "tour": 2,
+     "retenus": 2476,
+     "justesse": 0.6025848142164781,
+     "exactitude_test": 0.5548996458087367
+    },
+    {
+     "tour": 3,
+     "retenus": 2725,
+     "justesse": 0.5930275229357799,
+     "exactitude_test": 0.5548996458087367
+    },
+    {
+     "tour": 4,
+     "retenus": 2756,
+     "justesse": 0.5936139332365747,
+     "exactitude_test": 0.551357733175915
+    }
+   ],
+   "minutes": 2.0
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 768, 'image': 2048}",
+   "cible": "RPCD",
+   "graine": 234567,
+   "sources_seules": 0.5029515938606848,
+   "auto_apprentissage": 0.5324675324675324,
+   "oracle_cible": 0.6481700118063755,
+   "classe_majoritaire": 0.5855962219598583,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.6739606126914661,
+     "exactitude_test": 0.5064935064935064
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.6345733041575492,
+     "exactitude_test": 0.5218417945690673
+    },
+    {
+     "tour": 2,
+     "retenus": 2502,
+     "justesse": 0.5903277378097522,
+     "exactitude_test": 0.5230224321133412
+    },
+    {
+     "tour": 3,
+     "retenus": 2731,
+     "justesse": 0.5840351519589894,
+     "exactitude_test": 0.5230224321133412
+    },
+    {
+     "tour": 4,
+     "retenus": 2761,
+     "justesse": 0.5823976819992757,
+     "exactitude_test": 0.5324675324675324
+    }
+   ],
+   "minutes": 1.9
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 768, 'image': 2048}",
+   "cible": "RPCD",
+   "graine": 345678,
+   "sources_seules": 0.5194805194805194,
+   "auto_apprentissage": 0.5537190082644629,
+   "oracle_cible": 0.6517119244391971,
+   "classe_majoritaire": 0.5855962219598583,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.6717724288840262,
+     "exactitude_test": 0.526564344746163
+    },
+    {
+     "tour": 1,
+     "retenus": 1790,
+     "justesse": 0.647486033519553,
+     "exactitude_test": 0.5430932703659976
+    },
+    {
+     "tour": 2,
+     "retenus": 2452,
+     "justesse": 0.6088907014681892,
+     "exactitude_test": 0.5572609208972845
+    },
+    {
+     "tour": 3,
+     "retenus": 2691,
+     "justesse": 0.6038647342995169,
+     "exactitude_test": 0.5572609208972845
+    },
+    {
+     "tour": 4,
+     "retenus": 2731,
+     "justesse": 0.6063712925668253,
+     "exactitude_test": 0.5537190082644629
+    }
+   ],
+   "minutes": 1.9
+  }
+ ],
+ "diagnostics": []
+}

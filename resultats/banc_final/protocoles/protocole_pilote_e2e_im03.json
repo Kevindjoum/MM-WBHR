@@ -1,0 +1,23 @@
+{
+ "titre": "Pilote : methode de bout en bout avec maximisation de l'information (SHOT, poids 0.3), AVA",
+ "ecrit_le": "2026-10-28T22:41",
+ "ecrit_avant_tout_resultat": true,
+ "code": "methode/ du commit dcff47f de MM-WBHR (option phase1.poids_im), constructeur kaggle/e2e/build.py",
+ "cible": "AVA",
+ "graine": 123456,
+ "configuration": {
+  "fusion.dim": 256,
+  "lr_extracteur": 5e-05,
+  "lr_dorsale": 2e-06,
+  "poids_im": 0.3,
+  "pseudo": true,
+  "epoques": 3,
+  "pas_par_epoque": 847,
+  "partition": "spectrale (sans equilibrage)"
+ },
+ "reference": "meme protocole sans poids_im (section 26), AVA graine 123456 : 58.91, groupes 711 / 136 ; gele CLIP : 72.06 ; gele BERT/ResNet : 73.12",
+ "decision": {
+  "etendre": "si les groupes ne s'effondrent pas (plus petit groupe >= 30 % du test) ET exactitude > 73.12 : etendre a PCCD et RPCD",
+  "arreter": "sinon : arret du bout en bout, limite declaree dans le memoire"
+ }
+}

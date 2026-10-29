@@ -1,0 +1,139 @@
+{
+ "titre": "Configurations de la branche (commit dcff47f) sur la partition, CLIP, aesthetic",
+ "ecrit_le": "2026-10-28T22:25",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_code": null,
+ "code": "methode/ du commit dcff47f de MM-WBHR",
+ "groupe": "aesthetic",
+ "cibles": [
+  "AVA",
+  "PCCD",
+  "RPCD"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "configurations": {
+  "fgm": {
+   "methode": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    }
+   },
+   "methode_im03": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     },
+     "poids_im": 0.3
+    },
+    "pseudo": {
+     "actif": true
+    }
+   },
+   "methode_im1": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     },
+     "poids_im": 1.0
+    },
+    "pseudo": {
+     "actif": true
+    }
+   },
+   "methode_zn": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     },
+     "normaliser_z": true
+    },
+    "pseudo": {
+     "actif": true
+    }
+   },
+   "methode_knn": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    },
+    "phase2": {
+     "affinite": "knn",
+     "voisins_graphe": 15
+    }
+   },
+   "methode_wbhr_zn": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     },
+     "normaliser_z": true
+    },
+    "pseudo": {
+     "actif": true
+    },
+    "phase2": {
+     "support": "auto",
+     "appariement": "argmax",
+     "classifieur": "logistique"
+    }
+   }
+  },
+  "m2can": {}
+ },
+ "notes": "memes surcharges que configs/methode_*.yaml de la branche, mais 3 epoques (et non 10) pour rester comparable aux sections 25 a 30 ; chaque evaluation journalise aussi le plancher logistique (regression logistique sources -> cible sur z)",
+ "metrique_principale": "exactitude au dernier point",
+ "comparaisons": {
+  "principales": [
+   "methode_im03 - methode (9 paires)",
+   "methode_im1 - methode (9 paires)",
+   "methode_zn - methode (9 paires)",
+   "methode_knn - methode (9 paires)",
+   "methode_wbhr_zn - methode (9 paires)"
+  ],
+  "secondaires": [
+   "meilleure configuration contre M2CAN extracteur 5e-5 (section 27)"
+  ]
+ },
+ "critere": {
+  "MIEUX": "IC95 (t, 8 ddl) > 0 et au moins 7/9 positifs",
+  "MOINS_BIEN": "IC95 < 0",
+  "INDISTINGUABLE": "sinon"
+ }
+}

@@ -1,0 +1,924 @@
+{
+ "bases": [
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 768, 'image': 2048}",
+   "cible": "TumEmo",
+   "graine": 123456,
+   "sources_seules": 0.4673333333333333,
+   "auto_apprentissage": 0.4613333333333333,
+   "oracle_cible": 0.7086666666666667,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.5525925925925926,
+     "exactitude_test": 0.468
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5132098765432099,
+     "exactitude_test": 0.464
+    },
+    {
+     "tour": 2,
+     "retenus": 12149,
+     "justesse": 0.48374351798501936,
+     "exactitude_test": 0.4553333333333333
+    },
+    {
+     "tour": 3,
+     "retenus": 13312,
+     "justesse": 0.4765625,
+     "exactitude_test": 0.45866666666666667
+    },
+    {
+     "tour": 4,
+     "retenus": 13348,
+     "justesse": 0.4764758765358106,
+     "exactitude_test": 0.4613333333333333
+    }
+   ],
+   "minutes": 32.0
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 768, 'image': 2048}",
+   "cible": "TumEmo",
+   "graine": 234567,
+   "sources_seules": 0.46266666666666667,
+   "auto_apprentissage": 0.464,
+   "oracle_cible": 0.702,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.5506172839506173,
+     "exactitude_test": 0.4633333333333333
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5070370370370371,
+     "exactitude_test": 0.4653333333333333
+    },
+    {
+     "tour": 2,
+     "retenus": 12081,
+     "justesse": 0.47893386309080377,
+     "exactitude_test": 0.4673333333333333
+    },
+    {
+     "tour": 3,
+     "retenus": 13236,
+     "justesse": 0.47030825022665457,
+     "exactitude_test": 0.46266666666666667
+    },
+    {
+     "tour": 4,
+     "retenus": 13269,
+     "justesse": 0.4699675936393097,
+     "exactitude_test": 0.464
+    }
+   ],
+   "minutes": 31.5
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 768, 'image': 2048}",
+   "cible": "TumEmo",
+   "graine": 345678,
+   "sources_seules": 0.458,
+   "auto_apprentissage": 0.458,
+   "oracle_cible": 0.7006666666666667,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.5479012345679012,
+     "exactitude_test": 0.456
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5064197530864197,
+     "exactitude_test": 0.4533333333333333
+    },
+    {
+     "tour": 2,
+     "retenus": 12150,
+     "justesse": 0.4805761316872428,
+     "exactitude_test": 0.46
+    },
+    {
+     "tour": 3,
+     "retenus": 13330,
+     "justesse": 0.4741185296324081,
+     "exactitude_test": 0.46066666666666667
+    },
+    {
+     "tour": 4,
+     "retenus": 13357,
+     "justesse": 0.47398367896982857,
+     "exactitude_test": 0.458
+    }
+   ],
+   "minutes": 31.4
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 768, 'image': 2048}",
+   "cible": "Twitter",
+   "graine": 123456,
+   "sources_seules": 0.49733333333333335,
+   "auto_apprentissage": 0.5206666666666667,
+   "oracle_cible": 0.7193333333333334,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.5985185185185186,
+     "exactitude_test": 0.5033333333333333
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5596296296296296,
+     "exactitude_test": 0.5146666666666667
+    },
+    {
+     "tour": 2,
+     "retenus": 12065,
+     "justesse": 0.5273104019892251,
+     "exactitude_test": 0.5173333333333333
+    },
+    {
+     "tour": 3,
+     "retenus": 13247,
+     "justesse": 0.5187589642938024,
+     "exactitude_test": 0.52
+    },
+    {
+     "tour": 4,
+     "retenus": 13280,
+     "justesse": 0.5188253012048193,
+     "exactitude_test": 0.5206666666666667
+    }
+   ],
+   "minutes": 31.2
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 768, 'image': 2048}",
+   "cible": "Twitter",
+   "graine": 234567,
+   "sources_seules": 0.49933333333333335,
+   "auto_apprentissage": 0.5173333333333333,
+   "oracle_cible": 0.718,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.6032098765432099,
+     "exactitude_test": 0.502
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5687654320987654,
+     "exactitude_test": 0.5066666666666667
+    },
+    {
+     "tour": 2,
+     "retenus": 12070,
+     "justesse": 0.5371996685998343,
+     "exactitude_test": 0.5126666666666667
+    },
+    {
+     "tour": 3,
+     "retenus": 13285,
+     "justesse": 0.5299962363567934,
+     "exactitude_test": 0.514
+    },
+    {
+     "tour": 4,
+     "retenus": 13302,
+     "justesse": 0.5302210193955796,
+     "exactitude_test": 0.5173333333333333
+    }
+   ],
+   "minutes": 31.5
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 768, 'image': 2048}",
+   "cible": "Twitter",
+   "graine": 345678,
+   "sources_seules": 0.49466666666666664,
+   "auto_apprentissage": 0.5086666666666667,
+   "oracle_cible": 0.718,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.5846913580246914,
+     "exactitude_test": 0.5046666666666667
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5481481481481482,
+     "exactitude_test": 0.5106666666666667
+    },
+    {
+     "tour": 2,
+     "retenus": 12103,
+     "justesse": 0.5204494753366934,
+     "exactitude_test": 0.512
+    },
+    {
+     "tour": 3,
+     "retenus": 13318,
+     "justesse": 0.5117885568403664,
+     "exactitude_test": 0.5073333333333333
+    },
+    {
+     "tour": 4,
+     "retenus": 13345,
+     "justesse": 0.5114275009366804,
+     "exactitude_test": 0.5086666666666667
+    }
+   ],
+   "minutes": 32.3
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 768, 'image': 2048}",
+   "cible": "Yelp",
+   "graine": 123456,
+   "sources_seules": 0.514,
+   "auto_apprentissage": 0.5233333333333333,
+   "oracle_cible": 0.6053333333333333,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.5948148148148148,
+     "exactitude_test": 0.52
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5509876543209876,
+     "exactitude_test": 0.5226666666666666
+    },
+    {
+     "tour": 2,
+     "retenus": 12150,
+     "justesse": 0.5156378600823045,
+     "exactitude_test": 0.53
+    },
+    {
+     "tour": 3,
+     "retenus": 13455,
+     "justesse": 0.5065031586770717,
+     "exactitude_test": 0.528
+    },
+    {
+     "tour": 4,
+     "retenus": 13465,
+     "justesse": 0.5066468622354252,
+     "exactitude_test": 0.5233333333333333
+    }
+   ],
+   "minutes": 31.6
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 768, 'image': 2048}",
+   "cible": "Yelp",
+   "graine": 234567,
+   "sources_seules": 0.508,
+   "auto_apprentissage": 0.5333333333333333,
+   "oracle_cible": 0.5953333333333334,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.6027160493827161,
+     "exactitude_test": 0.5333333333333333
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5574074074074075,
+     "exactitude_test": 0.5346666666666666
+    },
+    {
+     "tour": 2,
+     "retenus": 12150,
+     "justesse": 0.5203292181069958,
+     "exactitude_test": 0.5353333333333333
+    },
+    {
+     "tour": 3,
+     "retenus": 13449,
+     "justesse": 0.5098520336084468,
+     "exactitude_test": 0.5373333333333333
+    },
+    {
+     "tour": 4,
+     "retenus": 13463,
+     "justesse": 0.510064621555374,
+     "exactitude_test": 0.5333333333333333
+    }
+   ],
+   "minutes": 31.6
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 768, 'image': 2048}",
+   "cible": "Yelp",
+   "graine": 345678,
+   "sources_seules": 0.512,
+   "auto_apprentissage": 0.5286666666666666,
+   "oracle_cible": 0.6,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.6079012345679012,
+     "exactitude_test": 0.5253333333333333
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5565432098765432,
+     "exactitude_test": 0.5226666666666666
+    },
+    {
+     "tour": 2,
+     "retenus": 12150,
+     "justesse": 0.5196707818930041,
+     "exactitude_test": 0.5286666666666666
+    },
+    {
+     "tour": 3,
+     "retenus": 13444,
+     "justesse": 0.5077357929187741,
+     "exactitude_test": 0.5266666666666666
+    },
+    {
+     "tour": 4,
+     "retenus": 13455,
+     "justesse": 0.5073206986250465,
+     "exactitude_test": 0.5286666666666666
+    }
+   ],
+   "minutes": 31.4
+  },
+  {
+   "jeu": "hac:feats_hac_clip:{'audio': 768, 'video': 512}",
+   "cible": "human",
+   "graine": 123456,
+   "sources_seules": 0.7391304347826086,
+   "auto_apprentissage": 0.8695652173913043,
+   "oracle_cible": 0.9384057971014492,
+   "classe_majoritaire": 0.14492753623188406,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 294,
+     "justesse": 0.9591836734693877,
+     "exactitude_test": 0.8442028985507246
+    },
+    {
+     "tour": 1,
+     "retenus": 595,
+     "justesse": 0.957983193277311,
+     "exactitude_test": 0.8804347826086957
+    },
+    {
+     "tour": 2,
+     "retenus": 896,
+     "justesse": 0.8872767857142857,
+     "exactitude_test": 0.8840579710144928
+    },
+    {
+     "tour": 3,
+     "retenus": 980,
+     "justesse": 0.8673469387755102,
+     "exactitude_test": 0.8659420289855072
+    },
+    {
+     "tour": 4,
+     "retenus": 982,
+     "justesse": 0.8655804480651731,
+     "exactitude_test": 0.8695652173913043
+    }
+   ],
+   "minutes": 0.1
+  },
+  {
+   "jeu": "hac:feats_hac_clip:{'audio': 768, 'video': 512}",
+   "cible": "human",
+   "graine": 234567,
+   "sources_seules": 0.7391304347826086,
+   "auto_apprentissage": 0.8985507246376812,
+   "oracle_cible": 0.9347826086956522,
+   "classe_majoritaire": 0.14492753623188406,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 294,
+     "justesse": 0.9693877551020408,
+     "exactitude_test": 0.8405797101449275
+    },
+    {
+     "tour": 1,
+     "retenus": 595,
+     "justesse": 0.9512605042016806,
+     "exactitude_test": 0.8876811594202898
+    },
+    {
+     "tour": 2,
+     "retenus": 895,
+     "justesse": 0.8949720670391061,
+     "exactitude_test": 0.8985507246376812
+    },
+    {
+     "tour": 3,
+     "retenus": 971,
+     "justesse": 0.8815653964984552,
+     "exactitude_test": 0.894927536231884
+    },
+    {
+     "tour": 4,
+     "retenus": 976,
+     "justesse": 0.8801229508196722,
+     "exactitude_test": 0.8985507246376812
+    }
+   ],
+   "minutes": 0.1
+  },
+  {
+   "jeu": "hac:feats_hac_clip:{'audio': 768, 'video': 512}",
+   "cible": "human",
+   "graine": 345678,
+   "sources_seules": 0.7355072463768116,
+   "auto_apprentissage": 0.8731884057971014,
+   "oracle_cible": 0.9492753623188406,
+   "classe_majoritaire": 0.14492753623188406,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 293,
+     "justesse": 0.9590443686006825,
+     "exactitude_test": 0.8260869565217391
+    },
+    {
+     "tour": 1,
+     "retenus": 589,
+     "justesse": 0.9388794567062818,
+     "exactitude_test": 0.8804347826086957
+    },
+    {
+     "tour": 2,
+     "retenus": 887,
+     "justesse": 0.8861330326944757,
+     "exactitude_test": 0.894927536231884
+    },
+    {
+     "tour": 3,
+     "retenus": 983,
+     "justesse": 0.8677517802644964,
+     "exactitude_test": 0.8731884057971014
+    },
+    {
+     "tour": 4,
+     "retenus": 984,
+     "justesse": 0.8678861788617886,
+     "exactitude_test": 0.8731884057971014
+    }
+   ],
+   "minutes": 0.1
+  },
+  {
+   "jeu": "hac:feats_hac_clip:{'audio': 768, 'video': 512}",
+   "cible": "animal",
+   "graine": 123456,
+   "sources_seules": 0.8579545454545454,
+   "auto_apprentissage": 0.9204545454545454,
+   "oracle_cible": 0.9715909090909091,
+   "classe_majoritaire": 0.20454545454545456,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 196,
+     "justesse": 0.9744897959183674,
+     "exactitude_test": 0.8863636363636364
+    },
+    {
+     "tour": 1,
+     "retenus": 392,
+     "justesse": 0.9668367346938775,
+     "exactitude_test": 0.9147727272727273
+    },
+    {
+     "tour": 2,
+     "retenus": 571,
+     "justesse": 0.9211908931698775,
+     "exactitude_test": 0.9261363636363636
+    },
+    {
+     "tour": 3,
+     "retenus": 616,
+     "justesse": 0.9090909090909091,
+     "exactitude_test": 0.9147727272727273
+    },
+    {
+     "tour": 4,
+     "retenus": 619,
+     "justesse": 0.9046849757673667,
+     "exactitude_test": 0.9204545454545454
+    }
+   ],
+   "minutes": 0.1
+  },
+  {
+   "jeu": "hac:feats_hac_clip:{'audio': 768, 'video': 512}",
+   "cible": "animal",
+   "graine": 234567,
+   "sources_seules": 0.8636363636363636,
+   "auto_apprentissage": 0.9261363636363636,
+   "oracle_cible": 0.9715909090909091,
+   "classe_majoritaire": 0.20454545454545456,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 196,
+     "justesse": 0.9897959183673469,
+     "exactitude_test": 0.8806818181818182
+    },
+    {
+     "tour": 1,
+     "retenus": 392,
+     "justesse": 0.9821428571428571,
+     "exactitude_test": 0.9090909090909091
+    },
+    {
+     "tour": 2,
+     "retenus": 575,
+     "justesse": 0.9269565217391305,
+     "exactitude_test": 0.9261363636363636
+    },
+    {
+     "tour": 3,
+     "retenus": 621,
+     "justesse": 0.9114331723027376,
+     "exactitude_test": 0.9204545454545454
+    },
+    {
+     "tour": 4,
+     "retenus": 624,
+     "justesse": 0.9086538461538461,
+     "exactitude_test": 0.9261363636363636
+    }
+   ],
+   "minutes": 0.1
+  },
+  {
+   "jeu": "hac:feats_hac_clip:{'audio': 768, 'video': 512}",
+   "cible": "animal",
+   "graine": 345678,
+   "sources_seules": 0.875,
+   "auto_apprentissage": 0.9375,
+   "oracle_cible": 0.9715909090909091,
+   "classe_majoritaire": 0.20454545454545456,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 196,
+     "justesse": 0.9846938775510204,
+     "exactitude_test": 0.9034090909090909
+    },
+    {
+     "tour": 1,
+     "retenus": 392,
+     "justesse": 0.9719387755102041,
+     "exactitude_test": 0.9147727272727273
+    },
+    {
+     "tour": 2,
+     "retenus": 575,
+     "justesse": 0.9269565217391305,
+     "exactitude_test": 0.9375
+    },
+    {
+     "tour": 3,
+     "retenus": 624,
+     "justesse": 0.9102564102564102,
+     "exactitude_test": 0.9431818181818182
+    },
+    {
+     "tour": 4,
+     "retenus": 626,
+     "justesse": 0.9089456869009584,
+     "exactitude_test": 0.9375
+    }
+   ],
+   "minutes": 0.1
+  },
+  {
+   "jeu": "hac:feats_hac_clip:{'audio': 768, 'video': 512}",
+   "cible": "cartoon",
+   "graine": 123456,
+   "sources_seules": 0.7110091743119266,
+   "auto_apprentissage": 0.8119266055045872,
+   "oracle_cible": 0.9311926605504587,
+   "classe_majoritaire": 0.23394495412844038,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 231,
+     "justesse": 0.9437229437229437,
+     "exactitude_test": 0.7660550458715596
+    },
+    {
+     "tour": 1,
+     "retenus": 469,
+     "justesse": 0.8997867803837953,
+     "exactitude_test": 0.8027522935779816
+    },
+    {
+     "tour": 2,
+     "retenus": 691,
+     "justesse": 0.8060781476121563,
+     "exactitude_test": 0.8027522935779816
+    },
+    {
+     "tour": 3,
+     "retenus": 751,
+     "justesse": 0.7776298268974701,
+     "exactitude_test": 0.8073394495412844
+    },
+    {
+     "tour": 4,
+     "retenus": 752,
+     "justesse": 0.7779255319148937,
+     "exactitude_test": 0.8119266055045872
+    }
+   ],
+   "minutes": 0.1
+  },
+  {
+   "jeu": "hac:feats_hac_clip:{'audio': 768, 'video': 512}",
+   "cible": "cartoon",
+   "graine": 234567,
+   "sources_seules": 0.7201834862385321,
+   "auto_apprentissage": 0.8165137614678899,
+   "oracle_cible": 0.9311926605504587,
+   "classe_majoritaire": 0.23394495412844038,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 231,
+     "justesse": 0.9307359307359307,
+     "exactitude_test": 0.7889908256880734
+    },
+    {
+     "tour": 1,
+     "retenus": 469,
+     "justesse": 0.8912579957356077,
+     "exactitude_test": 0.8256880733944955
+    },
+    {
+     "tour": 2,
+     "retenus": 676,
+     "justesse": 0.8076923076923077,
+     "exactitude_test": 0.8119266055045872
+    },
+    {
+     "tour": 3,
+     "retenus": 725,
+     "justesse": 0.7875862068965517,
+     "exactitude_test": 0.8211009174311926
+    },
+    {
+     "tour": 4,
+     "retenus": 731,
+     "justesse": 0.7811217510259918,
+     "exactitude_test": 0.8165137614678899
+    }
+   ],
+   "minutes": 0.1
+  },
+  {
+   "jeu": "hac:feats_hac_clip:{'audio': 768, 'video': 512}",
+   "cible": "cartoon",
+   "graine": 345678,
+   "sources_seules": 0.7018348623853211,
+   "auto_apprentissage": 0.8119266055045872,
+   "oracle_cible": 0.9311926605504587,
+   "classe_majoritaire": 0.23394495412844038,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 231,
+     "justesse": 0.9393939393939394,
+     "exactitude_test": 0.7522935779816514
+    },
+    {
+     "tour": 1,
+     "retenus": 469,
+     "justesse": 0.8805970149253731,
+     "exactitude_test": 0.7935779816513762
+    },
+    {
+     "tour": 2,
+     "retenus": 680,
+     "justesse": 0.8073529411764706,
+     "exactitude_test": 0.8027522935779816
+    },
+    {
+     "tour": 3,
+     "retenus": 739,
+     "justesse": 0.7821380243572396,
+     "exactitude_test": 0.8073394495412844
+    },
+    {
+     "tour": 4,
+     "retenus": 742,
+     "justesse": 0.7789757412398922,
+     "exactitude_test": 0.8119266055045872
+    }
+   ],
+   "minutes": 0.1
+  }
+ ],
+ "diagnostics": [
+  {
+   "run": "notebooks/fgm_methode/animal_s123456",
+   "exactitude": 0.9829545454545454,
+   "oracle": 0.9829545454545454,
+   "nmi": 0.9634355632090531,
+   "ari": 0.9645990659466104,
+   "sonde_oracle_z": 0.8807936507936509,
+   "mmd2_cible_sources": 0.017222821712493896,
+   "tailles_groupes": [
+    26,
+    36,
+    25,
+    25,
+    22,
+    26,
+    16
+   ],
+   "tailles_vraies": [
+    36,
+    26,
+    25,
+    21,
+    24,
+    27,
+    17
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode/cartoon_s123456",
+   "exactitude": 0.7660550458715596,
+   "oracle": 0.7660550458715596,
+   "nmi": 0.6491987449844234,
+   "ari": 0.5631291704275775,
+   "sonde_oracle_z": 0.688583509513742,
+   "mmd2_cible_sources": 0.019690096378326416,
+   "tailles_groupes": [
+    26,
+    22,
+    49,
+    42,
+    34,
+    24,
+    21
+   ],
+   "tailles_vraies": [
+    23,
+    28,
+    28,
+    22,
+    27,
+    51,
+    39
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode/human_s123456",
+   "exactitude": 0.9311594202898551,
+   "oracle": 0.9311594202898551,
+   "nmi": 0.8812257553048494,
+   "ari": 0.8546488072172942,
+   "sonde_oracle_z": 0.9346753246753247,
+   "mmd2_cible_sources": 0.02504134178161621,
+   "tailles_groupes": [
+    41,
+    50,
+    40,
+    36,
+    40,
+    28,
+    41
+   ],
+   "tailles_vraies": [
+    39,
+    40,
+    39,
+    40,
+    40,
+    38,
+    40
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode_sans_pseudo/animal_s123456",
+   "exactitude": 0.9488636363636364,
+   "oracle": 0.9488636363636364,
+   "nmi": 0.9050719420798958,
+   "ari": 0.8889045400961136,
+   "sonde_oracle_z": 0.7896825396825398,
+   "mmd2_cible_sources": 0.050278425216674805,
+   "tailles_groupes": [
+    26,
+    34,
+    27,
+    25,
+    25,
+    16,
+    23
+   ],
+   "tailles_vraies": [
+    36,
+    26,
+    25,
+    21,
+    24,
+    27,
+    17
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode_sans_pseudo/cartoon_s123456",
+   "exactitude": 0.5688073394495413,
+   "oracle": 0.6009174311926605,
+   "nmi": 0.5113912649876836,
+   "ari": 0.35699886814567716,
+   "sonde_oracle_z": 0.42706131078224097,
+   "mmd2_cible_sources": 0.12029188871383667,
+   "tailles_groupes": [
+    40,
+    47,
+    21,
+    32,
+    29,
+    27,
+    22
+   ],
+   "tailles_vraies": [
+    23,
+    28,
+    28,
+    22,
+    27,
+    51,
+    39
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode_sans_pseudo/human_s123456",
+   "exactitude": 0.8913043478260869,
+   "oracle": 0.8913043478260869,
+   "nmi": 0.8077961850621312,
+   "ari": 0.7732843240740325,
+   "sonde_oracle_z": 0.8837662337662338,
+   "mmd2_cible_sources": 0.08464270830154419,
+   "tailles_groupes": [
+    37,
+    50,
+    39,
+    40,
+    33,
+    33,
+    44
+   ],
+   "tailles_vraies": [
+    39,
+    40,
+    39,
+    40,
+    40,
+    38,
+    40
+   ]
+  }
+ ]
+}

@@ -1,0 +1,69 @@
+{
+ "titre": "HAC avec CLIP pour la video (AST pour l'audio) : la methode contre M2CAN, M2CAN publie et M2CAN a taux adapte",
+ "ecrit_le": "2026-10-20T18:32",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_code": null,
+ "groupe": "hac",
+ "cibles": [
+  "human",
+  "animal",
+  "cartoon"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "donnees": "sortie de kevindjoumessiwoumpe/extract-clip-hac : video CLIP ViT-B/32 512-d (8 frames TSN, moyenne), audio AST 768-d, 1 vue faible + 4 fortes ; test 276 / 176 / 218",
+ "configurations": {
+  "fgm": {
+   "methode": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    }
+   },
+   "methode_sans_pseudo": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": false
+    }
+   }
+  },
+  "m2can": {
+   "publie": {},
+   "extracteur_5e-5": {
+    "extractor_lr": 5e-05
+   }
+  }
+ },
+ "notes": "methode : ALGORITHME.md, 3 epoques x 3750 pas, sans partition equilibree. M2CAN : configuration Twitter (comme les runs HAC), lot 4, 10 epoques ; video 512-d completee par des zeros jusqu'a 2048, audio 768-d inchange ; extracteur_5e-5 = meme taux que la methode (correction.md A1).",
+ "metrique_principale": "exactitude au dernier point",
+ "comparaisons": {
+  "principale": "methode contre M2CAN extracteur_5e-5 (traitement symetrique)",
+  "secondaires": [
+   "methode contre M2CAN publie",
+   "methode contre methode_sans_pseudo",
+   "methode CLIP contre methode SlowFast (section 21), appariee par (cible, graine)"
+  ]
+ },
+ "critere": {
+  "MIEUX": "IC95 (t, 8 ddl) > 0 et au moins 7/9 positifs",
+  "MOINS_BIEN": "IC95 < 0",
+  "INDISTINGUABLE": "sinon"
+ }
+}

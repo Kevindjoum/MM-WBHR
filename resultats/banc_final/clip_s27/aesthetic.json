@@ -1,0 +1,533 @@
+[
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "AVA",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 11.7,
+  "meilleur": 0.7237308146399055,
+  "dernier": 0.7166469893742621,
+  "oracle_dernier": 0.7166469893742621,
+  "critere": 0.7166469893742621,
+  "n_evals": 15,
+  "tailles_dernier": [
+   437,
+   410
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5153333333333333,
+   "n_retenus": 450,
+   "precision_retenus": 0.4711111111111111
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.6923333333333334,
+   "n_retenus": 1822,
+   "precision_retenus": 0.6926454445664105
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "AVA",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 10.6,
+  "meilleur": 0.7331759149940968,
+  "dernier": 0.730814639905549,
+  "oracle_dernier": 0.730814639905549,
+  "critere": 0.730814639905549,
+  "n_evals": 15,
+  "tailles_dernier": [
+   395,
+   452
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "AVA",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.8,
+  "meilleur": 0.6399055489964581,
+  "dernier": 0.6340023612750886,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "AVA",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 11.6,
+  "meilleur": 0.730814639905549,
+  "dernier": 0.7296340023612751,
+  "oracle_dernier": 0.7296340023612751,
+  "critere": 0.7296340023612751,
+  "n_evals": 15,
+  "tailles_dernier": [
+   436,
+   411
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5336666666666666,
+   "n_retenus": 450,
+   "precision_retenus": 0.5222222222222223
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.7123333333333334,
+   "n_retenus": 1772,
+   "precision_retenus": 0.6901805869074492
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "AVA",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 10.1,
+  "meilleur": 0.7355371900826446,
+  "dernier": 0.7355371900826446,
+  "oracle_dernier": 0.7355371900826446,
+  "critere": 0.7355371900826446,
+  "n_evals": 15,
+  "tailles_dernier": [
+   377,
+   470
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "AVA",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 13.3,
+  "meilleur": 0.6198347107438017,
+  "dernier": 0.6198347107438017,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "AVA",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 11.4,
+  "meilleur": 0.7154663518299882,
+  "dernier": 0.7154663518299882,
+  "oracle_dernier": 0.7154663518299882,
+  "critere": 0.7154663518299882,
+  "n_evals": 15,
+  "tailles_dernier": [
+   365,
+   482
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.49466666666666664,
+   "n_retenus": 450,
+   "precision_retenus": 0.4288888888888889
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.6923333333333334,
+   "n_retenus": 1791,
+   "precision_retenus": 0.6795086543830262
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "AVA",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 10.1,
+  "meilleur": 0.7272727272727273,
+  "dernier": 0.7249114521841794,
+  "oracle_dernier": 0.7249114521841794,
+  "critere": 0.7249114521841794,
+  "n_evals": 15,
+  "tailles_dernier": [
+   408,
+   439
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "AVA",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 13.3,
+  "meilleur": 0.6186540731995277,
+  "dernier": 0.6174734356552538,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "PCCD",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 11.8,
+  "meilleur": 0.6304604486422668,
+  "dernier": 0.6162927981109799,
+  "oracle_dernier": 0.6162927981109799,
+  "critere": 0.6304604486422668,
+  "n_evals": 15,
+  "tailles_dernier": [
+   434,
+   413
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5326666666666666,
+   "n_retenus": 450,
+   "precision_retenus": 0.5111111111111111
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.6466666666666666,
+   "n_retenus": 2859,
+   "precision_retenus": 0.6516264428121721
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "PCCD",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 10.2,
+  "meilleur": 0.6505312868949232,
+  "dernier": 0.6481700118063755,
+  "oracle_dernier": 0.6481700118063755,
+  "critere": 0.6481700118063755,
+  "n_evals": 15,
+  "tailles_dernier": [
+   441,
+   406
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "PCCD",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.6,
+  "meilleur": 0.6292798110979929,
+  "dernier": 0.6257378984651711,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "PCCD",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 11.5,
+  "meilleur": 0.6316410861865407,
+  "dernier": 0.6162927981109799,
+  "oracle_dernier": 0.6162927981109799,
+  "critere": 0.6162927981109799,
+  "n_evals": 15,
+  "tailles_dernier": [
+   505,
+   342
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.507,
+   "n_retenus": 451,
+   "precision_retenus": 0.5565410199556541
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.6426666666666667,
+   "n_retenus": 2469,
+   "precision_retenus": 0.669501822600243
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "PCCD",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 10.1,
+  "meilleur": 0.641086186540732,
+  "dernier": 0.6269185360094451,
+  "oracle_dernier": 0.6269185360094451,
+  "critere": 0.6269185360094451,
+  "n_evals": 15,
+  "tailles_dernier": [
+   490,
+   357
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "PCCD",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 13.1,
+  "meilleur": 0.6221959858323495,
+  "dernier": 0.6198347107438017,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "PCCD",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 11.4,
+  "meilleur": 0.6316410861865407,
+  "dernier": 0.6292798110979929,
+  "oracle_dernier": 0.6292798110979929,
+  "critere": 0.6233766233766234,
+  "n_evals": 15,
+  "tailles_dernier": [
+   446,
+   401
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5226666666666666,
+   "n_retenus": 530,
+   "precision_retenus": 0.5509433962264151
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.6433333333333333,
+   "n_retenus": 2840,
+   "precision_retenus": 0.648943661971831
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "PCCD",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 10.2,
+  "meilleur": 0.6458087367178277,
+  "dernier": 0.6375442739079102,
+  "oracle_dernier": 0.6375442739079102,
+  "critere": 0.6434474616292798,
+  "n_evals": 15,
+  "tailles_dernier": [
+   453,
+   394
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "PCCD",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 13.3,
+  "meilleur": 0.6033057851239669,
+  "dernier": 0.602125147579693,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "RPCD",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 11.4,
+  "meilleur": 0.6269185360094451,
+  "dernier": 0.6162927981109799,
+  "oracle_dernier": 0.6162927981109799,
+  "critere": 0.6221959858323495,
+  "n_evals": 15,
+  "tailles_dernier": [
+   451,
+   396
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5683333333333334,
+   "n_retenus": 450,
+   "precision_retenus": 0.5333333333333333
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.6146666666666667,
+   "n_retenus": 1982,
+   "precision_retenus": 0.6246215943491423
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "RPCD",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 10.2,
+  "meilleur": 0.6269185360094451,
+  "dernier": 0.6210153482880756,
+  "oracle_dernier": 0.6210153482880756,
+  "critere": 0.6210153482880756,
+  "n_evals": 15,
+  "tailles_dernier": [
+   461,
+   386
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "RPCD",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.6,
+  "meilleur": 0.5785123966942148,
+  "dernier": 0.5785123966942148,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "RPCD",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 11.5,
+  "meilleur": 0.615112160566706,
+  "dernier": 0.6056670602125147,
+  "oracle_dernier": 0.6056670602125147,
+  "critere": 0.6044864226682408,
+  "n_evals": 15,
+  "tailles_dernier": [
+   415,
+   432
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5786666666666667,
+   "n_retenus": 450,
+   "precision_retenus": 0.52
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.611,
+   "n_retenus": 2206,
+   "precision_retenus": 0.6201269265639165
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "RPCD",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 10.3,
+  "meilleur": 0.6162927981109799,
+  "dernier": 0.6080283353010626,
+  "oracle_dernier": 0.6080283353010626,
+  "critere": 0.6092089728453365,
+  "n_evals": 15,
+  "tailles_dernier": [
+   464,
+   383
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "RPCD",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 13.1,
+  "meilleur": 0.5808736717827627,
+  "dernier": 0.5808736717827627,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "RPCD",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 10.0,
+  "meilleur": 0.6162927981109799,
+  "dernier": 0.6103896103896104,
+  "oracle_dernier": 0.6103896103896104,
+  "critere": 0.6092089728453365,
+  "n_evals": 15,
+  "tailles_dernier": [
+   413,
+   434
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.574,
+   "n_retenus": 450,
+   "precision_retenus": 0.49333333333333335
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.6143333333333333,
+   "n_retenus": 1935,
+   "precision_retenus": 0.620671834625323
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "RPCD",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 8.9,
+  "meilleur": 0.6233766233766234,
+  "dernier": 0.6210153482880756,
+  "oracle_dernier": 0.6210153482880756,
+  "critere": 0.615112160566706,
+  "n_evals": 15,
+  "tailles_dernier": [
+   398,
+   449
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "RPCD",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 9.5,
+  "meilleur": 0.5879574970484062,
+  "dernier": 0.5879574970484062,
+  "n_evals": 10
+ }
+]

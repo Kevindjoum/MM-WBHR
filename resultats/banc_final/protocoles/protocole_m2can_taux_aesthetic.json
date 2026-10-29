@@ -1,0 +1,46 @@
+{
+ "titre": "M2CAN avec des taux d'apprentissage adaptes aux caracteristiques gelees (CLIP, aesthetic)",
+ "ecrit_le": "2026-10-20T17:51",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_code": null,
+ "groupe": "aesthetic",
+ "cibles": [
+  "AVA",
+  "PCCD",
+  "RPCD"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "donnees": "sortie de djoumessikevin/extract-clip-aesthetic (CLIP ViT-B/32, 512 + 512, 1 vue faible + 4 fortes), memes caracteristiques que bench-a-aesthetic-clip",
+ "motivation": "equite : la methode a recu un taux d'extracteur regle pour le gele (5e-5, section 18) ; M2CAN gardait ses taux publies, prevus pour des encodeurs ajustes (sections 23 et 25)",
+ "configurations": {
+  "fgm": {},
+  "m2can": {
+   "extracteur_5e-5": {
+    "extractor_lr": 5e-05
+   },
+   "taux_eleves": {
+    "extractor_lr": 5e-05,
+    "mlb_lr": 0.0005,
+    "classifier_lr": 0.0005
+   }
+  }
+ },
+ "notes": "configuration publiee de la cible, seuls les taux changent ; lot 8, 10 epoques ; reference appariee par (cible, graine) : M2CAN publie et methode de bench-a-aesthetic-clip",
+ "metrique_principale": "exactitude au dernier point",
+ "comparaisons": {
+  "principale": "methode (CLIP) contre le meilleur des deux reglages de M2CAN, choisi par configuration et non par graine",
+  "secondaires": [
+   "chaque reglage contre M2CAN publie",
+   "methode contre chaque reglage"
+  ]
+ },
+ "critere": {
+  "MIEUX": "IC95 (t, 8 ddl) > 0 et au moins 7/9 positifs",
+  "MOINS_BIEN": "IC95 < 0",
+  "INDISTINGUABLE": "sinon"
+ }
+}

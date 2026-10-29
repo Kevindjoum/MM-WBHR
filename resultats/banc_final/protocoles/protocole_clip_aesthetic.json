@@ -1,0 +1,78 @@
+{
+ "titre": "Cadre A avec CLIP, esthetique : la methode contre M2CAN sur les memes caracteristiques CLIP gelees",
+ "ecrit_le": "2026-10-13T15:20",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_code": "033b4a44df5940e98c78c12c19cfe2e7d75a9a1bd3950638c9ed72c600ae5c98",
+ "groupe": "aesthetic",
+ "cibles": [
+  "AVA",
+  "PCCD",
+  "RPCD"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "donnees": "sortie de djoumessikevin/extract-clip-aesthetic : CLIP ViT-B/32, projections texte 512-d et image 512-d, 1 vue faible + 4 fortes (memes augmentations que M2CAN) ; memes decoupes que bench-a-aesthetic",
+ "configurations": {
+  "fgm": {
+   "methode": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    }
+   },
+   "methode_sans_pseudo": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": false
+    }
+   }
+  },
+  "m2can": {
+   "publie": {}
+  }
+ },
+ "notes": "seul l'encodeur change par rapport a bench-a-aesthetic (section 23). Methode : 3 epoques x 3750 pas, lot 4, options de leviers a leur defaut. M2CAN : configuration publiee, lot 8, 10 epoques ; entrees 512-d completees par des zeros jusqu'a 768 (texte) et 2048 (image) par l'adaptateur. Reserve connue : M2CAN n'apprenait pas ses sources sur BERT/ResNet geles (section 23), la comparaison avec M2CAN reste a lire avec cette reserve.",
+ "metrique_principale": "exactitude au dernier point",
+ "comparaisons": {
+  "principale": "methode contre M2CAN (9 paires cible x graine)",
+  "secondaires": [
+   "methode_sans_pseudo contre M2CAN",
+   "methode contre methode_sans_pseudo",
+   "methode CLIP contre methode BERT/ResNet (bench-a-aesthetic), par (cible, graine)"
+  ]
+ },
+ "critere": {
+  "MIEUX": "IC95 (t, 8 ddl) de l'ecart moyen > 0 et au moins 7/9 positifs",
+  "MOINS_BIEN": "IC95 < 0",
+  "INDISTINGUABLE": "sinon"
+ },
+ "reperes": {
+  "classe_majoritaire_test": {
+   "AVA": 54.07,
+   "PCCD": 50.3,
+   "RPCD": 58.56
+  },
+  "M2CAN_publie_bout_en_bout": {
+   "AVA": 77.9,
+   "PCCD": 69.1,
+   "RPCD": 73.8
+  }
+ }
+}

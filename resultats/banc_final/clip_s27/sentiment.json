@@ -1,0 +1,551 @@
+[
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "TumEmo",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.0,
+  "meilleur": 0.5966666666666667,
+  "dernier": 0.4726666666666667,
+  "oracle_dernier": 0.4726666666666667,
+  "critere": 0.474,
+  "n_evals": 15,
+  "tailles_dernier": [
+   859,
+   197,
+   444
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.522,
+   "n_retenus": 600,
+   "precision_retenus": 0.655
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.49666666666666665,
+   "n_retenus": 1291,
+   "precision_retenus": 0.6769945778466305
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "TumEmo",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 11.7,
+  "meilleur": 0.596,
+  "dernier": 0.45866666666666667,
+  "oracle_dernier": 0.45866666666666667,
+  "critere": 0.46066666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   893,
+   141,
+   466
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "TumEmo",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 62.9,
+  "meilleur": 0.5346666666666666,
+  "dernier": 0.5346666666666666,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "TumEmo",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.4,
+  "meilleur": 0.6213333333333333,
+  "dernier": 0.4493333333333333,
+  "oracle_dernier": 0.4493333333333333,
+  "critere": 0.456,
+  "n_evals": 15,
+  "tailles_dernier": [
+   169,
+   427,
+   904
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.541,
+   "n_retenus": 600,
+   "precision_retenus": 0.7733333333333333
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.479,
+   "n_retenus": 1289,
+   "precision_retenus": 0.6470131885182312
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "TumEmo",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 11.2,
+  "meilleur": 0.6153333333333333,
+  "dernier": 0.44533333333333336,
+  "oracle_dernier": 0.44533333333333336,
+  "critere": 0.45266666666666666,
+  "n_evals": 15,
+  "tailles_dernier": [
+   894,
+   150,
+   456
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "TumEmo",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 61.2,
+  "meilleur": 0.482,
+  "dernier": 0.4806666666666667,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "TumEmo",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.4,
+  "meilleur": 0.6013333333333334,
+  "dernier": 0.45866666666666667,
+  "oracle_dernier": 0.45866666666666667,
+  "critere": 0.4646666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   194,
+   471,
+   835
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.49133333333333334,
+   "n_retenus": 600,
+   "precision_retenus": 0.48833333333333334
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.479,
+   "n_retenus": 1387,
+   "precision_retenus": 0.6366258111031002
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "TumEmo",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 10.8,
+  "meilleur": 0.6073333333333333,
+  "dernier": 0.44,
+  "oracle_dernier": 0.44,
+  "critere": 0.44333333333333336,
+  "n_evals": 15,
+  "tailles_dernier": [
+   844,
+   501,
+   155
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "TumEmo",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 61.9,
+  "meilleur": 0.552,
+  "dernier": 0.55,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Twitter",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.564,
+  "dernier": 0.5586666666666666,
+  "oracle_dernier": 0.5586666666666666,
+  "critere": 0.558,
+  "n_evals": 15,
+  "tailles_dernier": [
+   588,
+   309,
+   603
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.41833333333333333,
+   "n_retenus": 401,
+   "precision_retenus": 0.38902743142144636
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.554,
+   "n_retenus": 2099,
+   "precision_retenus": 0.6141019533111005
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "Twitter",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 11.2,
+  "meilleur": 0.5646666666666667,
+  "dernier": 0.5566666666666666,
+  "oracle_dernier": 0.5566666666666666,
+  "critere": 0.5586666666666666,
+  "n_evals": 15,
+  "tailles_dernier": [
+   615,
+   584,
+   301
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "Twitter",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 61.5,
+  "meilleur": 0.464,
+  "dernier": 0.4613333333333333,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Twitter",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.8,
+  "meilleur": 0.5633333333333334,
+  "dernier": 0.558,
+  "oracle_dernier": 0.558,
+  "critere": 0.5613333333333334,
+  "n_evals": 15,
+  "tailles_dernier": [
+   572,
+   574,
+   354
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.3983333333333333,
+   "n_retenus": 445,
+   "precision_retenus": 0.449438202247191
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.565,
+   "n_retenus": 2115,
+   "precision_retenus": 0.6056737588652482
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "Twitter",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 11.1,
+  "meilleur": 0.5726666666666667,
+  "dernier": 0.566,
+  "oracle_dernier": 0.566,
+  "critere": 0.5686666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   551,
+   379,
+   570
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "Twitter",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 61.7,
+  "meilleur": 0.504,
+  "dernier": 0.504,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Twitter",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.5766666666666667,
+  "dernier": 0.574,
+  "oracle_dernier": 0.574,
+  "critere": 0.5726666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   585,
+   344,
+   571
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.4646666666666667,
+   "n_retenus": 301,
+   "precision_retenus": 0.521594684385382
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.5693333333333334,
+   "n_retenus": 2021,
+   "precision_retenus": 0.6209797130133597
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "Twitter",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 11.4,
+  "meilleur": 0.5726666666666667,
+  "dernier": 0.5686666666666667,
+  "oracle_dernier": 0.5686666666666667,
+  "critere": 0.57,
+  "n_evals": 15,
+  "tailles_dernier": [
+   565,
+   597,
+   338
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "Twitter",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 61.6,
+  "meilleur": 0.472,
+  "dernier": 0.4713333333333333,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Yelp",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.4513333333333333,
+  "dernier": 0.43333333333333335,
+  "oracle_dernier": 0.43333333333333335,
+  "critere": 0.434,
+  "n_evals": 15,
+  "tailles_dernier": [
+   794,
+   545,
+   161
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.37933333333333336,
+   "n_retenus": 370,
+   "precision_retenus": 0.3324324324324324
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.4126666666666667,
+   "n_retenus": 1167,
+   "precision_retenus": 0.4712939160239931
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "Yelp",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 11.1,
+  "meilleur": 0.49266666666666664,
+  "dernier": 0.4766666666666667,
+  "oracle_dernier": 0.4766666666666667,
+  "critere": 0.476,
+  "n_evals": 15,
+  "tailles_dernier": [
+   643,
+   241,
+   616
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "Yelp",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 60.8,
+  "meilleur": 0.432,
+  "dernier": 0.432,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Yelp",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.6,
+  "meilleur": 0.44133333333333336,
+  "dernier": 0.34,
+  "oracle_dernier": 0.44533333333333336,
+  "critere": 0.39666666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   783,
+   658,
+   59
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.36833333333333335,
+   "n_retenus": 300,
+   "precision_retenus": 0.37333333333333335
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.32866666666666666,
+   "n_retenus": 1144,
+   "precision_retenus": 0.2945804195804196
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "Yelp",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 11.4,
+  "meilleur": 0.454,
+  "dernier": 0.4086666666666667,
+  "oracle_dernier": 0.4086666666666667,
+  "critere": 0.39666666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   531,
+   813,
+   156
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "Yelp",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 49.7,
+  "meilleur": 0.362,
+  "dernier": 0.342,
+  "n_evals": 10
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Yelp",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 13.1,
+  "meilleur": 0.4553333333333333,
+  "dernier": 0.4166666666666667,
+  "oracle_dernier": 0.4166666666666667,
+  "critere": 0.4166666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   167,
+   519,
+   814
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.377,
+   "n_retenus": 600,
+   "precision_retenus": 0.36666666666666664
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.41833333333333333,
+   "n_retenus": 1187,
+   "precision_retenus": 0.4658803706823926
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_sans_pseudo",
+  "cible": "Yelp",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 11.6,
+  "meilleur": 0.4706666666666667,
+  "dernier": 0.46066666666666667,
+  "oracle_dernier": 0.46066666666666667,
+  "critere": 0.46066666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   519,
+   738,
+   243
+  ],
+  "pseudo_premier": null,
+  "pseudo_dernier": null
+ },
+ {
+  "methode": "m2can",
+  "config": "publie",
+  "cible": "Yelp",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 40.0,
+  "meilleur": 0.36333333333333334,
+  "dernier": 0.358,
+  "n_evals": 10
+ }
+]

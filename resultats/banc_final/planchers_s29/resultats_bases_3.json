@@ -1,0 +1,978 @@
+{
+ "bases": [
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 512, 'image': 512}",
+   "cible": "AVA",
+   "graine": 123456,
+   "sources_seules": 0.6587957497048406,
+   "auto_apprentissage": 0.6623376623376623,
+   "oracle_cible": 0.7036599763872491,
+   "classe_majoritaire": 0.5407319952774499,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.8096280087527352,
+     "exactitude_test": 0.6706021251475797
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.7407002188183808,
+     "exactitude_test": 0.6753246753246753
+    },
+    {
+     "tour": 2,
+     "retenus": 2734,
+     "justesse": 0.6894659839063643,
+     "exactitude_test": 0.6694214876033058
+    },
+    {
+     "tour": 3,
+     "retenus": 2990,
+     "justesse": 0.6705685618729097,
+     "exactitude_test": 0.667060212514758
+    },
+    {
+     "tour": 4,
+     "retenus": 3011,
+     "justesse": 0.6705413483892394,
+     "exactitude_test": 0.6623376623376623
+    }
+   ],
+   "minutes": 0.3
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 512, 'image': 512}",
+   "cible": "AVA",
+   "graine": 234567,
+   "sources_seules": 0.6635182998819362,
+   "auto_apprentissage": 0.6658795749704841,
+   "oracle_cible": 0.704840613931523,
+   "classe_majoritaire": 0.5407319952774499,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.8107221006564551,
+     "exactitude_test": 0.6753246753246753
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.7335886214442013,
+     "exactitude_test": 0.6753246753246753
+    },
+    {
+     "tour": 2,
+     "retenus": 2701,
+     "justesse": 0.6812291743798593,
+     "exactitude_test": 0.6706021251475797
+    },
+    {
+     "tour": 3,
+     "retenus": 2939,
+     "justesse": 0.6685947601224906,
+     "exactitude_test": 0.6658795749704841
+    },
+    {
+     "tour": 4,
+     "retenus": 2962,
+     "justesse": 0.6661039837947332,
+     "exactitude_test": 0.6658795749704841
+    }
+   ],
+   "minutes": 0.4
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 512, 'image': 512}",
+   "cible": "AVA",
+   "graine": 345678,
+   "sources_seules": 0.6517119244391971,
+   "auto_apprentissage": 0.6812278630460449,
+   "oracle_cible": 0.7036599763872491,
+   "classe_majoritaire": 0.5407319952774499,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.8063457330415755,
+     "exactitude_test": 0.6694214876033058
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.7412472647702407,
+     "exactitude_test": 0.6717827626918536
+    },
+    {
+     "tour": 2,
+     "retenus": 2673,
+     "justesse": 0.693228582117471,
+     "exactitude_test": 0.6776859504132231
+    },
+    {
+     "tour": 3,
+     "retenus": 2916,
+     "justesse": 0.6844993141289437,
+     "exactitude_test": 0.6753246753246753
+    },
+    {
+     "tour": 4,
+     "retenus": 2952,
+     "justesse": 0.6842818428184282,
+     "exactitude_test": 0.6812278630460449
+    }
+   ],
+   "minutes": 0.3
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 512, 'image': 512}",
+   "cible": "PCCD",
+   "graine": 123456,
+   "sources_seules": 0.5914994096812278,
+   "auto_apprentissage": 0.58913813459268,
+   "oracle_cible": 0.6387249114521841,
+   "classe_majoritaire": 0.5029515938606848,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.7242888402625821,
+     "exactitude_test": 0.602125147579693
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.6668490153172867,
+     "exactitude_test": 0.5974025974025974
+    },
+    {
+     "tour": 2,
+     "retenus": 2739,
+     "justesse": 0.628696604600219,
+     "exactitude_test": 0.5903187721369539
+    },
+    {
+     "tour": 3,
+     "retenus": 2997,
+     "justesse": 0.6186186186186187,
+     "exactitude_test": 0.5914994096812278
+    },
+    {
+     "tour": 4,
+     "retenus": 3009,
+     "justesse": 0.6168162180126288,
+     "exactitude_test": 0.58913813459268
+    }
+   ],
+   "minutes": 0.3
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 512, 'image': 512}",
+   "cible": "PCCD",
+   "graine": 234567,
+   "sources_seules": 0.6068476977567887,
+   "auto_apprentissage": 0.5962219598583235,
+   "oracle_cible": 0.6387249114521841,
+   "classe_majoritaire": 0.5029515938606848,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.7155361050328227,
+     "exactitude_test": 0.5985832349468713
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.6641137855579868,
+     "exactitude_test": 0.5903187721369539
+    },
+    {
+     "tour": 2,
+     "retenus": 2715,
+     "justesse": 0.630939226519337,
+     "exactitude_test": 0.5985832349468713
+    },
+    {
+     "tour": 3,
+     "retenus": 2976,
+     "justesse": 0.6196236559139785,
+     "exactitude_test": 0.602125147579693
+    },
+    {
+     "tour": 4,
+     "retenus": 2988,
+     "justesse": 0.6181392235609103,
+     "exactitude_test": 0.5962219598583235
+    }
+   ],
+   "minutes": 0.3
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 512, 'image': 512}",
+   "cible": "PCCD",
+   "graine": 345678,
+   "sources_seules": 0.5938606847697757,
+   "auto_apprentissage": 0.5950413223140496,
+   "oracle_cible": 0.6399055489964581,
+   "classe_majoritaire": 0.5029515938606848,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.7242888402625821,
+     "exactitude_test": 0.6033057851239669
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.6641137855579868,
+     "exactitude_test": 0.5997638724911453
+    },
+    {
+     "tour": 2,
+     "retenus": 2725,
+     "justesse": 0.6260550458715596,
+     "exactitude_test": 0.6009445100354192
+    },
+    {
+     "tour": 3,
+     "retenus": 2965,
+     "justesse": 0.6141652613827994,
+     "exactitude_test": 0.5950413223140496
+    },
+    {
+     "tour": 4,
+     "retenus": 2981,
+     "justesse": 0.6132170412613217,
+     "exactitude_test": 0.5950413223140496
+    }
+   ],
+   "minutes": 0.3
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 512, 'image': 512}",
+   "cible": "RPCD",
+   "graine": 123456,
+   "sources_seules": 0.5454545454545454,
+   "auto_apprentissage": 0.6033057851239669,
+   "oracle_cible": 0.6694214876033058,
+   "classe_majoritaire": 0.5855962219598583,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.737417943107221,
+     "exactitude_test": 0.5726092089728453
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.675054704595186,
+     "exactitude_test": 0.5938606847697757
+    },
+    {
+     "tour": 2,
+     "retenus": 2652,
+     "justesse": 0.6255656108597285,
+     "exactitude_test": 0.6056670602125147
+    },
+    {
+     "tour": 3,
+     "retenus": 2901,
+     "justesse": 0.6118579800068942,
+     "exactitude_test": 0.6080283353010626
+    },
+    {
+     "tour": 4,
+     "retenus": 2936,
+     "justesse": 0.6127384196185286,
+     "exactitude_test": 0.6033057851239669
+    }
+   ],
+   "minutes": 0.3
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 512, 'image': 512}",
+   "cible": "RPCD",
+   "graine": 234567,
+   "sources_seules": 0.538370720188902,
+   "auto_apprentissage": 0.5938606847697757,
+   "oracle_cible": 0.6694214876033058,
+   "classe_majoritaire": 0.5855962219598583,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.7221006564551422,
+     "exactitude_test": 0.5619834710743802
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.6717724288840262,
+     "exactitude_test": 0.5962219598583235
+    },
+    {
+     "tour": 2,
+     "retenus": 2644,
+     "justesse": 0.6206505295007564,
+     "exactitude_test": 0.5950413223140496
+    },
+    {
+     "tour": 3,
+     "retenus": 2893,
+     "justesse": 0.605945385413066,
+     "exactitude_test": 0.5926800472255017
+    },
+    {
+     "tour": 4,
+     "retenus": 2911,
+     "justesse": 0.6059773273789076,
+     "exactitude_test": 0.5938606847697757
+    }
+   ],
+   "minutes": 0.3
+  },
+  {
+   "jeu": "aesthetic:feats_aesthetic:{'text': 512, 'image': 512}",
+   "cible": "RPCD",
+   "graine": 345678,
+   "sources_seules": 0.5525383707201889,
+   "auto_apprentissage": 0.5867768595041323,
+   "oracle_cible": 0.6694214876033058,
+   "classe_majoritaire": 0.5855962219598583,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 914,
+     "justesse": 0.712253829321663,
+     "exactitude_test": 0.5619834710743802
+    },
+    {
+     "tour": 1,
+     "retenus": 1828,
+     "justesse": 0.661925601750547,
+     "exactitude_test": 0.5737898465171193
+    },
+    {
+     "tour": 2,
+     "retenus": 2651,
+     "justesse": 0.6193889098453413,
+     "exactitude_test": 0.5855962219598583
+    },
+    {
+     "tour": 3,
+     "retenus": 2903,
+     "justesse": 0.6066138477437134,
+     "exactitude_test": 0.5867768595041323
+    },
+    {
+     "tour": 4,
+     "retenus": 2930,
+     "justesse": 0.6064846416382252,
+     "exactitude_test": 0.5867768595041323
+    }
+   ],
+   "minutes": 0.3
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 512, 'image': 512}",
+   "cible": "TumEmo",
+   "graine": 123456,
+   "sources_seules": 0.5186666666666667,
+   "auto_apprentissage": 0.5513333333333333,
+   "oracle_cible": 0.796,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.5955555555555555,
+     "exactitude_test": 0.5193333333333333
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5688888888888889,
+     "exactitude_test": 0.5306666666666666
+    },
+    {
+     "tour": 2,
+     "retenus": 11997,
+     "justesse": 0.5429690756022338,
+     "exactitude_test": 0.552
+    },
+    {
+     "tour": 3,
+     "retenus": 13154,
+     "justesse": 0.5396077238862703,
+     "exactitude_test": 0.5506666666666666
+    },
+    {
+     "tour": 4,
+     "retenus": 13186,
+     "justesse": 0.5418625815258608,
+     "exactitude_test": 0.5513333333333333
+    }
+   ],
+   "minutes": 3.5
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 512, 'image': 512}",
+   "cible": "TumEmo",
+   "graine": 234567,
+   "sources_seules": 0.51,
+   "auto_apprentissage": 0.546,
+   "oracle_cible": 0.7973333333333333,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.5812345679012346,
+     "exactitude_test": 0.5113333333333333
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.551358024691358,
+     "exactitude_test": 0.5233333333333333
+    },
+    {
+     "tour": 2,
+     "retenus": 12032,
+     "justesse": 0.5330784574468085,
+     "exactitude_test": 0.5346666666666666
+    },
+    {
+     "tour": 3,
+     "retenus": 13180,
+     "justesse": 0.5295902883156297,
+     "exactitude_test": 0.5433333333333333
+    },
+    {
+     "tour": 4,
+     "retenus": 13206,
+     "justesse": 0.5327124034529759,
+     "exactitude_test": 0.546
+    }
+   ],
+   "minutes": 3.4
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 512, 'image': 512}",
+   "cible": "TumEmo",
+   "graine": 345678,
+   "sources_seules": 0.5206666666666667,
+   "auto_apprentissage": 0.5566666666666666,
+   "oracle_cible": 0.796,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.6022222222222222,
+     "exactitude_test": 0.5153333333333333
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5808641975308642,
+     "exactitude_test": 0.5386666666666666
+    },
+    {
+     "tour": 2,
+     "retenus": 11908,
+     "justesse": 0.5505542492442056,
+     "exactitude_test": 0.55
+    },
+    {
+     "tour": 3,
+     "retenus": 13038,
+     "justesse": 0.5437950605921154,
+     "exactitude_test": 0.5513333333333333
+    },
+    {
+     "tour": 4,
+     "retenus": 13069,
+     "justesse": 0.5440355038641059,
+     "exactitude_test": 0.5566666666666666
+    }
+   ],
+   "minutes": 3.3
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 512, 'image': 512}",
+   "cible": "Twitter",
+   "graine": 123456,
+   "sources_seules": 0.5186666666666667,
+   "auto_apprentissage": 0.558,
+   "oracle_cible": 0.7553333333333333,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 3910,
+     "justesse": 0.6680306905370844,
+     "exactitude_test": 0.5386666666666666
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.6091358024691358,
+     "exactitude_test": 0.546
+    },
+    {
+     "tour": 2,
+     "retenus": 12087,
+     "justesse": 0.5689583850417804,
+     "exactitude_test": 0.5506666666666666
+    },
+    {
+     "tour": 3,
+     "retenus": 13263,
+     "justesse": 0.5593003091306643,
+     "exactitude_test": 0.558
+    },
+    {
+     "tour": 4,
+     "retenus": 13269,
+     "justesse": 0.5616097671263848,
+     "exactitude_test": 0.558
+    }
+   ],
+   "minutes": 4.4
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 512, 'image': 512}",
+   "cible": "Twitter",
+   "graine": 234567,
+   "sources_seules": 0.522,
+   "auto_apprentissage": 0.546,
+   "oracle_cible": 0.7546666666666667,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 3911,
+     "justesse": 0.6589107645103555,
+     "exactitude_test": 0.5266666666666666
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.6017283950617284,
+     "exactitude_test": 0.5386666666666666
+    },
+    {
+     "tour": 2,
+     "retenus": 12071,
+     "justesse": 0.5634992958329882,
+     "exactitude_test": 0.5433333333333333
+    },
+    {
+     "tour": 3,
+     "retenus": 13248,
+     "justesse": 0.5552536231884058,
+     "exactitude_test": 0.548
+    },
+    {
+     "tour": 4,
+     "retenus": 13248,
+     "justesse": 0.5569897342995169,
+     "exactitude_test": 0.546
+    }
+   ],
+   "minutes": 4.0
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 512, 'image': 512}",
+   "cible": "Twitter",
+   "graine": 345678,
+   "sources_seules": 0.5213333333333333,
+   "auto_apprentissage": 0.5606666666666666,
+   "oracle_cible": 0.7553333333333333,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 3940,
+     "justesse": 0.6756345177664974,
+     "exactitude_test": 0.5473333333333333
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.6138271604938271,
+     "exactitude_test": 0.5586666666666666
+    },
+    {
+     "tour": 2,
+     "retenus": 12088,
+     "justesse": 0.5684976836532097,
+     "exactitude_test": 0.562
+    },
+    {
+     "tour": 3,
+     "retenus": 13253,
+     "justesse": 0.5590432354938505,
+     "exactitude_test": 0.5606666666666666
+    },
+    {
+     "tour": 4,
+     "retenus": 13254,
+     "justesse": 0.5602836879432624,
+     "exactitude_test": 0.5606666666666666
+    }
+   ],
+   "minutes": 4.1
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 512, 'image': 512}",
+   "cible": "Yelp",
+   "graine": 123456,
+   "sources_seules": 0.5046666666666667,
+   "auto_apprentissage": 0.512,
+   "oracle_cible": 0.576,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.6261728395061729,
+     "exactitude_test": 0.5006666666666667
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5669135802469136,
+     "exactitude_test": 0.5093333333333333
+    },
+    {
+     "tour": 2,
+     "retenus": 11948,
+     "justesse": 0.5175761633746234,
+     "exactitude_test": 0.512
+    },
+    {
+     "tour": 3,
+     "retenus": 13144,
+     "justesse": 0.5037279367011565,
+     "exactitude_test": 0.5126666666666667
+    },
+    {
+     "tour": 4,
+     "retenus": 13174,
+     "justesse": 0.5015181417944437,
+     "exactitude_test": 0.512
+    }
+   ],
+   "minutes": 5.0
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 512, 'image': 512}",
+   "cible": "Yelp",
+   "graine": 234567,
+   "sources_seules": 0.5006666666666667,
+   "auto_apprentissage": 0.512,
+   "oracle_cible": 0.5773333333333334,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.6212345679012345,
+     "exactitude_test": 0.4886666666666667
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5676543209876543,
+     "exactitude_test": 0.5046666666666667
+    },
+    {
+     "tour": 2,
+     "retenus": 11928,
+     "justesse": 0.5167672702883971,
+     "exactitude_test": 0.5093333333333333
+    },
+    {
+     "tour": 3,
+     "retenus": 13138,
+     "justesse": 0.5025879129243416,
+     "exactitude_test": 0.5126666666666667
+    },
+    {
+     "tour": 4,
+     "retenus": 13201,
+     "justesse": 0.5018559200060602,
+     "exactitude_test": 0.512
+    }
+   ],
+   "minutes": 4.9
+  },
+  {
+   "jeu": "sentiment:feats_sentiment:{'text': 512, 'image': 512}",
+   "cible": "Yelp",
+   "graine": 345678,
+   "sources_seules": 0.508,
+   "auto_apprentissage": 0.5153333333333333,
+   "oracle_cible": 0.5766666666666667,
+   "classe_majoritaire": 0.3333333333333333,
+   "tours": [
+    {
+     "tour": 0,
+     "retenus": 4050,
+     "justesse": 0.6249382716049383,
+     "exactitude_test": 0.49733333333333335
+    },
+    {
+     "tour": 1,
+     "retenus": 8100,
+     "justesse": 0.5602469135802469,
+     "exactitude_test": 0.506
+    },
+    {
+     "tour": 2,
+     "retenus": 12001,
+     "justesse": 0.5132072327306058,
+     "exactitude_test": 0.5146666666666667
+    },
+    {
+     "tour": 3,
+     "retenus": 13197,
+     "justesse": 0.498370841857998,
+     "exactitude_test": 0.512
+    },
+    {
+     "tour": 4,
+     "retenus": 13219,
+     "justesse": 0.4982222558438611,
+     "exactitude_test": 0.5153333333333333
+    }
+   ],
+   "minutes": 4.9
+  }
+ ],
+ "diagnostics": [
+  {
+   "run": "notebooks/fgm_methode/AVA_s123456",
+   "exactitude": 0.717827626918536,
+   "oracle": 0.717827626918536,
+   "nmi": 0.14555520899654878,
+   "ari": 0.1888378487616504,
+   "sonde_oracle_z": 0.7319735468151758,
+   "mmd2_cible_sources": 0.043759942054748535,
+   "tailles_groupes": [
+    438,
+    409
+   ],
+   "tailles_vraies": [
+    458,
+    389
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode/PCCD_s123456",
+   "exactitude": 0.6186540731995277,
+   "oracle": 0.6186540731995277,
+   "nmi": 0.04108129006886476,
+   "ari": 0.05519884563601165,
+   "sonde_oracle_z": 0.6163313609467457,
+   "mmd2_cible_sources": 0.007896780967712402,
+   "tailles_groupes": [
+    432,
+    415
+   ],
+   "tailles_vraies": [
+    421,
+    426
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode/RPCD_s123456",
+   "exactitude": 0.6174734356552538,
+   "oracle": 0.6174734356552538,
+   "nmi": 0.0379648865215569,
+   "ari": 0.05399395037956476,
+   "sonde_oracle_z": 0.6080612600069614,
+   "mmd2_cible_sources": 0.040897250175476074,
+   "tailles_groupes": [
+    452,
+    395
+   ],
+   "tailles_vraies": [
+    351,
+    496
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode_sans_pseudo/AVA_s123456",
+   "exactitude": 0.730814639905549,
+   "oracle": 0.730814639905549,
+   "nmi": 0.157886111496613,
+   "ari": 0.21215702668051684,
+   "sonde_oracle_z": 0.7095092238078664,
+   "mmd2_cible_sources": 0.014184832572937012,
+   "tailles_groupes": [
+    395,
+    452
+   ],
+   "tailles_vraies": [
+    458,
+    389
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode_sans_pseudo/PCCD_s123456",
+   "exactitude": 0.6481700118063755,
+   "oracle": 0.6481700118063755,
+   "nmi": 0.06458469931087459,
+   "ari": 0.08673973223309177,
+   "sonde_oracle_z": 0.63759136790811,
+   "mmd2_cible_sources": 0.013874173164367676,
+   "tailles_groupes": [
+    441,
+    406
+   ],
+   "tailles_vraies": [
+    421,
+    426
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode_sans_pseudo/RPCD_s123456",
+   "exactitude": 0.6210153482880756,
+   "oracle": 0.6210153482880756,
+   "nmi": 0.03929174959337301,
+   "ari": 0.057289058171618695,
+   "sonde_oracle_z": 0.603320570831883,
+   "mmd2_cible_sources": 0.04534810781478882,
+   "tailles_groupes": [
+    461,
+    386
+   ],
+   "tailles_vraies": [
+    351,
+    496
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode/TumEmo_s123456",
+   "exactitude": 0.472,
+   "oracle": 0.472,
+   "nmi": 0.15550354023094048,
+   "ari": 0.08819694037190029,
+   "sonde_oracle_z": 0.6666666666666666,
+   "mmd2_cible_sources": 0.03523951768875122,
+   "tailles_groupes": [
+    860,
+    197,
+    443
+   ],
+   "tailles_vraies": [
+    500,
+    500,
+    500
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode/Twitter_s123456",
+   "exactitude": 0.5586666666666666,
+   "oracle": 0.5586666666666666,
+   "nmi": 0.13712039908683105,
+   "ari": 0.15906365377951615,
+   "sonde_oracle_z": 0.6086666666666668,
+   "mmd2_cible_sources": 0.06138032674789429,
+   "tailles_groupes": [
+    588,
+    603,
+    309
+   ],
+   "tailles_vraies": [
+    500,
+    500,
+    500
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode/Yelp_s123456",
+   "exactitude": 0.43266666666666664,
+   "oracle": 0.43266666666666664,
+   "nmi": 0.054140898079702925,
+   "ari": 0.0241614724835234,
+   "sonde_oracle_z": 0.5086666666666666,
+   "mmd2_cible_sources": 0.24863463640213013,
+   "tailles_groupes": [
+    796,
+    542,
+    162
+   ],
+   "tailles_vraies": [
+    500,
+    500,
+    500
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode_sans_pseudo/TumEmo_s123456",
+   "exactitude": 0.458,
+   "oracle": 0.458,
+   "nmi": 0.1544429517864866,
+   "ari": 0.09033202791403257,
+   "sonde_oracle_z": 0.664,
+   "mmd2_cible_sources": 0.031182825565338135,
+   "tailles_groupes": [
+    892,
+    143,
+    465
+   ],
+   "tailles_vraies": [
+    500,
+    500,
+    500
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode_sans_pseudo/Twitter_s123456",
+   "exactitude": 0.5566666666666666,
+   "oracle": 0.5566666666666666,
+   "nmi": 0.13453492516385787,
+   "ari": 0.15468425119089094,
+   "sonde_oracle_z": 0.6093333333333333,
+   "mmd2_cible_sources": 0.05705493688583374,
+   "tailles_groupes": [
+    301,
+    584,
+    615
+   ],
+   "tailles_vraies": [
+    500,
+    500,
+    500
+   ]
+  },
+  {
+   "run": "notebooks/fgm_methode_sans_pseudo/Yelp_s123456",
+   "exactitude": 0.476,
+   "oracle": 0.476,
+   "nmi": 0.06983971137599715,
+   "ari": 0.04981082040199706,
+   "sonde_oracle_z": 0.5226666666666666,
+   "mmd2_cible_sources": 0.2366759181022644,
+   "tailles_groupes": [
+    616,
+    644,
+    240
+   ],
+   "tailles_vraies": [
+    500,
+    500,
+    500
+   ]
+  }
+ ]
+}

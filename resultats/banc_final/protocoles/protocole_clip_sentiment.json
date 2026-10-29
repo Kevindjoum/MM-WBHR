@@ -1,0 +1,84 @@
+{
+ "titre": "Cadre A avec CLIP, sentiment : la methode (avec et sans partition spectrale equilibree) contre M2CAN",
+ "ecrit_le": "2026-10-14T13:26",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_code": "033b4a44df5940e98c78c12c19cfe2e7d75a9a1bd3950638c9ed72c600ae5c98",
+ "groupe": "sentiment",
+ "cibles": [
+  "TumEmo",
+  "Twitter",
+  "Yelp"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "donnees": "sortie de djoumessikevin/extract-clip-sentiment : CLIP ViT-B/32, texte 512-d et image 512-d, 1 vue faible + 4 fortes ; memes decoupes que bench-a-sentiment",
+ "configurations": {
+  "fgm": {
+   "methode": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    }
+   },
+   "methode_sans_pseudo": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": false
+    }
+   }
+  },
+  "m2can": {
+   "publie": {}
+  }
+ },
+ "notes": "seul l'encodeur change par rapport a bench-a-sentiment ; spectrale_equilibree ajoutee apres les leviers (MIEUX sur l'esthetique, +3.86 non significatif sur le sentiment, section 24). M2CAN : configuration publiee, entrees completees par des zeros.",
+ "metrique_principale": "exactitude au dernier point",
+ "comparaisons": {
+  "principale": "methode contre M2CAN (9 paires)",
+  "secondaires": [
+   "spectrale_equilibree contre methode",
+   "spectrale_equilibree contre M2CAN",
+   "methode contre methode_sans_pseudo",
+   "methode CLIP contre methode BERT/ResNet (bench-a-sentiment)"
+  ]
+ },
+ "critere": {
+  "MIEUX": "IC95 (t, 8 ddl) de l'ecart moyen > 0 et au moins 7/9 positifs",
+  "MOINS_BIEN": "IC95 < 0",
+  "INDISTINGUABLE": "sinon"
+ },
+ "reperes": {
+  "classe_majoritaire_test": {
+   "TumEmo": 33.33,
+   "Twitter": 33.33,
+   "Yelp": 33.33
+  },
+  "M2CAN_publie_bout_en_bout": {
+   "TumEmo": 63.8,
+   "Yelp": 63.7
+  },
+  "M2CAN_checkpoint_officiel_remesure": {
+   "TumEmo": 64.87,
+   "Twitter": 86.4,
+   "Yelp": 61.2
+  },
+  "source_reperes": "ABLATIONS.md sections 9 et 10 (valeurs publiees deduites des ecarts qui y sont notes)"
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "titre": "Hypotheses H1 et H2 sur HAC avec CLIP, barycentre a la cardinalite de WBHR (support: auto), code de la branche (84fd73b)",
+ "ecrit_le": "2026-10-27T03:53",
+ "ecrit_avant_tout_resultat": true,
+ "sha256_code": null,
+ "groupe": "hac",
+ "cibles": [
+  "human",
+  "animal",
+  "cartoon"
+ ],
+ "graines": [
+  123456,
+  234567,
+  345678
+ ],
+ "configurations": {
+  "fgm": {
+   "methode": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    },
+    "phase2": {
+     "support": "auto"
+    }
+   },
+   "h1_concatenation": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    },
+    "phase2": {
+     "support": "auto",
+     "representant": "concatenation"
+    }
+   },
+   "h2_plat": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    },
+    "phase2": {
+     "support": "auto",
+     "transport": "plat"
+    }
+   },
+   "plat_concatenation": {
+    "fusion": {
+     "dim": 256
+    },
+    "phase1": {
+     "epoques": 3,
+     "optimiseur": {
+      "lr_extracteur": 5e-05
+     }
+    },
+    "pseudo": {
+     "actif": true
+    },
+    "phase2": {
+     "support": "auto",
+     "representant": "concatenation",
+     "transport": "plat"
+    }
+   }
+  },
+  "m2can": {}
+ },
+ "motivation": "section 22 (SlowFast, support 16) : H1 non concluante (etiquettes identiques), H2 non concluante ; reserve : un barycentre de 16 points est plus resserre qu'une concatenation. Avec support auto, barycentre et concatenation ont des cardinalites comparables.",
+ "hypotheses": {
+  "H1": "barycentre de Wasserstein (support auto) contre concatenation des sources : representant plus proche de la classe cible (cout de transport) et meilleur etiquetage",
+  "H2": "transport hierarchique contre transport plat point a point"
+ },
+ "metrique_principale": "exactitude au dernier point",
+ "comparaisons": {
+  "H1": "methode - h1_concatenation (9 paires) ; diagnostic cout_representant_classe_cible",
+  "H2": "methode - h2_plat (9 paires)",
+  "complementaire": "methode - plat_concatenation"
+ },
+ "critere": {
+  "SOUTENUE": "ecart moyen > 0, IC95 (t, 8 ddl) excluant 0, au moins 7/9 positifs",
+  "REFUTEE": "ecart moyen < 0 et IC95 excluant 0",
+  "NON_CONCLUANTE": "sinon"
+ }
+}

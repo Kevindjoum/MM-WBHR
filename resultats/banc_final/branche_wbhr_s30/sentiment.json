@@ -1,0 +1,1082 @@
+[
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "TumEmo",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.7,
+  "meilleur": 0.5966666666666667,
+  "dernier": 0.4726666666666667,
+  "oracle_dernier": 0.4726666666666667,
+  "critere": 0.474,
+  "n_evals": 15,
+  "tailles_dernier": [
+   859,
+   197,
+   444
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.522,
+   "n_retenus": 600,
+   "precision_retenus": 0.655
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.49666666666666665,
+   "n_retenus": 1291,
+   "precision_retenus": 0.6769945778466305
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "support_auto",
+  "cible": "TumEmo",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.9,
+  "meilleur": 0.5966666666666667,
+  "dernier": 0.4726666666666667,
+  "oracle_dernier": 0.4726666666666667,
+  "critere": 0.474,
+  "n_evals": 15,
+  "tailles_dernier": [
+   859,
+   197,
+   444
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.522,
+   "n_retenus": 600,
+   "precision_retenus": 0.655
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.49666666666666665,
+   "n_retenus": 1291,
+   "precision_retenus": 0.6769945778466305
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "fin_wbhr",
+  "cible": "TumEmo",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 14.0,
+  "meilleur": 0.536,
+  "dernier": 0.536,
+  "oracle_dernier": 0.488,
+  "critere": 0.5313333333333333,
+  "n_evals": 15,
+  "tailles_dernier": [
+   844,
+   223,
+   433
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5186666666666667,
+   "n_retenus": 600,
+   "precision_retenus": 0.655
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.5296666666666666,
+   "n_retenus": 2000,
+   "precision_retenus": 0.591
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_wbhr",
+  "cible": "TumEmo",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.7,
+  "meilleur": 0.5446666666666666,
+  "dernier": 0.5446666666666666,
+  "oracle_dernier": 0.48733333333333334,
+  "critere": 0.49333333333333335,
+  "n_evals": 15,
+  "tailles_dernier": [
+   838,
+   442,
+   220
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5193333333333333,
+   "n_retenus": 600,
+   "precision_retenus": 0.655
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.487,
+   "n_retenus": 1127,
+   "precision_retenus": 0.6015971606033718
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "TumEmo",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.1,
+  "meilleur": 0.6213333333333333,
+  "dernier": 0.4493333333333333,
+  "oracle_dernier": 0.4493333333333333,
+  "critere": 0.456,
+  "n_evals": 15,
+  "tailles_dernier": [
+   169,
+   427,
+   904
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.541,
+   "n_retenus": 600,
+   "precision_retenus": 0.7733333333333333
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.479,
+   "n_retenus": 1289,
+   "precision_retenus": 0.6470131885182312
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "support_auto",
+  "cible": "TumEmo",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.1,
+  "meilleur": 0.6213333333333333,
+  "dernier": 0.4493333333333333,
+  "oracle_dernier": 0.4493333333333333,
+  "critere": 0.456,
+  "n_evals": 15,
+  "tailles_dernier": [
+   169,
+   427,
+   904
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.541,
+   "n_retenus": 600,
+   "precision_retenus": 0.7733333333333333
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.479,
+   "n_retenus": 1289,
+   "precision_retenus": 0.6470131885182312
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "fin_wbhr",
+  "cible": "TumEmo",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.3,
+  "meilleur": 0.5253333333333333,
+  "dernier": 0.4846666666666667,
+  "oracle_dernier": 0.466,
+  "critere": 0.48333333333333334,
+  "n_evals": 15,
+  "tailles_dernier": [
+   889,
+   396,
+   215
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5516666666666666,
+   "n_retenus": 600,
+   "precision_retenus": 0.7733333333333333
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.526,
+   "n_retenus": 2000,
+   "precision_retenus": 0.5795
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_wbhr",
+  "cible": "TumEmo",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.5326666666666666,
+  "dernier": 0.49266666666666664,
+  "oracle_dernier": 0.4633333333333333,
+  "critere": 0.49066666666666664,
+  "n_evals": 15,
+  "tailles_dernier": [
+   887,
+   212,
+   401
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5486666666666666,
+   "n_retenus": 600,
+   "precision_retenus": 0.7733333333333333
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.5306666666666666,
+   "n_retenus": 2000,
+   "precision_retenus": 0.573
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "TumEmo",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.6013333333333334,
+  "dernier": 0.45866666666666667,
+  "oracle_dernier": 0.45866666666666667,
+  "critere": 0.4646666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   194,
+   471,
+   835
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.49133333333333334,
+   "n_retenus": 600,
+   "precision_retenus": 0.48833333333333334
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.479,
+   "n_retenus": 1387,
+   "precision_retenus": 0.6366258111031002
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "support_auto",
+  "cible": "TumEmo",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.2,
+  "meilleur": 0.6013333333333334,
+  "dernier": 0.45866666666666667,
+  "oracle_dernier": 0.45866666666666667,
+  "critere": 0.4646666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   194,
+   471,
+   835
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.49133333333333334,
+   "n_retenus": 600,
+   "precision_retenus": 0.48833333333333334
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.479,
+   "n_retenus": 1387,
+   "precision_retenus": 0.6366258111031002
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "fin_wbhr",
+  "cible": "TumEmo",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.538,
+  "dernier": 0.538,
+  "oracle_dernier": 0.468,
+  "critere": 0.5373333333333333,
+  "n_evals": 15,
+  "tailles_dernier": [
+   833,
+   457,
+   210
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.4126666666666667,
+   "n_retenus": 356,
+   "precision_retenus": 0.42696629213483145
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.47833333333333333,
+   "n_retenus": 1193,
+   "precision_retenus": 0.5968147527242247
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_wbhr",
+  "cible": "TumEmo",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.538,
+  "dernier": 0.538,
+  "oracle_dernier": 0.466,
+  "critere": 0.494,
+  "n_evals": 15,
+  "tailles_dernier": [
+   210,
+   459,
+   831
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.4076666666666667,
+   "n_retenus": 383,
+   "precision_retenus": 0.4073107049608355
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.49133333333333334,
+   "n_retenus": 1220,
+   "precision_retenus": 0.5983606557377049
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Twitter",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 12.3,
+  "meilleur": 0.564,
+  "dernier": 0.5586666666666666,
+  "oracle_dernier": 0.5586666666666666,
+  "critere": 0.558,
+  "n_evals": 15,
+  "tailles_dernier": [
+   588,
+   309,
+   603
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.41833333333333333,
+   "n_retenus": 401,
+   "precision_retenus": 0.38902743142144636
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.554,
+   "n_retenus": 2099,
+   "precision_retenus": 0.6141019533111005
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "support_auto",
+  "cible": "Twitter",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 12.7,
+  "meilleur": 0.564,
+  "dernier": 0.5586666666666666,
+  "oracle_dernier": 0.5586666666666666,
+  "critere": 0.558,
+  "n_evals": 15,
+  "tailles_dernier": [
+   588,
+   309,
+   603
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.41833333333333333,
+   "n_retenus": 401,
+   "precision_retenus": 0.38902743142144636
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.554,
+   "n_retenus": 2099,
+   "precision_retenus": 0.6141019533111005
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "fin_wbhr",
+  "cible": "Twitter",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 12.9,
+  "meilleur": 0.5606666666666666,
+  "dernier": 0.5566666666666666,
+  "oracle_dernier": 0.558,
+  "critere": 0.5573333333333333,
+  "n_evals": 15,
+  "tailles_dernier": [
+   601,
+   587,
+   312
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.47333333333333333,
+   "n_retenus": 137,
+   "precision_retenus": 0.5109489051094891
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.561,
+   "n_retenus": 2096,
+   "precision_retenus": 0.6140267175572519
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_wbhr",
+  "cible": "Twitter",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.5626666666666666,
+  "dernier": 0.5606666666666666,
+  "oracle_dernier": 0.556,
+  "critere": 0.5586666666666666,
+  "n_evals": 15,
+  "tailles_dernier": [
+   610,
+   591,
+   299
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.47433333333333333,
+   "n_retenus": 143,
+   "precision_retenus": 0.4965034965034965
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.5593333333333333,
+   "n_retenus": 2097,
+   "precision_retenus": 0.6137339055793991
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Twitter",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.5633333333333334,
+  "dernier": 0.558,
+  "oracle_dernier": 0.558,
+  "critere": 0.5613333333333334,
+  "n_evals": 15,
+  "tailles_dernier": [
+   572,
+   574,
+   354
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.3983333333333333,
+   "n_retenus": 445,
+   "precision_retenus": 0.449438202247191
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.565,
+   "n_retenus": 2115,
+   "precision_retenus": 0.6056737588652482
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "support_auto",
+  "cible": "Twitter",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.6,
+  "meilleur": 0.5633333333333334,
+  "dernier": 0.558,
+  "oracle_dernier": 0.558,
+  "critere": 0.5613333333333334,
+  "n_evals": 15,
+  "tailles_dernier": [
+   572,
+   574,
+   354
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.3983333333333333,
+   "n_retenus": 445,
+   "precision_retenus": 0.449438202247191
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.565,
+   "n_retenus": 2115,
+   "precision_retenus": 0.6056737588652482
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "fin_wbhr",
+  "cible": "Twitter",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.7,
+  "meilleur": 0.5693333333333334,
+  "dernier": 0.568,
+  "oracle_dernier": 0.5666666666666667,
+  "critere": 0.5673333333333334,
+  "n_evals": 15,
+  "tailles_dernier": [
+   362,
+   569,
+   569
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.4523333333333333,
+   "n_retenus": 300,
+   "precision_retenus": 0.5133333333333333
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.5676666666666667,
+   "n_retenus": 2101,
+   "precision_retenus": 0.6139933365064255
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_wbhr",
+  "cible": "Twitter",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.6,
+  "meilleur": 0.568,
+  "dernier": 0.568,
+  "oracle_dernier": 0.562,
+  "critere": 0.568,
+  "n_evals": 15,
+  "tailles_dernier": [
+   573,
+   577,
+   350
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.3993333333333333,
+   "n_retenus": 256,
+   "precision_retenus": 0.359375
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.568,
+   "n_retenus": 2112,
+   "precision_retenus": 0.6070075757575758
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Twitter",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.8,
+  "meilleur": 0.5766666666666667,
+  "dernier": 0.574,
+  "oracle_dernier": 0.574,
+  "critere": 0.5726666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   585,
+   344,
+   571
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.4646666666666667,
+   "n_retenus": 301,
+   "precision_retenus": 0.521594684385382
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.5693333333333334,
+   "n_retenus": 2021,
+   "precision_retenus": 0.6209797130133597
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "support_auto",
+  "cible": "Twitter",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.6,
+  "meilleur": 0.5766666666666667,
+  "dernier": 0.574,
+  "oracle_dernier": 0.574,
+  "critere": 0.5726666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   585,
+   344,
+   571
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.4646666666666667,
+   "n_retenus": 301,
+   "precision_retenus": 0.521594684385382
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.5693333333333334,
+   "n_retenus": 2021,
+   "precision_retenus": 0.6209797130133597
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "fin_wbhr",
+  "cible": "Twitter",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.8,
+  "meilleur": 0.5746666666666667,
+  "dernier": 0.57,
+  "oracle_dernier": 0.5726666666666667,
+  "critere": 0.5686666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   579,
+   340,
+   581
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.4256666666666667,
+   "n_retenus": 300,
+   "precision_retenus": 0.37666666666666665
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.572,
+   "n_retenus": 2060,
+   "precision_retenus": 0.625242718446602
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_wbhr",
+  "cible": "Twitter",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.7,
+  "meilleur": 0.578,
+  "dernier": 0.578,
+  "oracle_dernier": 0.568,
+  "critere": 0.578,
+  "n_evals": 15,
+  "tailles_dernier": [
+   592,
+   332,
+   576
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.45266666666666666,
+   "n_retenus": 1,
+   "precision_retenus": 0.0
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.5716666666666667,
+   "n_retenus": 2059,
+   "precision_retenus": 0.6216610004856726
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Yelp",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 12.6,
+  "meilleur": 0.4513333333333333,
+  "dernier": 0.43333333333333335,
+  "oracle_dernier": 0.43333333333333335,
+  "critere": 0.434,
+  "n_evals": 15,
+  "tailles_dernier": [
+   794,
+   545,
+   161
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.37933333333333336,
+   "n_retenus": 370,
+   "precision_retenus": 0.3324324324324324
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.4126666666666667,
+   "n_retenus": 1167,
+   "precision_retenus": 0.4712939160239931
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "support_auto",
+  "cible": "Yelp",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 12.9,
+  "meilleur": 0.4513333333333333,
+  "dernier": 0.43333333333333335,
+  "oracle_dernier": 0.43333333333333335,
+  "critere": 0.434,
+  "n_evals": 15,
+  "tailles_dernier": [
+   794,
+   545,
+   161
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.37933333333333336,
+   "n_retenus": 370,
+   "precision_retenus": 0.3324324324324324
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.4126666666666667,
+   "n_retenus": 1167,
+   "precision_retenus": 0.4712939160239931
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "fin_wbhr",
+  "cible": "Yelp",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.478,
+  "dernier": 0.4673333333333333,
+  "oracle_dernier": 0.434,
+  "critere": 0.468,
+  "n_evals": 15,
+  "tailles_dernier": [
+   787,
+   550,
+   163
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.37066666666666664,
+   "n_retenus": 374,
+   "precision_retenus": 0.3315508021390374
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.451,
+   "n_retenus": 1166,
+   "precision_retenus": 0.47084048027444253
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_wbhr",
+  "cible": "Yelp",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 12.7,
+  "meilleur": 0.4726666666666667,
+  "dernier": 0.45266666666666666,
+  "oracle_dernier": 0.43266666666666664,
+  "critere": 0.4533333333333333,
+  "n_evals": 15,
+  "tailles_dernier": [
+   786,
+   556,
+   158
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.37433333333333335,
+   "n_retenus": 372,
+   "precision_retenus": 0.33064516129032256
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.432,
+   "n_retenus": 1167,
+   "precision_retenus": 0.46272493573264784
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Yelp",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.6,
+  "meilleur": 0.44133333333333336,
+  "dernier": 0.34,
+  "oracle_dernier": 0.44533333333333336,
+  "critere": 0.39666666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   783,
+   658,
+   59
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.36833333333333335,
+   "n_retenus": 300,
+   "precision_retenus": 0.37333333333333335
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.32866666666666666,
+   "n_retenus": 1144,
+   "precision_retenus": 0.2945804195804196
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "support_auto",
+  "cible": "Yelp",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.3,
+  "meilleur": 0.44133333333333336,
+  "dernier": 0.34,
+  "oracle_dernier": 0.44533333333333336,
+  "critere": 0.39666666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   783,
+   658,
+   59
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.36833333333333335,
+   "n_retenus": 300,
+   "precision_retenus": 0.37333333333333335
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.32866666666666666,
+   "n_retenus": 1144,
+   "precision_retenus": 0.2945804195804196
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "fin_wbhr",
+  "cible": "Yelp",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.4,
+  "meilleur": 0.4673333333333333,
+  "dernier": 0.4126666666666667,
+  "oracle_dernier": 0.4126666666666667,
+  "critere": 0.44133333333333336,
+  "n_evals": 15,
+  "tailles_dernier": [
+   669,
+   745,
+   86
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.3576666666666667,
+   "n_retenus": 300,
+   "precision_retenus": 0.36
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.4003333333333333,
+   "n_retenus": 749,
+   "precision_retenus": 0.39118825100133514
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_wbhr",
+  "cible": "Yelp",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 12.5,
+  "meilleur": 0.464,
+  "dernier": 0.384,
+  "oracle_dernier": 0.4046666666666667,
+  "critere": 0.45,
+  "n_evals": 15,
+  "tailles_dernier": [
+   733,
+   683,
+   84
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.37766666666666665,
+   "n_retenus": 0,
+   "precision_retenus": null
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.367,
+   "n_retenus": 1174,
+   "precision_retenus": 0.32453151618398635
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode",
+  "cible": "Yelp",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.8,
+  "meilleur": 0.4553333333333333,
+  "dernier": 0.4166666666666667,
+  "oracle_dernier": 0.4166666666666667,
+  "critere": 0.4166666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   167,
+   519,
+   814
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.377,
+   "n_retenus": 600,
+   "precision_retenus": 0.36666666666666664
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.41833333333333333,
+   "n_retenus": 1187,
+   "precision_retenus": 0.4658803706823926
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "support_auto",
+  "cible": "Yelp",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.6,
+  "meilleur": 0.4553333333333333,
+  "dernier": 0.4166666666666667,
+  "oracle_dernier": 0.4166666666666667,
+  "critere": 0.4166666666666667,
+  "n_evals": 15,
+  "tailles_dernier": [
+   167,
+   519,
+   814
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.377,
+   "n_retenus": 600,
+   "precision_retenus": 0.36666666666666664
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.41833333333333333,
+   "n_retenus": 1187,
+   "precision_retenus": 0.4658803706823926
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "fin_wbhr",
+  "cible": "Yelp",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.4,
+  "meilleur": 0.492,
+  "dernier": 0.446,
+  "oracle_dernier": 0.404,
+  "critere": 0.446,
+  "n_evals": 15,
+  "tailles_dernier": [
+   494,
+   153,
+   853
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.3586666666666667,
+   "n_retenus": 300,
+   "precision_retenus": 0.33
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.44766666666666666,
+   "n_retenus": 1185,
+   "precision_retenus": 0.4607594936708861
+  }
+ },
+ {
+  "methode": "fgm",
+  "config": "methode_wbhr",
+  "cible": "Yelp",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 12.3,
+  "meilleur": 0.4713333333333333,
+  "dernier": 0.4533333333333333,
+  "oracle_dernier": 0.422,
+  "critere": 0.4533333333333333,
+  "n_evals": 15,
+  "tailles_dernier": [
+   515,
+   810,
+   175
+  ],
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.38,
+   "n_retenus": 300,
+   "precision_retenus": 0.38333333333333336
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.44433333333333336,
+   "n_retenus": 1189,
+   "precision_retenus": 0.4819175777964676
+  }
+ }
+]

@@ -1,0 +1,39 @@
+{
+ "titre": "Bloc A : plancher sources seules (A1), auto-apprentissage naif (A2), diagnostic de partition (A3, B3)",
+ "ecrit_le": "2026-10-21T21:07",
+ "ecrit_avant_tout_resultat": true,
+ "code": "kaggle/bases/bases.py (worktree inspiring-mahavira)",
+ "A1_A2": {
+  "jeux": [
+   "sentiment BERT/ResNet (compte1)",
+   "HAC CLIP (compte1)",
+   "esthetique BERT/ResNet (compte2)",
+   "sentiment CLIP (compte3)",
+   "esthetique CLIP (compte3)"
+  ],
+  "modele": "regression logistique multinomiale (sklearn, C=1, max_iter 1000) sur les deux modalites concatenees (vues faibles), standardisees sur les sources",
+  "graines": [
+   123456,
+   234567,
+   345678
+  ],
+  "graine": "sous-echantillon de 90 % de chaque train source et du train cible ; test cible complet",
+  "auto_apprentissage": "5 tours, quotas par classe predite 30/60/90/100/100 % de n/K, points les plus confiants, re-entrainement sur sources + pseudo-etiquetes ; dernier tour rapporte",
+  "repere": "oracle cible (train cible avec vraies etiquettes)",
+  "comparaisons": [
+   "methode (sections 25 et 27, dernier point) contre sources seules et contre auto-apprentissage, par (cible, graine) : graines communes, mais sous-echantillons differents, donc comparaison NON appariee au sens strict (moyennes et IC des ecarts par cible)",
+   "M2CAN extracteur 5e-5 contre les memes bases"
+  ],
+  "lecture": "si la base depasse la methode ou M2CAN, la comparaison entre eux change de sens"
+ },
+ "A3_B3": {
+  "donnees": "z_dernier.npz des kernels bench-a-{hac,aesthetic,sentiment}-tsne (CLIP, graine 123456, methode avec et sans pseudo-etiquettes, chaque domaine cible)",
+  "mesures": [
+   "NMI et ARI partition/vraies classes",
+   "exactitude et oracle",
+   "sonde lineaire oracle dans z (5 plis sur le test cible)",
+   "MMD2 cible-sources dans z (noyau gaussien, largeur mediane, 1500 points chacun)",
+   "t-SNE colore par vraie classe"
+  ]
+ }
+}

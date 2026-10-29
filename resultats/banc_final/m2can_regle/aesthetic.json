@@ -1,0 +1,200 @@
+[
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "AVA",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 14.1,
+  "meilleur": 0.6977567886658795,
+  "dernier": 0.6953955135773318,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "AVA",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 14.1,
+  "meilleur": 0.6977567886658795,
+  "dernier": 0.6953955135773318,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "AVA",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 14.2,
+  "meilleur": 0.7012987012987013,
+  "dernier": 0.6894923258559622,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "AVA",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 14.5,
+  "meilleur": 0.7012987012987013,
+  "dernier": 0.6894923258559622,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "AVA",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 13.4,
+  "meilleur": 0.7036599763872491,
+  "dernier": 0.7036599763872491,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "AVA",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 13.4,
+  "meilleur": 0.7036599763872491,
+  "dernier": 0.7036599763872491,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "PCCD",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.3,
+  "meilleur": 0.6399055489964581,
+  "dernier": 0.628099173553719,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "PCCD",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.3,
+  "meilleur": 0.6399055489964581,
+  "dernier": 0.628099173553719,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "PCCD",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 13.1,
+  "meilleur": 0.6316410861865407,
+  "dernier": 0.6269185360094451,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "PCCD",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 13.5,
+  "meilleur": 0.6316410861865407,
+  "dernier": 0.6269185360094451,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "PCCD",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 13.2,
+  "meilleur": 0.6257378984651711,
+  "dernier": 0.6174734356552538,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "PCCD",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 13.1,
+  "meilleur": 0.6257378984651711,
+  "dernier": 0.6174734356552538,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "RPCD",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.2,
+  "meilleur": 0.6056670602125147,
+  "dernier": 0.6009445100354192,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "RPCD",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 13.3,
+  "meilleur": 0.6056670602125147,
+  "dernier": 0.6009445100354192,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "RPCD",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 13.3,
+  "meilleur": 0.6080283353010626,
+  "dernier": 0.5974025974025974,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "RPCD",
+  "graine": 234567,
+  "rc": 0,
+  "minutes": 13.2,
+  "meilleur": 0.6080283353010626,
+  "dernier": 0.5974025974025974,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "extracteur_5e-5",
+  "cible": "RPCD",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 7.2,
+  "meilleur": 0.6044864226682408,
+  "dernier": 0.5997638724911453,
+  "n_evals": 10
+ },
+ {
+  "methode": "m2can",
+  "config": "taux_eleves",
+  "cible": "RPCD",
+  "graine": 345678,
+  "rc": 0,
+  "minutes": 7.1,
+  "meilleur": 0.6044864226682408,
+  "dernier": 0.5997638724911453,
+  "n_evals": 10
+ }
+]
