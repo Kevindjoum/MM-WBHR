@@ -24,6 +24,7 @@
 % ---------------------------------------------------------------
 \usepackage{graphicx}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,calc,shapes.geometric}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepackage{subcaption}
@@ -94,9 +95,11 @@
 \newcommand{\Tgt}{\mathcal{T}}
 \newcommand{\Loss}{\mathcal{L}}
 \newcommand{\Wass}{W_{\varepsilon}}
+\newcommand{\Pcal}{\mathcal{P}}
 
 \title{Étiquetage géométrique de la cible par barycentres de Wasserstein\\
-  pour l'adaptation de domaine multi-sources et multimodale}
+  et transport optimal hiérarchique pour l'adaptation de domaine\\
+  multi-sources et multimodale}
 \author{Kevin Djoumessi\\
   Faculté des Sciences, Université de Yaoundé I, Yaoundé, Cameroun\\
   \texttt{kevin.djoumessi@facsciences-uy1.cm}\\[4pt]
@@ -107,257 +110,351 @@
 
 \maketitle
 
+% =====================================================================
 \begin{abstract}
-Nous étudions l'adaptation de domaine multi-sources et multimodale : plusieurs domaines sources étiquetés, un
-domaine cible sans étiquette, deux modalités par exemple. Les méthodes de référence, telles que M2CAN, alignent les
-représentations puis entraînent un classifieur sur l'espace fusionné. Nous proposons de retirer ce classifieur et de
-lire les classes de la cible dans la géométrie de l'espace fusionné : chaque classe source est résumée par le
-barycentre de Wasserstein de ses nuages dans les différentes sources, la cible est partitionnée par un algorithme
-spectral, et un transport optimal entre ces structures, suivi d'un appariement hongrois, affecte une classe à chaque
-groupe. Cet étiquetage, dérivé de HOT-DA et de WBHR, est exécuté périodiquement pendant l'entraînement et fournit des
-pseudo-étiquettes à une perte contrastive supervisée sur l'espace fusionné. Sur des caractéristiques gelées (CLIP,
-AST), avec un protocole apparié par cible et par graine et des protocoles écrits avant les mesures, la méthode
-atteint le niveau de M2CAN réglé sur deux familles de jeux sur trois (reconnaissance d'actions HAC : 88,64 contre
-88,36 ; évaluation esthétique : 65,07 contre 63,99 ; écarts non significatifs), et les pseudo-étiquettes apportent
-+7,19 points sur HAC (IC95 $[+2{,}22 ; +12{,}17]$). Sur l'analyse de sentiment, la méthode est inférieure à M2CAN
-($-8{,}45$) et passe sous un plancher sans adaptation. Nos diagnostics montrent que l'appariement des groupes aux
-classes est optimal dans la quasi-totalité des runs et que le facteur limitant est la partition de la cible, c'est-à-dire
-l'existence d'une structure en groupes dans l'espace fusionné. Nous rapportons également deux hypothèses sur le rôle du
-barycentre et du transport hiérarchique, et une variante fidèle à WBHR.
+\textbf{Contexte.} L'adaptation de domaine multi-sources et multimodale (MSMMDA) vise à étiqueter un domaine cible
+sans étiquette à partir de plusieurs domaines sources étiquetés, chaque exemple étant décrit par plusieurs modalités.
+\textbf{Limite de l'état de l'art.} La méthode de référence, M2CAN, aligne les représentations par des pertes
+contrastives puis entraîne un classifieur sur l'espace fusionné ; les méthodes de transport optimal hiérarchique,
+HOT-DA et WBHR, étiquettent la cible par la géométrie mais opèrent après coup, sur des caractéristiques fixes, et sans
+fusion multimodale. \textbf{Solution proposée.} Nous supprimons le classifieur sur l'espace fusionné et plaçons
+l'étiquetage géométrique à l'intérieur de l'entraînement : chaque classe source est agrégée, à travers les sources, par
+un barycentre de Wasserstein ; la cible est partitionnée par un algorithme spectral ; un transport optimal à deux
+niveaux, entre structures puis entre points, suivi d'un appariement hongrois, affecte une classe à chaque groupe. Cet
+étiquetage est exécuté périodiquement et fournit des pseudo-étiquettes, filtrées par l'accord des têtes unimodales, à
+une perte contrastive supervisée sur l'espace fusionné. \textbf{Résultats.} Sur des caractéristiques gelées (CLIP, AST),
+dans un protocole apparié par cible et par graine avec des protocoles écrits avant les mesures, la méthode atteint le
+niveau de M2CAN réglé sur deux familles sur trois (actions HAC : 88,64 contre 88,36 ; esthétique : 65,07 contre 63,99 ;
+écarts non significatifs) et lui est inférieure sur l'analyse de sentiment ($-8{,}45$). Les pseudo-étiquettes apportent
+$+7{,}19$ points sur HAC (IC95 $[+2{,}22 ; +12{,}17]$). L'étude d'ablation montre que l'appariement des groupes aux
+classes est optimal dans la quasi-totalité des runs, que le barycentre et la taille de son support n'affectent pas les
+étiquettes, que le transport hiérarchique devance le transport plat ($+2{,}31$, tendance non significative), et que le
+facteur limitant est l'existence d'une structure en groupes dans l'espace fusionné, absente pour des classes ordinales
+comme la polarité d'un sentiment.
 \end{abstract}
 
+% =====================================================================
 \section{Introduction}\label{sec-intro}
 
-L'adaptation de domaine non supervisée cherche à prédire les étiquettes d'un domaine cible, pour lequel seules des
-entrées sont disponibles, à partir d'un ou plusieurs domaines sources étiquetés dont la distribution diffère
-\citep{courty2017otda}. Le cadre multi-sources et multimodal (MSMMDA) ajoute deux difficultés : les sources sont
-plusieurs et ne se recouvrent pas, et chaque exemple est décrit par plusieurs modalités, par exemple un texte et une
-image, ou une piste audio et une vidéo \citep{zhao2025msmmda, dong2026mmadaptsurvey}. La méthode de référence pour ce
-cadre, M2CAN \citep{zhao2025msmmda}, encode chaque modalité, aligne les représentations par des pertes contrastives
-entre modalités et entre domaines, les fusionne par un produit bilinéaire de rang faible \citep{kim2017mlb}, puis
-entraîne un classifieur sur l'espace fusionné.
+\paragraph{Contexte et motivation.}
+Les systèmes d'apprentissage sont entraînés sur des données qui ne sont pas celles de leur usage : les domaines diffèrent
+par la source des exemples, leur style ou leur capteur. L'adaptation de domaine non supervisée cherche à prédire les
+étiquettes d'un domaine cible, pour lequel seules des entrées sont disponibles, à partir de domaines sources étiquetés
+\citep{courty2017otda}. Deux extensions se sont imposées. L'adaptation multi-sources (MDA) exploite plusieurs sources
+qui ne se recouvrent pas ; l'adaptation multimodale (MMDA) traite des exemples décrits par plusieurs modalités, par
+exemple un texte et une image, ou une piste audio et une vidéo. Leur conjonction, l'adaptation multi-sources et
+multimodale (MSMMDA), a été définie récemment par \citet{zhao2025msmmda} et répond à des applications concrètes :
+analyse de sentiment sur des réseaux sociaux de styles différents, évaluation esthétique de photographies issues de
+plateformes distinctes, reconnaissance d'actions dans des vidéos humaines, animales ou de dessins animés.
 
-Le transport optimal offre une autre lecture de l'adaptation. HOT-DA \citep{elhamri2022hotda,
-elhamri2025theoretical} représente chaque domaine comme une mesure sur des structures, les classes pour la source et
-des groupes pour la cible, et résout un problème de transport entre structures avant d'apparier chaque groupe à une
-classe. WBHR \citep{elhamri2025wbhr} étend cette représentation hiérarchique au cas multi-sources en résumant chaque
-classe, à travers les sources, par un barycentre de Wasserstein \citep{cuturi2014fast, montesuma2021wbtransport}.
-Ces méthodes opèrent sur des caractéristiques fixes, après coup.
+\paragraph{Problème.}
+Étant donné $N$ domaines sources étiquetés et un domaine cible sans étiquette, chaque exemple ayant $M$ modalités,
+prédire les étiquettes de la cible. La difficulté est triple : le décalage entre chaque source et la cible, le
+désaccord entre les sources elles-mêmes, et le désaccord possible entre les modalités d'un même exemple.
 
-Nous proposons de placer cet étiquetage géométrique à l'intérieur de l'entraînement d'une fusion multimodale, et de
-supprimer le classifieur sur l'espace fusionné. Les classes de la cible sont lues par la géométrie : barycentres de
-Wasserstein des classes sources, partition spectrale de la cible, transport entre structures et appariement. Cet
-étiquetage est exécuté périodiquement pendant l'apprentissage ; les étiquettes qu'il produit, filtrées par l'accord des
-têtes unimodales, entrent dans une perte contrastive supervisée sur l'espace fusionné. L'espace que la géométrie lit
-est ainsi façonné par ce qu'elle y lit.
+\paragraph{Limites de l'état de l'art.}
+La méthode de référence pour la MSMMDA, M2CAN \citep{zhao2025msmmda}, aligne les représentations par des pertes
+contrastives entre modalités et entre domaines, les fusionne par un produit bilinéaire de rang faible, puis entraîne un
+classifieur sur l'espace fusionné. Ce classifieur n'est entraîné que sur les sources ; il transfère à la cible par la
+seule vertu de l'alignement, et rien ne garantit que la frontière apprise sur les sources respecte la structure de la
+cible. Du côté du transport optimal, HOT-DA \citep{elhamri2022hotda} étiquette la cible par un transport entre
+structures (classes sources, groupes cibles) qui exploite explicitement la structure collective de la cible, et WBHR
+\citep{elhamri2025wbhr} l'étend au cas multi-sources par des barycentres de Wasserstein. Mais ces méthodes opèrent après
+coup, sur des caractéristiques fixes, sans apprentissage de représentation, et ne traitent pas la multimodalité.
 
-Nos contributions sont les suivantes.
+\paragraph{Contributions.}
 \begin{enumerate}
-  \item Une méthode d'adaptation multi-sources et multimodale sans classifieur sur l'espace fusionné, où un étiquetage
-    géométrique dérivé de WBHR et de HOT-DA sert d'oracle pendant l'entraînement (\cref{sec-methode}). La méthode
-    accepte un nombre quelconque de sources et de modalités.
-  \item Une comparaison appariée à M2CAN sur trois familles de jeux (actions, esthétique, sentiment), à caractéristiques
-    gelées identiques, mêmes graines et mêmes découpes, avec des protocoles écrits avant les mesures
-    (\cref{sec-protocole,sec-resultats}). La méthode atteint le niveau de M2CAN sur deux familles et lui est inférieure
-    sur la troisième.
-  \item Une analyse du mécanisme : l'apport des pseudo-étiquettes, deux hypothèses sur le barycentre et sur le
-    transport hiérarchique, la variante fidèle à WBHR, et des diagnostics qui localisent le facteur limitant dans la
-    partition de la cible plutôt que dans l'appariement (\cref{sec-analyse}).
+  \item Une méthode de MSMMDA qui remplace le classifieur sur l'espace fusionné par un étiquetage géométrique de la
+    cible, dérivé de WBHR et de HOT-DA, et l'exécute pendant l'entraînement d'une fusion multimodale : les étiquettes
+    géométriques, filtrées par l'accord des modalités, servent de pseudo-étiquettes à une perte contrastive supervisée
+    sur l'espace fusionné (\cref{sec-methode}). La méthode accepte un nombre quelconque de sources et de modalités.
+  \item Une comparaison appariée à M2CAN sur trois familles de jeux, à caractéristiques gelées identiques, mêmes
+    graines et mêmes découpes, avec des protocoles écrits avant les mesures (\cref{sec-experimentation}). La méthode
+    atteint le niveau de M2CAN sur deux familles et lui est inférieure sur la troisième.
+  \item Une étude d'ablation et une analyse du mécanisme : apport des pseudo-étiquettes, rôle du barycentre, du
+    transport hiérarchique et du classifieur final de WBHR, et diagnostics qui localisent le facteur limitant dans la
+    partition de la cible plutôt que dans l'appariement.
 \end{enumerate}
 
-Le code, les configurations et les protocoles sont publics.\footnote{\url{https://github.com/Kevindjoum/MM-WBHR}}
+\paragraph{Organisation.}
+La \cref{sec-connexes} situe la méthode. La \cref{sec-methode} la décrit : architecture, formalisation, agrégation par
+barycentre, transport hiérarchique, perte et entraînement. La \cref{sec-experimentation} présente l'environnement
+expérimental, les résultats, l'étude d'ablation, l'analyse et la discussion. La \cref{sec-conclusion} conclut. Le code,
+les configurations, les protocoles et les résultats sont publics.\footnote{\url{https://github.com/Kevindjoum/MM-WBHR}}
 
-\section{Travaux liés}\label{sec-lies}
+% =====================================================================
+\section{Travaux connexes}\label{sec-connexes}
 
-\paragraph{Adaptation multi-sources et multimodale.}
-M2CAN \citep{zhao2025msmmda} définit le cadre MSMMDA et propose six jeux de données textes et images (sentiment :
-TumEmo, Twitter, Yelp ; esthétique : AVA, PCCD, RPCD). Sa fonction de coût combine une entropie croisée sur des têtes
-unimodales, un alignement contrastif entre modalités pondéré par la cohérence des têtes (CMCFA), un alignement
-contrastif supervisé entre domaines (CDCFA) et un classifieur sur la fusion MLB. Nous reprenons les trois premiers termes
-et remplaçons le quatrième. SimMMDG \citep{dong2023simmmdg} introduit le jeu HAC (humains, animaux, dessins animés)
-pour la généralisation multimodale ; nous l'utilisons en adaptation. Les revues de \citet{dong2026mmadaptsurvey} et
-\citet{li2025mmalignsurvey} situent ces travaux.
+\subsection{Adaptation de domaine multi-sources}
+L'adaptation multi-sources traite plusieurs domaines étiquetés dont aucun ne coïncide avec la cible. Les approches par
+transport optimal représentent chaque domaine par une mesure empirique et déplacent les sources vers la cible
+\citep{courty2017otda}. \citet{montesuma2021wbtransport} agrègent les sources en un barycentre de Wasserstein avant de
+transporter ce barycentre vers la cible ; WBHR \citep{elhamri2025wbhr} agrège plutôt chaque classe à travers les
+sources par un barycentre à support libre \citep{cuturi2014fast}, puis applique un transport hiérarchique. Nous
+reprenons cette agrégation par classe.
 
-\paragraph{Transport optimal pour l'adaptation.}
-\citet{courty2017otda} transportent les sources vers la cible point à point. HOT-DA \citep{elhamri2022hotda} transporte
-des structures (classes sources, groupes cibles) et apparie chaque groupe à une classe ; \citet{elhamri2025theoretical}
-en donnent des garanties. WBHR \citep{elhamri2025wbhr} résume chaque classe multi-sources par un barycentre de
-Wasserstein à support libre \citep{cuturi2014fast} avant d'appliquer HOT-DA, puis entraîne un classifieur sur les
-représentants transportés. \citet{montesuma2021wbtransport} utilisent aussi un barycentre de Wasserstein pour agréger
-des sources. Les calculs reposent sur la régularisation entropique \citep{cuturi2013sinkhorn, peyre2019computationalot}.
+\subsection{Adaptation de domaine multimodale}
+L'adaptation multimodale exploite plusieurs modalités par exemple. Les revues de \citet{dong2026mmadaptsurvey} et
+\citet{li2025mmalignsurvey} en donnent le panorama ; SimMMDG \citep{dong2023simmmdg} introduit le jeu HAC pour la
+généralisation multimodale, que nous utilisons en adaptation. M2CAN \citep{zhao2025msmmda} définit le cadre MSMMDA,
+publie six jeux textes et images, et propose une fonction de coût à quatre termes : entropie croisée sur des têtes
+unimodales, alignement contrastif entre modalités pondéré par la cohérence des têtes (CMCFA), alignement contrastif
+supervisé entre domaines (CDCFA), et classifieur sur une fusion bilinéaire de rang faible \citep{kim2017mlb}. Nous
+reprenons les trois premiers termes et remplaçons le quatrième par un étiquetage géométrique.
 
-\paragraph{Pseudo-étiquettes et maximisation de l'information.}
-SHOT \citep{liang2020shot} combine une perte de maximisation de l'information sur la cible et des pseudo-étiquettes
-par centres de classes. Nos pseudo-étiquettes viennent d'une partition de la cible appariée aux classes sources, et
-nous évaluons la maximisation de l'information comme option (\cref{sec-analyse}).
+\subsection{Transport optimal hiérarchique}
+Le transport optimal régularisé par l'entropie \citep{cuturi2013sinkhorn, peyre2019computationalot} permet de calculer
+des plans de transport et des barycentres \citep{cuturi2014fast} à grande échelle. HOT-DA \citep{elhamri2022hotda}
+organise le transport sur deux niveaux : au niveau haut, chaque domaine est une mesure sur des \emph{structures}, les
+classes pour la source et des groupes obtenus par partition pour la cible, et le coût entre deux structures est leur
+distance de Wasserstein ; au niveau bas, chaque structure source est transportée vers la structure cible qui lui est
+appariée. \citet{elhamri2025theoretical} en donnent des garanties. SHOT \citep{liang2020shot} combine, dans un autre
+cadre, une maximisation de l'information sur la cible et des pseudo-étiquettes par centres de classes ; nous évaluons la
+première comme option. Notre apport par rapport à HOT-DA et WBHR est de placer le transport hiérarchique dans la boucle
+d'entraînement d'une fusion multimodale, comme source de pseudo-étiquettes, et de supprimer le classifieur final.
 
-\section{Méthode}\label{sec-methode}
+% =====================================================================
+\section{Méthode proposée}\label{sec-methode}
 
-\subsection{Problème et notations}
+\subsection{Architecture}\label{sec-architecture}
 
-On dispose de $N$ domaines sources étiquetés $\Src_1, \dots, \Src_N$ et d'un domaine cible $\Tgt$ sans étiquette.
-Chaque exemple possède $M$ modalités ordonnées $x = (x_0, \dots, x_{M-1})$ et appartient à l'une de $K$ classes. Le
-train cible sert à l'entraînement sans ses étiquettes ; le test cible sert à l'évaluation. La méthode est transductive :
-elle partitionne un ensemble de points cibles et ne prédit pas un point isolé.
+La \cref{fig-architecture} montre l'architecture. Chaque modalité est encodée séparément par une dorsale gelée et un
+extracteur entraîné, et possède une tête de classification unimodale. Les représentations des modalités sont fusionnées
+dans un espace $z$ par un produit bilinéaire de rang faible (fusion intermédiaire). Aucun classifieur n'est entraîné sur
+$z$ : les classes de la cible y sont lues par la géométrie, en trois étapes exécutées périodiquement pendant
+l'entraînement. D'abord, chaque classe source est agrégée, à travers les $N$ sources, par un barycentre de Wasserstein.
+Ensuite, la cible est partitionnée en $K$ groupes et un transport optimal de niveau haut, entre barycentres et groupes,
+apparie chaque groupe à une classe ; le niveau bas est le transport entre points qui fournit les coûts du niveau haut.
+Enfin, les étiquettes obtenues, filtrées par l'accord des têtes unimodales (fusion tardive des décisions), entrent dans
+une perte contrastive supervisée sur $z$ et façonnent l'espace que la géométrie lit au tour suivant.
 
-\subsection{Modèle}
+\begin{figure}[ht]
+\centering
+\adjustbox{max width=\textwidth}{%
+\begin{tikzpicture}[
+  >=Latex, font=\footnotesize, node distance=0.5cm,
+  bloc/.style={draw, rounded corners, align=center, minimum height=0.75cm, inner sep=3pt, fill=white},
+  enc/.style={bloc, fill=blue!8},
+  tete/.style={bloc, fill=orange!12},
+  fus/.style={bloc, fill=green!12},
+  geo/.style={bloc, fill=violet!10},
+  perte/.style={bloc, dashed, fill=yellow!12},
+  fleche/.style={->, thick},
+  retour/.style={->, thick, dashed, violet!70!black}
+]
+  % ----- rangée 1 : passe avant -----
+  \node[bloc, fill=gray!10] (x0) at (0, 0.9) {$x_0$};
+  \node[bloc, fill=gray!10] (x1) at (0, -0.9) {$x_1$};
+  \node[enc, right=0.6cm of x0] (e0) {dorsale gelée $b_0$\\extracteur $W_0$};
+  \node[enc, right=0.6cm of x1] (e1) {dorsale gelée $b_1$\\extracteur $W_1$};
+  \node[tete, right=0.6cm of e0] (g0) {tête $g_0$ : $p_0$};
+  \node[tete, right=0.6cm of e1] (g1) {tête $g_1$ : $p_1$};
+  \node[fus, minimum width=2.3cm] (mlb) at ($(g0.east)!0.5!(g1.east) + (1.9cm, 0)$) {fusion MLB\\$z \in \R^{256}$};
+  \node[perte, right=0.9cm of mlb, text width=3.4cm] (lsc) {$\Loss^{\text{fus}}_{\text{SC}}$ : SupCon sur $z$,\\sources et cible\\pseudo-étiquetée};
+  \node[perte, above=0.35cm of g0, text width=4.6cm] (lhaut) {$\Loss_{\text{têtes}}$ (sources), $\Loss_{\text{CMCFA}}$, $\Loss_{\text{CDCFA}}$};
+  \draw[fleche] (x0) -- (e0); \draw[fleche] (x1) -- (e1);
+  \draw[fleche] (e0) -- (g0); \draw[fleche] (e1) -- (g1);
+  \draw[fleche] (e0.east) -- ++(0.3, 0) |- (mlb.west);
+  \draw[fleche] (e1.east) -- ++(0.3, 0) |- (mlb.west);
+  \draw[fleche] (mlb) -- (lsc);
+  \draw[fleche] (g0.north) -- (lhaut.south -| g0.north);
+  \node[left=0.1cm of x0, font=\scriptsize, align=right] {modalité $0$};
+  \node[left=0.1cm of x1, font=\scriptsize, align=right] {modalité $1$\\($\vdots$ $M$)};
+  % ----- rangée 2 : étiquetage géométrique périodique -----
+  \node[geo, text width=2.6cm] (bary) at (2.4, -4.0) {barycentres de\\Wasserstein $B_h$\\(classes sources)};
+  \node[geo, text width=2.6cm, right=0.5cm of bary] (part) {partition spectrale\\de la cible\\$G_1, \dots, G_K$};
+  \node[geo, fill=violet!18, text width=3.6cm, right=0.5cm of part] (hot) {transport hiérarchique :\\$W_{hl} = \Wass(B_h, G_l)$ (bas),\\$\Gamma$ sur $W$ (haut), hongrois $\pi$};
+  \node[geo, text width=2.0cm, right=0.5cm of hot] (yhat) {étiquettes\\$\hat y_j = \pi(\text{groupe}(j))$};
+  \node[tete, text width=2.3cm, right=0.5cm of yhat] (filtre) {filtre d'accord\\$\argmax \bar p_j = \hat y_j$\\quota par classe};
+  \node[draw, dashed, violet!60!black, rounded corners, inner sep=8pt, fit=(bary) (filtre), label={[violet!60!black, font=\scriptsize, yshift=-4pt]below:étiquetage géométrique, tous les 750 pas, modèle en évaluation}] (cadre) {};
+  \draw[retour] (mlb.south) -- ++(0, -1.1) -| (bary.north);
+  \draw[retour] (mlb.south) -- ++(0, -1.1) -| (part.north);
+    \draw[fleche] (part) -- (hot);
+  \draw[fleche] (bary.south) -- ++(0, -0.3) -| (hot.south);
+  \draw[fleche] (hot) -- (yhat);
+  \draw[fleche] (yhat) -- (filtre);
+  \draw[fleche] (g1.south) -- ++(0, -0.5) -| node[pos=0.22, below, font=\scriptsize] {$\bar p = \frac1M \sum_m p_m$} (filtre.north);
+  \draw[retour] (filtre.east) -- ++(0.3, 0) |- node[pos=0.75, above, font=\scriptsize] {pseudo-étiquettes $\{\hat y_j\}_{j \in \Pcal}$} (lsc.east);
+\end{tikzpicture}%
+}
+\caption{Architecture de la méthode. Rangée du haut : passe avant à chaque pas (encodeurs, têtes, fusion, pertes).
+  Rangée du bas : étiquetage géométrique périodique sur $z$, dont les étiquettes, filtrées par l'accord des têtes,
+  reviennent dans la perte contrastive sur l'espace fusionné.}\label{fig-architecture}
+\end{figure}
 
-\paragraph{Encodeurs et têtes unimodales.}
-Pour la modalité $m$, une dorsale gelée $b_m$ fournit un vecteur de caractéristiques ; un extracteur linéaire
+\subsection{Formalisation du problème}\label{sec-formalisation}
+
+On dispose de $N$ domaines sources étiquetés $\Src_i = \{(x^i_j, y^i_j)\}_{j=1}^{n_i}$, $i = 1, \dots, N$, et d'un
+domaine cible $\Tgt = \{x_j\}_{j=1}^{n}$ sans étiquette. Chaque exemple possède $M$ modalités ordonnées
+$x = (x_0, \dots, x_{M-1})$ et appartient à l'une de $K$ classes communes à tous les domaines. Le train cible sert à
+l'entraînement sans ses étiquettes ; le test cible sert à l'évaluation, ses étiquettes ne servant qu'à mesurer
+l'exactitude. L'inférence est transductive : la méthode partitionne un ensemble de points cibles et ne prédit pas un
+point isolé.
+
+\paragraph{Encodeurs et têtes.}
+Pour la modalité $m$, une dorsale gelée $b_m$ fournit un vecteur de dimension $d_m$ ; un extracteur linéaire
 $W_m \in \R^{256 \times d_m}$ suivi d'une normalisation donne
 \begin{equation}\label{eq-encodeur}
   e_m = \frac{\ReLU(W_m\, b_m(x_m))}{\norm{\ReLU(W_m\, b_m(x_m))}} \in \R^{256}.
 \end{equation}
-Une tête unimodale $g_m$, perceptron $256 \to 128 \to 64 \to K$, donne la prédiction
-$p_m = \softmax(g_m(e_m))$.
+Une tête unimodale $g_m$, perceptron $256 \to 128 \to 64 \to K$, produit $p_m = \softmax(g_m(e_m))$.
 
 \paragraph{Fusion.}
-Les représentations sont fusionnées par un produit bilinéaire de rang faible \citep{kim2017mlb}, le même que M2CAN,
-vers un espace de dimension $256$ :
+Les représentations sont fusionnées par un produit bilinéaire de rang faible \citep{kim2017mlb}, le même que M2CAN :
 \begin{equation}\label{eq-mlb}
-  z = P\Bigl(\sigma\bigl(\textstyle\bigodot_{m} U_m e_m\bigr)\Bigr) + \sum_{m} h_m(e_m),
+  z = P\Bigl(\sigma\bigl(\textstyle\bigodot_{m} U_m e_m\bigr)\Bigr) + \sum_{m} h_m(e_m) \in \R^{256},
 \end{equation}
 avec $U_m \colon \R^{256} \to \R^{128}$, $P \colon \R^{128} \to \R^{256}$, $h_m \colon \R^{256} \to \R^{256}$ linéaires,
-$\sigma$ la sigmoïde et $\odot$ le produit terme à terme. Aucun classifieur n'est entraîné sur $z$ : les classes de la
-cible y sont lues par la procédure de la \cref{sec-etiquetage}.
+$\sigma$ la sigmoïde et $\odot$ le produit terme à terme. Aucun classifieur n'est entraîné sur $z$.
 
-\subsection{Outils de transport optimal}\label{sec-ot}
-
-Le coût entre deux vecteurs est le coût cosinus
+\paragraph{Mesures et transport.}
+Dans $z$, le coût entre deux points est le coût cosinus
 $c(u, v) = \norm{u / \norm{u} - v / \norm{v}}^2 = 2 - 2\cos(u, v) \in [0, 4]$. Pour une matrice de coût $C$ et deux
 mesures discrètes $a$ et $b$, le plan de transport régularisé par l'entropie
 \begin{equation}\label{eq-sinkhorn}
-  \Gamma^\star = \argmin_{\Gamma \indicator = a,\ \Gamma^\top \indicator = b}\ \ip{\Gamma}{C} - \varepsilon H(\Gamma)
+  \Gamma^\star(a, b, C) = \argmin_{\Gamma \indicator = a,\ \Gamma^\top \indicator = b}\ \ip{\Gamma}{C} - \varepsilon H(\Gamma)
 \end{equation}
 est calculé par l'algorithme de Sinkhorn en domaine logarithmique \citep{cuturi2013sinkhorn}. Le coût de transport
 entre deux nuages $X$ et $Y$ de poids uniformes est $\Wass(X, Y) = \ip{\Gamma^\star}{C}$ avec $C_{ij} = c(x_i, y_j)$.
+Comme dans HOT-DA, la classe $h$ de la source $i$ est la mesure empirique uniforme $\rho^i_h$ sur ses points
+$C^i_h$, et le groupe $l$ de la cible est la mesure uniforme $\varrho_l$ sur ses points ; chaque domaine est une mesure
+uniforme sur ses structures, $\varphi_{\Src_i} = \frac1K \sum_h \delta_{\rho^i_h}$ et
+$\varphi_\Tgt = \frac1K \sum_l \delta_{\varrho_l}$.
 
-Le barycentre de Wasserstein à support libre de $N$ nuages $X_1, \dots, X_N$ \citep{cuturi2014fast} est un nuage
-$B = (b_1, \dots, b_S)$ de poids $1/S$ minimisant $\sum_k \Wass(B, X_k)$. Il est calculé par point fixe : $B$ est
-initialisé par $S$ points tirés dans l'union des nuages ; à chaque itération, le plan $\Gamma_k$ entre $B$ et $X_k$ est
-calculé pour chaque $k$, puis chaque point est remplacé par la moyenne de ses projections barycentriques,
-\begin{equation}\label{eq-barycentre}
-  b_s \leftarrow \frac{1}{N} \sum_{k=1}^{N} S \sum_{j} \Gamma_k[s, j]\, x_{k, j}.
+\subsection{Agrégation des structures sources par barycentre}\label{sec-barycentre}
+
+Les $N$ sources ne partagent pas la même distribution de la classe $h$. Plutôt que de choisir une source ou de
+concaténer les nuages, nous résumons la classe par le barycentre de Wasserstein de ses $N$ nuages
+\citep{cuturi2014fast, elhamri2025wbhr},
+\begin{equation}\label{eq-bary-def}
+  \rho^{\text{aux}}_h = \argmin_{\kappa} \frac1N \sum_{i=1}^{N} \Wass(\kappa, \rho^i_h),
 \end{equation}
-Nous utilisons $S = 16$, $\varepsilon = 0{,}02$, $60$ itérations de Sinkhorn et $8$ itérations de point fixe, comme
-l'algorithme 2 de WBHR \citep{elhamri2025wbhr}. La \cref{sec-analyse} montre que la valeur de $S$ n'a pas d'effet.
-
-\subsection{Étiquetage géométrique de la cible}\label{sec-etiquetage}
-
-La procédure \textsc{Étiqueter} (\cref{alg-etiqueter}) reçoit les représentations $z$ et les étiquettes des sources,
-et les $z$ de $n$ points cibles. Elle renvoie une classe pour chaque point cible.
+cherché à support libre : un nuage $B_h = (b_1, \dots, b_S)$ de $S$ points de poids $1/S$. Il est calculé par point
+fixe (\cref{alg-barycentre}) : $B_h$ est initialisé par $S$ points tirés dans l'union des nuages ; à chaque itération, le
+plan $\Gamma_i$ entre $B_h$ et $C^i_h$ est calculé pour chaque source, puis chaque point est remplacé par la moyenne de
+ses projections barycentriques. Le barycentre représente la classe telle que les sources la partagent, au sens du
+transport optimal. Nous utilisons $S = 16$, $\varepsilon = 0{,}02$, $60$ itérations de Sinkhorn et $8$ itérations de
+point fixe ; au plus $400$ points par classe et par source sont tirés. La taille théorique du support dans WBHR,
+$\frac1N \sum_i \abs{C^i_h}$, est évaluée en ablation.
 
 \begin{algorithm}[ht]
-\caption{\textsc{Étiqueter} : étiquetage géométrique de la cible}\label{alg-etiqueter}
-\KwIn{représentations et étiquettes des sources $\{(z, y)\}_{k \le N}$ ; représentations cibles $Z_\Tgt \in \R^{n \times 256}$ ; $K$}
+\caption{Barycentre de Wasserstein à support libre de la classe $h$}\label{alg-barycentre}
+\KwIn{nuages $C^1_h, \dots, C^N_h$ ; support $S$ ; $\varepsilon$ ; itérations $I_{\text{sink}}$, $I_{\text{iter}}$}
+\KwOut{$B_h \in \R^{S \times 256}$}
+$B_h \leftarrow$ $S$ points tirés dans $\bigcup_i C^i_h$ ; $a \leftarrow \frac1S \indicator_S$\;
+\For{$t = 1$ \KwTo $I_{\text{iter}}$}{
+  \For{$i = 1$ \KwTo $N$}{
+    $\Gamma_i \leftarrow \Gamma^\star\bigl(a,\ \tfrac{1}{\abs{C^i_h}} \indicator,\ c(B_h, C^i_h)\bigr)$ par Sinkhorn, $I_{\text{sink}}$ itérations\;
+  }
+  $b_s \leftarrow \dfrac{S}{N} \displaystyle\sum_{i=1}^{N} \sum_{j} \Gamma_i[s, j]\, x^i_j$ pour tout $s$ \tcp*{projection barycentrique moyenne}
+}
+\Return{$B_h$}
+\end{algorithm}
+
+\subsection{Transport optimal hiérarchique vers la cible}\label{sec-hotda}
+
+La procédure \textsc{Étiqueter} (\cref{alg-etiqueter}) reçoit les représentations $z$ et les étiquettes des sources,
+et les $z$ de $n$ points cibles, et renvoie une classe pour chaque point cible.
+
+\begin{algorithm}[ht]
+\caption{\textsc{Étiqueter} : transport hiérarchique et appariement}\label{alg-etiqueter}
+\KwIn{représentations et étiquettes des sources ; représentations cibles $Z_\Tgt \in \R^{n \times 256}$ ; $K$}
 \KwOut{étiquettes $\hat y \in \{1, \dots, K\}^n$, groupes, marges}
-\ForEach{classe $h$}{
-  tirer au plus $400$ points de classe $h$ dans chaque source\;
-  $B_h \leftarrow$ barycentre de Wasserstein de ces $N$ nuages, \cref{eq-barycentre} \tcp*{représentant de la classe}
-}
+\ForEach{classe $h$}{$B_h \leftarrow$ \cref{alg-barycentre} sur les nuages de classe $h$ des $N$ sources\;}
 $C_{ij} \leftarrow c(z_i, z_j)$ pour $z_i, z_j \in Z_\Tgt$ ; $\sigma \leftarrow$ médiane des $C_{ij} > 0$\;
-$A \leftarrow \exp(-C / \sigma)$, $A_{ii} \leftarrow 1$\;
-$G_1, \dots, G_K \leftarrow$ partition spectrale de $A$ en $K$ groupes \citep{vonluxburg2007spectral}\;
-\ForEach{classe $h$, groupe $l$}{
-  $W_{hl} \leftarrow \Wass(B_h, G_l)$ \tcp*{coût entre structures}
-}
-$\Gamma \leftarrow$ plan de Sinkhorn sur $W$, marges uniformes $1/K$, \cref{eq-sinkhorn}\;
+$A \leftarrow \exp(-C / \sigma)$, $A_{ii} \leftarrow 1$ ; $G_1, \dots, G_K \leftarrow$ partition spectrale de $A$ \citep{vonluxburg2007spectral}\;
+\ForEach{classe $h$, groupe $l$}{$W_{hl} \leftarrow \Wass(B_h, G_l)$ \tcp*{niveau bas : transport entre points}}
+$\Gamma \leftarrow \Gamma^\star(\tfrac1K \indicator, \tfrac1K \indicator, W)$, $300$ itérations \tcp*{niveau haut : transport entre structures}
 $\pi \leftarrow$ appariement hongrois \citep{kuhn1955hungarian} maximisant $\sum_l \Gamma_{\pi(l), l}$\;
 $\hat y_j \leftarrow \pi(\text{groupe}(j))$ pour tout $j$\;
 $\text{marge}_j \leftarrow \min_{l \ne \text{groupe}(j)} c(z_j, \bar c_l) \,/\, c(z_j, \bar c_{\text{groupe}(j)})$, avec $\bar c_l$ le centre du groupe $l$\;
 \Return{$\hat y$, groupes, marges}
 \end{algorithm}
 
-Les étapes 4 à 10 sont celles de HOT-DA \citep{elhamri2022hotda} ; le représentant de classe par barycentre
-multi-sources est celui de WBHR \citep{elhamri2025wbhr}. Deux différences sont à noter. L'appariement est hongrois,
-donc bijectif, là où le texte de WBHR prend un $\argmax$ par classe qui peut envoyer deux classes sur le même groupe.
-Et l'étiquette finale est celle du groupe apparié : WBHR transporte au contraire les représentants vers leur groupe et
-entraîne un classifieur sur les points transportés. Cette variante est évaluée à la \cref{sec-analyse}.
+\paragraph{Niveau bas.} Le coût entre la classe $h$ et le groupe $l$ est le coût de transport $\Wass(B_h, G_l)$ entre
+les points du barycentre et les points du groupe, avec le même $\varepsilon = 0{,}02$.
 
-\subsection{Phase d'entraînement}\label{sec-phase1}
+\paragraph{Niveau haut.} Le transport entre $\varphi^{\text{aux}}_\Src = \frac1K \sum_h \delta_{\rho^{\text{aux}}_h}$ et
+$\varphi_\Tgt$ se résout par Sinkhorn sur la matrice $W \in \R^{K \times K}$ avec marges uniformes. Le plan $\Gamma$
+exprime quelle part de chaque classe va dans chaque groupe.
 
-À chaque pas, on tire quatre exemples dans chaque domaine, sources puis cible, avec une vue faible $x$ et une vue
+\paragraph{Appariement.} L'algorithme hongrois appliqué à $-\Gamma$ apparie chaque groupe à une classe distincte. Il
+garantit la bijection, là où l'$\argmax$ par classe de WBHR peut envoyer deux classes sur le même groupe. Chaque point
+du groupe $l$ reçoit la classe $\pi(l)$. WBHR, lui, transporte ensuite les représentants vers leur groupe et entraîne un
+classifieur sur les points transportés ; nous évaluons cette fin en ablation et conservons l'étiquetage par groupe.
+
+\subsection{Fonction de perte et entraînement}\label{sec-perte}
+
+À chaque pas, quatre exemples sont tirés dans chaque domaine, sources puis cible, avec une vue faible $x$ et une vue
 augmentée $\tilde x$. La perte est
 \begin{equation}\label{eq-perte}
   \Loss = \Loss_{\text{têtes}} + \Loss_{\text{CMCFA}} + \Loss_{\text{CDCFA}} + \Loss^{\text{fus}}_{\text{SC}},
 \end{equation}
 avec des poids égaux à $1$. Les trois premiers termes sont ceux de M2CAN \citep{zhao2025msmmda}.
 
-$\Loss_{\text{têtes}}$ est l'entropie croisée des têtes unimodales sur les sources,
-$\frac{1}{MN} \sum_{i \le N} \sum_m \CE(g_m(e_m^{(i)}), y^{(i)})$.
+\paragraph{Têtes unimodales.} Entropie croisée sur les sources,
+$\Loss_{\text{têtes}} = \frac{1}{MN} \sum_{i \le N} \sum_m \CE\bigl(g_m(e^{(i)}_m), y^{(i)}\bigr)$.
 
-$\Loss_{\text{CMCFA}}$ aligne les modalités de chaque domaine, cible comprise, sans étiquette. Pour un exemple $x$ d'un
-lot, avec $a = e_0$ et $b = e_1$, l'InfoNCE sur les quatre combinaisons de vues vaut
+\paragraph{CMCFA.} Alignement contrastif entre modalités, sur tous les domaines, cible comprise, sans étiquette. Pour un
+exemple $x$ d'un lot, avec $a = e_0$ et $b = e_1$, l'InfoNCE sur les quatre combinaisons de vues vaut
 \begin{equation}\label{eq-infonce}
   \ell(x) = -\log \frac{\sum_{(u, v)} \exp\ip{u_x}{v_x}}{\sum_{(u, v)} \sum_{x'} \exp\ip{u_x}{v_{x'}}},
-  \qquad (u, v) \in \{a, \tilde a\} \times \{b, \tilde b\},
+  \qquad (u, v) \in \{a, \tilde a\} \times \{b, \tilde b\}.
 \end{equation}
-et la cohérence entre les têtes est $V(x) = \KL(p_1 \,\Vert\, p_0)$ pour $M = 2$ (divergence de Jensen-Shannon des $M$
-têtes au-delà). Les exemples où les modalités se contredisent pèsent moins :
+La cohérence entre les têtes est $V(x) = \KL(p_1 \,\Vert\, p_0)$ pour $M = 2$, la divergence de Jensen-Shannon des $M$
+têtes au-delà. Les exemples où les modalités se contredisent pèsent moins :
 $\Loss_{\text{CMCFA}} = \sum_{d} \bigl[\tfrac14 \sum_{x} \ell(x) e^{-V(x)} + \tfrac14 \sum_{x} V(x)\bigr]$. Avec
 $M \ge 3$, l'InfoNCE est moyenné sur les paires de modalités.
 
-$\Loss_{\text{CDCFA}}$ est une perte contrastive supervisée \citep{khosla2020supcon} par modalité, sur les exemples
-sources réunis, de température $\tau = 0{,}07$ :
+\paragraph{CDCFA.} Perte contrastive supervisée \citep{khosla2020supcon} par modalité, sur les sources réunies,
+$\Loss_{\text{CDCFA}} = \sum_m \SupCon(\{e^{(i)}_m\}, \{y^{(i)}\}, \tau)$ avec $\tau = 0{,}07$ et
 \begin{equation}\label{eq-supcon}
   \SupCon(Z, Y, \tau) = -\frac{1}{\abs{A}} \sum_{a \in A} \frac{1}{\abs{P(a)}} \sum_{p \in P(a)}
   \log \frac{\exp(z_a \cdot z_p / \tau)}{\sum_{b \ne a} \exp(z_a \cdot z_b / \tau)},
 \end{equation}
 où $P(a)$ réunit les exemples de même étiquette que $a$ et $A$ ceux qui en ont au moins un.
 
-$\Loss^{\text{fus}}_{\text{SC}}$ est le terme propre à la méthode : une perte $\SupCon$ sur l'espace fusionné $z$,
-portant sur les exemples sources et sur les exemples cibles du lot qui possèdent une pseudo-étiquette,
+\paragraph{SupCon sur l'espace fusionné.} C'est le terme propre à la méthode, sur les sources et sur les exemples cibles
+du lot qui possèdent une pseudo-étiquette :
 \begin{equation}\label{eq-scfus}
-  \Loss^{\text{fus}}_{\text{SC}} = \SupCon\Bigl(\{z^{(i)}\}_{i \le N} \cup \{z^{\Tgt}_j\}_{j \in \mathcal{P}},\
-  \{y^{(i)}\}_{i \le N} \cup \{\hat y_j\}_{j \in \mathcal{P}},\ \tau\Bigr).
+  \Loss^{\text{fus}}_{\text{SC}} = \SupCon\Bigl(\{z^{(i)}\}_{i \le N} \cup \{z^{\Tgt}_j\}_{j \in \Pcal},\
+  \{y^{(i)}\}_{i \le N} \cup \{\hat y_j\}_{j \in \Pcal},\ \tau\Bigr).
 \end{equation}
-C'est le seul terme où les pseudo-étiquettes agissent : un point cible étiqueté $h$ est attiré vers les exemples sources
-de la classe $h$ dans l'espace fusionné.
+Un point cible étiqueté $h$ est attiré vers les exemples sources de la classe $h$ dans $z$.
 
-\subsection{Pseudo-étiquettes}\label{sec-pseudo}
+\paragraph{Pseudo-étiquettes.} Tous les $750$ pas, soit $15$ tours $r = 0, \dots, 14$ sur $3$ époques, le modèle passe
+en évaluation ; \textsc{Étiqueter} est appliquée aux $z$ d'au plus $3000$ exemples du train cible, et la prédiction
+moyenne des têtes $\bar p_j = \frac1M \sum_m p_{m, j}$ est calculée. Deux filtres s'appliquent. \emph{Accord} : un point
+n'est retenu que si $\argmax_h \bar p_{j, h} = \hat y_j$ ; les têtes, fusion tardive des décisions unimodales, ne
+décident pas, elles filtrent la décision géométrique. \emph{Quota croissant} : avec
+$\rho_r = (0{,}3 ; 0{,}6 ; 0{,}9 ; 1{,}0)[\min(r, 3)]$ et $n$ points étiquetés, on garde dans chaque classe au plus
+$\lfloor \rho_r n / K \rfloor$ points, ceux de plus grande marge. La table des points retenus remplace celle du tour
+précédent. Les vraies étiquettes du train cible ne servent qu'à journaliser la justesse des pseudo-étiquettes.
 
-Tous les $750$ pas, soit $15$ tours $r = 0, \dots, 14$ sur $3$ époques, le modèle passe en évaluation. Les $z$ des
-sources et ceux d'au plus $3000$ exemples du train cible sont calculés, ainsi que la prédiction moyenne des têtes
-$\bar p_j = \frac{1}{M} \sum_m p_{m, j}$. La procédure \textsc{Étiqueter} fournit $\hat y_j$, le groupe et la marge de
-chaque point cible. Deux filtres s'appliquent.
-\begin{enumerate}
-  \item \emph{Accord.} Un point n'est retenu que si la prédiction moyenne des têtes désigne la même classe que la
-    géométrie, $\argmax_h \bar p_{j, h} = \hat y_j$. Les têtes, fusion tardive des décisions unimodales, ne décident
-    pas ; elles filtrent la décision géométrique, fusion intermédiaire des représentations.
-  \item \emph{Quota croissant.} Avec $\rho_r = (0{,}3 ; 0{,}6 ; 0{,}9 ; 1{,}0)[\min(r, 3)]$ et $n$ points étiquetés, on
-    garde dans chaque classe au plus $\lfloor \rho_r n / K \rfloor$ points, ceux de plus grande marge.
-\end{enumerate}
-La table $\{\text{identifiant} \mapsto \hat y_j\}$ des points retenus remplace celle du tour précédent et sert jusqu'au
-suivant. Les vraies étiquettes du train cible ne servent qu'à journaliser la justesse des pseudo-étiquettes.
+\paragraph{Optimisation et évaluation.} Adam, $\beta = (0{,}9 ; 0{,}999)$, taux $5 \times 10^{-5}$ pour les extracteurs,
+la fusion et les têtes, décroissance polynomiale $(1 - t/T)^{0{,}9}$ sur $T = 3 \times 3750$ pas. Après chaque tour,
+\textsc{Étiqueter} est appliquée au test cible. Le résultat rapporté est celui du \emph{dernier} point ; le meilleur
+point, choisi avec les étiquettes du test, serait optimiste et n'est jamais rapporté. Deux diagnostics sont journalisés :
+l'\emph{oracle}, exactitude avec le meilleur appariement possible des groupes aux classes, qui mesure la seule
+partition ; et le \emph{plancher logistique}, exactitude d'une régression logistique entraînée sur les $z$ des sources
+et appliquée au test cible, qui mesure ce que vaut $z$ sans étiquetage géométrique.
 
-\subsection{Évaluation}
+% =====================================================================
+\section{Expérimentation}\label{sec-experimentation}
 
-Après chaque tour, \textsc{Étiqueter} est appliquée au test cible et l'exactitude des $\hat y$ est journalisée, ainsi
-que deux diagnostics : l'\emph{oracle}, exactitude obtenue avec le meilleur appariement possible des groupes aux
-classes, qui mesure la qualité de la seule partition ; et le \emph{plancher logistique}, exactitude d'une régression
-logistique entraînée sur les $z$ des sources et appliquée au test cible, qui mesure ce que vaut $z$ sans étiquetage
-géométrique. Le résultat rapporté est celui du \emph{dernier} point d'évaluation. Le meilleur point, choisi avec les
-étiquettes du test, serait optimiste ; nous ne le rapportons jamais.
-
-\paragraph{Hyperparamètres.}
-Adam, $\beta = (0{,}9 ; 0{,}999)$, taux $5 \times 10^{-5}$ pour les extracteurs, la fusion et les têtes, décroissance
-polynomiale $(1 - t/T)^{0{,}9}$ sur $T = 3 \times 3750$ pas ; lot de $4$ exemples par domaine ; $e_m$ et $z$ en
-dimension $256$ ; $\tau = 0{,}07$ ; barycentre : $S = 16$, $\varepsilon = 0{,}02$, $60 \times 8$ itérations, $400$
-points par classe et par source ; transport entre structures : $\varepsilon = 0{,}02$, $300$ itérations ;
-pseudo-étiquettes : période $750$, $3000$ points, filtre d'accord, quotas $(0{,}3 ; 0{,}6 ; 0{,}9 ; 1)$.
-
-\section{Protocole expérimental}\label{sec-protocole}
+\subsection{Environnement expérimental}\label{sec-environnement}
 
 \paragraph{Jeux de données.}
-Trois familles, chacune de trois domaines qui servent de cible à tour de rôle, les deux autres étant les sources
-(\cref{tab-jeux}). HAC \citep{dong2023simmmdg} comprend des vidéos d'actions humaines, animales et de dessins
-animés, avec audio et vidéo. Les familles sentiment et esthétique sont celles de M2CAN \citep{zhao2025msmmda}, avec
-texte et image. Les découpes sont celles des auteurs de M2CAN et de SimMMDG.
+Trois familles de trois domaines, chaque domaine servant de cible à tour de rôle, les deux autres étant les sources
+(\cref{tab-jeux}). HAC \citep{dong2023simmmdg} comprend des vidéos d'actions humaines, animales et de dessins animés,
+avec audio et vidéo, sept classes d'actions. Les familles sentiment (trois classes de polarité) et esthétique (deux
+classes) sont celles de M2CAN \citep{zhao2025msmmda}, avec texte et image. Les découpes sont celles des auteurs.
 
 \begin{table}[ht]
 \centering
 \caption{Jeux de données. Le test cible est l'ensemble sur lequel l'exactitude est mesurée.}\label{tab-jeux}
-\small\begin{tabular}{l l l c c}
+\small
+\begin{tabular}{l l l c c}
 \toprule
 famille & domaines & modalités (dimension) & $K$ & test cible \\
 \midrule
@@ -371,37 +468,33 @@ sentiment & TumEmo, Twitter, Yelp & texte CLIP (512), image CLIP (512) & 3 & 150
 \paragraph{Caractéristiques gelées.}
 Toutes les méthodes reçoivent les mêmes vecteurs, extraits une fois par des encodeurs gelés : CLIP ViT-B/32
 \citep{radford2021clip} pour le texte, l'image et la vidéo (moyenne de huit images par segment temporel
-\citep{wang2016tsn}), AST \citep{gong2021ast} pour l'audio. Chaque exemple a une vue faible et quatre vues fortes,
-avec les augmentations de M2CAN. Pour M2CAN, les vecteurs sont complétés par des zéros jusqu'aux dimensions attendues
-par son code.
+\citep{wang2016tsn}), AST \citep{gong2021ast} pour l'audio. Chaque exemple a une vue faible et quatre vues fortes, avec
+les augmentations de M2CAN. Pour M2CAN, les vecteurs sont complétés par des zéros jusqu'aux dimensions attendues par son
+code.
 
-\paragraph{Méthodes comparées.}
-M2CAN est exécuté à partir du code de ses auteurs, adapté aux caractéristiques gelées, avec la configuration publiée de
-chaque cible et $10$ époques. Ses taux d'apprentissage publiés sont prévus pour des encodeurs ajustés de bout en bout ;
-sur caractéristiques gelées, ils figent presque ses couches entraînables. Nous rapportons donc aussi \emph{M2CAN réglé},
-dont le taux d'extracteur est porté à $5 \times 10^{-5}$, le même que celui de notre méthode. C'est la référence
-retenue pour toutes les comparaisons. La méthode est entraînée $3$ époques. Nous rapportons également la méthode sans
-pseudo-étiquettes (ablation), un plancher \emph{sources seules} (régression logistique sur les deux modalités
-concaténées, entraînée sur les sources) et un plancher d'auto-apprentissage naïf (le même modèle avec cinq tours de
-pseudo-étiquetage par confiance).
+\paragraph{Références (baselines).}
+\emph{M2CAN publié} : code des auteurs adapté aux caractéristiques gelées, configuration publiée de chaque cible,
+$10$ époques. Ses taux d'apprentissage sont prévus pour des encodeurs ajustés de bout en bout ; sur caractéristiques
+gelées, ils figent presque ses couches entraînables. \emph{M2CAN réglé} : le taux d'extracteur est porté à
+$5 \times 10^{-5}$, le même que celui de notre méthode ; c'est la référence retenue pour toutes les comparaisons.
+\emph{Sources seules} : régression logistique sur les deux modalités concaténées, entraînée sur les sources, sans
+adaptation. \emph{Auto-apprentissage} : le même modèle avec cinq tours de pseudo-étiquetage par confiance. La méthode
+est entraînée $3$ époques.
 
-\paragraph{Statistiques.}
-Trois graines ($123456$, $234567$, $345678$) par cible, soit $9$ runs par configuration et par famille. Les écarts entre
-deux configurations sont appariés par (cible, graine), $9$ paires, avec un intervalle de confiance à $95\,\%$ de Student
-à $8$ degrés de liberté. Un écart est déclaré en faveur d'une configuration si l'intervalle exclut zéro et si au moins
-$7$ paires sur $9$ sont de son côté ; il est déclaré \emph{non significatif} sinon. Les protocoles (configurations,
-comparaisons, critère) ont été écrits avant chaque série de mesures. Les runs sont déterministes : la méthode relancée
-avec un code ultérieur reproduit ses chiffres à l'identique.
+\paragraph{Métriques et statistiques.}
+Exactitude sur le test cible au dernier point d'évaluation. Trois graines ($123456$, $234567$, $345678$) par cible, soit
+$9$ runs par configuration et par famille. Les écarts entre deux configurations sont appariés par (cible, graine),
+$9$ paires, avec un intervalle de confiance à $95\,\%$ de Student à $8$ degrés de liberté. Un écart est déclaré en
+faveur d'une configuration si l'intervalle exclut zéro et si au moins $7$ paires sur $9$ sont de son côté ; il est
+\emph{non significatif} sinon. Les protocoles (configurations, comparaisons, critère) ont été écrits avant chaque série
+de mesures. Les runs sont déterministes.
 
-\section{Résultats}\label{sec-resultats}
-
-\subsection{Comparaison à M2CAN}
+\subsection{Résultats}\label{sec-resultats}
 
 \begin{table}[ht]
 \centering
 \caption{Exactitude au dernier point ($\%$), moyenne sur trois graines, caractéristiques gelées. En gras, la meilleure
-  valeur de chaque colonne parmi les méthodes d'adaptation. Les planchers ne sont pas appariés aux autres lignes
-  (sous-échantillons différents).}\label{tab-principal}
+  valeur de chaque colonne parmi les méthodes d'adaptation. Les planchers ne sont pas appariés aux autres lignes.}\label{tab-principal}
 \small
 \begin{tabularx}{\linewidth}{l *{4}{>{\centering\arraybackslash}X}}
 \toprule
@@ -409,7 +502,6 @@ avec un code ultérieur reproduit ses chiffres à l'identique.
 \midrule
 \multicolumn{5}{l}{\emph{HAC}} \\
 méthode & \textbf{93,36} & \textbf{96,40} & 76,15 & \textbf{88,64} \\
-méthode sans pseudo-étiquettes & 87,32 & 95,08 & 61,93 & 81,44 \\
 M2CAN réglé & 87,68 & 95,45 & \textbf{81,96} & 88,36 \\
 M2CAN publié & 86,23 & 86,17 & 77,06 & 83,16 \\
 sources seules / auto-apprentissage & 73,79 / 88,04 & 86,55 / 92,80 & 71,10 / 81,35 & 77,15 / 87,40 \\
@@ -417,9 +509,8 @@ sources seules / auto-apprentissage & 73,79 / 88,04 & 86,55 / 92,80 & 71,10 / 81
  & AVA & PCCD & RPCD & moyenne \\
 \midrule
 \multicolumn{5}{l}{\emph{esthétique}} \\
-méthode & 72,06 & 62,06 & 61,08 & 65,07 \\
-méthode sans pseudo-étiquettes & \textbf{73,04} & \textbf{63,75} & \textbf{61,67} & \textbf{66,16} \\
-M2CAN réglé & 69,62 & 62,42 & 59,94 & 63,99 \\
+méthode & \textbf{72,06} & 62,06 & \textbf{61,08} & \textbf{65,07} \\
+M2CAN réglé & 69,62 & \textbf{62,42} & 59,94 & 63,99 \\
 M2CAN publié & 62,38 & 61,59 & 58,24 & 60,74 \\
 sources seules / auto-apprentissage & 65,80 / 66,98 & 59,74 / 59,35 & 54,55 / 59,46 & 60,03 / 61,93 \\
 \midrule
@@ -427,7 +518,6 @@ sources seules / auto-apprentissage & 65,80 / 66,98 & 59,74 / 59,35 & 54,55 / 59
 \midrule
 \multicolumn{5}{l}{\emph{sentiment}} \\
 méthode & 46,02 & 56,36 & 39,67 & 47,35 \\
-méthode sans pseudo-étiquettes & 44,80 & 56,38 & 44,87 & 48,68 \\
 M2CAN réglé & \textbf{58,02} & \textbf{59,07} & \textbf{50,31} & \textbf{55,80} \\
 M2CAN publié & 52,18 & 47,89 & 37,73 & 45,93 \\
 sources seules / auto-apprentissage & 51,64 / 55,13 & 52,07 / 55,49 & 50,44 / 51,31 & 51,38 / 53,98 \\
@@ -437,21 +527,19 @@ sources seules / auto-apprentissage & 51,64 / 55,13 & 52,07 / 55,49 & 50,44 / 51
 
 \begin{table}[ht]
 \centering
-\caption{Écarts appariés par (cible, graine), en points d'exactitude : moyenne, IC95 et nombre de paires en faveur
-  de la première configuration. Verdict selon le critère de la \cref{sec-protocole}.}\label{tab-ecarts}
+\caption{Écarts appariés par (cible, graine), en points d'exactitude : moyenne, IC95, paires en faveur de la première
+  configuration, verdict du protocole.}\label{tab-ecarts}
 \small
 \begin{tabular}{llrcl}
 \toprule
 famille & comparaison & écart & IC95 & paires / verdict \\
 \midrule
 HAC & méthode $-$ M2CAN réglé & $+0{,}27$ & $[-3{,}68 ; +4{,}22]$ & 5/9, non significatif \\
-HAC & méthode $-$ sans pseudo-étiquettes & $+7{,}19$ & $[+2{,}22 ; +12{,}17]$ & 8/9, \textbf{mieux} \\
-HAC & M2CAN réglé $-$ M2CAN publié & $+5{,}21$ & $[+2{,}41 ; +8{,}01]$ & 8/9, mieux \\
 esthétique & méthode $-$ M2CAN réglé & $+1{,}08$ & $[-0{,}13 ; +2{,}28]$ & 7/9, non significatif \\
-esthétique & méthode $-$ sans pseudo-étiquettes & $-1{,}09$ & $[-1{,}75 ; -0{,}43]$ & 0/9, moins bien \\
-esthétique & M2CAN réglé $-$ M2CAN publié & $+3{,}25$ & $[+0{,}86 ; +5{,}64]$ & 9/9, mieux \\
 sentiment & méthode $-$ M2CAN réglé & $-8{,}45$ & $[-12{,}32 ; -4{,}58]$ & 0/9, \textbf{moins bien} \\
-sentiment & méthode $-$ sans pseudo-étiquettes & $-1{,}33$ & $[-3{,}70 ; +1{,}03]$ & 5/9, non significatif \\
+\midrule
+HAC & M2CAN réglé $-$ M2CAN publié & $+5{,}21$ & $[+2{,}41 ; +8{,}01]$ & 8/9, mieux \\
+esthétique & M2CAN réglé $-$ M2CAN publié & $+3{,}25$ & $[+0{,}86 ; +5{,}64]$ & 9/9, mieux \\
 sentiment & M2CAN réglé $-$ M2CAN publié & $+9{,}87$ & $[+6{,}40 ; +13{,}33]$ & 9/9, mieux \\
 \bottomrule
 \end{tabular}
@@ -459,118 +547,102 @@ sentiment & M2CAN réglé $-$ M2CAN publié & $+9{,}87$ & $[+6{,}40 ; +13{,}33]$
 
 Les \cref{tab-principal,tab-ecarts} donnent le résultat principal. Sur HAC et sur l'esthétique, la méthode atteint le
 niveau de M2CAN réglé : $+0{,}27$ et $+1{,}08$ point, écarts non significatifs. Un étiquetage purement géométrique de
-l'espace fusionné y fait donc aussi bien qu'un classifieur entraîné sur cet espace. Sur HAC, la méthode devance M2CAN sur
-human ($+5{,}7$) et animal ($+1{,}0$) et reste derrière sur cartoon ($-5{,}8$). Sur le sentiment, la méthode est
-inférieure à M2CAN réglé de $8{,}45$ points, sur les neuf paires, et passe sous le plancher sources seules ($47{,}35$
-contre $51{,}38$) : l'étiquetage géométrique y perd de l'information que $z$ contient.
+l'espace fusionné y fait aussi bien qu'un classifieur entraîné sur cet espace, et dépasse les deux planchers. Sur HAC, la
+méthode devance M2CAN sur human ($+5{,}7$) et animal ($+1{,}0$) et reste derrière sur cartoon ($-5{,}8$), la cible la
+plus éloignée. Sur le sentiment, la méthode est inférieure à M2CAN réglé de $8{,}45$ points sur les neuf paires, et
+passe sous le plancher sources seules ($47{,}35$ contre $51{,}38$) : l'étiquetage géométrique y perd de l'information
+que les caractéristiques contiennent.
 
 Le réglage du taux d'extracteur de M2CAN est déterminant : il apporte $+5$ à $+10$ points selon la famille. Les
-comparaisons à M2CAN publié, favorables à la méthode, tiennent surtout à cette asymétrie de réglage et ne sont pas
-retenues.
+comparaisons à M2CAN publié, favorables à la méthode, tiennent à cette asymétrie de réglage et ne sont pas retenues.
 
-\subsection{Apport des pseudo-étiquettes}
+\subsection{Étude d'ablation}\label{sec-ablation}
 
-Sur HAC, les pseudo-étiquettes apportent $+7{,}19$ points (IC95 $[+2{,}22 ; +12{,}17]$, $8/9$) ; sur cartoon, la cible
-la plus éloignée, elles font passer l'exactitude de $61{,}93$ à $76{,}15$. Les pseudo-étiquettes retenues sont justes à
-$94$ à $97\,\%$ en fin d'entraînement sur human et animal, à $79$ à $85\,\%$ sur cartoon. Sur une graine, la divergence
-MMD$^2$ entre la cible et les sources dans $z$ est divisée par trois à six (cartoon : $0{,}120 \to 0{,}020$) et
-l'information mutuelle normalisée de la partition augmente ($0{,}51 \to 0{,}65$) : les pseudo-étiquettes rapprochent la
-cible des classes sources dans l'espace fusionné. Sur l'esthétique et le sentiment, elles n'apportent rien, et coûtent
-même $1{,}09$ point sur l'esthétique : la MMD$^2$ n'y bouge pas. Leur bénéfice dépend donc de la justesse de l'étiquetage
+Chaque ablation retire ou remplace un seul élément de la méthode ; les protocoles ont été écrits avant les mesures.
+La \cref{tab-ablation} résume les résultats, détaillés ensuite.
+
+\begin{table}[ht]
+\centering
+\caption{Étude d'ablation, exactitude au dernier point ($\%$), moyenne de neuf runs, et écart apparié à la méthode
+  complète. n.s. : non significatif.}\label{tab-ablation}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}X ccc}
+\toprule
+configuration & HAC & esthétique & sentiment \\
+\midrule
+méthode complète & 88,64 & 65,07 & 47,35 \\
+\midrule
+sans pseudo-étiquettes & 81,44 ($-7{,}19$, 8/9) & 66,16 ($+1{,}09$, 9/9) & 48,68 (n.s.) \\
+sans barycentre (concaténation des nuages) & 88,64 ($0{,}00$) & \multicolumn{2}{c}{non mesuré} \\
+barycentre à support $\frac1N \sum_i \abs{C^i_h}$ & 88,64 ($0{,}00$) & 65,07 ($0{,}00$) & 47,35 ($0{,}00$) \\
+sans hiérarchie (transport plat vers les représentants) & 86,33 ($-2{,}31$ n.s.) & \multicolumn{2}{c}{non mesuré} \\
+sans barycentre ni hiérarchie & 86,57 & \multicolumn{2}{c}{non mesuré} \\
+fin de WBHR (argmax, classifieur sur les représentants transportés) & 88,10 (n.s.) & 65,18 (n.s.) & 50,88 ($+3{,}53$, 7/9) \\
+fin de WBHR et support théorique & 89,34 (n.s.) & 65,16 (n.s.) & 50,80 ($+3{,}45$, 9/9) \\
+sans fusion multimodale & \multicolumn{3}{c}{\textcolor{red}{non mesuré : à compléter ou à retirer}} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Sans pseudo-étiquettes.}
+Sur HAC, les pseudo-étiquettes apportent $+7{,}19$ points (IC95 $[+2{,}22 ; +12{,}17]$, $8/9$) ; sur cartoon, elles
+font passer l'exactitude de $61{,}93$ à $76{,}15$. Les pseudo-étiquettes retenues sont justes à $94$ à $97\,\%$ en fin
+d'entraînement sur human et animal, à $79$ à $85\,\%$ sur cartoon. Sur une graine, la divergence MMD$^2$ entre la cible
+et les sources dans $z$ est divisée par trois à six (cartoon : $0{,}120 \to 0{,}020$) et l'information mutuelle
+normalisée de la partition augmente ($0{,}51 \to 0{,}65$). Sur l'esthétique et le sentiment, elles n'apportent rien et
+coûtent $1{,}09$ point sur l'esthétique : la MMD$^2$ n'y bouge pas. Leur bénéfice dépend de la justesse de l'étiquetage
 géométrique qui les produit.
 
-\section{Analyse du mécanisme}\label{sec-analyse}
-
-\subsection{L'appariement n'est pas le facteur limitant}
-
-Dans $184$ runs sur $198$, l'exactitude au dernier point égale l'oracle de la partition : l'appariement hongrois des
-groupes aux classes est optimal. Les exceptions sont concentrées sur le sentiment (écart moyen $0{,}21$ point, maximum
-$10{,}5$). Tout ce qui sépare la méthode d'une exactitude parfaite tient donc à la partition de la cible, c'est-à-dire à
-l'existence, dans $z$, de $K$ groupes qui coïncident avec les classes. Ce constat éclaire les trois analyses qui
-suivent.
-
-\subsection{Hypothèses sur le barycentre et le transport hiérarchique}
-
+\paragraph{Sans barycentre.}
 \begin{hypothese}\label{hyp-h1}
-Résumer une classe par le barycentre de Wasserstein de ses nuages dans les sources représente mieux cette classe que la
-concaténation de ces nuages.
+Le barycentre de Wasserstein des nuages d'une classe représente mieux cette classe que leur concaténation.
 \end{hypothese}
+Sur HAC, avec un support de la taille moyenne de la classe afin que barycentre et concaténation aient des cardinalités
+comparables, le barycentre est plus proche, au sens du coût de transport, de la classe cible correspondante, dans
+$9$ cas sur $9$ ($+0{,}022$ en moyenne). Mais il produit exactement les mêmes étiquettes. \cref{hyp-h1} est
+partiellement vérifiée : le représentant est meilleur, mais il n'agit que sur l'appariement, qui est déjà optimal. Pour
+la même raison, la taille du support ($16$ points ou taille théorique de WBHR) ne change aucune étiquette sur les trois
+familles.
 
+\paragraph{Sans hiérarchie.}
 \begin{hypothese}\label{hyp-h2}
 Le transport hiérarchique (partition, transport entre structures, appariement) étiquette mieux la cible qu'un transport
 direct des points cibles vers les points des représentants de classe.
 \end{hypothese}
+Sur HAC, le transport hiérarchique devance le transport plat de $+2{,}31$ point (IC95 $[-0{,}04 ; +4{,}65]$, $7/9$),
+surtout sur animal ($+5{,}9$). L'intervalle touche zéro : \cref{hyp-h2} est une tendance favorable, non significative au
+sens du protocole.
 
-La \cref{tab-h1h2} rapporte les deux hypothèses sur HAC, avec un barycentre dont le support a la taille moyenne de la
-classe dans les sources, afin que barycentre et concaténation aient des cardinalités comparables.
+\paragraph{Fin de WBHR.}
+WBHR ne s'arrête pas à l'appariement : les points de chaque représentant $B_h$ sont transportés vers leur groupe apparié
+par projection barycentrique, $\tilde B_h = \abs{B_h}\, \Gamma^\star_{h, \hat l(h)}\, Z_{\hat l(h)}$, un classifieur est
+entraîné sur $\bigcup_h \tilde B_h$ étiqueté $h$ et appliqué à tous les points cibles. Cette fin n'aide que sur le
+sentiment ($+3{,}45$, $9/9$), où elle dépasse l'oracle de la partition de $2{,}3$ points : le classifieur n'est plus
+limité par les groupes. Elle ne change rien là où la partition est bonne et ne suffit pas à rattraper M2CAN réglé
+($-5{,}00$, IC95 $[-7{,}56 ; -2{,}44]$) ni le plancher sources seules. La méthode conserve l'étiquetage par groupe.
 
-\begin{table}[ht]
-\centering
-\caption{H1 et H2 sur HAC, exactitude au dernier point ($\%$), moyenne sur trois graines.}\label{tab-h1h2}
-\begin{tabular}{lcccc}
-\toprule
-représentant, transport & human & animal & cartoon & moyenne \\
-\midrule
-barycentre, hiérarchique (méthode) & \textbf{93,36} & \textbf{96,40} & 76,15 & \textbf{88,64} \\
-concaténation, hiérarchique & \textbf{93,36} & \textbf{96,40} & 76,15 & \textbf{88,64} \\
-barycentre, plat & 91,55 & 90,53 & \textbf{76,91} & 86,33 \\
-concaténation, plat & 92,27 & 90,53 & \textbf{76,91} & 86,57 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\subsection{Analyse}\label{sec-analyse}
 
-\emph{H1 est partiellement vérifiée.} Le barycentre est plus proche, au sens du coût de transport, de la classe cible
-correspondante que la concaténation, dans $9$ cas sur $9$ ($+0{,}022$ en moyenne). Mais il produit exactement les mêmes
-étiquettes : le représentant agit sur l'appariement, déjà optimal. Pour la même raison, la taille du support du
-barycentre ($16$ points ou taille moyenne de la classe) ne change aucune étiquette sur les trois familles.
+\paragraph{L'appariement n'est pas le facteur limitant.}
+Dans $184$ runs sur $198$, l'exactitude au dernier point égale l'oracle de la partition ; les exceptions sont
+concentrées sur le sentiment (écart moyen $0{,}21$ point, maximum $10{,}5$). Tout ce qui sépare la méthode d'une
+exactitude parfaite tient donc à la partition de la cible, c'est-à-dire à l'existence, dans $z$, de $K$ groupes qui
+coïncident avec les classes. C'est pourquoi le représentant, la taille de son support et l'appariement n'ont pas
+d'effet.
 
-\emph{H2 est une tendance favorable, non significative.} Le transport hiérarchique devance le transport plat de
-$+2{,}31$ point (IC95 $[-0{,}04 ; +4{,}65]$, $7/9$), surtout sur animal ($+5{,}9$). L'intervalle touche zéro ; le
-protocole conclut à un résultat non concluant de justesse.
-
-\subsection{Variante fidèle à WBHR}
-
-WBHR \citep{elhamri2025wbhr} ne s'arrête pas à l'appariement : les points de chaque représentant $B_h$ sont transportés
-vers leur groupe apparié par projection barycentrique, $\tilde B_h = \abs{B_h}\, \Gamma^\star_{h, \hat l(h)}\, Z_{\hat l(h)}$,
-un classifieur est entraîné sur $\bigcup_h \tilde B_h$ étiqueté $h$ et appliqué à tous les points cibles. Nous avons
-mesuré cette fin (appariement par $\argmax$, régression logistique sur les représentants transportés), seule et avec le
-support à la taille moyenne de la classe (\cref{tab-wbhr}).
+\paragraph{Leviers sur l'espace fusionné.}
+Six configurations modifiant un seul élément de la méthode ont été mesurées (\cref{tab-leviers}) : maximisation de
+l'information de SHOT \citep{liang2020shot} sur les têtes du lot cible (poids $0{,}3$ et $1$), perte $\SupCon$ de la
+fusion sur $z$ normalisé, partition spectrale sur le graphe des $15$ plus proches voisins, et combinaison de la fin de
+WBHR et de $z$ normalisé. Aucune ne change HAC ni l'esthétique au-delà du bruit. Sur le sentiment, seule la maximisation
+de l'information aide ($+3{,}07$ avec le poids $1$, borne basse de l'IC à $+0{,}01$, sans correction pour comparaisons
+multiples), sans rattraper M2CAN réglé ni le plancher sources seules. L'écart du graphe des plus proches voisins à M2CAN
+sur l'esthétique ($+1{,}71$, IC $> 0$) n'est pas rapporté comme résultat : la configuration a été choisie comme la
+meilleure des six sur le même test, et son écart à la méthode n'est pas significatif.
 
 \begin{table}[ht]
 \centering
-\caption{Variante fidèle à WBHR, exactitude au dernier point ($\%$), moyenne de neuf runs, et écart apparié à la
-  méthode.}\label{tab-wbhr}
-\small
-\begin{tabular}{lccc}
-\toprule
- & HAC & esthétique & sentiment \\
-\midrule
-méthode & 88,64 & 65,07 & 47,35 \\
-support à la taille moyenne & 88,64 & 65,07 & 47,35 \\
-fin WBHR (argmax, classifieur) & 88,10 & 65,18 & 50,88 \\
-les deux & \textbf{89,34} & \textbf{65,16} & \textbf{50,80} \\
-\midrule
-les deux $-$ méthode & $+0{,}70$ n.s. & $+0{,}09$ n.s. & $+3{,}45$ $[+1{,}28 ; +5{,}63]$, 9/9 \\
-les deux $-$ M2CAN réglé & $+0{,}97$ n.s. & $+1{,}17$ n.s. & $-5{,}00$ $[-7{,}56 ; -2{,}44]$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Le classifieur de WBHR n'aide que sur le sentiment ($+3{,}45$, $9/9$), où il dépasse l'oracle de la partition de
-$2{,}3$ points : il n'est plus limité par les groupes et corrige une partie des erreurs de la partition. Il ne change
-rien là où la partition est bonne, et ne suffit pas à rattraper M2CAN réglé ni le plancher sources seules sur le
-sentiment. La méthode garde donc l'étiquetage par groupe, sans classifieur ; la variante reste une option documentée.
-
-\subsection{Leviers sur l'espace fusionné}
-
-Six configurations modifiant un seul élément de la méthode ont été comparées, avec un protocole écrit avant les
-mesures (\cref{tab-leviers}) : la maximisation de l'information de SHOT \citep{liang2020shot} sur les têtes du lot
-cible (poids $0{,}3$ et $1$), la perte $\SupCon$ de la fusion sur $z$ normalisé, une partition spectrale sur le graphe
-des $15$ plus proches voisins au lieu du graphe complet, et la combinaison du classifieur WBHR et de $z$ normalisé.
-
-\begin{table}[ht]
-\centering
-\caption{Leviers sur l'espace fusionné, exactitude au dernier point ($\%$), moyenne de neuf runs. Entre parenthèses,
+\caption{Leviers sur l'espace fusionné, exactitude au dernier point ($\%$), moyenne de neuf runs ; entre parenthèses,
   l'écart apparié à la méthode quand il est significatif.}\label{tab-leviers}
 \small
 \begin{tabular}{lccc}
@@ -582,75 +654,77 @@ maximisation de l'information, poids 0,3 & \textbf{89,08} & 65,14 & 48,17 ($+0{,
 maximisation de l'information, poids 1 & 88,66 & 65,16 & \textbf{50,41} ($+3{,}07$, 7/9) \\
 $\SupCon$ sur $z$ normalisé & 88,37 & 64,31 & 46,56 \\
 graphe des 15 plus proches voisins & 87,48 & \textbf{65,70} & 48,39 \\
-classifieur WBHR et $z$ normalisé & 88,71 & 64,36 & 47,84 \\
+fin de WBHR et $z$ normalisé & 88,71 & 64,36 & 47,84 \\
 \midrule
 plancher logistique sur $z$ (méthode) & 86,64 & 60,06 & 48,53 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Aucune configuration ne change HAC ni l'esthétique au-delà du bruit. Sur le sentiment, seule la maximisation de
-l'information aide ($+3{,}07$ avec le poids $1$, borne basse de l'IC à $+0{,}01$, sans correction pour comparaisons
-multiples) ; elle ne rattrape ni M2CAN réglé ($-5{,}39$) ni le plancher sources seules. L'écart du graphe des plus
-proches voisins à M2CAN sur l'esthétique ($+1{,}71$, IC $> 0$) n'est pas rapporté comme résultat : la configuration a
-été choisie comme la meilleure des six sur le même test, et son écart à la méthode n'est pas significatif.
+\paragraph{Où est le goulot.}
+Les diagnostics localisent le facteur limitant par famille. Sur HAC, une sonde linéaire dans $z$ donne la même exactitude
+que la partition et la partition est quasi parfaite : $z$ est structuré en groupes qui coïncident avec les classes. Sur
+l'esthétique, sonde et partition coïncident à un niveau plus bas : la limite est la séparabilité des classes dans $z$.
+Sur le sentiment, deux cas se présentent. Sur TumEmo, la sonde atteint $66{,}7$ alors que la partition donne $47{,}2$ :
+$z$ sépare les classes mais n'a pas de structure en groupes, et la partition échoue. Sur Yelp, la cible est isolée des
+sources dans $z$ (MMD$^2$ de $0{,}249$, quatre à trente fois celle des autres cibles) et la sonde tombe à $50{,}9$ :
+l'espace $z$ lui-même ne transfère pas. De plus, le plancher logistique sur $z$ de la méthode ($48{,}53$) est inférieur au
+plancher sur les caractéristiques brutes ($51{,}38$) : sur le sentiment, l'entraînement dégrade l'information que les
+caractéristiques contiennent, avec ou sans pseudo-étiquettes. Les deux correctifs qui aident sur le sentiment, la
+maximisation de l'information et le classifieur de WBHR, sont ceux qui ne dépendent pas de la partition.
 
-\subsection{Où est le goulot}
+\subsection{Discussion}\label{sec-discussion}
 
-Les diagnostics localisent le facteur limitant par famille. Sur HAC, une sonde linéaire dans $z$ donne la même
-exactitude que la partition et la partition est quasi parfaite : $z$ est structuré en groupes qui coïncident avec les
-classes, et la géométrie les lit. Sur l'esthétique, sonde et partition coïncident aussi, à un niveau plus bas : la
-limite est la séparabilité des classes dans $z$. Sur le sentiment, deux cas se présentent. Sur TumEmo, la sonde atteint
-$66{,}7$ alors que la partition donne $47{,}2$ : $z$ sépare les classes mais n'a pas de structure en groupes, et la
-partition échoue. Sur Yelp, la cible est isolée des sources dans $z$ (MMD$^2$ de $0{,}249$, quatre à trente fois celle
-des autres cibles) et la sonde tombe à $50{,}9$ : c'est l'espace $z$ lui-même qui ne transfère pas. Les deux correctifs
-qui aident sur le sentiment, la maximisation de l'information et le classifieur de WBHR, sont précisément ceux qui ne
-dépendent pas de la partition.
+\paragraph{Domaine de validité.}
+La méthode suppose que les classes forment des groupes dans l'espace fusionné. C'est le cas de classes catégorielles,
+comme des actions ; ce n'est pas le cas de classes ordinales. La polarité d'un sentiment (négatif, neutre, positif)
+est un axe continu dont la classe neutre est le milieu, non un groupe ; la classe esthétique est un seuil sur un score
+continu. Une partition en $K$ groupes sur un axe coupe à des endroits arbitraires, alors qu'un classifieur entraîné sur
+les sources y trace une frontière. Le sentiment viole la condition et la méthode y passe sous un plancher sans
+adaptation. Imposer des groupes de même taille rétablirait des partitions plausibles, mais injecterait la distribution
+des classes de la cible, que l'on n'est pas censé connaître ; nous avons écarté cette option.
 
-\section{Discussion et limites}\label{sec-discussion}
-
-\paragraph{Ce que la méthode apporte.}
-Un étiquetage de la cible lu dans la géométrie de l'espace fusionné, sans classifieur, atteint le niveau de M2CAN réglé
-sur deux familles sur trois, et la boucle qui renvoie cet étiquetage dans l'entraînement est le mécanisme décisif sur
-HAC. La méthode est native pour $N$ sources, par le barycentre, et pour $M \ge 3$ modalités, par la fusion $M$-aire et
-l'InfoNCE sur les paires de modalités, ce que M2CAN ne prévoit pas.
-
-\paragraph{Condition d'application.}
-La méthode suppose que l'espace fusionné soit structuré en groupes qui coïncident avec les classes. Le sentiment viole
-cette condition et la méthode y passe sous un plancher sans adaptation, alors qu'un classifieur entraîné sur les sources
-garde un pouvoir de transfert. Imposer des groupes de même taille rétablirait des partitions plausibles, mais
-injecterait la distribution des classes de la cible, que l'on n'est pas censé connaître ; nous avons écarté cette
-option.
+\paragraph{Alignement entre modalités.}
+Le terme CMCFA suppose que les modalités d'un exemple disent la même chose. Sur HAC, audio et vidéo décrivent la même
+action. Sur Twitter et Yelp, l'image est souvent sans rapport avec la polarité du texte, et forcer l'alignement peut
+effacer le signal du texte, ce que suggère la dégradation de $z$ sous le plancher brut. Mesurer CMCFA sur les sources
+seules est l'expérience suivante.
 
 \paragraph{Transductivité.}
-L'inférence partitionne l'ensemble de test ensemble ; la méthode ne prédit pas un exemple isolé. Les méthodes comparées
-prédisent chaque point indépendamment. Toute comparaison doit porter cette réserve.
+L'inférence partitionne l'ensemble de test ensemble ; la méthode ne prédit pas un exemple isolé, alors que M2CAN prédit
+chaque point indépendamment. Toute comparaison porte cette réserve.
 
-\paragraph{Caractéristiques gelées et bout en bout.}
-Tous les résultats portent sur des encodeurs gelés. Un pilote de bout en bout, encodeurs entraînés, sur AVA avec une
-graine, a donné une partition effondrée (groupes de $722$ et $125$ points pour deux classes équilibrées), avec ou sans
-maximisation de l'information ; les critères d'extension écrits avant le run n'étaient pas remplis et le bout en bout a
-été arrêté. L'effondrement vient de $z$, non d'un déséquilibre des têtes.
+\paragraph{Caractéristiques gelées.}
+Tous les résultats portent sur des encodeurs gelés, ce qui coûte aux deux méthodes : M2CAN publié avec BERT et
+ResNet-50 entraînés atteint $84{,}7$ sur Twitter, contre $59{,}07$ ici. La méthode est entraînée $3$ époques contre $10$
+pour M2CAN. Un pilote de bout en bout, encodeurs entraînés, sur AVA avec une graine, a donné une partition effondrée
+(groupes de $722$ et $125$ points pour deux classes équilibrées), avec ou sans maximisation de l'information ; les
+critères d'extension écrits avant le run n'étaient pas remplis et le bout en bout a été arrêté. L'effondrement vient de
+$z$, non d'un déséquilibre des têtes ; une montée en régime (encodeurs gelés et pseudo-étiquettes inactives pendant la
+première époque) reste à évaluer.
 
 \paragraph{Puissance statistique.}
 Trois graines par cible et neuf paires par comparaison donnent des intervalles larges : sur HAC, un écart de
 $\pm 4$ points à M2CAN n'est pas détectable. Les comparaisons multiples de la \cref{tab-leviers} ne sont pas corrigées.
 Le dernier point d'évaluation évite le biais du meilleur point ; un critère d'arrêt sans étiquette fondé sur le ratio
-des distances intra et inter-groupes a été essayé et perd deux points en moyenne.
+des distances intra et inter-groupes perd deux points en moyenne et a été abandonné.
 
+% =====================================================================
 \section{Conclusion}\label{sec-conclusion}
 
 Nous avons proposé une méthode d'adaptation de domaine multi-sources et multimodale qui remplace le classifieur sur
-l'espace fusionné par un étiquetage géométrique de la cible, barycentres de Wasserstein des classes sources, partition
-spectrale, transport entre structures et appariement, exécuté pendant l'entraînement comme source de pseudo-étiquettes.
-Dans un protocole apparié à caractéristiques gelées, elle atteint le niveau de M2CAN réglé sur la reconnaissance
-d'actions et l'évaluation esthétique, et lui est inférieure sur l'analyse de sentiment. L'analyse montre que
-l'appariement est optimal dans la quasi-totalité des runs, que le représentant de classe et la taille de son support
-n'ont pas d'effet sur les étiquettes, et que le facteur limitant est l'existence d'une structure en groupes dans l'espace
-fusionné. Les travaux futurs portent sur cette structure : combiner la maximisation de l'information et le classifieur
-de WBHR, qui agissent sur des mécanismes distincts et aident tous deux sur le sentiment ; une fusion par attention,
-pondérant les modalités selon l'exemple ; et une partition de la cible fondée sur des distances de Wasserstein entre
-structures locales, telle que l'annonce WBHR.
+l'espace fusionné par un étiquetage géométrique de la cible : agrégation des classes sources par barycentres de
+Wasserstein, partition spectrale de la cible, transport optimal hiérarchique et appariement hongrois, exécutés pendant
+l'entraînement comme source de pseudo-étiquettes filtrées par l'accord des modalités. Dans un protocole apparié à
+caractéristiques gelées, elle atteint le niveau de M2CAN réglé sur la reconnaissance d'actions et l'évaluation
+esthétique, et lui est inférieure sur l'analyse de sentiment. L'étude d'ablation établit que les pseudo-étiquettes sont
+le mécanisme décisif sur les actions, que le barycentre est un meilleur représentant sans changer les étiquettes, que le
+transport hiérarchique devance le transport plat sans significativité, et que le facteur limitant est l'existence d'une
+structure en groupes dans l'espace fusionné, absente pour des classes ordinales. Les travaux futurs portent sur cette
+structure : restreindre l'alignement entre modalités aux sources quand les modalités ne sont pas redondantes ; combiner
+la maximisation de l'information et le classifieur de WBHR, qui agissent sur des mécanismes distincts ; une fusion par
+attention pondérant les modalités selon l'exemple ; une montée en régime pour l'entraînement de bout en bout ; et une
+partition de la cible fondée sur des distances de Wasserstein entre structures locales.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
