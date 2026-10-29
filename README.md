@@ -115,6 +115,7 @@ sur z, sans WBHR), et écart apparié à `methode/methode`. Configurations dispo
 | `methode_wbhr_zn` | classifieur + z normalisé |
 | `methode_knn` | partition spectrale sur graphe des 15 plus proches voisins |
 | `methode_lr1e-5`, `methode_lr2e-4` | taux de l'extracteur |
+| `methode_calendrier_m2can` | calendrier de M2CAN : époque 1 sur les sources seules (`phase1.cmcfa_cible_debut`), un tour de pseudo-étiquettes par époque à partir de la fin de l'époque 1 (`pseudo.debut`, `pseudo.tous_les`), quotas 0.3 / 0.6 / 0.9 / 1.0 par époque, 10 époques |
 
 ## 5. Visualiser l'espace fusionné (t-SNE)
 

@@ -27,6 +27,7 @@ géométrie** (partition), puis compare chacune à la méthode (`methode/methode
 | `methode_wbhr_zn` | les deux précédentes (classifieur + z normalisé) | B4+B5 : les pseudo-étiquettes du classifieur tirent-elles z ? |
 | `methode_knn` | partition spectrale sur graphe des 15 plus proches voisins | C7 : éviter le groupe géant sans imposer de taille |
 | `methode_lr1e-5`, `methode_lr2e-4` | taux de l'extracteur | B6 : grille du sentiment |
+| `methode_calendrier_m2can` | époque de chauffe sans cible, un tour de pseudo-étiquettes par époque, quotas par époque, 10 époques | le calendrier de M2CAN, 5 fois moins agressif que le nôtre |
 
 Chaque run journalise aussi l'**oracle** (plafond de la partition) et le **plancher logistique** (régression logistique
 sources → cible sur z, sans WBHR) : si l'oracle est bas, c'est la partition ; si le plancher est bas, c'est z.
@@ -43,7 +44,7 @@ DEPOT     = "https://github.com/Kevindjoum/MM-WBHR.git"
 BRANCHE   = "claude/repo-access-lzj47d"
 DRIVE     = "/content/drive/MyDrive/MM-WBHR"          # dossier Drive : DRIVE/donnees/<famille> en entrée, DRIVE/sorties en sortie
 FAMILLES  = ["sentiment"]                              # parmi "hac", "sentiment", "aesthetic" ; le sentiment d'abord (c'est là que ça coince)
-CONFIGS   = ["methode", "methode_im03", "methode_zn", "methode_knn", "methode_wbhr_zn"]   # ordre = priorité
+CONFIGS   = ["methode", "methode_calendrier_m2can"]   # ordre = priorité ; autres : methode_im03, methode_zn, methode_knn, methode_wbhr_zn
 GRAINES   = [123456, 234567, 345678]
 CIBLES    = None                                       # None = toutes ; ou ["Twitter"] pour un essai court
 PARALLELE = 3                                          # runs simultanés sur le GPU (3 tiennent sur un T4 avec des caractéristiques gelées)

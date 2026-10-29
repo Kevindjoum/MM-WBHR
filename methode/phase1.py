@@ -7,6 +7,9 @@ Option : pseudo-étiquettes WBHR (section `pseudo` de la configuration). Tous le
 WBHR (filtre `accord`), puis, par classe, les plus centraux de leur groupe, dans la limite d'un quota qui
 croît d'un tour à l'autre. Ces points rejoignent les sources dans le SupCon sur la fusion.
 `pseudo.debut` (0 par défaut) : aucun tour avant ce pas ; le quota repart de son premier taux au premier tour.
+`phase1.cmcfa_cible_debut` (0 par défaut) : avant ce pas, la cible n'entre pas dans CMCFA (sources seules, comme
+l'époque 0 de M2CAN). Calendrier de M2CAN (une époque de chauffe, un tour de pseudo-étiquettes par époque, quotas
+0.3 / 0.6 / 0.9 / 1.0 par époque) : configs/methode_calendrier_m2can.yaml.
 
     python phase1.py --config config.yaml
 """
@@ -105,7 +108,8 @@ def main():
                 print("[pseudo] " + json.dumps(j), flush=True)
                 histo.append({"pas": pas, "pseudo": j})
             lots = ech.suivant()
-            lt, lc, ld, ls, li = pertes_phase1(modele, lots, p1["tau"], pseudo, p1.get("normaliser_z", False))
+            lt, lc, ld, ls, li = pertes_phase1(modele, lots, p1["tau"], pseudo, p1.get("normaliser_z", False),
+                                              pas > p1.get("cmcfa_cible_debut", 0))
             perte = p1["poids_tetes"] * lt + p1["alpha_cmcfa"] * lc + p1["beta_cdcfa"] * ld + p1["gamma_supcon_fusion"] * ls
             if p1.get("poids_im", 0):
                 perte = perte + p1["poids_im"] * li

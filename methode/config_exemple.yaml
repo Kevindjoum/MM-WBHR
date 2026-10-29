@@ -37,6 +37,7 @@ phase1:
   gamma_supcon_fusion: 1.0
   poids_im: 0.0            # > 0 : maximisation de l'information sur les têtes du lot cible
   normaliser_z: false      # true : SupCon de la fusion sur z normalisé L2 (la géométrie lue par la phase 2)
+  cmcfa_cible_debut: 0     # pas avant lequel la cible n'entre pas dans CMCFA (3750 = époque de chauffe, comme M2CAN)
   optimiseur:              # Adam ; taux publiés de M2CAN, décroissance polynomiale
     lr_dorsale: 2.0e-6
     lr_extracteur: 2.0e-6  # très faible : avec des caractéristiques gelées, l'extracteur bouge à peine
@@ -63,7 +64,8 @@ phase2:
 
 pseudo:
   actif: false             # true = fusion géométrique + pseudo-étiquettes WBHR
-  tous_les: 750
+  tous_les: 750            # période des tours ; 3750 = un tour par époque, comme M2CAN
+  debut: 0                 # premier tour au plus tôt à ce pas ; 3750 = après la première époque, comme M2CAN
   cible_max: 3000
   taux: [0.3, 0.6, 0.9, 1.0]
   filtre: accord           # accord | aucun

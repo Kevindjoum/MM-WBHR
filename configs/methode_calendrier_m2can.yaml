@@ -1,0 +1,15 @@
+# Calendrier de pseudo-étiquetage de M2CAN (m2can/msmm/train.py) : époque 0 sur les sources seules (la cible n'entre
+# dans aucune perte), puis un tour de pseudo-étiquettes en fin de chaque époque avec quotas 0.3 / 0.6 / 0.9 / 1.0, la
+# cible pseudo-étiquetée rejoignant les sources. 10 époques comme M2CAN. Surcharges de methode/config_exemple.yaml.
+fusion:
+  dim: 256
+phase1:
+  epoques: 10
+  cmcfa_cible_debut: 3750      # époque de chauffe : CMCFA sur les sources seules pendant l'époque 1
+  optimiseur:
+    lr_extracteur: 5.0e-5
+pseudo:
+  actif: true
+  debut: 3750                  # premier tour en fin d'époque 1
+  tous_les: 3750               # un tour par époque (9 tours sur 10 époques)
+  taux: [0.3, 0.6, 0.9, 1.0]   # par tour, donc par époque, comme M2CAN

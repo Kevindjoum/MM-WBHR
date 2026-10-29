@@ -74,7 +74,7 @@ def cmcfa(feats, feats_aug, logits):
     return (l * torch.exp(-V)).mean() + V.mean()
 
 
-def pertes_phase1(modele, lots, tau, pseudo=None, normaliser_z=False):
+def pertes_phase1(modele, lots, tau, pseudo=None, normaliser_z=False, cmcfa_cible=True):
     """Calcule les quatre termes sur un pas.
 
     lots : liste de dictionnaires par domaine, sources d'abord, cible en dernier, chacun avec
@@ -83,6 +83,8 @@ def pertes_phase1(modele, lots, tau, pseudo=None, normaliser_z=False):
              les sources dans le SupCon sur la fusion.
     normaliser_z : SupCon de la fusion sur z normalisé L2 (option phase1.normaliser_z), la géométrie que lit la
              phase 2 ; par défaut z entre tel quel.
+    cmcfa_cible : False = CMCFA sur les sources seulement (la cible n'entre dans aucune perte, comme l'époque 0 de
+             M2CAN) ; True (défaut) = sur tous les domaines.
     Renvoie (tetes, cmcfa, cdcfa, sc_fusion, im) ; im porte sur les têtes du lot cible, sans étiquette.
     """
     n_src = len(lots) - 1
@@ -91,7 +93,7 @@ def pertes_phase1(modele, lots, tau, pseudo=None, normaliser_z=False):
         f, fa = modele.encoder(lot["x"]), modele.encoder(lot["x_aug"])
         feats.append(f); feats_aug.append(fa); logits.append(modele.logits_tetes(f))
 
-    l_cmcfa = sum(cmcfa(feats[d], feats_aug[d], logits[d]) for d in range(len(lots)))
+    l_cmcfa = sum(cmcfa(feats[d], feats_aug[d], logits[d]) for d in range(len(lots) if cmcfa_cible else n_src))
 
     ys = [lots[d]["y"] for d in range(n_src)]
     l_tetes = sum(F.cross_entropy(logits[d][m], ys[d]) for d in range(n_src) for m in range(modele.M)) \
