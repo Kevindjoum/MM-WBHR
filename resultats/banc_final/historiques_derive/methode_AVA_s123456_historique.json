@@ -1,0 +1,1250 @@
+{
+ "config": {
+  "appareil": "cuda",
+  "donnees": {
+   "cible": "AVA",
+   "racine": "/kaggle/input/notebooks/djoumessikevin/extract-clip-aesthetic/feats_aesthetic",
+   "sources": [
+    "PCCD",
+    "RPCD"
+   ]
+  },
+  "fusion": {
+   "dim": 256
+  },
+  "graine": 123456,
+  "modalites": [
+   {
+    "encodeur": {
+     "dim": 512,
+     "type": "caracteristiques"
+    },
+    "nom": "text"
+   },
+   {
+    "encodeur": {
+     "dim": 512,
+     "type": "caracteristiques"
+    },
+    "nom": "image"
+   }
+  ],
+  "phase1": {
+   "alpha_cmcfa": 1.0,
+   "beta_cdcfa": 1.0,
+   "cmcfa_cible_debut": 0,
+   "epoques": 10,
+   "evaluer_tous_les": 750,
+   "gamma_supcon_fusion": 1.0,
+   "lot": 4,
+   "normaliser_z": false,
+   "optimiseur": {
+    "lr_dorsale": 2e-06,
+    "lr_extracteur": 5e-05,
+    "lr_fusion": 5e-05,
+    "lr_min": 1e-08,
+    "lr_tetes": 5e-05,
+    "puissance": 0.9
+   },
+   "pas_par_epoque": 3750,
+   "poids_im": 0.0,
+   "poids_tetes": 1.0,
+   "tau": 0.07
+  },
+  "phase2": {
+   "affinite": "dense",
+   "appariement": "hongrois",
+   "classifieur": "aucun",
+   "eps": 0.02,
+   "par_classe": 400,
+   "partition": "spectrale",
+   "plancher": true,
+   "point_fixe": 8,
+   "sinkhorn": 60,
+   "sources_max": null,
+   "support": 16,
+   "voisins": 1,
+   "voisins_graphe": 15
+  },
+  "pseudo": {
+   "actif": true,
+   "cible_max": 3000,
+   "debut": 0,
+   "filtre": "accord",
+   "taux": [
+    0.3,
+    0.6,
+    0.9,
+    1.0
+   ],
+   "tous_les": 750
+  },
+  "sortie": "/kaggle/working/sorties/methode_methode/AVA_s123456"
+ },
+ "meilleur": {
+  "exactitude": 0.7249114521841794,
+  "oracle": 0.7249114521841794,
+  "silhouette": 0.4355217218399048,
+  "ratio_intra_inter": 0.5028066459038271,
+  "tailles_groupes": [
+   430,
+   417
+  ],
+  "plancher_logistique": 0.6824085005903188,
+  "cout_representant_classe_cible": 0.011832361575216055,
+  "epoque": 2,
+  "pas": 9000
+ },
+ "historique": [
+  {
+   "pas": 750,
+   "pseudo": {
+    "tour": 0,
+    "exactitude_wbhr_complet": 0.516,
+    "n_retenus": 450,
+    "precision_retenus": 0.4711111111111111
+   }
+  },
+  {
+   "exactitude": 0.5076741440377804,
+   "oracle": 0.5076741440377804,
+   "silhouette": 0.04827643185853958,
+   "ratio_intra_inter": 0.9494560509459311,
+   "tailles_groupes": [
+    407,
+    440
+   ],
+   "plancher_logistique": 0.46635182998819363,
+   "cout_representant_classe_cible": 0.007134435698390007,
+   "epoque": 0,
+   "pas": 750
+  },
+  {
+   "pas": 1500,
+   "pseudo": {
+    "tour": 1,
+    "exactitude_wbhr_complet": 0.552,
+    "n_retenus": 900,
+    "precision_retenus": 0.5222222222222223
+   }
+  },
+  {
+   "exactitude": 0.4899645808736718,
+   "oracle": 0.5100354191263282,
+   "silhouette": 0.04489877074956894,
+   "ratio_intra_inter": 0.9562413959175896,
+   "tailles_groupes": [
+    481,
+    366
+   ],
+   "plancher_logistique": 0.46635182998819363,
+   "cout_representant_classe_cible": 0.005312884226441383,
+   "epoque": 0,
+   "pas": 1500
+  },
+  {
+   "pas": 2250,
+   "pseudo": {
+    "tour": 2,
+    "exactitude_wbhr_complet": 0.6093333333333333,
+    "n_retenus": 1350,
+    "precision_retenus": 0.5437037037037037
+   }
+  },
+  {
+   "exactitude": 0.6068476977567887,
+   "oracle": 0.6068476977567887,
+   "silhouette": 0.04617548733949661,
+   "ratio_intra_inter": 0.9509745139438689,
+   "tailles_groupes": [
+    426,
+    421
+   ],
+   "plancher_logistique": 0.4757969303423849,
+   "cout_representant_classe_cible": 0.004405616316944361,
+   "epoque": 0,
+   "pas": 2250
+  },
+  {
+   "pas": 3000,
+   "pseudo": {
+    "tour": 3,
+    "exactitude_wbhr_complet": 0.6616666666666666,
+    "n_retenus": 1495,
+    "precision_retenus": 0.585953177257525
+   }
+  },
+  {
+   "exactitude": 0.6706021251475797,
+   "oracle": 0.6706021251475797,
+   "silhouette": 0.06328325718641281,
+   "ratio_intra_inter": 0.9330815397448414,
+   "tailles_groupes": [
+    436,
+    411
+   ],
+   "plancher_logistique": 0.5171192443919717,
+   "cout_representant_classe_cible": 0.0038991952314972878,
+   "epoque": 0,
+   "pas": 3000
+  },
+  {
+   "pas": 3750,
+   "pseudo": {
+    "tour": 4,
+    "exactitude_wbhr_complet": 0.678,
+    "n_retenus": 1500,
+    "precision_retenus": 0.6053333333333333
+   }
+  },
+  {
+   "exactitude": 0.69185360094451,
+   "oracle": 0.69185360094451,
+   "silhouette": 0.1171531081199646,
+   "ratio_intra_inter": 0.8743486689967384,
+   "tailles_groupes": [
+    400,
+    447
+   ],
+   "plancher_logistique": 0.5761511216056671,
+   "cout_representant_classe_cible": 0.0038006777176633477,
+   "epoque": 0,
+   "pas": 3750
+  },
+  {
+   "pas": 4500,
+   "pseudo": {
+    "tour": 5,
+    "exactitude_wbhr_complet": 0.6846666666666666,
+    "n_retenus": 1500,
+    "precision_retenus": 0.61
+   }
+  },
+  {
+   "exactitude": 0.7001180637544274,
+   "oracle": 0.7001180637544274,
+   "silhouette": 0.23668526113033295,
+   "ratio_intra_inter": 0.7385324725620331,
+   "tailles_groupes": [
+    411,
+    436
+   ],
+   "plancher_logistique": 0.6056670602125147,
+   "cout_representant_classe_cible": 0.004439974436536431,
+   "epoque": 1,
+   "pas": 4500
+  },
+  {
+   "pas": 5250,
+   "pseudo": {
+    "tour": 6,
+    "exactitude_wbhr_complet": 0.6863333333333334,
+    "n_retenus": 1514,
+    "precision_retenus": 0.6268163804491413
+   }
+  },
+  {
+   "exactitude": 0.69185360094451,
+   "oracle": 0.69185360094451,
+   "silhouette": 0.33385246992111206,
+   "ratio_intra_inter": 0.6233286146691318,
+   "tailles_groupes": [
+    424,
+    423
+   ],
+   "plancher_logistique": 0.615112160566706,
+   "cout_representant_classe_cible": 0.00593027425929904,
+   "epoque": 1,
+   "pas": 5250
+  },
+  {
+   "pas": 6000,
+   "pseudo": {
+    "tour": 7,
+    "exactitude_wbhr_complet": 0.6886666666666666,
+    "n_retenus": 1755,
+    "precision_retenus": 0.6746438746438747
+   }
+  },
+  {
+   "exactitude": 0.7036599763872491,
+   "oracle": 0.7036599763872491,
+   "silhouette": 0.3627285361289978,
+   "ratio_intra_inter": 0.5882255628891867,
+   "tailles_groupes": [
+    456,
+    391
+   ],
+   "plancher_logistique": 0.6186540731995277,
+   "cout_representant_classe_cible": 0.007047978695482016,
+   "epoque": 1,
+   "pas": 6000
+  },
+  {
+   "pas": 6750,
+   "pseudo": {
+    "tour": 8,
+    "exactitude_wbhr_complet": 0.6893333333333334,
+    "n_retenus": 1761,
+    "precision_retenus": 0.6797274275979557
+   }
+  },
+  {
+   "exactitude": 0.7119244391971665,
+   "oracle": 0.7119244391971665,
+   "silhouette": 0.3894546627998352,
+   "ratio_intra_inter": 0.5566919015323247,
+   "tailles_groupes": [
+    469,
+    378
+   ],
+   "plancher_logistique": 0.6245572609208973,
+   "cout_representant_classe_cible": 0.008408891037106514,
+   "epoque": 1,
+   "pas": 6750
+  },
+  {
+   "pas": 7500,
+   "pseudo": {
+    "tour": 9,
+    "exactitude_wbhr_complet": 0.692,
+    "n_retenus": 2158,
+    "precision_retenus": 0.7099165894346617
+   }
+  },
+  {
+   "exactitude": 0.7131050767414404,
+   "oracle": 0.7131050767414404,
+   "silhouette": 0.4077397882938385,
+   "ratio_intra_inter": 0.5351562274137546,
+   "tailles_groupes": [
+    452,
+    395
+   ],
+   "plancher_logistique": 0.6304604486422668,
+   "cout_representant_classe_cible": 0.009675423614680767,
+   "epoque": 1,
+   "pas": 7500
+  },
+  {
+   "pas": 8250,
+   "pseudo": {
+    "tour": 10,
+    "exactitude_wbhr_complet": 0.691,
+    "n_retenus": 2316,
+    "precision_retenus": 0.707685664939551
+   }
+  },
+  {
+   "exactitude": 0.7237308146399055,
+   "oracle": 0.7237308146399055,
+   "silhouette": 0.4270448684692383,
+   "ratio_intra_inter": 0.5115744047370792,
+   "tailles_groupes": [
+    409,
+    438
+   ],
+   "plancher_logistique": 0.6623376623376623,
+   "cout_representant_classe_cible": 0.010880331508815289,
+   "epoque": 2,
+   "pas": 8250
+  },
+  {
+   "pas": 9000,
+   "pseudo": {
+    "tour": 11,
+    "exactitude_wbhr_complet": 0.692,
+    "n_retenus": 2030,
+    "precision_retenus": 0.7039408866995074
+   }
+  },
+  {
+   "exactitude": 0.7249114521841794,
+   "oracle": 0.7249114521841794,
+   "silhouette": 0.4355217218399048,
+   "ratio_intra_inter": 0.5028066459038271,
+   "tailles_groupes": [
+    430,
+    417
+   ],
+   "plancher_logistique": 0.6824085005903188,
+   "cout_representant_classe_cible": 0.011832361575216055,
+   "epoque": 2,
+   "pas": 9000
+  },
+  {
+   "pas": 9750,
+   "pseudo": {
+    "tour": 12,
+    "exactitude_wbhr_complet": 0.6866666666666666,
+    "n_retenus": 2078,
+    "precision_retenus": 0.697786333012512
+   }
+  },
+  {
+   "exactitude": 0.7107438016528925,
+   "oracle": 0.7107438016528925,
+   "silhouette": 0.4320743680000305,
+   "ratio_intra_inter": 0.5079900335953266,
+   "tailles_groupes": [
+    480,
+    367
+   ],
+   "plancher_logistique": 0.6729634002361276,
+   "cout_representant_classe_cible": 0.013557126745581627,
+   "epoque": 2,
+   "pas": 9750
+  },
+  {
+   "pas": 10500,
+   "pseudo": {
+    "tour": 13,
+    "exactitude_wbhr_complet": 0.6783333333333333,
+    "n_retenus": 2033,
+    "precision_retenus": 0.6994589276930644
+   }
+  },
+  {
+   "exactitude": 0.7225501770956316,
+   "oracle": 0.7225501770956316,
+   "silhouette": 0.4477231502532959,
+   "ratio_intra_inter": 0.48982350742748615,
+   "tailles_groupes": [
+    470,
+    377
+   ],
+   "plancher_logistique": 0.6706021251475797,
+   "cout_representant_classe_cible": 0.016653206199407578,
+   "epoque": 2,
+   "pas": 10500
+  },
+  {
+   "pas": 11250,
+   "pseudo": {
+    "tour": 14,
+    "exactitude_wbhr_complet": 0.6806666666666666,
+    "n_retenus": 2058,
+    "precision_retenus": 0.6977648202137998
+   }
+  },
+  {
+   "exactitude": 0.7166469893742621,
+   "oracle": 0.7166469893742621,
+   "silhouette": 0.45132219791412354,
+   "ratio_intra_inter": 0.48609332114754517,
+   "tailles_groupes": [
+    471,
+    376
+   ],
+   "plancher_logistique": 0.6776859504132231,
+   "cout_representant_classe_cible": 0.018589877523481846,
+   "epoque": 2,
+   "pas": 11250
+  },
+  {
+   "pas": 12000,
+   "pseudo": {
+    "tour": 15,
+    "exactitude_wbhr_complet": 0.6756666666666666,
+    "n_retenus": 2079,
+    "precision_retenus": 0.6988936988936989
+   }
+  },
+  {
+   "exactitude": 0.7166469893742621,
+   "oracle": 0.7166469893742621,
+   "silhouette": 0.44023311138153076,
+   "ratio_intra_inter": 0.5025915708271466,
+   "tailles_groupes": [
+    497,
+    350
+   ],
+   "plancher_logistique": 0.6753246753246753,
+   "cout_representant_classe_cible": 0.019529905170202255,
+   "epoque": 3,
+   "pas": 12000
+  },
+  {
+   "pas": 12750,
+   "pseudo": {
+    "tour": 16,
+    "exactitude_wbhr_complet": 0.665,
+    "n_retenus": 2433,
+    "precision_retenus": 0.7020139745170572
+   }
+  },
+  {
+   "exactitude": 0.7107438016528925,
+   "oracle": 0.7107438016528925,
+   "silhouette": 0.43911197781562805,
+   "ratio_intra_inter": 0.507627134829434,
+   "tailles_groupes": [
+    500,
+    347
+   ],
+   "plancher_logistique": 0.667060212514758,
+   "cout_representant_classe_cible": 0.021987754851579666,
+   "epoque": 3,
+   "pas": 12750
+  },
+  {
+   "pas": 13500,
+   "pseudo": {
+    "tour": 17,
+    "exactitude_wbhr_complet": 0.663,
+    "n_retenus": 2461,
+    "precision_retenus": 0.7013409183258837
+   }
+  },
+  {
+   "exactitude": 0.7119244391971665,
+   "oracle": 0.7119244391971665,
+   "silhouette": 0.437538206577301,
+   "ratio_intra_inter": 0.5094683218041156,
+   "tailles_groupes": [
+    487,
+    360
+   ],
+   "plancher_logistique": 0.667060212514758,
+   "cout_representant_classe_cible": 0.02601796295493841,
+   "epoque": 3,
+   "pas": 13500
+  },
+  {
+   "pas": 14250,
+   "pseudo": {
+    "tour": 18,
+    "exactitude_wbhr_complet": 0.6626666666666666,
+    "n_retenus": 2407,
+    "precision_retenus": 0.7000415454923141
+   }
+  },
+  {
+   "exactitude": 0.6989374262101535,
+   "oracle": 0.6989374262101535,
+   "silhouette": 0.4336601495742798,
+   "ratio_intra_inter": 0.5143991654834821,
+   "tailles_groupes": [
+    492,
+    355
+   ],
+   "plancher_logistique": 0.680047225501771,
+   "cout_representant_classe_cible": 0.028537155129015446,
+   "epoque": 3,
+   "pas": 14250
+  },
+  {
+   "pas": 15000,
+   "pseudo": {
+    "tour": 19,
+    "exactitude_wbhr_complet": 0.661,
+    "n_retenus": 2584,
+    "precision_retenus": 0.7023993808049536
+   }
+  },
+  {
+   "exactitude": 0.7012987012987013,
+   "oracle": 0.7012987012987013,
+   "silhouette": 0.4383423924446106,
+   "ratio_intra_inter": 0.5097231763263923,
+   "tailles_groupes": [
+    343,
+    504
+   ],
+   "plancher_logistique": 0.6835891381345927,
+   "cout_representant_classe_cible": 0.03238450363278389,
+   "epoque": 3,
+   "pas": 15000
+  },
+  {
+   "pas": 15750,
+   "pseudo": {
+    "tour": 20,
+    "exactitude_wbhr_complet": 0.6616666666666666,
+    "n_retenus": 2538,
+    "precision_retenus": 0.6993695823483057
+   }
+  },
+  {
+   "exactitude": 0.7001180637544274,
+   "oracle": 0.7001180637544274,
+   "silhouette": 0.427263468503952,
+   "ratio_intra_inter": 0.5218888777207186,
+   "tailles_groupes": [
+    487,
+    360
+   ],
+   "plancher_logistique": 0.6765053128689492,
+   "cout_representant_classe_cible": 0.03620617650449276,
+   "epoque": 4,
+   "pas": 15750
+  },
+  {
+   "pas": 16500,
+   "pseudo": {
+    "tour": 21,
+    "exactitude_wbhr_complet": 0.6563333333333333,
+    "n_retenus": 2463,
+    "precision_retenus": 0.6983353633779943
+   }
+  },
+  {
+   "exactitude": 0.6989374262101535,
+   "oracle": 0.6989374262101535,
+   "silhouette": 0.4192929267883301,
+   "ratio_intra_inter": 0.5307728205697168,
+   "tailles_groupes": [
+    500,
+    347
+   ],
+   "plancher_logistique": 0.6835891381345927,
+   "cout_representant_classe_cible": 0.04043402336537838,
+   "epoque": 4,
+   "pas": 16500
+  },
+  {
+   "pas": 17250,
+   "pseudo": {
+    "tour": 22,
+    "exactitude_wbhr_complet": 0.6613333333333333,
+    "n_retenus": 2496,
+    "precision_retenus": 0.6971153846153846
+   }
+  },
+  {
+   "exactitude": 0.7001180637544274,
+   "oracle": 0.7001180637544274,
+   "silhouette": 0.42713361978530884,
+   "ratio_intra_inter": 0.5242772729147238,
+   "tailles_groupes": [
+    481,
+    366
+   ],
+   "plancher_logistique": 0.6835891381345927,
+   "cout_representant_classe_cible": 0.04564935714006424,
+   "epoque": 4,
+   "pas": 17250
+  },
+  {
+   "pas": 18000,
+   "pseudo": {
+    "tour": 23,
+    "exactitude_wbhr_complet": 0.65,
+    "n_retenus": 2464,
+    "precision_retenus": 0.6879058441558441
+   }
+  },
+  {
+   "exactitude": 0.6906729634002361,
+   "oracle": 0.6906729634002361,
+   "silhouette": 0.40615856647491455,
+   "ratio_intra_inter": 0.5466018752364857,
+   "tailles_groupes": [
+    493,
+    354
+   ],
+   "plancher_logistique": 0.6824085005903188,
+   "cout_representant_classe_cible": 0.04998859390616417,
+   "epoque": 4,
+   "pas": 18000
+  },
+  {
+   "pas": 18750,
+   "pseudo": {
+    "tour": 24,
+    "exactitude_wbhr_complet": 0.6536666666666666,
+    "n_retenus": 2530,
+    "precision_retenus": 0.6897233201581028
+   }
+  },
+  {
+   "exactitude": 0.69185360094451,
+   "oracle": 0.69185360094451,
+   "silhouette": 0.4165845513343811,
+   "ratio_intra_inter": 0.5376783669468143,
+   "tailles_groupes": [
+    482,
+    365
+   ],
+   "plancher_logistique": 0.6812278630460449,
+   "cout_representant_classe_cible": 0.05631859228014946,
+   "epoque": 4,
+   "pas": 18750
+  },
+  {
+   "pas": 19500,
+   "pseudo": {
+    "tour": 25,
+    "exactitude_wbhr_complet": 0.6476666666666666,
+    "n_retenus": 2487,
+    "precision_retenus": 0.6899879372738239
+   }
+  },
+  {
+   "exactitude": 0.6847697756788665,
+   "oracle": 0.6847697756788665,
+   "silhouette": 0.40243735909461975,
+   "ratio_intra_inter": 0.5510723288138346,
+   "tailles_groupes": [
+    492,
+    355
+   ],
+   "plancher_logistique": 0.6788665879574971,
+   "cout_representant_classe_cible": 0.06039046123623848,
+   "epoque": 5,
+   "pas": 19500
+  },
+  {
+   "pas": 20250,
+   "pseudo": {
+    "tour": 26,
+    "exactitude_wbhr_complet": 0.6493333333333333,
+    "n_retenus": 2531,
+    "precision_retenus": 0.686685104701699
+   }
+  },
+  {
+   "exactitude": 0.680047225501771,
+   "oracle": 0.680047225501771,
+   "silhouette": 0.4028111398220062,
+   "ratio_intra_inter": 0.5517025206636529,
+   "tailles_groupes": [
+    496,
+    351
+   ],
+   "plancher_logistique": 0.6741440377804014,
+   "cout_representant_classe_cible": 0.0633467547595501,
+   "epoque": 5,
+   "pas": 20250
+  },
+  {
+   "pas": 21000,
+   "pseudo": {
+    "tour": 27,
+    "exactitude_wbhr_complet": 0.6483333333333333,
+    "n_retenus": 2490,
+    "precision_retenus": 0.6835341365461848
+   }
+  },
+  {
+   "exactitude": 0.6765053128689492,
+   "oracle": 0.6765053128689492,
+   "silhouette": 0.3984200656414032,
+   "ratio_intra_inter": 0.5576277791487723,
+   "tailles_groupes": [
+    505,
+    342
+   ],
+   "plancher_logistique": 0.6788665879574971,
+   "cout_representant_classe_cible": 0.06414275988936424,
+   "epoque": 5,
+   "pas": 21000
+  },
+  {
+   "pas": 21750,
+   "pseudo": {
+    "tour": 28,
+    "exactitude_wbhr_complet": 0.646,
+    "n_retenus": 2568,
+    "precision_retenus": 0.6818535825545171
+   }
+  },
+  {
+   "exactitude": 0.6776859504132231,
+   "oracle": 0.6776859504132231,
+   "silhouette": 0.4099215567111969,
+   "ratio_intra_inter": 0.5464051254019645,
+   "tailles_groupes": [
+    333,
+    514
+   ],
+   "plancher_logistique": 0.6682408500590319,
+   "cout_representant_classe_cible": 0.07016501948237419,
+   "epoque": 5,
+   "pas": 21750
+  },
+  {
+   "pas": 22500,
+   "pseudo": {
+    "tour": 29,
+    "exactitude_wbhr_complet": 0.649,
+    "n_retenus": 2584,
+    "precision_retenus": 0.6818885448916409
+   }
+  },
+  {
+   "exactitude": 0.6859504132231405,
+   "oracle": 0.6859504132231405,
+   "silhouette": 0.40460968017578125,
+   "ratio_intra_inter": 0.5523387811111434,
+   "tailles_groupes": [
+    503,
+    344
+   ],
+   "plancher_logistique": 0.6729634002361276,
+   "cout_representant_classe_cible": 0.07143132761120796,
+   "epoque": 5,
+   "pas": 22500
+  },
+  {
+   "pas": 23250,
+   "pseudo": {
+    "tour": 30,
+    "exactitude_wbhr_complet": 0.6503333333333333,
+    "n_retenus": 2539,
+    "precision_retenus": 0.6837337534462387
+   }
+  },
+  {
+   "exactitude": 0.6682408500590319,
+   "oracle": 0.6682408500590319,
+   "silhouette": 0.39891916513442993,
+   "ratio_intra_inter": 0.5558526124319637,
+   "tailles_groupes": [
+    502,
+    345
+   ],
+   "plancher_logistique": 0.6753246753246753,
+   "cout_representant_classe_cible": 0.07181769981980324,
+   "epoque": 6,
+   "pas": 23250
+  },
+  {
+   "pas": 24000,
+   "pseudo": {
+    "tour": 31,
+    "exactitude_wbhr_complet": 0.649,
+    "n_retenus": 2542,
+    "precision_retenus": 0.6805664830841857
+   }
+  },
+  {
+   "exactitude": 0.6753246753246753,
+   "oracle": 0.6753246753246753,
+   "silhouette": 0.40264812111854553,
+   "ratio_intra_inter": 0.5537497505670611,
+   "tailles_groupes": [
+    500,
+    347
+   ],
+   "plancher_logistique": 0.6741440377804014,
+   "cout_representant_classe_cible": 0.07626989111304283,
+   "epoque": 6,
+   "pas": 24000
+  },
+  {
+   "pas": 24750,
+   "pseudo": {
+    "tour": 32,
+    "exactitude_wbhr_complet": 0.6466666666666666,
+    "n_retenus": 2555,
+    "precision_retenus": 0.6806262230919765
+   }
+  },
+  {
+   "exactitude": 0.680047225501771,
+   "oracle": 0.680047225501771,
+   "silhouette": 0.39864978194236755,
+   "ratio_intra_inter": 0.5565265567125832,
+   "tailles_groupes": [
+    496,
+    351
+   ],
+   "plancher_logistique": 0.6717827626918536,
+   "cout_representant_classe_cible": 0.07656536996364594,
+   "epoque": 6,
+   "pas": 24750
+  },
+  {
+   "pas": 25500,
+   "pseudo": {
+    "tour": 33,
+    "exactitude_wbhr_complet": 0.6476666666666666,
+    "n_retenus": 2556,
+    "precision_retenus": 0.681924882629108
+   }
+  },
+  {
+   "exactitude": 0.6706021251475797,
+   "oracle": 0.6706021251475797,
+   "silhouette": 0.39433154463768005,
+   "ratio_intra_inter": 0.5609181688877277,
+   "tailles_groupes": [
+    494,
+    353
+   ],
+   "plancher_logistique": 0.6706021251475797,
+   "cout_representant_classe_cible": 0.07730183750391006,
+   "epoque": 6,
+   "pas": 25500
+  },
+  {
+   "pas": 26250,
+   "pseudo": {
+    "tour": 34,
+    "exactitude_wbhr_complet": 0.65,
+    "n_retenus": 2547,
+    "precision_retenus": 0.6784452296819788
+   }
+  },
+  {
+   "exactitude": 0.6729634002361276,
+   "oracle": 0.6729634002361276,
+   "silhouette": 0.39547502994537354,
+   "ratio_intra_inter": 0.5602007771135237,
+   "tailles_groupes": [
+    490,
+    357
+   ],
+   "plancher_logistique": 0.6753246753246753,
+   "cout_representant_classe_cible": 0.07607178017497063,
+   "epoque": 6,
+   "pas": 26250
+  },
+  {
+   "pas": 27000,
+   "pseudo": {
+    "tour": 35,
+    "exactitude_wbhr_complet": 0.647,
+    "n_retenus": 2575,
+    "precision_retenus": 0.6784466019417476
+   }
+  },
+  {
+   "exactitude": 0.6776859504132231,
+   "oracle": 0.6776859504132231,
+   "silhouette": 0.39901185035705566,
+   "ratio_intra_inter": 0.5556009482199463,
+   "tailles_groupes": [
+    490,
+    357
+   ],
+   "plancher_logistique": 0.6753246753246753,
+   "cout_representant_classe_cible": 0.07788658887147903,
+   "epoque": 7,
+   "pas": 27000
+  },
+  {
+   "pas": 27750,
+   "pseudo": {
+    "tour": 36,
+    "exactitude_wbhr_complet": 0.6456666666666667,
+    "n_retenus": 2561,
+    "precision_retenus": 0.6782506833268255
+   }
+  },
+  {
+   "exactitude": 0.6788665879574971,
+   "oracle": 0.6788665879574971,
+   "silhouette": 0.3964069187641144,
+   "ratio_intra_inter": 0.5583121248723178,
+   "tailles_groupes": [
+    491,
+    356
+   ],
+   "plancher_logistique": 0.6741440377804014,
+   "cout_representant_classe_cible": 0.07631473056972027,
+   "epoque": 7,
+   "pas": 27750
+  },
+  {
+   "pas": 28500,
+   "pseudo": {
+    "tour": 37,
+    "exactitude_wbhr_complet": 0.6456666666666667,
+    "n_retenus": 2571,
+    "precision_retenus": 0.6783352781019059
+   }
+  },
+  {
+   "exactitude": 0.6753246753246753,
+   "oracle": 0.6753246753246753,
+   "silhouette": 0.3941635489463806,
+   "ratio_intra_inter": 0.5601758017598056,
+   "tailles_groupes": [
+    488,
+    359
+   ],
+   "plancher_logistique": 0.6765053128689492,
+   "cout_representant_classe_cible": 0.07593062147498131,
+   "epoque": 7,
+   "pas": 28500
+  },
+  {
+   "pas": 29250,
+   "pseudo": {
+    "tour": 38,
+    "exactitude_wbhr_complet": 0.6466666666666666,
+    "n_retenus": 2581,
+    "precision_retenus": 0.6772568771793879
+   }
+  },
+  {
+   "exactitude": 0.6812278630460449,
+   "oracle": 0.6812278630460449,
+   "silhouette": 0.3987840414047241,
+   "ratio_intra_inter": 0.5556112421604629,
+   "tailles_groupes": [
+    481,
+    366
+   ],
+   "plancher_logistique": 0.6741440377804014,
+   "cout_representant_classe_cible": 0.07595071569085121,
+   "epoque": 7,
+   "pas": 29250
+  },
+  {
+   "pas": 30000,
+   "pseudo": {
+    "tour": 39,
+    "exactitude_wbhr_complet": 0.6443333333333333,
+    "n_retenus": 2582,
+    "precision_retenus": 0.6789310611928737
+   }
+  },
+  {
+   "exactitude": 0.6776859504132231,
+   "oracle": 0.6776859504132231,
+   "silhouette": 0.39600539207458496,
+   "ratio_intra_inter": 0.5576114337287371,
+   "tailles_groupes": [
+    476,
+    371
+   ],
+   "plancher_logistique": 0.6753246753246753,
+   "cout_representant_classe_cible": 0.07446025684475899,
+   "epoque": 7,
+   "pas": 30000
+  },
+  {
+   "pas": 30750,
+   "pseudo": {
+    "tour": 40,
+    "exactitude_wbhr_complet": 0.6453333333333333,
+    "n_retenus": 2580,
+    "precision_retenus": 0.6775193798449612
+   }
+  },
+  {
+   "exactitude": 0.6835891381345927,
+   "oracle": 0.6835891381345927,
+   "silhouette": 0.39903387427330017,
+   "ratio_intra_inter": 0.5545299494985232,
+   "tailles_groupes": [
+    475,
+    372
+   ],
+   "plancher_logistique": 0.6741440377804014,
+   "cout_representant_classe_cible": 0.07432897575199604,
+   "epoque": 8,
+   "pas": 30750
+  },
+  {
+   "pas": 31500,
+   "pseudo": {
+    "tour": 41,
+    "exactitude_wbhr_complet": 0.6443333333333333,
+    "n_retenus": 2589,
+    "precision_retenus": 0.6790266512166859
+   }
+  },
+  {
+   "exactitude": 0.6788665879574971,
+   "oracle": 0.6788665879574971,
+   "silhouette": 0.39646396040916443,
+   "ratio_intra_inter": 0.5570314396202489,
+   "tailles_groupes": [
+    475,
+    372
+   ],
+   "plancher_logistique": 0.6706021251475797,
+   "cout_representant_classe_cible": 0.07472508028149605,
+   "epoque": 8,
+   "pas": 31500
+  },
+  {
+   "pas": 32250,
+   "pseudo": {
+    "tour": 42,
+    "exactitude_wbhr_complet": 0.644,
+    "n_retenus": 2590,
+    "precision_retenus": 0.6787644787644788
+   }
+  },
+  {
+   "exactitude": 0.6776859504132231,
+   "oracle": 0.6776859504132231,
+   "silhouette": 0.3966272473335266,
+   "ratio_intra_inter": 0.5567165810125504,
+   "tailles_groupes": [
+    468,
+    379
+   ],
+   "plancher_logistique": 0.6741440377804014,
+   "cout_representant_classe_cible": 0.07356237433850765,
+   "epoque": 8,
+   "pas": 32250
+  },
+  {
+   "pas": 33000,
+   "pseudo": {
+    "tour": 43,
+    "exactitude_wbhr_complet": 0.645,
+    "n_retenus": 2590,
+    "precision_retenus": 0.6787644787644788
+   }
+  },
+  {
+   "exactitude": 0.6765053128689492,
+   "oracle": 0.6765053128689492,
+   "silhouette": 0.39779818058013916,
+   "ratio_intra_inter": 0.5554136589786676,
+   "tailles_groupes": [
+    465,
+    382
+   ],
+   "plancher_logistique": 0.6729634002361276,
+   "cout_representant_classe_cible": 0.07288661226630211,
+   "epoque": 8,
+   "pas": 33000
+  },
+  {
+   "pas": 33750,
+   "pseudo": {
+    "tour": 44,
+    "exactitude_wbhr_complet": 0.644,
+    "n_retenus": 2592,
+    "precision_retenus": 0.6793981481481481
+   }
+  },
+  {
+   "exactitude": 0.680047225501771,
+   "oracle": 0.680047225501771,
+   "silhouette": 0.3981025516986847,
+   "ratio_intra_inter": 0.5550881579446271,
+   "tailles_groupes": [
+    460,
+    387
+   ],
+   "plancher_logistique": 0.6776859504132231,
+   "cout_representant_classe_cible": 0.07259917631745338,
+   "epoque": 8,
+   "pas": 33750
+  },
+  {
+   "pas": 34500,
+   "pseudo": {
+    "tour": 45,
+    "exactitude_wbhr_complet": 0.644,
+    "n_retenus": 2590,
+    "precision_retenus": 0.6791505791505792
+   }
+  },
+  {
+   "exactitude": 0.6824085005903188,
+   "oracle": 0.6824085005903188,
+   "silhouette": 0.39960822463035583,
+   "ratio_intra_inter": 0.553610546552813,
+   "tailles_groupes": [
+    470,
+    377
+   ],
+   "plancher_logistique": 0.6729634002361276,
+   "cout_representant_classe_cible": 0.07248061336576939,
+   "epoque": 9,
+   "pas": 34500
+  },
+  {
+   "pas": 35250,
+   "pseudo": {
+    "tour": 46,
+    "exactitude_wbhr_complet": 0.6436666666666667,
+    "n_retenus": 2593,
+    "precision_retenus": 0.679521789433089
+   }
+  },
+  {
+   "exactitude": 0.6765053128689492,
+   "oracle": 0.6765053128689492,
+   "silhouette": 0.39835354685783386,
+   "ratio_intra_inter": 0.5545617535740002,
+   "tailles_groupes": [
+    461,
+    386
+   ],
+   "plancher_logistique": 0.6741440377804014,
+   "cout_representant_classe_cible": 0.0727390144020319,
+   "epoque": 9,
+   "pas": 35250
+  },
+  {
+   "pas": 36000,
+   "pseudo": {
+    "tour": 47,
+    "exactitude_wbhr_complet": 0.6433333333333333,
+    "n_retenus": 2594,
+    "precision_retenus": 0.6792598303777949
+   }
+  },
+  {
+   "exactitude": 0.680047225501771,
+   "oracle": 0.680047225501771,
+   "silhouette": 0.3991953134536743,
+   "ratio_intra_inter": 0.5536405845551547,
+   "tailles_groupes": [
+    377,
+    470
+   ],
+   "plancher_logistique": 0.6753246753246753,
+   "cout_representant_classe_cible": 0.07233469560742378,
+   "epoque": 9,
+   "pas": 36000
+  },
+  {
+   "pas": 36750,
+   "pseudo": {
+    "tour": 48,
+    "exactitude_wbhr_complet": 0.6426666666666667,
+    "n_retenus": 2593,
+    "precision_retenus": 0.6791361357500965
+   }
+  },
+  {
+   "exactitude": 0.6765053128689492,
+   "oracle": 0.6765053128689492,
+   "silhouette": 0.4000129699707031,
+   "ratio_intra_inter": 0.5526664529781968,
+   "tailles_groupes": [
+    378,
+    469
+   ],
+   "plancher_logistique": 0.6741440377804014,
+   "cout_representant_classe_cible": 0.07219895161688328,
+   "epoque": 9,
+   "pas": 36750
+  },
+  {
+   "pas": 37500,
+   "pseudo": {
+    "tour": 49,
+    "exactitude_wbhr_complet": 0.6423333333333333,
+    "n_retenus": 2593,
+    "precision_retenus": 0.6787504820671038
+   }
+  },
+  {
+   "exactitude": 0.680047225501771,
+   "oracle": 0.680047225501771,
+   "silhouette": 0.39981526136398315,
+   "ratio_intra_inter": 0.552816268127144,
+   "tailles_groupes": [
+    470,
+    377
+   ],
+   "plancher_logistique": 0.6765053128689492,
+   "cout_representant_classe_cible": 0.07206470519304276,
+   "epoque": 9,
+   "pas": 37500
+  }
+ ]
+}

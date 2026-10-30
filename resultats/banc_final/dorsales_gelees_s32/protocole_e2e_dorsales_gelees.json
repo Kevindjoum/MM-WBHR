@@ -1,0 +1,28 @@
+{
+ "titre": "Bout en bout avec les dorsales gelees : le pipeline de bout en bout est-il en cause, ou l'affinage ?",
+ "ecrit_le": "2026-10-31, avant tout resultat",
+ "ecrit_avant_tout_resultat": true,
+ "demande": "test decisif propose le 30/10 : relancer le pipeline de bout en bout (section 26) avec les dorsales gelees",
+ "code": "kaggle/e2e/build.py (option --dorsales) avec le paquet de la methode EXACTEMENT celui de la section 26 (extrait du kernel djoumessikevin/e2e-aesthetic-ava, sha256 634190995a46...), code M2CAN de results/code_ref",
+ "cible": "AVA",
+ "graine": 123456,
+ "reglages": "identiques a la section 26 : 3 epoques x 847 pas, pseudo-etiquettes tous les 169 pas, evaluation en fin d'epoque, z 256, extracteur 5e-5, chargeurs de M2CAN (images brutes, augmentations a la volee)",
+ "variantes": {
+  "gelees_eval": "poids de BERT et ResNet-50 figes, en mode evaluation (BatchNorm sur les statistiques ImageNet, sans dropout) : l'equivalent des caracteristiques gelees, seul le pipeline differe",
+  "gelees_train": "poids figes mais mode entrainement (BatchNorm sur les statistiques du lot d'une image, moyennes glissantes mises a jour ; dropout de BERT actif) : ce qu'aurait donne un taux de dorsale nul"
+ },
+ "reperes_graine_123456": {
+  "bout en bout, dorsales entrainees a 2e-6 (section 26)": 58.91,
+  "caracteristiques gelees BERT/ResNet (section 23)": 72.73,
+  "caracteristiques gelees CLIP (section 27)": 71.66
+ },
+ "lecture": {
+  "gelees_eval proche de 72.73": "le pipeline n'est pas en cause ; la chute vient de l'affinage ou du mode entrainement des dorsales -> lire gelees_train",
+  "gelees_eval proche de 58.91": "le pipeline de bout en bout est en cause (chargeurs, augmentations, calendrier 847 / 169 pas au lieu de 3750 / 750, pooling) ; l'affinage n'y est pour rien",
+  "gelees_train nettement sous gelees_eval": "le mode entrainement des dorsales (BatchNorm sur une image, dropout) suffit a casser la methode, sans meme changer les poids"
+ },
+ "reserves": [
+  "une seule graine (couts) : lecture descriptive, a +/- 3 points de bruit environ",
+  "le calendrier de la section 26 (847 pas par epoque, pseudo-etiquettes tous les 169 pas) differe de celui du banc gele (3750 / 750) : il fait partie du 'pipeline' teste ici"
+ ]
+}

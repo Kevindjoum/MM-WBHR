@@ -1,0 +1,262 @@
+{
+ "config": {
+  "appareil": "cuda",
+  "donnees": {
+   "cible": "AVA",
+   "racine": "brut",
+   "sources": [
+    "PCCD",
+    "RPCD"
+   ]
+  },
+  "fusion": {
+   "dim": 256
+  },
+  "graine": 123456,
+  "modalites": [
+   {
+    "encodeur": {
+     "type": "m2can_texte"
+    },
+    "nom": "text"
+   },
+   {
+    "encodeur": {
+     "type": "m2can_image"
+    },
+    "nom": "image"
+   }
+  ],
+  "phase1": {
+   "alpha_cmcfa": 1.0,
+   "beta_cdcfa": 1.0,
+   "epoques": 3,
+   "evaluer_tous_les": 847,
+   "gamma_supcon_fusion": 1.0,
+   "lot": 4,
+   "optimiseur": {
+    "lr_dorsale": 0.0,
+    "lr_extracteur": 5e-05,
+    "lr_fusion": 5e-05,
+    "lr_min": 1e-08,
+    "lr_tetes": 5e-05,
+    "puissance": 0.9
+   },
+   "pas_par_epoque": 847,
+   "poids_im": 0.0,
+   "poids_tetes": 1.0,
+   "tau": 0.07
+  },
+  "phase2": {
+   "eps": 0.02,
+   "par_classe": 400,
+   "partition": "spectrale",
+   "point_fixe": 8,
+   "sinkhorn": 60,
+   "sources_max": 1600,
+   "support": 16
+  },
+  "pseudo": {
+   "actif": true,
+   "cible_max": 3000,
+   "filtre": "accord",
+   "taux": [
+    0.3,
+    0.6,
+    0.9,
+    1.0
+   ],
+   "tous_les": 169
+  },
+  "sortie": "/kaggle/working/sorties/AVA_s123456"
+ },
+ "meilleur": {
+  "exactitude": 0.4592680047225502,
+  "oracle": 0.5407319952774499,
+  "silhouette": 0.1082834005355835,
+  "ratio_intra_inter": 0.8708273658042521,
+  "tailles_groupes": [
+   348,
+   499
+  ],
+  "cout_representant_classe_cible": 0.0007126721320673823,
+  "epoque": 2,
+  "pas": 2541
+ },
+ "historique": [
+  {
+   "pas": 169,
+   "pseudo": {
+    "tour": 0,
+    "exactitude_wbhr_complet": 0.5276666666666666,
+    "n_retenus": 450,
+    "precision_retenus": 0.5
+   }
+  },
+  {
+   "pas": 338,
+   "pseudo": {
+    "tour": 1,
+    "exactitude_wbhr_complet": 0.44,
+    "n_retenus": 900,
+    "precision_retenus": 0.4177777777777778
+   }
+  },
+  {
+   "pas": 507,
+   "pseudo": {
+    "tour": 2,
+    "exactitude_wbhr_complet": 0.554,
+    "n_retenus": 1211,
+    "precision_retenus": 0.47811725846407926
+   }
+  },
+  {
+   "pas": 676,
+   "pseudo": {
+    "tour": 3,
+    "exactitude_wbhr_complet": 0.5253333333333333,
+    "n_retenus": 1493,
+    "precision_retenus": 0.4534494306764903
+   }
+  },
+  {
+   "pas": 845,
+   "pseudo": {
+    "tour": 4,
+    "exactitude_wbhr_complet": 0.5463333333333333,
+    "n_retenus": 1208,
+    "precision_retenus": 0.4685430463576159
+   }
+  },
+  {
+   "exactitude": 0.45808736717827625,
+   "oracle": 0.5419126328217237,
+   "silhouette": 0.09514392912387848,
+   "ratio_intra_inter": 0.8953312196082673,
+   "tailles_groupes": [
+    440,
+    407
+   ],
+   "cout_representant_classe_cible": 0.0008205126214306802,
+   "epoque": 0,
+   "pas": 847
+  },
+  {
+   "pas": 1014,
+   "pseudo": {
+    "tour": 5,
+    "exactitude_wbhr_complet": 0.4736666666666667,
+    "n_retenus": 1500,
+    "precision_retenus": 0.4093333333333333
+   }
+  },
+  {
+   "pas": 1183,
+   "pseudo": {
+    "tour": 6,
+    "exactitude_wbhr_complet": 0.5303333333333333,
+    "n_retenus": 1492,
+    "precision_retenus": 0.4584450402144772
+   }
+  },
+  {
+   "pas": 1352,
+   "pseudo": {
+    "tour": 7,
+    "exactitude_wbhr_complet": 0.446,
+    "n_retenus": 1500,
+    "precision_retenus": 0.39666666666666667
+   }
+  },
+  {
+   "pas": 1521,
+   "pseudo": {
+    "tour": 8,
+    "exactitude_wbhr_complet": 0.45866666666666667,
+    "n_retenus": 1500,
+    "precision_retenus": 0.4033333333333333
+   }
+  },
+  {
+   "pas": 1690,
+   "pseudo": {
+    "tour": 9,
+    "exactitude_wbhr_complet": 0.548,
+    "n_retenus": 1163,
+    "precision_retenus": 0.469475494411006
+   }
+  },
+  {
+   "exactitude": 0.45336481700118064,
+   "oracle": 0.5466351829988194,
+   "silhouette": 0.10632259398698807,
+   "ratio_intra_inter": 0.8768280062366423,
+   "tailles_groupes": [
+    377,
+    470
+   ],
+   "cout_representant_classe_cible": 0.0008089870680123568,
+   "epoque": 1,
+   "pas": 1694
+  },
+  {
+   "pas": 1859,
+   "pseudo": {
+    "tour": 10,
+    "exactitude_wbhr_complet": 0.544,
+    "n_retenus": 1251,
+    "precision_retenus": 0.46682653876898483
+   }
+  },
+  {
+   "pas": 2028,
+   "pseudo": {
+    "tour": 11,
+    "exactitude_wbhr_complet": 0.465,
+    "n_retenus": 1500,
+    "precision_retenus": 0.41
+   }
+  },
+  {
+   "pas": 2197,
+   "pseudo": {
+    "tour": 12,
+    "exactitude_wbhr_complet": 0.446,
+    "n_retenus": 1500,
+    "precision_retenus": 0.402
+   }
+  },
+  {
+   "pas": 2366,
+   "pseudo": {
+    "tour": 13,
+    "exactitude_wbhr_complet": 0.5553333333333333,
+    "n_retenus": 1147,
+    "precision_retenus": 0.47863993025283347
+   }
+  },
+  {
+   "pas": 2535,
+   "pseudo": {
+    "tour": 14,
+    "exactitude_wbhr_complet": 0.5146666666666667,
+    "n_retenus": 1455,
+    "precision_retenus": 0.44123711340206184
+   }
+  },
+  {
+   "exactitude": 0.4592680047225502,
+   "oracle": 0.5407319952774499,
+   "silhouette": 0.1082834005355835,
+   "ratio_intra_inter": 0.8708273658042521,
+   "tailles_groupes": [
+    348,
+    499
+   ],
+   "cout_representant_classe_cible": 0.0007126721320673823,
+   "epoque": 2,
+   "pas": 2541
+  }
+ ]
+}

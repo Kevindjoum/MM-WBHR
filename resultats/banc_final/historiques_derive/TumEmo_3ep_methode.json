@@ -1,0 +1,436 @@
+{
+ "config": {
+  "appareil": "cuda",
+  "donnees": {
+   "cible": "TumEmo",
+   "racine": "/kaggle/input/notebooks/djoumessikevin/extract-clip-sentiment/feats_sentiment",
+   "sources": [
+    "Twitter",
+    "Yelp"
+   ]
+  },
+  "fusion": {
+   "dim": 256
+  },
+  "graine": 123456,
+  "modalites": [
+   {
+    "encodeur": {
+     "dim": 512,
+     "type": "caracteristiques"
+    },
+    "nom": "text"
+   },
+   {
+    "encodeur": {
+     "dim": 512,
+     "type": "caracteristiques"
+    },
+    "nom": "image"
+   }
+  ],
+  "phase1": {
+   "alpha_cmcfa": 1.0,
+   "beta_cdcfa": 1.0,
+   "epoques": 3,
+   "evaluer_tous_les": 750,
+   "gamma_supcon_fusion": 1.0,
+   "lot": 4,
+   "optimiseur": {
+    "lr_dorsale": 2e-06,
+    "lr_extracteur": 5e-05,
+    "lr_fusion": 5e-05,
+    "lr_min": 1e-08,
+    "lr_tetes": 5e-05,
+    "puissance": 0.9
+   },
+   "pas_par_epoque": 3750,
+   "poids_im": 0.0,
+   "poids_tetes": 1.0,
+   "tau": 0.07
+  },
+  "phase2": {
+   "eps": 0.02,
+   "par_classe": 400,
+   "partition": "spectrale",
+   "point_fixe": 8,
+   "sinkhorn": 60,
+   "sources_max": null,
+   "support": 16
+  },
+  "pseudo": {
+   "actif": true,
+   "cible_max": 3000,
+   "filtre": "accord",
+   "taux": [
+    0.3,
+    0.6,
+    0.9,
+    1.0
+   ],
+   "tous_les": 750
+  },
+  "sortie": "/kaggle/working/sorties/fgm_methode/TumEmo_s123456"
+ },
+ "meilleur": {
+  "exactitude": 0.5966666666666667,
+  "oracle": 0.5966666666666667,
+  "silhouette": 0.05360517278313637,
+  "ratio_intra_inter": 0.9134589441130647,
+  "tailles_groupes": [
+   566,
+   595,
+   339
+  ],
+  "cout_representant_classe_cible": 0.01445785133788983,
+  "epoque": 0,
+  "pas": 1500
+ },
+ "historique": [
+  {
+   "pas": 750,
+   "pseudo": {
+    "tour": 0,
+    "exactitude_wbhr_complet": 0.522,
+    "n_retenus": 600,
+    "precision_retenus": 0.655
+   }
+  },
+  {
+   "exactitude": 0.5153333333333333,
+   "oracle": 0.5153333333333333,
+   "silhouette": 0.05528061091899872,
+   "ratio_intra_inter": 0.9104465143323318,
+   "tailles_groupes": [
+    768,
+    396,
+    336
+   ],
+   "cout_representant_classe_cible": 0.015405539733668169,
+   "epoque": 0,
+   "pas": 750
+  },
+  {
+   "pas": 1500,
+   "pseudo": {
+    "tour": 1,
+    "exactitude_wbhr_complet": 0.605,
+    "n_retenus": 1085,
+    "precision_retenus": 0.7373271889400922
+   }
+  },
+  {
+   "exactitude": 0.5966666666666667,
+   "oracle": 0.5966666666666667,
+   "silhouette": 0.05360517278313637,
+   "ratio_intra_inter": 0.9134589441130647,
+   "tailles_groupes": [
+    566,
+    595,
+    339
+   ],
+   "cout_representant_classe_cible": 0.01445785133788983,
+   "epoque": 0,
+   "pas": 1500
+  },
+  {
+   "pas": 2250,
+   "pseudo": {
+    "tour": 2,
+    "exactitude_wbhr_complet": 0.5973333333333334,
+    "n_retenus": 1652,
+    "precision_retenus": 0.6815980629539952
+   }
+  },
+  {
+   "exactitude": 0.35533333333333333,
+   "oracle": 0.584,
+   "silhouette": 0.08003115653991699,
+   "ratio_intra_inter": 0.87751900883449,
+   "tailles_groupes": [
+    548,
+    597,
+    355
+   ],
+   "cout_representant_classe_cible": 0.014133519803484281,
+   "epoque": 0,
+   "pas": 2250
+  },
+  {
+   "pas": 3000,
+   "pseudo": {
+    "tour": 3,
+    "exactitude_wbhr_complet": 0.566,
+    "n_retenus": 2068,
+    "precision_retenus": 0.5880077369439072
+   }
+  },
+  {
+   "exactitude": 0.34933333333333333,
+   "oracle": 0.564,
+   "silhouette": 0.1319243609905243,
+   "ratio_intra_inter": 0.7988793380865516,
+   "tailles_groupes": [
+    536,
+    688,
+    276
+   ],
+   "cout_representant_classe_cible": 0.015038826502859592,
+   "epoque": 0,
+   "pas": 3000
+  },
+  {
+   "pas": 3750,
+   "pseudo": {
+    "tour": 4,
+    "exactitude_wbhr_complet": 0.4726666666666667,
+    "n_retenus": 1184,
+    "precision_retenus": 0.6503378378378378
+   }
+  },
+  {
+   "exactitude": 0.454,
+   "oracle": 0.454,
+   "silhouette": 0.16476945579051971,
+   "ratio_intra_inter": 0.6124994230024666,
+   "tailles_groupes": [
+    914,
+    352,
+    234
+   ],
+   "cout_representant_classe_cible": 0.016844133536020916,
+   "epoque": 0,
+   "pas": 3750
+  },
+  {
+   "pas": 4500,
+   "pseudo": {
+    "tour": 5,
+    "exactitude_wbhr_complet": 0.4836666666666667,
+    "n_retenus": 1232,
+    "precision_retenus": 0.6590909090909091
+   }
+  },
+  {
+   "exactitude": 0.462,
+   "oracle": 0.462,
+   "silhouette": 0.18055111169815063,
+   "ratio_intra_inter": 0.5876760988676802,
+   "tailles_groupes": [
+    894,
+    384,
+    222
+   ],
+   "cout_representant_classe_cible": 0.017388910055160522,
+   "epoque": 1,
+   "pas": 4500
+  },
+  {
+   "pas": 5250,
+   "pseudo": {
+    "tour": 6,
+    "exactitude_wbhr_complet": 0.4866666666666667,
+    "n_retenus": 1243,
+    "precision_retenus": 0.6637168141592921
+   }
+  },
+  {
+   "exactitude": 0.47,
+   "oracle": 0.47,
+   "silhouette": 0.20319250226020813,
+   "ratio_intra_inter": 0.5589261469071105,
+   "tailles_groupes": [
+    859,
+    417,
+    224
+   ],
+   "cout_representant_classe_cible": 0.01845745804409186,
+   "epoque": 1,
+   "pas": 5250
+  },
+  {
+   "pas": 6000,
+   "pseudo": {
+    "tour": 7,
+    "exactitude_wbhr_complet": 0.49166666666666664,
+    "n_retenus": 1252,
+    "precision_retenus": 0.670926517571885
+   }
+  },
+  {
+   "exactitude": 0.4766666666666667,
+   "oracle": 0.4766666666666667,
+   "silhouette": 0.20647546648979187,
+   "ratio_intra_inter": 0.5534677580888538,
+   "tailles_groupes": [
+    850,
+    423,
+    227
+   ],
+   "cout_representant_classe_cible": 0.01898302510380745,
+   "epoque": 1,
+   "pas": 6000
+  },
+  {
+   "pas": 6750,
+   "pseudo": {
+    "tour": 8,
+    "exactitude_wbhr_complet": 0.49433333333333335,
+    "n_retenus": 1287,
+    "precision_retenus": 0.6767676767676768
+   }
+  },
+  {
+   "exactitude": 0.476,
+   "oracle": 0.476,
+   "silhouette": 0.204555943608284,
+   "ratio_intra_inter": 0.5463738530554851,
+   "tailles_groupes": [
+    863,
+    423,
+    214
+   ],
+   "cout_representant_classe_cible": 0.019261057178179424,
+   "epoque": 1,
+   "pas": 6750
+  },
+  {
+   "pas": 7500,
+   "pseudo": {
+    "tour": 9,
+    "exactitude_wbhr_complet": 0.49533333333333335,
+    "n_retenus": 1276,
+    "precision_retenus": 0.6786833855799373
+   }
+  },
+  {
+   "exactitude": 0.4686666666666667,
+   "oracle": 0.4686666666666667,
+   "silhouette": 0.2059316337108612,
+   "ratio_intra_inter": 0.5374653853813797,
+   "tailles_groupes": [
+    878,
+    202,
+    420
+   ],
+   "cout_representant_classe_cible": 0.019910268485546112,
+   "epoque": 1,
+   "pas": 7500
+  },
+  {
+   "pas": 8250,
+   "pseudo": {
+    "tour": 10,
+    "exactitude_wbhr_complet": 0.495,
+    "n_retenus": 1292,
+    "precision_retenus": 0.673374613003096
+   }
+  },
+  {
+   "exactitude": 0.4706666666666667,
+   "oracle": 0.4706666666666667,
+   "silhouette": 0.21213297545909882,
+   "ratio_intra_inter": 0.5271824415793088,
+   "tailles_groupes": [
+    862,
+    202,
+    436
+   ],
+   "cout_representant_classe_cible": 0.02066868667801221,
+   "epoque": 2,
+   "pas": 8250
+  },
+  {
+   "pas": 9000,
+   "pseudo": {
+    "tour": 11,
+    "exactitude_wbhr_complet": 0.5003333333333333,
+    "n_retenus": 1306,
+    "precision_retenus": 0.6768759571209801
+   }
+  },
+  {
+   "exactitude": 0.4746666666666667,
+   "oracle": 0.4746666666666667,
+   "silhouette": 0.2117331176996231,
+   "ratio_intra_inter": 0.5237542975457387,
+   "tailles_groupes": [
+    864,
+    196,
+    440
+   ],
+   "cout_representant_classe_cible": 0.020980977763732273,
+   "epoque": 2,
+   "pas": 9000
+  },
+  {
+   "pas": 9750,
+   "pseudo": {
+    "tour": 12,
+    "exactitude_wbhr_complet": 0.497,
+    "n_retenus": 1291,
+    "precision_retenus": 0.6762199845081333
+   }
+  },
+  {
+   "exactitude": 0.47533333333333333,
+   "oracle": 0.47533333333333333,
+   "silhouette": 0.2133016288280487,
+   "ratio_intra_inter": 0.5237703336421664,
+   "tailles_groupes": [
+    858,
+    200,
+    442
+   ],
+   "cout_representant_classe_cible": 0.021350185697277386,
+   "epoque": 2,
+   "pas": 9750
+  },
+  {
+   "pas": 10500,
+   "pseudo": {
+    "tour": 13,
+    "exactitude_wbhr_complet": 0.49966666666666665,
+    "n_retenus": 1311,
+    "precision_retenus": 0.6735316552250191
+   }
+  },
+  {
+   "exactitude": 0.474,
+   "oracle": 0.474,
+   "silhouette": 0.21621446311473846,
+   "ratio_intra_inter": 0.5162587779991692,
+   "tailles_groupes": [
+    857,
+    448,
+    195
+   ],
+   "cout_representant_classe_cible": 0.021667656178275745,
+   "epoque": 2,
+   "pas": 10500
+  },
+  {
+   "pas": 11250,
+   "pseudo": {
+    "tour": 14,
+    "exactitude_wbhr_complet": 0.49666666666666665,
+    "n_retenus": 1291,
+    "precision_retenus": 0.6769945778466305
+   }
+  },
+  {
+   "exactitude": 0.4726666666666667,
+   "oracle": 0.4726666666666667,
+   "silhouette": 0.21453800797462463,
+   "ratio_intra_inter": 0.5192167008401523,
+   "tailles_groupes": [
+    859,
+    197,
+    444
+   ],
+   "cout_representant_classe_cible": 0.021653258552153904,
+   "epoque": 2,
+   "pas": 11250
+  }
+ ]
+}

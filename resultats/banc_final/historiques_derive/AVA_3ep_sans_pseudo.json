@@ -1,0 +1,285 @@
+{
+ "config": {
+  "appareil": "cuda",
+  "donnees": {
+   "cible": "AVA",
+   "racine": "/kaggle/input/notebooks/djoumessikevin/extract-clip-aesthetic/feats_aesthetic",
+   "sources": [
+    "PCCD",
+    "RPCD"
+   ]
+  },
+  "fusion": {
+   "dim": 256
+  },
+  "graine": 123456,
+  "modalites": [
+   {
+    "encodeur": {
+     "dim": 512,
+     "type": "caracteristiques"
+    },
+    "nom": "text"
+   },
+   {
+    "encodeur": {
+     "dim": 512,
+     "type": "caracteristiques"
+    },
+    "nom": "image"
+   }
+  ],
+  "phase1": {
+   "alpha_cmcfa": 1.0,
+   "beta_cdcfa": 1.0,
+   "epoques": 3,
+   "evaluer_tous_les": 750,
+   "gamma_supcon_fusion": 1.0,
+   "lot": 4,
+   "optimiseur": {
+    "lr_dorsale": 2e-06,
+    "lr_extracteur": 5e-05,
+    "lr_fusion": 5e-05,
+    "lr_min": 1e-08,
+    "lr_tetes": 5e-05,
+    "puissance": 0.9
+   },
+   "pas_par_epoque": 3750,
+   "poids_im": 0.0,
+   "poids_tetes": 1.0,
+   "tau": 0.07
+  },
+  "phase2": {
+   "eps": 0.02,
+   "par_classe": 400,
+   "partition": "spectrale",
+   "point_fixe": 8,
+   "sinkhorn": 60,
+   "sources_max": null,
+   "support": 16
+  },
+  "pseudo": {
+   "actif": false,
+   "cible_max": 3000,
+   "filtre": "accord",
+   "taux": [
+    0.3,
+    0.6,
+    0.9,
+    1.0
+   ],
+   "tous_les": 750
+  },
+  "sortie": "/kaggle/working/sorties/fgm_methode_sans_pseudo/AVA_s123456"
+ },
+ "meilleur": {
+  "exactitude": 0.7331759149940968,
+  "oracle": 0.7331759149940968,
+  "silhouette": 0.3165440559387207,
+  "ratio_intra_inter": 0.6434116289308088,
+  "tailles_groupes": [
+   399,
+   448
+  ],
+  "cout_representant_classe_cible": 0.005219917744398117,
+  "epoque": 2,
+  "pas": 9750
+ },
+ "historique": [
+  {
+   "exactitude": 0.5088547815820543,
+   "oracle": 0.5088547815820543,
+   "silhouette": 0.04780346155166626,
+   "ratio_intra_inter": 0.9495304956843609,
+   "tailles_groupes": [
+    423,
+    424
+   ],
+   "cout_representant_classe_cible": 0.007172604324296117,
+   "epoque": 0,
+   "pas": 750
+  },
+  {
+   "exactitude": 0.5194805194805194,
+   "oracle": 0.5194805194805194,
+   "silhouette": 0.05289700627326965,
+   "ratio_intra_inter": 0.9531477614611654,
+   "tailles_groupes": [
+    516,
+    331
+   ],
+   "cout_representant_classe_cible": 0.005410002777352929,
+   "epoque": 0,
+   "pas": 1500
+  },
+  {
+   "exactitude": 0.6127508854781583,
+   "oracle": 0.6127508854781583,
+   "silhouette": 0.041662946343421936,
+   "ratio_intra_inter": 0.9553882958092326,
+   "tailles_groupes": [
+    428,
+    419
+   ],
+   "cout_representant_classe_cible": 0.004516178043559194,
+   "epoque": 0,
+   "pas": 2250
+  },
+  {
+   "exactitude": 0.6646989374262101,
+   "oracle": 0.6646989374262101,
+   "silhouette": 0.05098646134138107,
+   "ratio_intra_inter": 0.9452493097922775,
+   "tailles_groupes": [
+    411,
+    436
+   ],
+   "cout_representant_classe_cible": 0.004014609148725867,
+   "epoque": 0,
+   "pas": 3000
+  },
+  {
+   "exactitude": 0.69185360094451,
+   "oracle": 0.69185360094451,
+   "silhouette": 0.06838755309581757,
+   "ratio_intra_inter": 0.9267494968628858,
+   "tailles_groupes": [
+    441,
+    406
+   ],
+   "cout_representant_classe_cible": 0.003726605325937271,
+   "epoque": 0,
+   "pas": 3750
+  },
+  {
+   "exactitude": 0.704840613931523,
+   "oracle": 0.704840613931523,
+   "silhouette": 0.0941886305809021,
+   "ratio_intra_inter": 0.898301439259872,
+   "tailles_groupes": [
+    393,
+    454
+   ],
+   "cout_representant_classe_cible": 0.003576420829631388,
+   "epoque": 1,
+   "pas": 4500
+  },
+  {
+   "exactitude": 0.704840613931523,
+   "oracle": 0.704840613931523,
+   "silhouette": 0.1324925571680069,
+   "ratio_intra_inter": 0.8542587139845481,
+   "tailles_groupes": [
+    347,
+    500
+   ],
+   "cout_representant_classe_cible": 0.003642657888121903,
+   "epoque": 1,
+   "pas": 5250
+  },
+  {
+   "exactitude": 0.7119244391971665,
+   "oracle": 0.7119244391971665,
+   "silhouette": 0.17743462324142456,
+   "ratio_intra_inter": 0.8057192811170761,
+   "tailles_groupes": [
+    371,
+    476
+   ],
+   "cout_representant_classe_cible": 0.0038725268095731735,
+   "epoque": 1,
+   "pas": 6000
+  },
+  {
+   "exactitude": 0.7083825265643447,
+   "oracle": 0.7083825265643447,
+   "silhouette": 0.2275295853614807,
+   "ratio_intra_inter": 0.7479640680929618,
+   "tailles_groupes": [
+    368,
+    479
+   ],
+   "cout_representant_classe_cible": 0.004247281001880765,
+   "epoque": 1,
+   "pas": 6750
+  },
+  {
+   "exactitude": 0.7095631641086186,
+   "oracle": 0.7095631641086186,
+   "silhouette": 0.2689741849899292,
+   "ratio_intra_inter": 0.7004511883465689,
+   "tailles_groupes": [
+    391,
+    456
+   ],
+   "cout_representant_classe_cible": 0.004609481664374471,
+   "epoque": 1,
+   "pas": 7500
+  },
+  {
+   "exactitude": 0.7201889020070839,
+   "oracle": 0.7201889020070839,
+   "silhouette": 0.294952929019928,
+   "ratio_intra_inter": 0.668922576924981,
+   "tailles_groupes": [
+    380,
+    467
+   ],
+   "cout_representant_classe_cible": 0.004873943980783224,
+   "epoque": 2,
+   "pas": 8250
+  },
+  {
+   "exactitude": 0.7249114521841794,
+   "oracle": 0.7249114521841794,
+   "silhouette": 0.3140016794204712,
+   "ratio_intra_inter": 0.6457836682024163,
+   "tailles_groupes": [
+    382,
+    465
+   ],
+   "cout_representant_classe_cible": 0.0051579049322754145,
+   "epoque": 2,
+   "pas": 9000
+  },
+  {
+   "exactitude": 0.7331759149940968,
+   "oracle": 0.7331759149940968,
+   "silhouette": 0.3165440559387207,
+   "ratio_intra_inter": 0.6434116289308088,
+   "tailles_groupes": [
+    399,
+    448
+   ],
+   "cout_representant_classe_cible": 0.005219917744398117,
+   "epoque": 2,
+   "pas": 9750
+  },
+  {
+   "exactitude": 0.7331759149940968,
+   "oracle": 0.7331759149940968,
+   "silhouette": 0.3229963779449463,
+   "ratio_intra_inter": 0.6352550167195742,
+   "tailles_groupes": [
+    395,
+    452
+   ],
+   "cout_representant_classe_cible": 0.0053096015471965075,
+   "epoque": 2,
+   "pas": 10500
+  },
+  {
+   "exactitude": 0.730814639905549,
+   "oracle": 0.730814639905549,
+   "silhouette": 0.32486268877983093,
+   "ratio_intra_inter": 0.6330005195992878,
+   "tailles_groupes": [
+    395,
+    452
+   ],
+   "cout_representant_classe_cible": 0.005335481837391853,
+   "epoque": 2,
+   "pas": 11250
+  }
+ ]
+}

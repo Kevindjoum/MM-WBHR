@@ -1,0 +1,59 @@
+--- ../demande_30_10/demande_30_10/code_bout_en_bout/e2e_build.py	2026-10-30 03:43:54.000000000 +0000
++++ e2e_build.py	2026-10-30 05:49:18.556121502 +0000
+@@ -114,6 +114,10 @@
+             super().train(mode)
+             if GEL == "gelees_eval":
+                 self.net.eval()
++            elif mode and CONF.get("bn_eval"):      # affinage avec BatchNorm figee (statistiques ImageNet) :
++                for m in self.net.modules():        # le lot d'une image ne permet pas d'estimer les statistiques
++                    if isinstance(m, nn.modules.batchnorm._BatchNorm):
++                        m.eval()
+             return self
+ 
+         def forward(self, x):
+@@ -214,6 +218,10 @@
+             c.update(graine=graine, appareil="cuda", sortie=sortie)
+             c["phase1"].update(epoques=CONF["epoques"], pas_par_epoque=ppe, evaluer_tous_les=ev_per)
+             c.setdefault("pseudo", {})["tous_les"] = per
++            if CONF.get("calendrier_m2can"):        # epoque 1 sources seules, un tour par epoque, amorcage par les tetes
++                c["phase1"]["cmcfa_cible_debut"] = ppe
++                c["pseudo"].update(debut=ppe, tous_les=ppe, taux=[0.3, 0.6, 0.9, 1.0], amorcage_tours=2)
++                per = ppe
+             os.makedirs(sortie, exist_ok=True)
+             cp = f"{sortie}/config.yaml"
+             yaml.safe_dump(c, open(cp, "w"), allow_unicode=True)
+@@ -296,7 +304,16 @@
+     ap.add_argument("--evaluer", type=int, default=None,
+                     help="periode d'evaluation sur le test cible ; defaut : une fois par epoque (mesure = dernier point)")
+     ap.add_argument("--dim_z", type=int, default=256, help="dimension de l'espace fusionne (ALGORITHME.md : 256)")
+-    ap.add_argument("--lr_extracteur", type=float, default=5e-05, help="ALGORITHME.md : 5e-5")
++    ap.add_argument("--lr_extracteur", type=float, default=5e-05, help="ALGORITHME.md : 5e-5 ; section 19 / M2CAN : 2e-5")
++    ap.add_argument("--lr_dorsale", type=float, default=2e-06, help="section 26 : 2e-6 ; section 19 / M2CAN : 2e-5")
++    ap.add_argument("--lr_fusion", type=float, default=5e-05, help="section 26 : 5e-5 ; section 19 / M2CAN (mlb_lr) : 5e-4")
++    ap.add_argument("--lr_tetes", type=float, default=5e-05, help="section 26 : 5e-5 ; section 19 / M2CAN (classifier_lr) : 5e-4")
++    ap.add_argument("--alpha_cmcfa", type=float, default=1.0, help="poids de CMCFA ; section 19 / config_AVA : 0.5")
++    ap.add_argument("--bn_eval", action="store_true",
++                    help="BatchNorm de ResNet-50 figee (mode evaluation) pendant l'affinage ; les poids s'entrainent")
++    ap.add_argument("--calendrier_m2can", action="store_true",
++                    help="epoque 1 sources seules (cmcfa_cible_debut), un tour de pseudo-etiquettes par epoque "
++                         "(debut = tous_les = pas_par_epoque), quotas 0.3/0.6/0.9/1 par epoque, 2 tours amorces par les tetes")
+     ap.add_argument("--poids_im", type=float, default=0.0, help="maximisation de l'information (SHOT) sur la cible ; 0 = methode")
+     ap.add_argument("--pas_max", type=int, default=None)
+     ap.add_argument("--dorsales", choices=["entrainees", "gelees_eval", "gelees_train"], default="entrainees",
+@@ -321,11 +338,13 @@
+     conf = {"cibles": args.cibles, "graines": args.graines, "epoques": args.epoques,
+             "pas_par_epoque": args.pas_par_epoque, "periode": args.periode, "evaluer": args.evaluer, "pas_max": args.pas_max,
+             "surcharges": {"fusion": {"dim": args.dim_z}, "pseudo": {"actif": True},
+-                           "phase1": {"poids_im": args.poids_im,
++                           "phase1": {"poids_im": args.poids_im, "alpha_cmcfa": args.alpha_cmcfa,
+                                       "optimiseur": {"lr_extracteur": args.lr_extracteur,
+-                                                     "lr_dorsale": 2e-06 if args.dorsales == "entrainees" else 0.0}},
++                                                     "lr_fusion": args.lr_fusion, "lr_tetes": args.lr_tetes,
++                                                     "lr_dorsale": args.lr_dorsale if args.dorsales == "entrainees" else 0.0}},
+                            "phase2": {"sources_max": 1600}},
+-            "dorsales": args.dorsales, "sha256_methode": h.hexdigest()}
++            "dorsales": args.dorsales, "bn_eval": args.bn_eval, "calendrier_m2can": args.calendrier_m2can,
++            "sha256_methode": h.hexdigest()}
+     params = {"group": args.groupe, "target": "e2e", "source": "drive"}
+     code = (tete.replace("__PARAMS__", repr(params)).replace("__MANIFEST__", json.dumps(manifest, indent=1))
+             .replace("__SPLIT_SHA__", json.dumps(split_sha(), indent=1)).replace("__BUNDLE__", b64)

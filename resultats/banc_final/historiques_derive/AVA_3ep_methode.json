@@ -1,0 +1,420 @@
+{
+ "config": {
+  "appareil": "cuda",
+  "donnees": {
+   "cible": "AVA",
+   "racine": "/kaggle/input/notebooks/djoumessikevin/extract-clip-aesthetic/feats_aesthetic",
+   "sources": [
+    "PCCD",
+    "RPCD"
+   ]
+  },
+  "fusion": {
+   "dim": 256
+  },
+  "graine": 123456,
+  "modalites": [
+   {
+    "encodeur": {
+     "dim": 512,
+     "type": "caracteristiques"
+    },
+    "nom": "text"
+   },
+   {
+    "encodeur": {
+     "dim": 512,
+     "type": "caracteristiques"
+    },
+    "nom": "image"
+   }
+  ],
+  "phase1": {
+   "alpha_cmcfa": 1.0,
+   "beta_cdcfa": 1.0,
+   "epoques": 3,
+   "evaluer_tous_les": 750,
+   "gamma_supcon_fusion": 1.0,
+   "lot": 4,
+   "optimiseur": {
+    "lr_dorsale": 2e-06,
+    "lr_extracteur": 5e-05,
+    "lr_fusion": 5e-05,
+    "lr_min": 1e-08,
+    "lr_tetes": 5e-05,
+    "puissance": 0.9
+   },
+   "pas_par_epoque": 3750,
+   "poids_im": 0.0,
+   "poids_tetes": 1.0,
+   "tau": 0.07
+  },
+  "phase2": {
+   "eps": 0.02,
+   "par_classe": 400,
+   "partition": "spectrale",
+   "point_fixe": 8,
+   "sinkhorn": 60,
+   "sources_max": null,
+   "support": 16
+  },
+  "pseudo": {
+   "actif": true,
+   "cible_max": 3000,
+   "filtre": "accord",
+   "taux": [
+    0.3,
+    0.6,
+    0.9,
+    1.0
+   ],
+   "tous_les": 750
+  },
+  "sortie": "/kaggle/working/sorties/fgm_methode/AVA_s123456"
+ },
+ "meilleur": {
+  "exactitude": 0.7237308146399055,
+  "oracle": 0.7237308146399055,
+  "silhouette": 0.39186885952949524,
+  "ratio_intra_inter": 0.5537504395646414,
+  "tailles_groupes": [
+   443,
+   404
+  ],
+  "cout_representant_classe_cible": 0.007006347645074129,
+  "epoque": 2,
+  "pas": 9000
+ },
+ "historique": [
+  {
+   "pas": 750,
+   "pseudo": {
+    "tour": 0,
+    "exactitude_wbhr_complet": 0.5153333333333333,
+    "n_retenus": 450,
+    "precision_retenus": 0.4711111111111111
+   }
+  },
+  {
+   "exactitude": 0.5088547815820543,
+   "oracle": 0.5088547815820543,
+   "silhouette": 0.04780346155166626,
+   "ratio_intra_inter": 0.9495304956843609,
+   "tailles_groupes": [
+    423,
+    424
+   ],
+   "cout_representant_classe_cible": 0.007172601064667106,
+   "epoque": 0,
+   "pas": 750
+  },
+  {
+   "pas": 1500,
+   "pseudo": {
+    "tour": 1,
+    "exactitude_wbhr_complet": 0.5496666666666666,
+    "n_retenus": 900,
+    "precision_retenus": 0.5188888888888888
+   }
+  },
+  {
+   "exactitude": 0.48642266824085006,
+   "oracle": 0.51357733175915,
+   "silhouette": 0.04670180380344391,
+   "ratio_intra_inter": 0.955812843808518,
+   "tailles_groupes": [
+    494,
+    353
+   ],
+   "cout_representant_classe_cible": 0.005399018293246627,
+   "epoque": 0,
+   "pas": 1500
+  },
+  {
+   "pas": 2250,
+   "pseudo": {
+    "tour": 2,
+    "exactitude_wbhr_complet": 0.6,
+    "n_retenus": 1350,
+    "precision_retenus": 0.5318518518518518
+   }
+  },
+  {
+   "exactitude": 0.5938606847697757,
+   "oracle": 0.5938606847697757,
+   "silhouette": 0.04513248801231384,
+   "ratio_intra_inter": 0.9520707736993683,
+   "tailles_groupes": [
+    420,
+    427
+   ],
+   "cout_representant_classe_cible": 0.004510999657213688,
+   "epoque": 0,
+   "pas": 2250
+  },
+  {
+   "pas": 3000,
+   "pseudo": {
+    "tour": 3,
+    "exactitude_wbhr_complet": 0.6493333333333333,
+    "n_retenus": 1470,
+    "precision_retenus": 0.5748299319727891
+   }
+  },
+  {
+   "exactitude": 0.6646989374262101,
+   "oracle": 0.6646989374262101,
+   "silhouette": 0.056586284190416336,
+   "ratio_intra_inter": 0.9400596432032803,
+   "tailles_groupes": [
+    421,
+    426
+   ],
+   "cout_representant_classe_cible": 0.003990463679656386,
+   "epoque": 0,
+   "pas": 3000
+  },
+  {
+   "pas": 3750,
+   "pseudo": {
+    "tour": 4,
+    "exactitude_wbhr_complet": 0.6733333333333333,
+    "n_retenus": 1498,
+    "precision_retenus": 0.5974632843791722
+   }
+  },
+  {
+   "exactitude": 0.6824085005903188,
+   "oracle": 0.6824085005903188,
+   "silhouette": 0.08812674134969711,
+   "ratio_intra_inter": 0.9064588954672691,
+   "tailles_groupes": [
+    412,
+    435
+   ],
+   "cout_representant_classe_cible": 0.0037503668572753668,
+   "epoque": 0,
+   "pas": 3750
+  },
+  {
+   "pas": 4500,
+   "pseudo": {
+    "tour": 5,
+    "exactitude_wbhr_complet": 0.679,
+    "n_retenus": 1500,
+    "precision_retenus": 0.6086666666666667
+   }
+  },
+  {
+   "exactitude": 0.7001180637544274,
+   "oracle": 0.7001180637544274,
+   "silhouette": 0.15107566118240356,
+   "ratio_intra_inter": 0.8366296343102676,
+   "tailles_groupes": [
+    405,
+    442
+   ],
+   "cout_representant_classe_cible": 0.003833783674053848,
+   "epoque": 1,
+   "pas": 4500
+  },
+  {
+   "pas": 5250,
+   "pseudo": {
+    "tour": 6,
+    "exactitude_wbhr_complet": 0.6813333333333333,
+    "n_retenus": 1500,
+    "precision_retenus": 0.604
+   }
+  },
+  {
+   "exactitude": 0.6977567886658795,
+   "oracle": 0.6977567886658795,
+   "silhouette": 0.24493750929832458,
+   "ratio_intra_inter": 0.7279463926585403,
+   "tailles_groupes": [
+    379,
+    468
+   ],
+   "cout_representant_classe_cible": 0.004474401939660311,
+   "epoque": 1,
+   "pas": 5250
+  },
+  {
+   "pas": 6000,
+   "pseudo": {
+    "tour": 7,
+    "exactitude_wbhr_complet": 0.6863333333333334,
+    "n_retenus": 1583,
+    "precision_retenus": 0.6317119393556538
+   }
+  },
+  {
+   "exactitude": 0.6989374262101535,
+   "oracle": 0.6989374262101535,
+   "silhouette": 0.3114545941352844,
+   "ratio_intra_inter": 0.6503154425378357,
+   "tailles_groupes": [
+    448,
+    399
+   ],
+   "cout_representant_classe_cible": 0.0053799650631845,
+   "epoque": 1,
+   "pas": 6000
+  },
+  {
+   "pas": 6750,
+   "pseudo": {
+    "tour": 8,
+    "exactitude_wbhr_complet": 0.6856666666666666,
+    "n_retenus": 1637,
+    "precision_retenus": 0.6487477092241906
+   }
+  },
+  {
+   "exactitude": 0.7001180637544274,
+   "oracle": 0.7001180637544274,
+   "silhouette": 0.3491002023220062,
+   "ratio_intra_inter": 0.6059289348542677,
+   "tailles_groupes": [
+    439,
+    408
+   ],
+   "cout_representant_classe_cible": 0.006153341382741928,
+   "epoque": 1,
+   "pas": 6750
+  },
+  {
+   "pas": 7500,
+   "pseudo": {
+    "tour": 9,
+    "exactitude_wbhr_complet": 0.6903333333333334,
+    "n_retenus": 1873,
+    "precision_retenus": 0.6871329418045916
+   }
+  },
+  {
+   "exactitude": 0.7119244391971665,
+   "oracle": 0.7119244391971665,
+   "silhouette": 0.3710409998893738,
+   "ratio_intra_inter": 0.5790588085419803,
+   "tailles_groupes": [
+    402,
+    445
+   ],
+   "cout_representant_classe_cible": 0.006620424101129174,
+   "epoque": 1,
+   "pas": 7500
+  },
+  {
+   "pas": 8250,
+   "pseudo": {
+    "tour": 10,
+    "exactitude_wbhr_complet": 0.6916666666666667,
+    "n_retenus": 1769,
+    "precision_retenus": 0.679479932165065
+   }
+  },
+  {
+   "exactitude": 0.717827626918536,
+   "oracle": 0.717827626918536,
+   "silhouette": 0.3817790448665619,
+   "ratio_intra_inter": 0.566079445489292,
+   "tailles_groupes": [
+    438,
+    409
+   ],
+   "cout_representant_classe_cible": 0.0067043970339000225,
+   "epoque": 2,
+   "pas": 8250
+  },
+  {
+   "pas": 9000,
+   "pseudo": {
+    "tour": 11,
+    "exactitude_wbhr_complet": 0.6886666666666666,
+    "n_retenus": 1770,
+    "precision_retenus": 0.6853107344632768
+   }
+  },
+  {
+   "exactitude": 0.7237308146399055,
+   "oracle": 0.7237308146399055,
+   "silhouette": 0.39186885952949524,
+   "ratio_intra_inter": 0.5537504395646414,
+   "tailles_groupes": [
+    443,
+    404
+   ],
+   "cout_representant_classe_cible": 0.007006347645074129,
+   "epoque": 2,
+   "pas": 9000
+  },
+  {
+   "pas": 9750,
+   "pseudo": {
+    "tour": 12,
+    "exactitude_wbhr_complet": 0.6916666666666667,
+    "n_retenus": 1887,
+    "precision_retenus": 0.6989931107578167
+   }
+  },
+  {
+   "exactitude": 0.71900826446281,
+   "oracle": 0.71900826446281,
+   "silhouette": 0.3898765742778778,
+   "ratio_intra_inter": 0.5557077854647469,
+   "tailles_groupes": [
+    439,
+    408
+   ],
+   "cout_representant_classe_cible": 0.00695313629694283,
+   "epoque": 2,
+   "pas": 9750
+  },
+  {
+   "pas": 10500,
+   "pseudo": {
+    "tour": 13,
+    "exactitude_wbhr_complet": 0.692,
+    "n_retenus": 1847,
+    "precision_retenus": 0.6951813752030319
+   }
+  },
+  {
+   "exactitude": 0.7166469893742621,
+   "oracle": 0.7166469893742621,
+   "silhouette": 0.39704591035842896,
+   "ratio_intra_inter": 0.5471288632886174,
+   "tailles_groupes": [
+    439,
+    408
+   ],
+   "cout_representant_classe_cible": 0.007132144179195166,
+   "epoque": 2,
+   "pas": 10500
+  },
+  {
+   "pas": 11250,
+   "pseudo": {
+    "tour": 14,
+    "exactitude_wbhr_complet": 0.6923333333333334,
+    "n_retenus": 1822,
+    "precision_retenus": 0.6926454445664105
+   }
+  },
+  {
+   "exactitude": 0.7166469893742621,
+   "oracle": 0.7166469893742621,
+   "silhouette": 0.39732035994529724,
+   "ratio_intra_inter": 0.5468337284482758,
+   "tailles_groupes": [
+    437,
+    410
+   ],
+   "cout_representant_classe_cible": 0.007104915799573064,
+   "epoque": 2,
+   "pas": 11250
+  }
+ ]
+}

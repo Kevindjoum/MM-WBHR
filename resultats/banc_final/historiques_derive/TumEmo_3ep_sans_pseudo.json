@@ -1,0 +1,301 @@
+{
+ "config": {
+  "appareil": "cuda",
+  "donnees": {
+   "cible": "TumEmo",
+   "racine": "/kaggle/input/notebooks/djoumessikevin/extract-clip-sentiment/feats_sentiment",
+   "sources": [
+    "Twitter",
+    "Yelp"
+   ]
+  },
+  "fusion": {
+   "dim": 256
+  },
+  "graine": 123456,
+  "modalites": [
+   {
+    "encodeur": {
+     "dim": 512,
+     "type": "caracteristiques"
+    },
+    "nom": "text"
+   },
+   {
+    "encodeur": {
+     "dim": 512,
+     "type": "caracteristiques"
+    },
+    "nom": "image"
+   }
+  ],
+  "phase1": {
+   "alpha_cmcfa": 1.0,
+   "beta_cdcfa": 1.0,
+   "epoques": 3,
+   "evaluer_tous_les": 750,
+   "gamma_supcon_fusion": 1.0,
+   "lot": 4,
+   "optimiseur": {
+    "lr_dorsale": 2e-06,
+    "lr_extracteur": 5e-05,
+    "lr_fusion": 5e-05,
+    "lr_min": 1e-08,
+    "lr_tetes": 5e-05,
+    "puissance": 0.9
+   },
+   "pas_par_epoque": 3750,
+   "poids_im": 0.0,
+   "poids_tetes": 1.0,
+   "tau": 0.07
+  },
+  "phase2": {
+   "eps": 0.02,
+   "par_classe": 400,
+   "partition": "spectrale",
+   "point_fixe": 8,
+   "sinkhorn": 60,
+   "sources_max": null,
+   "support": 16
+  },
+  "pseudo": {
+   "actif": false,
+   "cible_max": 3000,
+   "filtre": "accord",
+   "taux": [
+    0.3,
+    0.6,
+    0.9,
+    1.0
+   ],
+   "tous_les": 750
+  },
+  "sortie": "/kaggle/working/sorties/fgm_methode_sans_pseudo/TumEmo_s123456"
+ },
+ "meilleur": {
+  "exactitude": 0.596,
+  "oracle": 0.596,
+  "silhouette": 0.05266820266842842,
+  "ratio_intra_inter": 0.9144900808485976,
+  "tailles_groupes": [
+   566,
+   593,
+   341
+  ],
+  "cout_representant_classe_cible": 0.014473138066629568,
+  "epoque": 0,
+  "pas": 1500
+ },
+ "historique": [
+  {
+   "exactitude": 0.5153333333333333,
+   "oracle": 0.5153333333333333,
+   "silhouette": 0.05528061091899872,
+   "ratio_intra_inter": 0.9104465143323318,
+   "tailles_groupes": [
+    768,
+    396,
+    336
+   ],
+   "cout_representant_classe_cible": 0.015405538802345594,
+   "epoque": 0,
+   "pas": 750
+  },
+  {
+   "exactitude": 0.596,
+   "oracle": 0.596,
+   "silhouette": 0.05266820266842842,
+   "ratio_intra_inter": 0.9144900808485976,
+   "tailles_groupes": [
+    566,
+    593,
+    341
+   ],
+   "cout_representant_classe_cible": 0.014473138066629568,
+   "epoque": 0,
+   "pas": 1500
+  },
+  {
+   "exactitude": 0.35733333333333334,
+   "oracle": 0.574,
+   "silhouette": 0.07415872812271118,
+   "ratio_intra_inter": 0.8816400503074805,
+   "tailles_groupes": [
+    582,
+    382,
+    536
+   ],
+   "cout_representant_classe_cible": 0.014117243078847727,
+   "epoque": 0,
+   "pas": 2250
+  },
+  {
+   "exactitude": 0.3526666666666667,
+   "oracle": 0.576,
+   "silhouette": 0.11864999681711197,
+   "ratio_intra_inter": 0.8250001239422425,
+   "tailles_groupes": [
+    633,
+    321,
+    546
+   ],
+   "cout_representant_classe_cible": 0.014861924263338247,
+   "epoque": 0,
+   "pas": 3000
+  },
+  {
+   "exactitude": 0.41333333333333333,
+   "oracle": 0.45266666666666666,
+   "silhouette": 0.1458798497915268,
+   "ratio_intra_inter": 0.6927228642553567,
+   "tailles_groupes": [
+    858,
+    320,
+    322
+   ],
+   "cout_representant_classe_cible": 0.016652120277285576,
+   "epoque": 0,
+   "pas": 3750
+  },
+  {
+   "exactitude": 0.45866666666666667,
+   "oracle": 0.45866666666666667,
+   "silhouette": 0.15932796895503998,
+   "ratio_intra_inter": 0.6336208336195845,
+   "tailles_groupes": [
+    901,
+    363,
+    236
+   ],
+   "cout_representant_classe_cible": 0.017350060244401295,
+   "epoque": 1,
+   "pas": 4500
+  },
+  {
+   "exactitude": 0.458,
+   "oracle": 0.458,
+   "silhouette": 0.17965683341026306,
+   "ratio_intra_inter": 0.5942400116689324,
+   "tailles_groupes": [
+    394,
+    217,
+    889
+   ],
+   "cout_representant_classe_cible": 0.018545179317394894,
+   "epoque": 1,
+   "pas": 5250
+  },
+  {
+   "exactitude": 0.4613333333333333,
+   "oracle": 0.4613333333333333,
+   "silhouette": 0.17807556688785553,
+   "ratio_intra_inter": 0.5870504049760257,
+   "tailles_groupes": [
+    892,
+    412,
+    196
+   ],
+   "cout_representant_classe_cible": 0.019088418533404667,
+   "epoque": 1,
+   "pas": 6000
+  },
+  {
+   "exactitude": 0.46266666666666667,
+   "oracle": 0.46266666666666667,
+   "silhouette": 0.18156811594963074,
+   "ratio_intra_inter": 0.5747529867608941,
+   "tailles_groupes": [
+    884,
+    183,
+    433
+   ],
+   "cout_representant_classe_cible": 0.01953267181913058,
+   "epoque": 1,
+   "pas": 6750
+  },
+  {
+   "exactitude": 0.45466666666666666,
+   "oracle": 0.45466666666666666,
+   "silhouette": 0.1864795982837677,
+   "ratio_intra_inter": 0.5649883723283686,
+   "tailles_groupes": [
+    895,
+    424,
+    181
+   ],
+   "cout_representant_classe_cible": 0.02010138767460982,
+   "epoque": 1,
+   "pas": 7500
+  },
+  {
+   "exactitude": 0.4573333333333333,
+   "oracle": 0.4573333333333333,
+   "silhouette": 0.19098034501075745,
+   "ratio_intra_inter": 0.5559505640350844,
+   "tailles_groupes": [
+    886,
+    182,
+    432
+   ],
+   "cout_representant_classe_cible": 0.02091427519917488,
+   "epoque": 2,
+   "pas": 8250
+  },
+  {
+   "exactitude": 0.4553333333333333,
+   "oracle": 0.4553333333333333,
+   "silhouette": 0.1877957284450531,
+   "ratio_intra_inter": 0.5460025081239764,
+   "tailles_groupes": [
+    892,
+    153,
+    455
+   ],
+   "cout_representant_classe_cible": 0.021170678238073986,
+   "epoque": 2,
+   "pas": 9000
+  },
+  {
+   "exactitude": 0.458,
+   "oracle": 0.458,
+   "silhouette": 0.18757015466690063,
+   "ratio_intra_inter": 0.5470716408541157,
+   "tailles_groupes": [
+    893,
+    456,
+    151
+   ],
+   "cout_representant_classe_cible": 0.021398767828941345,
+   "epoque": 2,
+   "pas": 9750
+  },
+  {
+   "exactitude": 0.46066666666666667,
+   "oracle": 0.46066666666666667,
+   "silhouette": 0.18912655115127563,
+   "ratio_intra_inter": 0.5356398830606357,
+   "tailles_groupes": [
+    899,
+    460,
+    141
+   ],
+   "cout_representant_classe_cible": 0.021744464834531147,
+   "epoque": 2,
+   "pas": 10500
+  },
+  {
+   "exactitude": 0.45866666666666667,
+   "oracle": 0.45866666666666667,
+   "silhouette": 0.18858878314495087,
+   "ratio_intra_inter": 0.5383412693968944,
+   "tailles_groupes": [
+    893,
+    141,
+    466
+   ],
+   "cout_representant_classe_cible": 0.02169797755777836,
+   "epoque": 2,
+   "pas": 11250
+  }
+ ]
+}

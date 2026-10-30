@@ -1,0 +1,28 @@
+[
+ {
+  "cible": "AVA",
+  "graine": 123456,
+  "rc": 0,
+  "minutes": 101.6,
+  "dernier": 0.5159386068476978,
+  "meilleur": 0.5336481700118064,
+  "oracle_dernier": 0.5159386068476978,
+  "tailles_dernier": [
+   428,
+   419
+  ],
+  "n_evals": 3,
+  "pseudo_premier": {
+   "tour": 0,
+   "exactitude_wbhr_complet": 0.5276666666666666,
+   "n_retenus": 450,
+   "precision_retenus": 0.5
+  },
+  "pseudo_dernier": {
+   "tour": 14,
+   "exactitude_wbhr_complet": 0.5086666666666667,
+   "n_retenus": 1500,
+   "precision_retenus": 0.448
+  }
+ }
+]

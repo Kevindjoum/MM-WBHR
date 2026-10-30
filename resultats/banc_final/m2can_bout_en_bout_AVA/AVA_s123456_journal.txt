@@ -1,0 +1,680 @@
+/content/MM-WBHR/m2can/msmm/../data_loader/common_loader.py:51: SyntaxWarning: invalid escape sequence '\#'
+  remove_chars = '[·’!"\#$%&\'()＃！（）*+,-./:;<=>?\@，：?￥★、…．＞【】［］《》？“”‘’\[\\]^_`{|}~。]+'
+/content/MM-WBHR/m2can/msmm/../common_modules/sdat.py:114: SyntaxWarning: invalid escape sequence '\o'
+  T_{\odot}(f,g) = \dfrac{1}{\sqrt{d}} (R_f f) \odot (R_g g),
+/content/MM-WBHR/m2can/msmm/../common_modules/grl.py:35: SyntaxWarning: invalid escape sequence '\m'
+  """Gradient Reverse Layer :math:`\mathcal{R}(x)` with warm start
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+set random seed to 123456
+config.yaml dumped at [/content/drive/MyDrive/M2CAN_bout_en_bout/AVA_s123456/run/config.yaml]
+{'criterion': {'cross_domain_contrastive_loss_rate': 0.2,
+               'cross_modal_contrastive_loss_rate': 0.5,
+               'mm_D_loss_rate': 0.05},
+ 'dataset': {'batch_size': 8,
+             'bert_model': 'bert-base-uncased',
+             'train': {'AVA': {'data_list': '/workspaces/M2CAN1/split/aesthetic/AVA/train.json',
+                               'data_root': '/workspaces/M2CAN1/datasets/AVA/images4AVA/images',
+                               'n_sample': 3388},
+                       'PCCD': {'data_list': '/workspaces/M2CAN1/split/aesthetic/PCCD/train.json',
+                                'data_root': '/workspaces/M2CAN1/datasets/PCCD/PCCD/images/full',
+                                'n_sample': 3388},
+                       'RPCD': {'data_list': '/workspaces/M2CAN1/split/aesthetic/RPCD/train.json',
+                                'data_root': '/workspaces/M2CAN1/datasets/RPCD/RPCD',
+                                'n_sample': 3388},
+                       'TumEmo': {'data_list': '/kaggle/working/M2CAN1/split_full/sentiment/TumEmo/train.json',
+                                  'data_root': '/kaggle/working/mnt_turmemo/TumEmo',
+                                  'n_sample': 15000},
+                       'Twitter': {'data_list': '/kaggle/working/M2CAN1/split_full/sentiment/Twitter/train.json',
+                                   'data_root': '/kaggle/working/Twitter_mount',
+                                   'n_sample': 15000},
+                       'Yelp': {'data_list': '/kaggle/working/M2CAN1/split_full/sentiment/Yelp/train.json',
+                                'data_root': '/kaggle/working/mnt_yelp/data/Yelp',
+                                'n_sample': 15000},
+                       'text_encode': {'max_length': 200},
+                       'transforms_strong': {'mean': [0.485, 0.456, 0.406],
+                                             'rand_apply': {'color_jitter': {'brightness': 0.4,
+                                                                             'contrast': 0.4,
+                                                                             'hue': 0.1,
+                                                                             'saturation': 0.4},
+                                                            'p': 0.8},
+                                             'rand_flip': 0.5,
+                                             'rand_gray_scale': 0.2,
+                                             'rand_resize_crop': 224,
+                                             'std': [0.229, 0.224, 0.225]},
+                       'transforms_weak': {'center_crop': 224,
+                                           'mean': [0.485, 0.456, 0.406],
+                                           'resize': 256,
+                                           'std': [0.229, 0.224, 0.225]}},
+             'types': ['PCCD', 'RPCD', 'AVA'],
+             'val': {'AVA': {'data_list': '/workspaces/M2CAN1/split/aesthetic/AVA/val.json',
+                             'data_root': '/workspaces/M2CAN1/datasets/AVA/images4AVA/images',
+                             'n_sample': 847},
+                     'PCCD': {'data_list': '/workspaces/M2CAN1/split/aesthetic/PCCD/val.json',
+                              'data_root': '/workspaces/M2CAN1/datasets/PCCD/PCCD/images/full',
+                              'n_sample': 847},
+                     'RPCD': {'data_list': '/workspaces/M2CAN1/split/aesthetic/RPCD/val.json',
+                              'data_root': '/workspaces/M2CAN1/datasets/RPCD/RPCD',
+                              'n_sample': 847},
+                     'TumEmo': {'data_list': '/kaggle/working/M2CAN1/split_full/sentiment/TumEmo/val.json',
+                                'data_root': '/kaggle/working/mnt_turmemo/TumEmo',
+                                'n_sample': 1500},
+                     'Twitter': {'data_list': '/kaggle/working/M2CAN1/split_full/sentiment/Twitter/val.json',
+                                 'data_root': '/kaggle/working/Twitter_mount',
+                                 'n_sample': 1500},
+                     'Yelp': {'data_list': '/kaggle/working/M2CAN1/split_full/sentiment/Yelp/val.json',
+                              'data_root': '/kaggle/working/mnt_yelp/data/Yelp',
+                              'n_sample': 1500},
+                     'text_encode': {'max_length': 200},
+                     'transforms_strong': {'mean': [0.485, 0.456, 0.406],
+                                           'rand_apply': {'color_jitter': {'brightness': 0.4,
+                                                                           'contrast': 0.4,
+                                                                           'hue': 0.1,
+                                                                           'saturation': 0.4},
+                                                          'p': 0.8},
+                                           'rand_flip': 0.5,
+                                           'rand_gray_scale': 0.2,
+                                           'rand_resize_crop': 224,
+                                           'std': [0.229, 0.224, 0.225]},
+                     'transforms_weak': {'center_crop': 224,
+                                         'mean': [0.485, 0.456, 0.406],
+                                         'resize': 256,
+                                         'std': [0.229, 0.224, 0.225]}},
+             'workers': 8},
+ 'exp_path': '/content/drive/MyDrive/M2CAN_bout_en_bout/AVA_s123456',
+ 'hyper_para': {'eps': 0.8, 'rho': 0.05, 'temperature': 2.0},
+ 'net': {'ema_decay': 0.99,
+         'num_classes': 2,
+         'start_rate': 0.3,
+         'update_rate': 0.3},
+ 'save_path': '/content/drive/MyDrive/M2CAN_bout_en_bout/AVA_s123456/run',
+ 'seed': 123456,
+ 'snapshot_dir': '/content/drive/MyDrive/M2CAN_bout_en_bout/AVA_s123456/run',
+ 'trainer': {'epochs': 10,
+             'eval_mode': {'epoch': 1},
+             'eval_on': True,
+             'log_iter': 200,
+             'lr_scheduler': {'kwargs': {'lowest_lr': 1e-06, 'power': 0.99},
+                              'mode': 'poly'},
+             'optimizer': {'backbone_lr': 2e-05,
+                           'classifier_lr': 0.0005,
+                           'extractor_lr': 2e-05,
+                           'kwargs': {'betas': '0.9 0.999',
+                                      'eps': '1e-8',
+                                      'lr': 0.001},
+                           'mlb_lr': 0.0005,
+                           'mmdiscriminator1_lr': 0.0002,
+                           'mmdiscriminator2_lr': 0.0003,
+                           'type': 'adam'}}}
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 5779.60it/s]
+[transformers] [1mBertModel LOAD REPORT[0m from: bert-base-uncased
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Downloading: "https://download.pytorch.org/models/resnet50-0676ba61.pth" to /root/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth
+  0%|          | 0.00/97.8M [00:00<?, ?B/s] 24%|██▍       | 23.5M/97.8M [00:00<00:00, 246MB/s] 60%|█████▉    | 58.2M/97.8M [00:00<00:00, 315MB/s] 94%|█████████▍| 92.1M/97.8M [00:00<00:00, 333MB/s]100%|██████████| 97.8M/97.8M [00:00<00:00, 322MB/s]
+[2026-10-29 18:05:45,320][    INFO] # samples: 3388
+[2026-10-29 18:05:45,329][    INFO] # samples: 847
+[2026-10-29 18:05:45,348][    INFO] # samples: 3388
+[2026-10-29 18:05:45,353][    INFO] # samples: 847
+[2026-10-29 18:05:45,377][    INFO] # samples: 3388
+[2026-10-29 18:05:45,384][    INFO] # samples: 847
+[2026-10-29 18:05:45,391][    INFO] The kwargs for lr scheduler: 0.99
+[2026-10-29 18:05:45,391][    INFO] The kwargs for lr scheduler: 0.99
+PCCD
+RPCD
+AVA
+optim_kwargs =  {'betas': (0.9, 0.999), 'eps': 1e-08, 'lr': 0.001}
+optim_kwargs =  {'betas': (0.9, 0.999), 'eps': 1e-08, 'lr': 0.001}
+optim_kwargs =  {'betas': (0.9, 0.999), 'eps': 1e-08, 'lr': 0.001}
+  0%|          | 0/10 [00:00<?, ?it/s][2026-10-29 18:05:54,124][    INFO] Iter [0/4230]	Time 8.46 (8.46)	total_loss_meter 4.2484 (4.2484)	cross_modal_contrastive_loss_meter 2.0788 (2.0788)	cross_domain_contrastive_loss_meter -0.1879 (-0.1879)	mm_D_loss_meter 0.0347 (0.0347)	mcc_loss_meter 0.0000 (0.0000)	task_loss_meter 2.3229 (2.3229)	LR 0.0000200
+[2026-10-29 18:14:03,825][    INFO] Iter [200/4230]	Time 2.43 (2.45)	total_loss_meter 3.8535 (3.8725)	cross_modal_contrastive_loss_meter 1.7600 (1.8271)	cross_domain_contrastive_loss_meter -0.1977 (-0.1995)	mm_D_loss_meter 0.0347 (0.0347)	mcc_loss_meter 0.0000 (0.0000)	task_loss_meter 2.2565 (2.2102)	LR 0.0000191
+[2026-10-29 18:22:16,766][    INFO] Iter [400/4230]	Time 2.47 (2.46)	total_loss_meter 3.5899 (3.7497)	cross_modal_contrastive_loss_meter 1.8006 (1.7738)	cross_domain_contrastive_loss_meter -0.1763 (-0.1859)	mm_D_loss_meter 0.0331 (0.0345)	mcc_loss_meter 0.0000 (0.0000)	task_loss_meter 1.9324 (2.1273)	LR 0.0000181
+[2026-10-29 18:24:11,792][    INFO] start evaluation
+generating pseudo 0/423
+generating pseudo 42/423
+generating pseudo 84/423
+generating pseudo 126/423
+generating pseudo 168/423
+generating pseudo 210/423
+generating pseudo 252/423
+generating pseudo 294/423
+generating pseudo 336/423
+generating pseudo 378/423
+generating pseudo 420/423
+target train set AVA pseudo label generated!
+              precision    recall  f1-score   support
+
+           0     0.9275    0.8421    0.8828       532
+           1     0.8346    0.9237    0.8769       459
+
+    accuracy                         0.8799       991
+   macro avg     0.8811    0.8829    0.8798       991
+weighted avg     0.8845    0.8799    0.8801       991
+
+pseudo balanced_acc = 0.8829, acc = 0.8799
+[2026-10-29 18:24:27,414][    INFO] epoch = 0
+[2026-10-29 18:24:27,414][    INFO]               precision    recall  f1-score   support
+
+           0     0.9355    0.2533    0.3986       458
+           1     0.5270    0.9794    0.6853       389
+
+    accuracy                         0.5868       847
+   macro avg     0.7312    0.6164    0.5419       847
+weighted avg     0.7479    0.5868    0.5303       847
+
+[2026-10-29 18:24:28,614][    INFO] [31m * Currently, the best val result is: 58.68, best epoch is : 0[0m
+ 10%|█         | 1/10 [18:43<2:48:29, 1123.22s/it][2026-10-29 18:24:30,288][    INFO] # samples: 3388
+[2026-10-29 18:24:30,296][    INFO] # samples: 847
+[2026-10-29 18:24:30,317][    INFO] # samples: 3388
+[2026-10-29 18:24:30,323][    INFO] # samples: 847
+[2026-10-29 18:24:30,335][    INFO] # samples: 3388
+[2026-10-29 18:24:30,342][    INFO] # samples: 847
+              precision    recall  f1-score   support
+
+           0     0.9355    0.2533    0.3986       458
+           1     0.5270    0.9794    0.6853       389
+
+    accuracy                         0.5868       847
+   macro avg     0.7312    0.6164    0.5419       847
+weighted avg     0.7479    0.5868    0.5303       847
+
+PCCD
+RPCD
+AVA
+--------------------------------------------------Insufficient sample! total:991 < expected:3388--------------------------------------------------
+[2026-10-29 18:35:24,382][    INFO] Iter [600/4230]	Time 3.66 (3.67)	total_loss_meter 4.0767 (3.8002)	cross_modal_contrastive_loss_meter 2.6195 (2.6537)	cross_domain_contrastive_loss_meter -0.5736 (-0.5404)	mm_D_loss_meter 0.0346 (0.0342)	mcc_loss_meter 0.0201 (0.0196)	task_loss_meter 1.9761 (1.6331)	LR 0.0000172
+[2026-10-29 18:47:33,449][    INFO] Iter [800/4230]	Time 3.64 (3.65)	total_loss_meter 3.3489 (3.7277)	cross_modal_contrastive_loss_meter 2.6505 (2.6565)	cross_domain_contrastive_loss_meter -0.5674 (-0.5607)	mm_D_loss_meter 0.0329 (0.0337)	mcc_loss_meter 0.0149 (0.0171)	task_loss_meter 1.2180 (1.5811)	LR 0.0000163
+[2026-10-29 18:51:20,326][    INFO] start evaluation
+generating pseudo 0/423
+generating pseudo 42/423
+generating pseudo 84/423
+generating pseudo 126/423
+generating pseudo 168/423
+generating pseudo 210/423
+generating pseudo 252/423
+generating pseudo 294/423
+generating pseudo 336/423
+generating pseudo 378/423
+generating pseudo 420/423
+target train set AVA pseudo label generated!
+              precision    recall  f1-score   support
+
+           0     0.8996    0.8146    0.8550      1122
+           1     0.7953    0.8879    0.8390       910
+
+    accuracy                         0.8474      2032
+   macro avg     0.8474    0.8513    0.8470      2032
+weighted avg     0.8529    0.8474    0.8479      2032
+
+pseudo balanced_acc = 0.8513, acc = 0.8474
+[2026-10-29 18:51:36,025][    INFO] epoch = 1
+[2026-10-29 18:51:36,025][    INFO]               precision    recall  f1-score   support
+
+           0     0.9091    0.5677    0.6989       458
+           1     0.6471    0.9332    0.7642       389
+
+    accuracy                         0.7355       847
+   macro avg     0.7781    0.7504    0.7316       847
+weighted avg     0.7887    0.7355    0.7289       847
+
+[2026-10-29 18:51:37,330][    INFO] [31m * Currently, the best val result is: 73.55, best epoch is : 1[0m
+ 20%|██        | 2/10 [45:51<3:09:24, 1420.57s/it][2026-10-29 18:51:38,895][    INFO] # samples: 3388
+[2026-10-29 18:51:38,903][    INFO] # samples: 847
+[2026-10-29 18:51:38,923][    INFO] # samples: 3388
+[2026-10-29 18:51:38,928][    INFO] # samples: 847
+[2026-10-29 18:51:38,951][    INFO] # samples: 3388
+[2026-10-29 18:51:38,958][    INFO] # samples: 847
+              precision    recall  f1-score   support
+
+           0     0.9091    0.5677    0.6989       458
+           1     0.6471    0.9332    0.7642       389
+
+    accuracy                         0.7355       847
+   macro avg     0.7781    0.7504    0.7316       847
+weighted avg     0.7887    0.7355    0.7289       847
+
+PCCD
+RPCD
+AVA
+--------------------------------------------------Insufficient sample! total:2032 < expected:3388--------------------------------------------------
+[2026-10-29 19:01:09,278][    INFO] Iter [1000/4230]	Time 3.65 (3.67)	total_loss_meter 3.3720 (3.5828)	cross_modal_contrastive_loss_meter 2.6791 (2.6666)	cross_domain_contrastive_loss_meter -0.5733 (-0.5667)	mm_D_loss_meter 0.0343 (0.0337)	mcc_loss_meter 0.0147 (0.0147)	task_loss_meter 1.2173 (1.4345)	LR 0.0000153
+[2026-10-29 19:13:22,862][    INFO] Iter [1200/4230]	Time 3.68 (3.67)	total_loss_meter 3.9430 (3.5415)	cross_modal_contrastive_loss_meter 2.6561 (2.6669)	cross_domain_contrastive_loss_meter -0.5818 (-0.5723)	mm_D_loss_meter 0.0344 (0.0335)	mcc_loss_meter 0.0179 (0.0135)	task_loss_meter 1.8163 (1.3999)	LR 0.0000144
+[2026-10-29 19:18:34,534][    INFO] start evaluation
+generating pseudo 0/423
+generating pseudo 42/423
+generating pseudo 84/423
+generating pseudo 126/423
+generating pseudo 168/423
+generating pseudo 210/423
+generating pseudo 252/423
+generating pseudo 294/423
+generating pseudo 336/423
+generating pseudo 378/423
+generating pseudo 420/423
+target train set AVA pseudo label generated!
+              precision    recall  f1-score   support
+
+           0     0.8559    0.7450    0.7966      1698
+           1     0.7159    0.8367    0.7716      1304
+
+    accuracy                         0.7848      3002
+   macro avg     0.7859    0.7908    0.7841      3002
+weighted avg     0.7951    0.7848    0.7857      3002
+
+pseudo balanced_acc = 0.7908, acc = 0.7848
+[2026-10-29 19:18:50,227][    INFO] epoch = 2
+[2026-10-29 19:18:50,228][    INFO]               precision    recall  f1-score   support
+
+           0     0.8420    0.7096    0.7701       458
+           1     0.7115    0.8432    0.7718       389
+
+    accuracy                         0.7710       847
+   macro avg     0.7767    0.7764    0.7710       847
+weighted avg     0.7820    0.7710    0.7709       847
+
+[2026-10-29 19:18:51,507][    INFO] [31m * Currently, the best val result is: 77.10, best epoch is : 2[0m
+ 30%|███       | 3/10 [1:13:06<2:57:06, 1518.11s/it][2026-10-29 19:18:53,088][    INFO] # samples: 3388
+[2026-10-29 19:18:53,096][    INFO] # samples: 847
+[2026-10-29 19:18:53,116][    INFO] # samples: 3388
+[2026-10-29 19:18:53,122][    INFO] # samples: 847
+[2026-10-29 19:18:53,151][    INFO] # samples: 3388
+[2026-10-29 19:18:53,158][    INFO] # samples: 847
+              precision    recall  f1-score   support
+
+           0     0.8420    0.7096    0.7701       458
+           1     0.7115    0.8432    0.7718       389
+
+    accuracy                         0.7710       847
+   macro avg     0.7767    0.7764    0.7710       847
+weighted avg     0.7820    0.7710    0.7709       847
+
+PCCD
+RPCD
+AVA
+--------------------------------------------------Insufficient sample! total:3002 < expected:3388--------------------------------------------------
+[2026-10-29 19:27:03,955][    INFO] Iter [1400/4230]	Time 3.64 (3.71)	total_loss_meter 3.6645 (3.4475)	cross_modal_contrastive_loss_meter 2.6848 (2.6716)	cross_domain_contrastive_loss_meter -0.5745 (-0.5750)	mm_D_loss_meter 0.0346 (0.0339)	mcc_loss_meter 0.0163 (0.0138)	task_loss_meter 1.5032 (1.3032)	LR 0.0000134
+[2026-10-29 19:39:14,408][    INFO] Iter [1600/4230]	Time 3.70 (3.65)	total_loss_meter 3.6592 (3.4412)	cross_modal_contrastive_loss_meter 2.7411 (2.6770)	cross_domain_contrastive_loss_meter -0.5809 (-0.5768)	mm_D_loss_meter 0.0339 (0.0340)	mcc_loss_meter 0.0137 (0.0134)	task_loss_meter 1.4514 (1.2936)	LR 0.0000125
+[2026-10-29 19:45:50,423][    INFO] start evaluation
+generating pseudo 0/423
+generating pseudo 42/423
+generating pseudo 84/423
+generating pseudo 126/423
+generating pseudo 168/423
+generating pseudo 210/423
+generating pseudo 252/423
+generating pseudo 294/423
+generating pseudo 336/423
+generating pseudo 378/423
+generating pseudo 420/423
+target train set AVA pseudo label generated!
+              precision    recall  f1-score   support
+
+           0     0.8528    0.6994    0.7685      1823
+           1     0.6765    0.8389    0.7490      1366
+
+    accuracy                         0.7592      3189
+   macro avg     0.7647    0.7692    0.7588      3189
+weighted avg     0.7773    0.7592    0.7602      3189
+
+pseudo balanced_acc = 0.7692, acc = 0.7592
+[2026-10-29 19:46:06,057][    INFO] epoch = 3
+[2026-10-29 19:46:06,058][    INFO]               precision    recall  f1-score   support
+
+           0     0.8447    0.7009    0.7661       458
+           1     0.7066    0.8483    0.7710       389
+
+    accuracy                         0.7686       847
+   macro avg     0.7757    0.7746    0.7686       847
+weighted avg     0.7813    0.7686    0.7684       847
+
+[2026-10-29 19:46:06,127][    INFO] [31m * Currently, the best val result is: 77.10, best epoch is : 2[0m
+ 40%|████      | 4/10 [1:40:20<2:36:24, 1564.11s/it][2026-10-29 19:46:07,687][    INFO] # samples: 3388
+[2026-10-29 19:46:07,695][    INFO] # samples: 847
+[2026-10-29 19:46:07,716][    INFO] # samples: 3388
+[2026-10-29 19:46:07,722][    INFO] # samples: 847
+[2026-10-29 19:46:07,752][    INFO] # samples: 3388
+[2026-10-29 19:46:07,760][    INFO] # samples: 847
+              precision    recall  f1-score   support
+
+           0     0.8447    0.7009    0.7661       458
+           1     0.7066    0.8483    0.7710       389
+
+    accuracy                         0.7686       847
+   macro avg     0.7757    0.7746    0.7686       847
+weighted avg     0.7813    0.7686    0.7684       847
+
+PCCD
+RPCD
+AVA
+--------------------------------------------------Insufficient sample! total:3189 < expected:3388--------------------------------------------------
+[2026-10-29 19:52:49,784][    INFO] Iter [1800/4230]	Time 3.64 (3.68)	total_loss_meter 3.3327 (3.2986)	cross_modal_contrastive_loss_meter 2.7133 (2.7022)	cross_domain_contrastive_loss_meter -0.5705 (-0.5709)	mm_D_loss_meter 0.0344 (0.0340)	mcc_loss_meter 0.0111 (0.0127)	task_loss_meter 1.1445 (1.1206)	LR 0.0000116
+[2026-10-29 20:05:01,525][    INFO] Iter [2000/4230]	Time 3.66 (3.66)	total_loss_meter 3.1752 (3.2431)	cross_modal_contrastive_loss_meter 2.7019 (2.7248)	cross_domain_contrastive_loss_meter -0.5692 (-0.5729)	mm_D_loss_meter 0.0337 (0.0341)	mcc_loss_meter 0.0103 (0.0115)	task_loss_meter 0.9985 (1.0456)	LR 0.0000106
+[2026-10-29 20:13:02,854][    INFO] start evaluation
+generating pseudo 0/423
+generating pseudo 42/423
+generating pseudo 84/423
+generating pseudo 126/423
+generating pseudo 168/423
+generating pseudo 210/423
+generating pseudo 252/423
+generating pseudo 294/423
+generating pseudo 336/423
+generating pseudo 378/423
+generating pseudo 420/423
+target train set AVA pseudo label generated!
+              precision    recall  f1-score   support
+
+           0     0.8499    0.7009    0.7682      1842
+           1     0.6747    0.8337    0.7458      1371
+
+    accuracy                         0.7575      3213
+   macro avg     0.7623    0.7673    0.7570      3213
+weighted avg     0.7752    0.7575    0.7587      3213
+
+pseudo balanced_acc = 0.7673, acc = 0.7575
+[2026-10-29 20:13:18,662][    INFO] epoch = 4
+[2026-10-29 20:13:18,662][    INFO]               precision    recall  f1-score   support
+
+           0     0.8303    0.7052    0.7627       458
+           1     0.7052    0.8303    0.7627       389
+
+    accuracy                         0.7627       847
+   macro avg     0.7678    0.7678    0.7627       847
+weighted avg     0.7729    0.7627    0.7627       847
+
+[2026-10-29 20:13:18,756][    INFO] [31m * Currently, the best val result is: 77.10, best epoch is : 2[0m
+ 50%|█████     | 5/10 [2:07:33<2:12:24, 1588.82s/it][2026-10-29 20:13:20,365][    INFO] # samples: 3388
+[2026-10-29 20:13:20,373][    INFO] # samples: 847
+[2026-10-29 20:13:20,395][    INFO] # samples: 3388
+[2026-10-29 20:13:20,401][    INFO] # samples: 847
+[2026-10-29 20:13:20,433][    INFO] # samples: 3388
+[2026-10-29 20:13:20,441][    INFO] # samples: 847
+              precision    recall  f1-score   support
+
+           0     0.8303    0.7052    0.7627       458
+           1     0.7052    0.8303    0.7627       389
+
+    accuracy                         0.7627       847
+   macro avg     0.7678    0.7678    0.7627       847
+weighted avg     0.7729    0.7627    0.7627       847
+
+PCCD
+RPCD
+AVA
+--------------------------------------------------Insufficient sample! total:3213 < expected:3388--------------------------------------------------
+[2026-10-29 20:18:41,038][    INFO] Iter [2200/4230]	Time 3.66 (3.72)	total_loss_meter 2.7698 (2.9079)	cross_modal_contrastive_loss_meter 2.7326 (2.7442)	cross_domain_contrastive_loss_meter -0.5456 (-0.5501)	mm_D_loss_meter 0.0335 (0.0341)	mcc_loss_meter 0.0057 (0.0081)	task_loss_meter 0.5435 (0.6716)	LR 0.0000097
+[2026-10-29 20:30:50,359][    INFO] Iter [2400/4230]	Time 3.62 (3.65)	total_loss_meter 2.8220 (2.8395)	cross_modal_contrastive_loss_meter 2.8347 (2.7192)	cross_domain_contrastive_loss_meter -0.5354 (-0.5544)	mm_D_loss_meter 0.0342 (0.0342)	mcc_loss_meter 0.0085 (0.0099)	task_loss_meter 0.4801 (0.6307)	LR 0.0000087
+[2026-10-29 20:40:15,145][    INFO] start evaluation
+generating pseudo 0/423
+generating pseudo 42/423
+generating pseudo 84/423
+generating pseudo 126/423
+generating pseudo 168/423
+generating pseudo 210/423
+generating pseudo 252/423
+generating pseudo 294/423
+generating pseudo 336/423
+generating pseudo 378/423
+generating pseudo 420/423
+target train set AVA pseudo label generated!
+              precision    recall  f1-score   support
+
+           0     0.8369    0.7109    0.7688      1906
+           1     0.6747    0.8124    0.7372      1407
+
+    accuracy                         0.7540      3313
+   macro avg     0.7558    0.7616    0.7530      3313
+weighted avg     0.7681    0.7540    0.7554      3313
+
+pseudo balanced_acc = 0.7616, acc = 0.754
+[2026-10-29 20:40:30,772][    INFO] epoch = 5
+[2026-10-29 20:40:30,772][    INFO]               precision    recall  f1-score   support
+
+           0     0.8099    0.7533    0.7805       458
+           1     0.7316    0.7918    0.7605       389
+
+    accuracy                         0.7710       847
+   macro avg     0.7707    0.7725    0.7705       847
+weighted avg     0.7739    0.7710    0.7713       847
+
+[2026-10-29 20:40:30,845][    INFO] [31m * Currently, the best val result is: 77.10, best epoch is : 2[0m
+ 60%|██████    | 6/10 [2:34:45<1:46:54, 1603.53s/it][2026-10-29 20:40:32,381][    INFO] # samples: 3388
+[2026-10-29 20:40:32,391][    INFO] # samples: 847
+[2026-10-29 20:40:32,413][    INFO] # samples: 3388
+[2026-10-29 20:40:32,419][    INFO] # samples: 847
+[2026-10-29 20:40:32,452][    INFO] # samples: 3388
+[2026-10-29 20:40:32,460][    INFO] # samples: 847
+              precision    recall  f1-score   support
+
+           0     0.8099    0.7533    0.7805       458
+           1     0.7316    0.7918    0.7605       389
+
+    accuracy                         0.7710       847
+   macro avg     0.7707    0.7725    0.7705       847
+weighted avg     0.7739    0.7710    0.7713       847
+
+PCCD
+RPCD
+AVA
+--------------------------------------------------Insufficient sample! total:3313 < expected:3388--------------------------------------------------
+[2026-10-29 20:44:27,143][    INFO] Iter [2600/4230]	Time 3.68 (3.71)	total_loss_meter 2.8332 (2.7308)	cross_modal_contrastive_loss_meter 2.6282 (2.6676)	cross_domain_contrastive_loss_meter -0.5690 (-0.5625)	mm_D_loss_meter 0.0347 (0.0341)	mcc_loss_meter 0.0142 (0.0090)	task_loss_meter 0.7252 (0.5825)	LR 0.0000078
+[2026-10-29 20:56:43,713][    INFO] Iter [2800/4230]	Time 3.66 (3.68)	total_loss_meter 2.7298 (2.7002)	cross_modal_contrastive_loss_meter 2.6414 (2.6410)	cross_domain_contrastive_loss_meter -0.5721 (-0.5667)	mm_D_loss_meter 0.0348 (0.0343)	mcc_loss_meter 0.0139 (0.0094)	task_loss_meter 0.6118 (0.5822)	LR 0.0000068
+[2026-10-29 21:07:35,895][    INFO] start evaluation
+generating pseudo 0/423
+generating pseudo 42/423
+generating pseudo 84/423
+generating pseudo 126/423
+generating pseudo 168/423
+generating pseudo 210/423
+generating pseudo 252/423
+generating pseudo 294/423
+generating pseudo 336/423
+generating pseudo 378/423
+generating pseudo 420/423
+target train set AVA pseudo label generated!
+              precision    recall  f1-score   support
+
+           0     0.8359    0.7083    0.7668      1913
+           1     0.6706    0.8103    0.7339      1402
+
+    accuracy                         0.7514      3315
+   macro avg     0.7533    0.7593    0.7503      3315
+weighted avg     0.7660    0.7514    0.7529      3315
+
+pseudo balanced_acc = 0.7593, acc = 0.7514
+[2026-10-29 21:07:51,484][    INFO] epoch = 6
+[2026-10-29 21:07:51,485][    INFO]               precision    recall  f1-score   support
+
+           0     0.8125    0.7380    0.7735       458
+           1     0.7216    0.7995    0.7585       389
+
+    accuracy                         0.7662       847
+   macro avg     0.7670    0.7687    0.7660       847
+weighted avg     0.7707    0.7662    0.7666       847
+
+[2026-10-29 21:07:51,559][    INFO] [31m * Currently, the best val result is: 77.10, best epoch is : 2[0m
+ 70%|███████   | 7/10 [3:02:06<1:20:47, 1615.69s/it][2026-10-29 21:07:53,128][    INFO] # samples: 3388
+[2026-10-29 21:07:53,136][    INFO] # samples: 847
+[2026-10-29 21:07:53,158][    INFO] # samples: 3388
+[2026-10-29 21:07:53,169][    INFO] # samples: 847
+[2026-10-29 21:07:53,202][    INFO] # samples: 3388
+[2026-10-29 21:07:53,209][    INFO] # samples: 847
+              precision    recall  f1-score   support
+
+           0     0.8125    0.7380    0.7735       458
+           1     0.7216    0.7995    0.7585       389
+
+    accuracy                         0.7662       847
+   macro avg     0.7670    0.7687    0.7660       847
+weighted avg     0.7707    0.7662    0.7666       847
+
+PCCD
+RPCD
+AVA
+--------------------------------------------------Insufficient sample! total:3315 < expected:3388--------------------------------------------------
+[2026-10-29 21:10:22,800][    INFO] Iter [3000/4230]	Time 3.64 (3.71)	total_loss_meter 2.5952 (2.6156)	cross_modal_contrastive_loss_meter 2.6339 (2.6251)	cross_domain_contrastive_loss_meter -0.5622 (-0.5685)	mm_D_loss_meter 0.0341 (0.0343)	mcc_loss_meter 0.0053 (0.0081)	task_loss_meter 0.4842 (0.5165)	LR 0.0000059
+[2026-10-29 21:22:32,489][    INFO] Iter [3200/4230]	Time 3.65 (3.65)	total_loss_meter 2.4090 (2.6019)	cross_modal_contrastive_loss_meter 2.6188 (2.6366)	cross_domain_contrastive_loss_meter -0.5653 (-0.5664)	mm_D_loss_meter 0.0342 (0.0344)	mcc_loss_meter 0.0056 (0.0080)	task_loss_meter 0.3157 (0.4894)	LR 0.0000049
+[2026-10-29 21:34:39,031][    INFO] start evaluation
+generating pseudo 0/423
+generating pseudo 42/423
+generating pseudo 84/423
+generating pseudo 126/423
+generating pseudo 168/423
+generating pseudo 210/423
+generating pseudo 252/423
+generating pseudo 294/423
+generating pseudo 336/423
+generating pseudo 378/423
+generating pseudo 420/423
+target train set AVA pseudo label generated!
+              precision    recall  f1-score   support
+
+           0     0.8295    0.7127    0.7667      1932
+           1     0.6724    0.8010    0.7311      1422
+
+    accuracy                         0.7501      3354
+   macro avg     0.7509    0.7569    0.7489      3354
+weighted avg     0.7629    0.7501    0.7516      3354
+
+pseudo balanced_acc = 0.7569, acc = 0.7501
+[2026-10-29 21:34:54,623][    INFO] epoch = 7
+[2026-10-29 21:34:54,623][    INFO]               precision    recall  f1-score   support
+
+           0     0.7833    0.7969    0.7900       458
+           1     0.7559    0.7404    0.7481       389
+
+    accuracy                         0.7710       847
+   macro avg     0.7696    0.7687    0.7690       847
+weighted avg     0.7707    0.7710    0.7708       847
+
+[2026-10-29 21:34:54,703][    INFO] [31m * Currently, the best val result is: 77.10, best epoch is : 2[0m
+ 80%|████████  | 8/10 [3:29:09<53:56, 1618.06s/it]  [2026-10-29 21:34:56,357][    INFO] # samples: 3388
+[2026-10-29 21:34:56,365][    INFO] # samples: 847
+[2026-10-29 21:34:56,386][    INFO] # samples: 3388
+[2026-10-29 21:34:56,391][    INFO] # samples: 847
+[2026-10-29 21:34:56,430][    INFO] # samples: 3388
+[2026-10-29 21:34:56,438][    INFO] # samples: 847
+              precision    recall  f1-score   support
+
+           0     0.7833    0.7969    0.7900       458
+           1     0.7559    0.7404    0.7481       389
+
+    accuracy                         0.7710       847
+   macro avg     0.7696    0.7687    0.7690       847
+weighted avg     0.7707    0.7710    0.7708       847
+
+PCCD
+RPCD
+AVA
+--------------------------------------------------Insufficient sample! total:3354 < expected:3388--------------------------------------------------
+[2026-10-29 21:36:01,930][    INFO] Iter [3400/4230]	Time 3.61 (3.79)	total_loss_meter 2.7392 (2.5031)	cross_modal_contrastive_loss_meter 2.6203 (2.6212)	cross_domain_contrastive_loss_meter -0.5655 (-0.5630)	mm_D_loss_meter 0.0342 (0.0344)	mcc_loss_meter 0.0061 (0.0065)	task_loss_meter 0.6441 (0.4040)	LR 0.0000040
+[2026-10-29 21:48:10,524][    INFO] Iter [3600/4230]	Time 3.67 (3.64)	total_loss_meter 2.4365 (2.5279)	cross_modal_contrastive_loss_meter 2.6313 (2.6299)	cross_domain_contrastive_loss_meter -0.5631 (-0.5610)	mm_D_loss_meter 0.0338 (0.0344)	mcc_loss_meter 0.0035 (0.0070)	task_loss_meter 0.3310 (0.4175)	LR 0.0000030
+[2026-10-29 22:00:18,303][    INFO] Iter [3800/4230]	Time 3.60 (3.64)	total_loss_meter 2.4024 (2.5221)	cross_modal_contrastive_loss_meter 2.6202 (2.6277)	cross_domain_contrastive_loss_meter -0.5579 (-0.5607)	mm_D_loss_meter 0.0346 (0.0344)	mcc_loss_meter 0.0067 (0.0066)	task_loss_meter 0.2989 (0.4142)	LR 0.0000021
+[2026-10-29 22:01:41,376][    INFO] start evaluation
+generating pseudo 0/423
+generating pseudo 42/423
+generating pseudo 84/423
+generating pseudo 126/423
+generating pseudo 168/423
+generating pseudo 210/423
+generating pseudo 252/423
+generating pseudo 294/423
+generating pseudo 336/423
+generating pseudo 378/423
+generating pseudo 420/423
+target train set AVA pseudo label generated!
+              precision    recall  f1-score   support
+
+           0     0.8253    0.7138    0.7655      1953
+           1     0.6700    0.7937    0.7266      1430
+
+    accuracy                         0.7476      3383
+   macro avg     0.7477    0.7537    0.7461      3383
+weighted avg     0.7597    0.7476    0.7491      3383
+
+pseudo balanced_acc = 0.7537, acc = 0.7476
+[2026-10-29 22:01:57,154][    INFO] epoch = 8
+[2026-10-29 22:01:57,154][    INFO]               precision    recall  f1-score   support
+
+           0     0.7713    0.8319    0.8004       458
+           1     0.7819    0.7095    0.7439       389
+
+    accuracy                         0.7757       847
+   macro avg     0.7766    0.7707    0.7722       847
+weighted avg     0.7761    0.7757    0.7745       847
+
+[2026-10-29 22:01:58,445][    INFO] [31m * Currently, the best val result is: 77.57, best epoch is : 8[0m
+ 90%|█████████ | 9/10 [3:56:13<26:59, 1619.84s/it][2026-10-29 22:02:00,057][    INFO] # samples: 3388
+[2026-10-29 22:02:00,065][    INFO] # samples: 847
+[2026-10-29 22:02:00,089][    INFO] # samples: 3388
+[2026-10-29 22:02:00,096][    INFO] # samples: 847
+[2026-10-29 22:02:00,133][    INFO] # samples: 3388
+[2026-10-29 22:02:00,148][    INFO] # samples: 847
+              precision    recall  f1-score   support
+
+           0     0.7713    0.8319    0.8004       458
+           1     0.7819    0.7095    0.7439       389
+
+    accuracy                         0.7757       847
+   macro avg     0.7766    0.7707    0.7722       847
+weighted avg     0.7761    0.7757    0.7745       847
+
+PCCD
+RPCD
+AVA
+--------------------------------------------------Insufficient sample! total:3383 < expected:3388--------------------------------------------------
+[2026-10-29 22:13:51,516][    INFO] Iter [4000/4230]	Time 3.63 (3.66)	total_loss_meter 2.6758 (2.5054)	cross_modal_contrastive_loss_meter 2.6761 (2.6251)	cross_domain_contrastive_loss_meter -0.5660 (-0.5590)	mm_D_loss_meter 0.0346 (0.0344)	mcc_loss_meter 0.0074 (0.0070)	task_loss_meter 0.5238 (0.3980)	LR 0.0000011
+[2026-10-29 22:26:02,167][    INFO] Iter [4200/4230]	Time 3.68 (3.65)	total_loss_meter 2.4305 (2.5142)	cross_modal_contrastive_loss_meter 2.6542 (2.6291)	cross_domain_contrastive_loss_meter -0.5672 (-0.5595)	mm_D_loss_meter 0.0349 (0.0345)	mcc_loss_meter 0.0104 (0.0075)	task_loss_meter 0.2981 (0.4027)	LR 0.0000010
+[2026-10-29 22:28:49,340][    INFO] start evaluation
+generating pseudo 0/423
+generating pseudo 42/423
+generating pseudo 84/423
+generating pseudo 126/423
+generating pseudo 168/423
+generating pseudo 210/423
+generating pseudo 252/423
+generating pseudo 294/423
+generating pseudo 336/423
+generating pseudo 378/423
+generating pseudo 420/423
+target train set AVA pseudo label generated!
+              precision    recall  f1-score   support
+
+           0     0.8263    0.7145    0.7664      1951
+           1     0.6712    0.7951    0.7279      1430
+
+    accuracy                         0.7486      3381
+   macro avg     0.7488    0.7548    0.7471      3381
+weighted avg     0.7607    0.7486    0.7501      3381
+
+pseudo balanced_acc = 0.7548, acc = 0.7486
+[2026-10-29 22:29:04,826][    INFO] epoch = 9
+[2026-10-29 22:29:04,827][    INFO]               precision    recall  f1-score   support
+
+           0     0.7748    0.8341    0.8034       458
+           1     0.7853    0.7147    0.7483       389
+
+    accuracy                         0.7792       847
+   macro avg     0.7801    0.7744    0.7758       847
+weighted avg     0.7797    0.7792    0.7781       847
+
+[2026-10-29 22:29:06,112][    INFO] [31m * Currently, the best val result is: 77.92, best epoch is : 9[0m
+100%|██████████| 10/10 [4:23:20<00:00, 1622.25s/it]100%|██████████| 10/10 [4:23:20<00:00, 1580.07s/it]
+              precision    recall  f1-score   support
+
+           0     0.7748    0.8341    0.8034       458
+           1     0.7853    0.7147    0.7483       389
+
+    accuracy                         0.7792       847
+   macro avg     0.7801    0.7744    0.7758       847
+weighted avg     0.7797    0.7792    0.7781       847
+
