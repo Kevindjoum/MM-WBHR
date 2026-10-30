@@ -151,7 +151,10 @@ preparation/             téléchargement et extraction des caractéristiques
 configs/                 configurations des runs
 lancer_banc.py           lance les deux méthodes sur un jeu préparé
 analyser.py              tableaux et comparaison appariée
-resultats/               protocoles et résultats déjà obtenus
+resultats/               protocoles et résultats déjà obtenus (banc_final/ : voir LISEZMOI_s32.md)
+kaggle_e2e/              générateur du bout en bout (Kaggle), version patchée pour R2 ; voir son LISEZMOI.md
+experiences_colab.ipynb  carnet Colab des expériences (généré par experiences_colab.py)
+article/                 article en LaTeX (article.tex, references.bib) et son PDF
 ```
 
 ## Résultats déjà obtenus
