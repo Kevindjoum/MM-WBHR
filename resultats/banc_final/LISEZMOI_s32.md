@@ -8,7 +8,8 @@ les mots « lecture » et « hypothèse » signalent une interprétation, pas un
 Configuration : `config_AVA.yaml` publiée, donc les valeurs par défaut de `config.py` (dorsales et extracteurs 2e-5, MLB
 et classifieurs 5e-4, lot 8, 10 époques, SAM), qui correspondent au texte de l'article. Exactitude par époque :
 58,68 ; 73,55 ; 77,10 ; 76,86 ; 76,27 ; 77,10 ; 76,62 ; 77,10 ; 77,57 ; **77,92**. Le dernier point est aussi le
-meilleur. Article : 79,9. Le run PCCD a été interrompu (crédits épuisés), seul son début figure dans la discussion.
+meilleur. Article : 79,9. Le run PCCD a été interrompu après 5 époques sur 10 (crédits épuisés) ; son journal n'est pas conservé
+ici. Exactitude par époque : 64,34 ; 67,89 ; 67,65 ; 67,18 ; 67,30 (article : 69,8).
 
 ## `historiques_derive/` : la dérive, graine 123456
 
@@ -43,3 +44,31 @@ python lancer_banc.py --feats donnees/sentiment --sortie sorties/derive --method
 À lire sur le dernier point **et** le meilleur point ; le succès est que l'écart entre les deux tombe vers 0 et que le
 dernier point dépasse le plancher sources seules (51,38). Voir aussi `methode_amorcage` et `methode_calendrier_m2can`
 (10 époques).
+
+## Pistes issues de l'état de l'art « auto-étiquetage » (lecture du 1/11, pages 1 à 28 sur 37)
+
+Ce document est une synthèse générale de l'auto-étiquetage ; il ne traite presque pas le transport optimal pour
+l'adaptation, ni le multi-sources, ni le multimodal. Les références et les chiffres ci-dessous viennent de lui et
+**sont à vérifier dans les articles originaux avant toute citation**.
+
+- **La dérive est un phénomène connu.** Biais de confirmation (Arazo et al., 2020) ; avec FixMatch, la précision au
+  test suit la part de pseudo-étiquettes justes et entraîner plus longtemps peut nuire (Lucas et al., 2022) ; risque en U
+  avec un nombre d'itérations optimal (Wu, Yang et Sun, 2026, régression linéaire surparamétrée : analogie, pas
+  explication prouvée pour nos réseaux).
+- **Vocabulaire du domaine de validité.** Hypothèses de cluster, de lissage et de faible densité (section 1.3,
+  Amini et al., 2025) : quand elles ne tiennent pas, les données non étiquetées n'aident pas. La polarité d'un sentiment
+  (continuum, le neutre au milieu) viole l'hypothèse de cluster ; les actions de HAC la respectent.
+- **Remèdes classiques à essayer** : enseignant à moyenne mobile des poids (Mean Teacher, Tarvainen et Valpola, 2017 ;
+  FreeMatch) pour produire les pseudo-étiquettes et évaluer ; pondération douce à la place du quota dur (SoftMatch) ;
+  sélection par classe (CBST, FlexMatch), que le quota par classe fait déjà en partie.
+- **Accord entre classifieurs** : le filtre « têtes d'accord avec la géométrie » est du co-training (Blum et Mitchell,
+  1998 ; tri-training) ; la section 9.4 recommande des filtres fondés sur l'accord ou l'incertitude plutôt que sur la
+  seule confiance.
+- **Protocole** : régler aussi les références (Oliver et al., 2018), limiter la validation (Huang et al., 2023), lire un
+  classement avec prudence quand la variance entre graines est forte (section 14.3). Appuie « M2CAN réglé » et le refus
+  de régler sur le test cible.
+- **Question ouverte reconnue** (section 16.3) : estimer la qualité sans validation humaine ; c'est l'arrêt sans
+  étiquette. Le taux d'accord têtes/géométrie n'est pas journalisé aujourd'hui (une ligne dans `pseudo_etiquettes`).
+- **À noter dans les limites de l'article** : les marges uniformes 1/K du transport entre structures (héritées de
+  HOT-DA) et le quota égal par classe supposent des classes à peu près équilibrées (section 4.4 : les pseudo-étiquettes
+  favorisent les classes majoritaires).
