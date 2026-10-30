@@ -1,0 +1,11 @@
+# Dérive : quota plafonné à 50 % et CMCFA sources seules. Surcharges de methode/config_exemple.yaml.
+fusion:
+  dim: 256
+phase1:
+  cmcfa_cible_debut: 1000000000
+  epoques: 3
+  optimiseur:
+    lr_extracteur: 5.0e-5
+pseudo:
+  actif: true
+  taux: [0.3, 0.5]
