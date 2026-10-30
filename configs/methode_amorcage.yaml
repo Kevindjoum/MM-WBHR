@@ -1,0 +1,16 @@
+# Amorçage à la M2CAN (R2, caractéristiques gelées) : époque 1 sur les sources seules, puis un tour de pseudo-étiquettes
+# par époque ; les deux premiers tours sont étiquetés par les têtes unimodales (confiance, parts égales par classe),
+# la géométrie WBHR prend le relais ensuite. Surcharges de methode/config_exemple.yaml.
+fusion:
+  dim: 256
+phase1:
+  epoques: 10
+  cmcfa_cible_debut: 3750
+  optimiseur:
+    lr_extracteur: 5.0e-5
+pseudo:
+  actif: true
+  debut: 3750
+  tous_les: 3750
+  taux: [0.3, 0.6, 0.9, 1.0]
+  amorcage_tours: 2

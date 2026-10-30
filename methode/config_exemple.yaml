@@ -69,3 +69,4 @@ pseudo:
   cible_max: 3000
   taux: [0.3, 0.6, 0.9, 1.0]
   filtre: accord           # accord | aucun
+  amorcage_tours: 0        # n premiers tours étiquetés par les têtes (confiance, parts égales par classe), pas par WBHR

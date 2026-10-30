@@ -62,9 +62,9 @@ def lancer(M, pseudo, options=False):
             cfg["phase2"].update(support="auto", appariement="argmax", classifieur="logistique")
         elif options == "voisins":
             cfg["phase2"].update(classifieur="voisins", voisins=3)
-        elif options == "calendrier":      # calendrier de M2CAN : chauffe sans cible, un tour par époque
+        elif options == "calendrier":      # calendrier de M2CAN : chauffe sans cible, un tour par époque, amorçage têtes
             cfg["phase1"].update(epoques=3, cmcfa_cible_debut=40)
-            cfg["pseudo"].update(debut=40, tous_les=40, taux=[0.3, 0.6, 1.0])
+            cfg["pseudo"].update(debut=40, tous_les=40, taux=[0.3, 0.6, 1.0], amorcage_tours=1)
         elif options == "knn_zn":          # graphe kNN, SupCon sur z normalisé
             cfg["phase2"].update(affinite="knn", voisins_graphe=10)
             cfg["phase1"]["normaliser_z"] = True

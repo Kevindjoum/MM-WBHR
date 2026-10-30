@@ -696,8 +696,13 @@ chaque point indépendamment. Toute comparaison porte cette réserve.
 
 \paragraph{Caractéristiques gelées.}
 Tous les résultats portent sur des encodeurs gelés, ce qui coûte aux deux méthodes : M2CAN publié avec BERT et
-ResNet-50 entraînés atteint $84{,}7$ sur Twitter, contre $59{,}07$ ici. La méthode est entraînée $3$ époques contre $10$
-pour M2CAN. Un pilote de bout en bout, encodeurs entraînés, sur AVA avec une graine, a donné une partition effondrée
+ResNet-50 entraînés atteint $84{,}7$ sur Twitter, contre $59{,}07$ ici, et son ablation sans auto-apprentissage
+(UACR) donne $55{,}9$ en sentiment et $64{,}5$ en esthétique \citep[tableau~5]{zhao2025msmmda}, soit les valeurs de
+M2CAN réglé sur caractéristiques gelées : le gain de l'auto-apprentissage suppose des encodeurs qui s'adaptent. Notre
+reproduction de M2CAN de bout en bout sur AVA (une graine, taux du texte de l'article) donne $77{,}9$ au dernier point,
+qui est aussi le meilleur, avec une courbe plate à partir de la troisième époque : M2CAN ne dérive pas. La méthode est
+entraînée $3$ époques contre $10$ pour M2CAN ; à $10$ époques elle perd $3{,}15$ point sur l'esthétique
+(IC95 $[-4{,}63 ; -1{,}66]$), par dérive. Un pilote de bout en bout, encodeurs entraînés, sur AVA avec une graine, a donné une partition effondrée
 (groupes de $722$ et $125$ points pour deux classes équilibrées), avec ou sans maximisation de l'information ; les
 critères d'extension écrits avant le run n'étaient pas remplis et le bout en bout a été arrêté. L'effondrement vient de
 $z$, non d'un déséquilibre des têtes ; une montée en régime (encodeurs gelés et pseudo-étiquettes inactives pendant la

@@ -7,6 +7,8 @@ Option : pseudo-étiquettes WBHR (section `pseudo` de la configuration). Tous le
 WBHR (filtre `accord`), puis, par classe, les plus centraux de leur groupe, dans la limite d'un quota qui
 croît d'un tour à l'autre. Ces points rejoignent les sources dans le SupCon sur la fusion.
 `pseudo.debut` (0 par défaut) : aucun tour avant ce pas ; le quota repart de son premier taux au premier tour.
+`pseudo.amorcage_tours` (0 par défaut) : les premiers tours prennent leurs pseudo-étiquettes aux têtes unimodales
+(sélection par classe à parts égales, par confiance), la géométrie ensuite ; voir `pseudo_etiquettes`.
 `phase1.cmcfa_cible_debut` (0 par défaut) : avant ce pas, la cible n'entre pas dans CMCFA (sources seules, comme
 l'époque 0 de M2CAN). Calendrier de M2CAN (une époque de chauffe, un tour de pseudo-étiquettes par époque, quotas
 0.3 / 0.6 / 0.9 / 1.0 par époque) : configs/methode_calendrier_m2can.yaml.
@@ -41,18 +43,31 @@ def groupes_parametres(modele, opt):
 
 
 def pseudo_etiquettes(modele, src, cib_train, K, conf2, confp, tour):
-    """Étiquette le train cible par WBHR et renvoie ({id: classe}, journal du tour)."""
+    """Étiquette le train cible par WBHR et renvoie ({id: classe}, journal du tour).
+
+    Option `pseudo.amorcage_tours` (0 par défaut) : pendant les premiers tours, les pseudo-étiquettes viennent de la
+    moyenne des têtes unimodales (classe prédite, score = confiance), sélectionnées par classe à parts égales, comme
+    la sélection de M2CAN ; la géométrie ne sert qu'à partir du tour `amorcage_tours`. Utile quand z n'a pas encore de
+    structure (bout en bout) : une partition effondrée donne des étiquettes effondrées, les têtes, ancrées par les
+    vraies étiquettes sources, non.
+    """
+    amorcage = tour < int(confp.get("amorcage_tours", 0))
     was = modele.training
     modele.eval()
     try:
-        s = [phase2.representations(modele, j, conf2.get("sources_max")) for j in src]
         zt, pt, ids, yt = phase2.representations(modele, cib_train, confp.get("cible_max", 3000))
-        res = phase2.etiqueter([x[0] for x in s], [x[3] for x in s], zt, K, conf2, graine=tour)
+        if not amorcage:
+            s = [phase2.representations(modele, j, conf2.get("sources_max")) for j in src]
+            res = phase2.etiqueter([x[0] for x in s], [x[3] for x in s], zt, K, conf2, graine=tour)
     finally:
         if was:
             modele.train()
-    yw, marge = res["etiquettes"], res["marge"]
-    ok = (pt.argmax(1) == yw) if confp.get("filtre", "accord") == "accord" else np.ones(len(yw), bool)
+    if amorcage:
+        yw, marge = pt.argmax(1), pt.max(1)
+        ok = np.ones(len(yw), bool)
+    else:
+        yw, marge = res["etiquettes"], res["marge"]
+        ok = (pt.argmax(1) == yw) if confp.get("filtre", "accord") == "accord" else np.ones(len(yw), bool)
     taux = confp.get("taux", [0.3, 0.6, 0.9, 1.0])
     quota = int(taux[min(tour, len(taux) - 1)] * len(yw) / K)
     garde = []
@@ -60,7 +75,8 @@ def pseudo_etiquettes(modele, src, cib_train, K, conf2, confp, tour):
         cand = np.where((yw == c) & ok)[0]
         garde.extend(cand[np.argsort(-marge[cand])][:quota].tolist())
     garde = np.array(garde, dtype=int)
-    journal = {"tour": tour, "exactitude_wbhr_complet": float((yw == yt).mean()), "n_retenus": int(len(garde)),
+    journal = {"tour": tour, "source": "tetes" if amorcage else "wbhr",
+               "exactitude_wbhr_complet": float((yw == yt).mean()), "n_retenus": int(len(garde)),
                "precision_retenus": float((yw[garde] == yt[garde]).mean()) if len(garde) else None}
     return {ids[j]: int(yw[j]) for j in garde}, journal
 
