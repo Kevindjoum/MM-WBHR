@@ -696,17 +696,22 @@ chaque point indépendamment. Toute comparaison porte cette réserve.
 
 \paragraph{Caractéristiques gelées.}
 Tous les résultats portent sur des encodeurs gelés, ce qui coûte aux deux méthodes : M2CAN publié avec BERT et
-ResNet-50 entraînés atteint $84{,}7$ sur Twitter, contre $59{,}07$ ici, et son ablation sans auto-apprentissage
-(UACR) donne $55{,}9$ en sentiment et $64{,}5$ en esthétique \citep[tableau~5]{zhao2025msmmda}, soit les valeurs de
-M2CAN réglé sur caractéristiques gelées : le gain de l'auto-apprentissage suppose des encodeurs qui s'adaptent. Notre
+ResNet-50 entraînés atteint $84{,}7$ sur Twitter, contre $59{,}07$ ici. Son ablation sans auto-apprentissage
+(UACR), encodeurs toujours entraînés, donne $55{,}9$ en sentiment et $64{,}5$ en esthétique en moyenne
+\citep[tableau~5]{zhao2025msmmda}, des moyennes proches de celles de M2CAN réglé sur caractéristiques gelées
+($55{,}80$ et $63{,}99$), mais les valeurs par cible s'écartent jusqu'à $8$ points ; que le gain de
+l'auto-apprentissage exige des encodeurs adaptables reste une hypothèse, non testée directement. Notre
 reproduction de M2CAN de bout en bout sur AVA (une graine, taux du texte de l'article) donne $77{,}9$ au dernier point,
 qui est aussi le meilleur, avec une courbe plate à partir de la troisième époque : M2CAN ne dérive pas. La méthode est
 entraînée $3$ époques contre $10$ pour M2CAN ; à $10$ époques elle perd $3{,}15$ point sur l'esthétique
 (IC95 $[-4{,}63 ; -1{,}66]$), par dérive. Un pilote de bout en bout, encodeurs entraînés, sur AVA avec une graine, a donné une partition effondrée
 (groupes de $722$ et $125$ points pour deux classes équilibrées), avec ou sans maximisation de l'information ; les
-critères d'extension écrits avant le run n'étaient pas remplis et le bout en bout a été arrêté. L'effondrement vient de
-$z$, non d'un déséquilibre des têtes ; une montée en régime (encodeurs gelés et pseudo-étiquettes inactives pendant la
-première époque) reste à évaluer.
+critères d'extension écrits avant le run n'étaient pas remplis et le bout en bout a été arrêté. Ce pilote comptait $3 \times 847 = 2\,541$ pas, contre $11\,250$ dans le cadre gelé, où la courbe
+d'AVA n'atteint que $59$ à $61\,\%$ au pas $2\,250$ et $66\,\%$ au pas $3\,000$ : le bout en bout obtenu ($57$ à
+$59$) correspond au niveau du cadre gelé au même nombre de pas, et un sous-entraînement de la fusion est l'explication
+la plus simple. Un budget de pas comparable, ou des taux d'apprentissage de la fusion et des têtes dix fois plus élevés
+comme ceux de M2CAN, et une montée en régime (encodeurs gelés et pseudo-étiquettes inactives pendant la première
+époque) restent à évaluer.
 
 \paragraph{Puissance statistique.}
 Trois graines par cible et neuf paires par comparaison donnent des intervalles larges : sur HAC, un écart de

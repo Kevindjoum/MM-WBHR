@@ -117,6 +117,8 @@ sur z, sans WBHR), et écart apparié à `methode/methode`. Configurations dispo
 | `methode_lr1e-5`, `methode_lr2e-4` | taux de l'extracteur |
 | `methode_quota50`, `methode_cmcfa_sources`, `methode_quota50_cmcfa_sources` | contre la dérive en cours d'entraînement : quota de pseudo-étiquettes plafonné à 50 %, CMCFA sur les sources seules, les deux (3 époques) |
 | `methode_amorcage` | calendrier de M2CAN et amorçage : les deux premiers tours de pseudo-étiquettes viennent des têtes unimodales (confiance, parts égales par classe, `pseudo.amorcage_tours`), la géométrie ensuite |
+| `methode_accord` | appariement groupes ↔ classes départagé par les votes des têtes unimodales (`phase2.appariement: hongrois_accord`) |
+| `methode_poids_m2can`, `methode_tau02` | poids des pertes de M2CAN (α 0,5, β 0,2) ; température SupCon 0,2 |
 | `methode_calendrier_m2can` | calendrier de M2CAN : époque 1 sur les sources seules (`phase1.cmcfa_cible_debut`), un tour de pseudo-étiquettes par époque à partir de la fin de l'époque 1 (`pseudo.debut`, `pseudo.tous_les`), quotas 0.3 / 0.6 / 0.9 / 1.0 par époque, 10 époques |
 
 ## 5. Visualiser l'espace fusionné (t-SNE)
