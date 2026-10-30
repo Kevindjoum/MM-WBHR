@@ -58,7 +58,7 @@ def pseudo_etiquettes(modele, src, cib_train, K, conf2, confp, tour):
         zt, pt, ids, yt = phase2.representations(modele, cib_train, confp.get("cible_max", 3000))
         if not amorcage:
             s = [phase2.representations(modele, j, conf2.get("sources_max")) for j in src]
-            res = phase2.etiqueter([x[0] for x in s], [x[3] for x in s], zt, K, conf2, graine=tour)
+            res = phase2.etiqueter([x[0] for x in s], [x[3] for x in s], zt, K, conf2, graine=tour, pt=pt)
     finally:
         if was:
             modele.train()

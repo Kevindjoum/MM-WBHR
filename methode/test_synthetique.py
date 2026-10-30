@@ -65,6 +65,8 @@ def lancer(M, pseudo, options=False):
         elif options == "calendrier":      # calendrier de M2CAN : chauffe sans cible, un tour par époque, amorçage têtes
             cfg["phase1"].update(epoques=3, cmcfa_cible_debut=40)
             cfg["pseudo"].update(debut=40, tous_les=40, taux=[0.3, 0.6, 1.0], amorcage_tours=1)
+        elif options == "accord":          # appariement départagé par les têtes
+            cfg["phase2"].update(appariement="hongrois_accord")
         elif options == "knn_zn":          # graphe kNN, SupCon sur z normalisé
             cfg["phase2"].update(affinite="knn", voisins_graphe=10)
             cfg["phase1"]["normaliser_z"] = True
@@ -93,6 +95,7 @@ if __name__ == "__main__":
     torch.set_num_threads(2)
     res = [lancer(M, p) for M in (2, 3, 4) for p in (False, True)] + [lancer(2, False, True), lancer(3, True, True),
                                                                  lancer(2, True, "wbhr"), lancer(2, False, "voisins"),
-                                                                 lancer(2, True, "knn_zn"), lancer(2, True, "calendrier")]
+                                                                 lancer(2, True, "knn_zn"), lancer(2, True, "calendrier"),
+                                                                 lancer(3, True, "accord")]
     print("TOUS LES TESTS PASSENT" if all(res) else "ECHEC")
     sys.exit(0 if all(res) else 1)

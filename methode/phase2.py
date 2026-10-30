@@ -17,9 +17,14 @@ Options de fidélité à WBHR / HOT-DA (défauts = la méthode) :
   support: 16 | auto                          16 (défaut, algorithme 2 de WBHR) ; auto : cardinalité du cadre
                 théorique, |Supp(rho_h^aux)| = (1/N) sum_i |C_h^i|, la taille moyenne de la classe h dans les
                 sources (après le tirage de `par_classe` points au plus par source).
-  appariement: hongrois | argmax              hongrois (défaut) : bijection groupes <-> classes sur le plan G ;
+  appariement: hongrois | argmax | hongrois_accord
+                hongrois (défaut) : bijection groupes <-> classes sur le plan G ;
                 argmax : comme WBHR, chaque classe h va au groupe argmax_l G[h, l] (pas forcément bijectif) et
-                chaque groupe prend la classe argmax_h G[h, l].
+                chaque groupe prend la classe argmax_h G[h, l] ;
+                hongrois_accord : bijection sur G/max(G) + poids_accord (1) x part des votes des têtes unimodales
+                pour la classe h dans le groupe l. Quand le plan G est presque plat (cible loin des sources), le
+                hongrois seul peut rendre une permutation fausse alors que la partition est bonne (TumEmo : 35 %
+                d'exactitude pour un oracle de 58 %) ; les têtes, ancrées par les étiquettes sources, départagent.
   classifieur: aucun | logistique | voisins    aucun (défaut) : chaque point cible prend la classe appariée à son
                 groupe. Sinon, fin de HOT-DA : les points du représentant B_h sont transportés par projection
                 barycentrique vers leur groupe apparié (B~_h = |B_h| gamma_{h,l} Z_l), un classifieur est entraîné
@@ -76,8 +81,9 @@ def representations(modele, jeu, limite=None):
 
 
 @torch.no_grad()
-def etiqueter(z_src, y_src, zt, K, conf, graine=0):
+def etiqueter(z_src, y_src, zt, K, conf, graine=0, pt=None):
     """Cœur de la phase 2. z_src : liste de N tenseurs (sources) ; y_src : liste de N tableaux ; zt : cible.
+    pt (n, K) : prédiction moyenne des têtes unimodales sur la cible, pour `appariement: hongrois_accord`.
 
     Renvoie un dictionnaire : étiquettes, groupes, appariement, marge géométrique, coûts W.
     """
@@ -118,11 +124,18 @@ def etiqueter(z_src, y_src, zt, K, conf, graine=0):
                 W[h, l] = cout_transport(barys[h], zt[torch.as_tensor(sel, device=zt.device)], eps, it)
     u = torch.full((K,), 1.0 / K)
     G = sinkhorn_log(torch.tensor(W, dtype=torch.float32), u, u, eps, 300).numpy()
-    if conf.get("appariement", "hongrois") == "argmax":
+    app = conf.get("appariement", "hongrois")
+    if app == "argmax":
         c2g = {h: int(G[h].argmax()) for h in barys}                  # classe -> groupe, comme WBHR
         g2c = {l: int(G[:, l].argmax()) for l in range(K)}            # groupe -> classe, pour les étiquettes
     else:
-        rows, cols = linear_sum_assignment(-G)
+        S = G / max(float(G.max()), 1e-12)
+        if app == "hongrois_accord" and pt is not None:
+            # part des votes des têtes pour la classe h dans le groupe l : départage un plan G presque plat
+            V = np.stack([np.asarray(pt)[groupes == l].mean(0) if (groupes == l).any() else np.full(K, 1.0 / K)
+                          for l in range(K)], 1)                       # (K classes, K groupes)
+            S = S + float(conf.get("poids_accord", 1.0)) * V
+        rows, cols = linear_sum_assignment(-S)
         g2c = {int(c): int(r) for r, c in zip(rows, cols)}
         c2g = {h: l for l, h in g2c.items()}
     etiq = np.array([g2c.get(int(g), 0) for g in groupes])
@@ -281,10 +294,14 @@ def evaluer(modele, jeux_sources, jeu_cible, K, conf, graine=0, jeu_cible_train=
     modele.eval()
     try:
         src = [representations(modele, j, conf.get("sources_max")) for j in jeux_sources]
-        zt, _, _, yt = representations(modele, jeu_cible)
+        zt, pt, _, yt = representations(modele, jeu_cible)
         nt = len(yt)
-        zall = zt if jeu_cible_train is None else torch.cat([zt, representations(modele, jeu_cible_train, n_train)[0]])
-        res = etiqueter([s[0] for s in src], [s[3] for s in src], zall, K, conf, graine)
+        if jeu_cible_train is None:
+            zall, pall = zt, pt
+        else:
+            ztr, ptr, _, _ = representations(modele, jeu_cible_train, n_train)
+            zall, pall = torch.cat([zt, ztr]), np.concatenate([pt, ptr])
+        res = etiqueter([s[0] for s in src], [s[3] for s in src], zall, K, conf, graine, pt=pall)
         if jeu_cible_train is not None:
             res = dict(res, etiquettes=res["etiquettes"][:nt], groupes=res["groupes"][:nt], C=res["C"][:nt, :nt])
         d = diagnostics(res, yt, K)

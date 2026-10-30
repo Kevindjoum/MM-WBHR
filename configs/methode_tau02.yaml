@@ -1,0 +1,10 @@
+# Température SupCon 0.2 au lieu de 0.07 : groupes moins serrés, dérive plus lente ? Surcharges de methode/config_exemple.yaml.
+fusion:
+  dim: 256
+phase1:
+  tau: 0.2
+  epoques: 3
+  optimiseur:
+    lr_extracteur: 5.0e-5
+pseudo:
+  actif: true
